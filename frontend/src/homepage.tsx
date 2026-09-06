@@ -1243,16 +1243,16 @@ function Homepage() {
               </div>
             </section>
 
-            {/* Pricing Section (Dark Sheet Music Backdrop + 3-Column Glassmorphic Layout) */}
+            {/* Pricing Section (Soft Warm Brown & Gentle Peach Gradient Backdrop + 3-Column Glassmorphic Layout) */}
             <section
               className="py-14 lg:py-20 px-4 md:px-8 border-b border-[#ebd3cb]/15 relative overflow-hidden bg-cover bg-center"
               style={{
                 backgroundImage:
-                  "linear-gradient(180deg, rgba(20, 9, 4, 0.88) 0%, rgba(13, 5, 2, 0.93) 100%), url('/sheetss.png')",
+                  "linear-gradient(135deg, rgba(58, 36, 29, 0.68) 0%, rgba(85, 52, 42, 0.62) 40%, rgba(140, 92, 76, 0.55) 100%), url('/sheetss.png')",
               }}
             >
-              {/* Symmetrical Ambient Warm Rose Glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-64 bg-[#dfa38f]/10 rounded-full blur-[100px] pointer-events-none z-0" />
+              {/* Symmetrical Soft Ambient Warm Peach & Rose Glow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-80 bg-gradient-to-r from-[#dfa38f]/25 via-[#f5b8c9]/20 to-[#ffd0ab]/25 rounded-full blur-[90px] pointer-events-none z-0" />
 
               <div className="relative z-10 max-w-[1140px] mx-auto space-y-10 w-full">
                 {/* Section Header */}
@@ -1260,7 +1260,7 @@ function Homepage() {
                   <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#fff0ea] font-bold leading-tight drop-shadow-sm">
                     Start Your Musical Journey
                   </h2>
-                  <p className="text-[#dfa38f] font-sans text-xs md:text-sm font-bold uppercase tracking-widest">
+                  <p className="text-[#ffd0ab] font-sans text-xs md:text-sm font-bold uppercase tracking-widest">
                     Choose the plan that fits your pace of learning.
                   </p>
                 </div>
@@ -1269,16 +1269,16 @@ function Homepage() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch w-full">
                   
                   {/* Left Column: Feature List Panel */}
-                  <div className="lg:col-span-4 bg-[#281710]/75 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#dfa38f]/40 shadow-[0_16px_40px_rgba(0,0,0,0.4)] flex flex-col justify-between text-left">
+                  <div className="lg:col-span-4 bg-[#4a2e24]/55 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#ebd3cb]/30 shadow-[0_12px_35px_rgba(0,0,0,0.22)] flex flex-col justify-between text-left">
                     <div className="space-y-6">
                       <div>
-                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#dfa38f] block mb-1">
+                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffd0ab] block mb-1">
                           Included in Every Plan
                         </span>
                         <h3 className="font-display-lg text-xl font-bold text-[#fff0ea]">
                           Full Access Pass
                         </h3>
-                        <p className="text-xs text-[#ebd3c7]/75 font-medium mt-1 leading-relaxed">
+                        <p className="text-xs text-[#ebd3c7]/90 font-medium mt-1 leading-relaxed">
                           Get immediate access to everything Stephanie Keys has to offer with no restrictions.
                         </p>
                       </div>
@@ -1292,7 +1292,7 @@ function Homepage() {
                           { title: "Community Forum", desc: "Connect with fellow pianists" },
                         ].map((item, i) => (
                           <div key={i} className="flex items-start gap-3">
-                            <div className="w-5 h-5 rounded-full bg-[#3a2219] border border-[#dfa38f]/60 text-[#dfa38f] flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                            <div className="w-5 h-5 rounded-full bg-[#5c3a2e]/80 border border-[#dfa38f]/60 text-[#ffd0ab] flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                               <svg className="w-3 h-3 text-[#ffd0ab]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
                                 <polyline points="20 6 9 17 4 12" />
                               </svg>
@@ -1301,7 +1301,7 @@ function Homepage() {
                               <span className="text-sm font-bold text-[#fff0ea] block leading-snug">
                                 {item.title}
                               </span>
-                              <span className="text-[11px] text-[#ebd3c7]/70 font-medium block">
+                              <span className="text-[11px] text-[#ebd3c7]/80 font-medium block">
                                 {item.desc}
                               </span>
                             </div>
@@ -1310,18 +1310,18 @@ function Homepage() {
                       </div>
                     </div>
 
-                    <div className="pt-6 border-t border-[#ebd3cb]/10 mt-6">
-                      <p className="text-[11px] text-[#dfa38f]/90 font-semibold italic text-center">
+                    <div className="pt-6 border-t border-[#ebd3cb]/15 mt-6">
+                      <p className="text-[11px] text-[#ffd0ab]/95 font-semibold italic text-center">
                         Cancel anytime with 1-click in account settings.
                       </p>
                     </div>
                   </div>
 
                   {/* Middle Column: Monthly Plan Card */}
-                  <div className="lg:col-span-4 bg-[#281710]/75 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#dfa38f]/40 shadow-[0_16px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#ffd0ab]/70 hover:scale-[1.01] flex flex-col justify-between text-left">
+                  <div className="lg:col-span-4 bg-[#4a2e24]/55 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#ebd3cb]/30 shadow-[0_12px_35px_rgba(0,0,0,0.22)] transition-all duration-300 hover:bg-[#57372b]/65 hover:border-[#ffd0ab]/70 hover:scale-[1.01] flex flex-col justify-between text-left">
                     <div className="space-y-5">
                       <div className="space-y-1">
-                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#dfa38f] block">
+                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffd0ab] block">
                           Flexible Monthly
                         </span>
                         <h3 className="font-display-lg text-xl font-bold text-[#fff0ea] tracking-tight">
@@ -1331,7 +1331,7 @@ function Homepage() {
 
                       <div className="space-y-1">
                         <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#fff0ea]">
-                          $18.99 <span className="text-sm font-normal text-[#ebd3c7]/70">/ month</span>
+                          $18.99 <span className="text-sm font-normal text-[#ebd3c7]/80">/ month</span>
                         </div>
                       </div>
 
@@ -1339,7 +1339,7 @@ function Homepage() {
                         <span className="font-sans text-sm font-bold text-[#ffd0ab] block">
                           Free 14-Day Trial
                         </span>
-                        <p className="text-xs text-[#ebd3c7]/75 font-medium leading-normal">
+                        <p className="text-xs text-[#ebd3c7]/85 font-medium leading-normal">
                           Billed monthly after trial ends. Cancel anytime.
                         </p>
                       </div>
@@ -1348,7 +1348,7 @@ function Homepage() {
                     <div className="pt-8">
                       <button
                         onClick={() => setView("dashboard")}
-                        className="w-full py-3 px-4 rounded-full font-sans text-sm font-bold text-[#fff0ea] bg-[#3d251c] hover:bg-[#4d2f23] border border-[#dfa38f]/60 hover:border-[#ffd0ab] shadow-[0_4px_16px_rgba(223,163,143,0.2)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
+                        className="w-full py-3 px-4 rounded-full font-sans text-sm font-bold text-[#fff0ea] bg-gradient-to-r from-[#6b4334] to-[#59372a] hover:from-[#7a4e3d] hover:to-[#684132] border border-[#ebd3cb]/50 hover:border-[#ffd0ab] shadow-[0_4px_16px_rgba(223,163,143,0.25)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
                       >
                         Start 14-Day Free Trial
                       </button>
@@ -1356,10 +1356,10 @@ function Homepage() {
                   </div>
 
                   {/* Right Column: Annual Plan Card */}
-                  <div className="lg:col-span-4 bg-[#281710]/75 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#dfa38f]/40 shadow-[0_16px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#ffd0ab]/70 hover:scale-[1.01] flex flex-col justify-between text-left">
+                  <div className="lg:col-span-4 bg-[#4a2e24]/55 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#ebd3cb]/30 shadow-[0_12px_35px_rgba(0,0,0,0.22)] transition-all duration-300 hover:bg-[#57372b]/65 hover:border-[#ffd0ab]/70 hover:scale-[1.01] flex flex-col justify-between text-left">
                     <div className="space-y-5">
                       <div className="space-y-1">
-                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#dfa38f] block">
+                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffd0ab] block">
                           Save Over 25%
                         </span>
                         <h3 className="font-display-lg text-xl font-bold text-[#fff0ea] tracking-tight">
@@ -1369,7 +1369,7 @@ function Homepage() {
 
                       <div className="space-y-1">
                         <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#fff0ea]">
-                          $14.16 <span className="text-sm font-normal text-[#ebd3c7]/70">/ month</span>
+                          $14.16 <span className="text-sm font-normal text-[#ebd3c7]/80">/ month</span>
                         </div>
                       </div>
 
@@ -1377,7 +1377,7 @@ function Homepage() {
                         <span className="font-sans text-sm font-bold text-[#ffd0ab] block">
                           Free 14-Day Trial
                         </span>
-                        <p className="text-xs text-[#ebd3c7]/75 font-medium leading-normal">
+                        <p className="text-xs text-[#ebd3c7]/85 font-medium leading-normal">
                           Billed annually at $169.99 after trial ends.
                         </p>
                       </div>
@@ -1386,7 +1386,7 @@ function Homepage() {
                     <div className="pt-8">
                       <button
                         onClick={() => setView("dashboard")}
-                        className="w-full py-3 px-4 rounded-full font-sans text-sm font-bold text-[#fff0ea] bg-[#3d251c] hover:bg-[#4d2f23] border border-[#dfa38f]/60 hover:border-[#ffd0ab] shadow-[0_4px_16px_rgba(223,163,143,0.2)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
+                        className="w-full py-3 px-4 rounded-full font-sans text-sm font-bold text-[#fff0ea] bg-gradient-to-r from-[#6b4334] to-[#59372a] hover:from-[#7a4e3d] hover:to-[#684132] border border-[#ebd3cb]/50 hover:border-[#ffd0ab] shadow-[0_4px_16px_rgba(223,163,143,0.25)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
                       >
                         Start 14-Day Free Trial
                       </button>
