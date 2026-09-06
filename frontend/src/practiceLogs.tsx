@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { levels } from './courseData'
+import { GlassDropdownButton } from './components/GlassDropdownButton'
+
 
 /*
 interface FeedbackMessage {
@@ -290,13 +292,42 @@ function PracticeLogs({ onNavigate }: PracticeLogsProps) {
                   </h2>
                 </div>
 
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="px-6 py-3 bg-[#fbece7] hover:bg-[#f6dad0] active:scale-95 text-[#785b4f] border border-[#dfa38f]/30 rounded-[4px] font-bold uppercase tracking-wider text-[10px] shadow-sm transition-all duration-300 cursor-pointer border-none flex items-center justify-center gap-2"
-                >
-                  <span className="material-symbols-outlined text-sm text-[#785b4f]">edit</span>
-                  Log a Practice Session
-                </button>
+                <div className="flex items-center gap-3">
+                  <GlassDropdownButton
+                    label="Tambah"
+                    onMainClick={() => setIsModalOpen(true)}
+                    options={[
+                      {
+                        id: 'tambah-data',
+                        label: 'Tambah Data',
+                        onClick: () => setIsModalOpen(true),
+                        icon: (
+                          <svg className="w-3.5 h-3.5 text-[#E1B5A3] shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        id: 'import-excel',
+                        label: 'Import Excel',
+                        onClick: () => setSystemAlert({ type: 'success', message: 'Import Excel berhasil disimulasikan.' }),
+                        icon: (
+                          <svg className="w-3.5 h-3.5 text-[#E1B5A3] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 14.5 4.5M12 3v13.5" />
+                          </svg>
+                        ),
+                      },
+                    ]}
+                  />
+
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-4 py-2.5 bg-[#fbece7] hover:bg-[#f6dad0] active:scale-95 text-[#785b4f] border border-[#dfa38f]/30 rounded-[8px] font-bold uppercase tracking-wider text-[10px] shadow-sm transition-all duration-300 cursor-pointer border-none flex items-center justify-center gap-1.5 h-[40px]"
+                  >
+                    <span className="material-symbols-outlined text-sm text-[#785b4f]">edit</span>
+                    Log Session
+                  </button>
+                </div>
               </div>
 
               {/* Logs Feed Container - Unified Card */}

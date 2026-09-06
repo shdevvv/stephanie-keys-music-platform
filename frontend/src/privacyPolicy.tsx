@@ -28,7 +28,7 @@ function PrivacyPolicy() {
             1. Introduction & Overview
           </h2>
           <p>
-            Welcome to Phanilie Music. We respect your privacy and are committed to protecting your personal data. 
+            Welcome to Stephanie Keys. We respect your privacy and are committed to protecting your personal data. 
             This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit 
             our web application, purchase sheet music, enroll in courses, or connect with our local API Gateway.
           </p>

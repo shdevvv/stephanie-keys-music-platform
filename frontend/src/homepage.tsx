@@ -116,7 +116,7 @@ function Homepage() {
       const timer = setTimeout(() => {
         if (videoARef.current) {
           videoARef.current.playbackRate = 0.55;
-          videoARef.current.play().catch(() => {});
+          videoARef.current.play().catch(() => { });
         }
         if (videoBRef.current) {
           videoBRef.current.playbackRate = 0.55;
@@ -125,7 +125,7 @@ function Homepage() {
         }
         // setFaqActive("A");
         if (pricingVideoRef.current) {
-          pricingVideoRef.current.play().catch(() => {});
+          pricingVideoRef.current.play().catch(() => { });
         }
       }, 150);
       return () => clearTimeout(timer);
@@ -145,9 +145,9 @@ function Homepage() {
     switch (view) {
       case "videos":
         return (
-          <CoversSheets 
+          <CoversSheets
             initialTab="videos"
-            onNavigate={handleNavigate} 
+            onNavigate={handleNavigate}
             onSetBuyNowSheet={(sheet) => {
               setBuyNowSheet(sheet);
               const loggedIn = localStorage.getItem("isLoggedIn") !== "false";
@@ -157,9 +157,9 @@ function Homepage() {
         );
       case "sheets":
         return (
-          <CoversSheets 
+          <CoversSheets
             initialTab="sheets"
-            onNavigate={handleNavigate} 
+            onNavigate={handleNavigate}
             onSetBuyNowSheet={(sheet) => {
               setBuyNowSheet(sheet);
               const loggedIn = localStorage.getItem("isLoggedIn") !== "false";
@@ -169,9 +169,9 @@ function Homepage() {
         );
       case "library":
         return (
-          <CoversSheets 
+          <CoversSheets
             initialTab="all"
-            onNavigate={handleNavigate} 
+            onNavigate={handleNavigate}
             onSetBuyNowSheet={(sheet) => {
               setBuyNowSheet(sheet);
               const loggedIn = localStorage.getItem("isLoggedIn") !== "false";
@@ -181,41 +181,41 @@ function Homepage() {
         );
       case "cart":
         return (
-          <SheetPurchaseFlow 
-            initialStep={2} 
-            onNavigate={handleNavigate} 
-            selectedSheetForBuyNow={buyNowSheet} 
-            clearBuyNowSheet={() => setBuyNowSheet(null)} 
+          <SheetPurchaseFlow
+            initialStep={2}
+            onNavigate={handleNavigate}
+            selectedSheetForBuyNow={buyNowSheet}
+            clearBuyNowSheet={() => setBuyNowSheet(null)}
           />
         );
       case "checkout":
         return (
-          <SheetPurchaseFlow 
-            initialStep={4} 
-            onNavigate={handleNavigate} 
-            selectedSheetForBuyNow={buyNowSheet} 
-            clearBuyNowSheet={() => setBuyNowSheet(null)} 
+          <SheetPurchaseFlow
+            initialStep={4}
+            onNavigate={handleNavigate}
+            selectedSheetForBuyNow={buyNowSheet}
+            clearBuyNowSheet={() => setBuyNowSheet(null)}
           />
         );
       case "my-library":
         return (
-          <SheetPurchaseFlow 
-            initialStep={8} 
-            onNavigate={handleNavigate} 
+          <SheetPurchaseFlow
+            initialStep={8}
+            onNavigate={handleNavigate}
           />
         );
       case "download-page":
         return (
-          <SheetPurchaseFlow 
-            initialStep={9} 
-            onNavigate={handleNavigate} 
+          <SheetPurchaseFlow
+            initialStep={9}
+            onNavigate={handleNavigate}
           />
         );
       case "invoice":
         return (
-          <SheetPurchaseFlow 
-            initialStep={10} 
-            onNavigate={handleNavigate} 
+          <SheetPurchaseFlow
+            initialStep={10}
+            onNavigate={handleNavigate}
           />
         );
       case "dashboard":
@@ -227,7 +227,9 @@ function Homepage() {
       case "forums":
         return <Forums onNavigate={handleNavigate} />;
       case "profile":
-        return <UserProfile onNavigate={handleNavigate} />;
+        return <UserProfile onNavigate={handleNavigate} initialTab="profile" />;
+      case "subscription":
+        return <UserProfile onNavigate={handleNavigate} initialTab="subscription" />;
       case "faq":
         return <FAQ />;
       case "privacy":
@@ -250,15 +252,12 @@ function Homepage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#fff8f6] via-[#fff8f6]/80 to-transparent z-10"></div>
                 <img
                   className="w-full h-full object-cover object-right"
-                  alt="A baby pink grand piano in a sun-drenched minimalist studio"
-                  src="/pink-piano-hero.jpg"
+                  alt="A white grand piano in a sun-drenched luxury minimalist studio"
+                  src="/white-grand-piano-hero.jpg"
                 />
               </div>
               <div className="relative z-20 px-6 max-w-[1200px] mx-auto w-full">
                 <div className="max-w-2xl space-y-8">
-                  <span className="inline-block px-5 py-2 rounded-full bg-[#e8cdc1]/35 text-[#4a372e] font-bold text-xs md:text-sm uppercase tracking-wider border border-[#e8cdc1]/50">
-                    Master the Keys
-                  </span>
                   <h1 className="font-curvy-vibes text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-[#5a453d] to-[#8b7368] bg-clip-text text-transparent leading-tight py-2">
                     Learn Gospel, Jazz, and Classical Piano Step by Step
                   </h1>
@@ -271,13 +270,13 @@ function Homepage() {
                       onClick={() => setView("dashboard")}
                       className="bg-gradient-to-br from-[#dcc1b5] to-[#f9ddd1] text-[#271811] px-8 py-4 rounded-xl font-bold text-sm md:text-base shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer border-none"
                     >
-                      Start Learning Now
+                      Start Learning
                     </button>
                     <button
-                      onClick={() => setView("library")}
+                      onClick={() => setView("videos")}
                       className="border-2 border-[#b5a39a] text-[#4a372e] px-8 py-4 rounded-xl font-bold text-sm md:text-base hover:bg-[#e8cdc1]/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer bg-transparent"
                     >
-                      Browse Phanilie Music
+                      Watch S Keys Videos
                     </button>
                   </div>
                 </div>
@@ -287,7 +286,7 @@ function Homepage() {
             {/* Current Musical Limitations Section */}
             <section className="py-24 px-6 bg-gradient-to-br from-[#dfa38f] via-[#5c4033] to-[#251610] border-y border-[#251610]/30 relative overflow-hidden">
               {/* Background Image Layer */}
-              <div 
+              <div
                 className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none select-none"
                 style={{
                   backgroundImage: "url('/keys.png')",
@@ -347,7 +346,7 @@ function Homepage() {
               {/* Background Video Layer */}
               <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
                 {/* Tone matching color overlay (Adjust color and opacity here) */}
-                <div 
+                <div
                   className="absolute inset-0 z-10 pointer-events-none mix-blend-color"
                   style={{
                     backgroundColor: "#5a453d", // Warm dark brown theme color
@@ -355,26 +354,26 @@ function Homepage() {
                   }}
                 />
                 {/* Readability softening overlay - warm soft peach/champagne gradient to tint the background */}
-                <div 
+                <div
                   className="absolute inset-0 z-10 pointer-events-none"
                   style={{
                     background: "linear-gradient(to bottom, rgba(255, 235, 228, 0.45) 0%, rgba(255, 220, 205, 0.35) 100%)",
                   }}
                 />
-                
+
                 {/* Videos Container (Increased video background opacity for better visibility) */}
                 <div className="w-full h-full opacity-[0.88]">
                   {videoList.map((src, idx) => {
                     const isActive = idx === currentVideoIdx;
                     const isPrev = idx === prevVideoIdx;
- 
+
                     return (
                       <video
                         key={src}
                         ref={(el) => {
                           if (el) {
                             if (isActive || isPrev) {
-                              el.play().catch(() => {});
+                              el.play().catch(() => { });
                             } else {
                               el.pause();
                             }
@@ -405,7 +404,7 @@ function Homepage() {
               <div className="relative z-20 max-w-[1200px] mx-auto flex flex-col items-center">
                 {/* Unified Glassmorphic Canvas Card */}
                 <div className="w-full max-w-3xl bg-white/45 backdrop-blur-lg border border-white/60 p-8 md:p-12 rounded-3xl shadow-sm space-y-10 text-center">
-                  
+
                   {/* Quote Block */}
                   <div className="space-y-4">
                     <p className="font-display-lg text-lg md:text-xl lg:text-2xl italic text-[#5a453d] leading-relaxed font-bold">
@@ -461,7 +460,7 @@ function Homepage() {
 
             <section className="py-24 px-6 border-b border-[#ebd3cb]/25 relative overflow-hidden">
               {/* Background Marble Image Layer with smooth fade-in mask at the top */}
-              <div 
+              <div
                 className="absolute inset-0 z-0 pointer-events-none select-none opacity-100"
                 style={{
                   backgroundImage: "url('/marble.png')",
@@ -473,12 +472,13 @@ function Homepage() {
                 }}
               />
               {/* Soft overlay with a white-to-soft-whitish-peach-pink blend */}
-              <div 
+              <div
                 className="absolute inset-0 z-10 bg-gradient-to-b from-[#fff6f3] via-white/20 to-[#fff2ee]/10 pointer-events-none select-none"
               />
 
               {/* Floating Sparkling Elements (Moving from bottom to top, glossy gold stars with warm glows) */}
-              <style dangerouslySetInnerHTML={{__html: `
+              <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes sparkleFloat {
                   0% {
                     transform: translateY(0) scale(0) rotate(0deg);
@@ -528,7 +528,7 @@ function Homepage() {
                 <div className="lg:col-span-7 space-y-10 text-left max-w-xl mx-auto lg:mx-0 relative z-10">
                   <div className="space-y-3 pl-2">
                     <h2 className="font-display-lg text-3xl md:text-4xl lg:text-5xl text-[#3d251c] font-black leading-tight tracking-tight">
-                      Welcome to Phanilie Music.
+                      Welcome to Stephanie Keys.
                     </h2>
                     <p className="font-sans text-[10px] md:text-xs text-[#a27866] font-bold uppercase tracking-[0.2em] block">
                       Your core focus
@@ -547,7 +547,7 @@ function Homepage() {
                           widgets
                         </span>
                       </div>
-                      
+
                       {/* Individual Glassmorphic Card for Step 1 */}
                       <div className="flex-grow bg-white/45 backdrop-blur-md border border-white/50 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(205,161,149,0.03)] transition-all duration-300 hover:bg-white/65 hover:border-[#cda195]/40 hover:shadow-[0_12px_35px_rgba(205,161,149,0.08)] group-hover:translate-x-1">
                         <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#3d251c] tracking-tight transition-colors duration-300 group-hover:text-[#a27866]">
@@ -617,7 +617,7 @@ function Homepage() {
                   <div className="absolute w-72 h-72 bg-[#ffd89b]/12 rounded-full blur-3xl right-0 bottom-0 z-0"></div>
                   {/* Soft floor shadow to ground the keys */}
                   <div className="absolute right-[-280px] bottom-[-265px] w-[420px] h-16 bg-[#5a453d]/20 rounded-full blur-2xl pointer-events-none transform rotate-[-22deg] z-0"></div>
-                  
+
                   {/* Crystalline keys image wrapper (Scaled significantly down to fit beautifully inside the 5-column space) */}
                   <div className="absolute right-[-380px] bottom-[-440px] w-[140%] sm:w-[110%] md:w-[90%] lg:w-[168%] max-w-none origin-bottom-right transform scale-125 lg:scale-145 z-10">
                     <img
@@ -654,7 +654,7 @@ function Homepage() {
             {/* Feedbacks / Testimonials Section (Clean Soft White-Brown Blend with Chocolate Cards) */}
             <section className="py-24 px-6 border-b border-[#ebd3cb]/15 relative overflow-hidden bg-gradient-to-b from-[#21110a] to-[#170a04]">
               {/* Background Palace Image Layer */}
-              <div 
+              <div
                 className="absolute inset-0 z-0 pointer-events-none select-none opacity-[0.35]"
                 style={{
                   backgroundImage: "url('/palacey.png')",
@@ -663,7 +663,8 @@ function Homepage() {
                 }}
               />
               {/* CSS Keyframes for falling glitters */}
-              <style dangerouslySetInnerHTML={{ __html: `
+              <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes glitter-fall {
                   0% {
                     transform: translateY(-20px) rotate(0deg);
@@ -711,7 +712,7 @@ function Homepage() {
                     Students Feedbacks
                   </h2>
                   <p className="font-sans text-sm md:text-base text-[#ebd3c7]/80 leading-relaxed">
-                    Discover how pianists of all backgrounds found their creative freedom and built a solid foundation with Phanilie Music.
+                    Discover how pianists of all backgrounds found their creative freedom and built a solid foundation with Stephanie Keys.
                   </p>
                 </div>
 
@@ -724,7 +725,7 @@ function Homepage() {
                       date: "June 14, 2025",
                       stars: 5,
                       comment:
-                         "I was stuck relying 100% on sheet music for years. Phanilie taught me how to actually listen to chords and play by ear. Within 3 months, I was playing worship songs at my church without any paper!",
+                        "I was stuck relying 100% on sheet music for years. Phanilie taught me how to actually listen to chords and play by ear. Within 3 months, I was playing worship songs at my church without any paper!",
                       avatar:
                         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
                     },
@@ -804,7 +805,7 @@ function Homepage() {
             </section>
 
             {/* About Mentor Section (Jonny May Style Full-Height Image Split Layout with Soft Parent Marble Background) */}
-            <section 
+            <section
               className="bg-[#fffbf9] overflow-hidden border-b border-[#e5d5cd]/30 relative"
               style={{
                 backgroundImage: "url('/mar.png')",
@@ -820,8 +821,8 @@ function Homepage() {
                 <div className="lg:col-span-5 relative min-h-[350px] lg:min-h-0 overflow-hidden">
                   <img
                     className="absolute inset-0 w-full h-full object-cover object-center"
-                    src="/pink-piano-mentor.jpg"
-                    alt="Phanilie Music - Grand Piano"
+                    src="/profile-photo.jpg"
+                    alt="Stephanie Halim - Mentor"
                   />
                 </div>
 
@@ -856,10 +857,10 @@ function Homepage() {
                       enough to let you explore and express your own musical
                       voice.
                     </p>
-                    
+
                     <div className="pl-4 border-l-2 border-[#cda195] pt-1 pb-1">
                       <p className="font-display-lg italic text-[#5a453d] font-semibold text-base md:text-lg leading-relaxed">
-                        "In Phanilie Music, we will explore rich chords, and help
+                        "In Stephanie Keys, we will explore rich chords, and help
                         you find your own voice on the piano at your own
                         comfortable pace."
                       </p>
@@ -874,7 +875,8 @@ function Homepage() {
 
             {/* What You Will Get Section */}
             <section className="py-24 px-6 bg-gradient-to-br from-[#614639] via-[#543c31] to-[#664b3f] border-b border-[#ebd3cb]/15 text-center relative overflow-hidden">
-              <style dangerouslySetInnerHTML={{__html: `
+              <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes sparkleFloat1 {
                   0% { transform: translate(0, 15px) scale(0.3) rotate(0deg); opacity: 0; }
                   35% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
@@ -895,7 +897,7 @@ function Homepage() {
               `}} />
 
               {/* Background Strings Image Layer */}
-              <div 
+              <div
                 className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none select-none opacity-[0.08]"
                 style={{
                   backgroundImage: "url('/strings.png')",
@@ -1036,7 +1038,8 @@ function Homepage() {
             </section>
             {/* FAQ Section */}
             <section className="py-24 px-6 bg-gradient-to-br from-[#a38777] via-[#94786d] to-[#c4a296] border-b border-[#e8cdc1]/20 relative overflow-hidden">
-              <style dangerouslySetInnerHTML={{__html: `
+              <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes faqSparkle1 {
                   0% { transform: translate(0, 15px) scale(0.3) rotate(0deg); opacity: 0; }
                   35% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
@@ -1057,7 +1060,7 @@ function Homepage() {
               `}} />
 
               {/* Background Piano Grand Image Layer */}
-              <div 
+              <div
                 className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none select-none opacity-[0.16]"
                 style={{
                   backgroundImage: "url('/pianogrand.jpg')",
@@ -1110,7 +1113,7 @@ function Homepage() {
 
               <div className="relative z-10 max-w-[1100px] mx-auto space-y-12">
                 <div className="text-center space-y-3">
-                  <h2 
+                  <h2
                     className="font-display-lg text-3xl md:text-4xl text-white font-bold leading-tight tracking-tight drop-shadow-[0_1px_4px_rgba(0,0,0,0.15)]"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
@@ -1162,29 +1165,26 @@ function Homepage() {
                     ].map((item) => (
                       <div
                         key={item.idx}
-                        className={`border rounded-2xl overflow-hidden transition-all duration-300 backdrop-blur-lg ${
-                          openFaq === item.idx
+                        className={`border rounded-2xl overflow-hidden transition-all duration-300 backdrop-blur-lg ${openFaq === item.idx
                             ? "border-[#cda195] shadow-[0_12px_30px_rgba(0,0,0,0.15)] bg-black/50"
                             : "border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-black/20 hover:bg-black/30 hover:border-white/40 hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)]"
-                        }`}
+                          }`}
                       >
                         <button
                           onClick={() => setOpenFaq(openFaq === item.idx ? null : item.idx)}
                           className="w-full py-4.5 px-5 flex items-center justify-between gap-4 cursor-pointer text-left bg-transparent border-none focus:outline-none"
                         >
                           <span
-                            className={`font-sans text-[13px] md:text-sm font-bold transition-colors duration-200 ${
-                              openFaq === item.idx
+                            className={`font-sans text-[13px] md:text-sm font-bold transition-colors duration-200 ${openFaq === item.idx
                                 ? "text-[#ffdcd3]"
                                 : "text-white"
-                            }`}
+                              }`}
                           >
                             {item.question}
                           </span>
                           <span
-                            className={`material-symbols-outlined text-white/70 text-lg transition-transform duration-300 select-none ${
-                              openFaq === item.idx ? "rotate-180 text-[#cda195]" : ""
-                            }`}
+                            className={`material-symbols-outlined text-white/70 text-lg transition-transform duration-300 select-none ${openFaq === item.idx ? "rotate-180 text-[#cda195]" : ""
+                              }`}
                           >
                             expand_more
                           </span>
@@ -1249,29 +1249,26 @@ function Homepage() {
                     ].map((item) => (
                       <div
                         key={item.idx}
-                        className={`border rounded-2xl overflow-hidden transition-all duration-300 backdrop-blur-lg ${
-                          openFaq === item.idx
+                        className={`border rounded-2xl overflow-hidden transition-all duration-300 backdrop-blur-lg ${openFaq === item.idx
                             ? "border-[#cda195] shadow-[0_12px_30px_rgba(0,0,0,0.15)] bg-black/50"
                             : "border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-black/20 hover:bg-black/30 hover:border-white/40 hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)]"
-                        }`}
+                          }`}
                       >
                         <button
                           onClick={() => setOpenFaq(openFaq === item.idx ? null : item.idx)}
                           className="w-full py-4.5 px-5 flex items-center justify-between gap-4 cursor-pointer text-left bg-transparent border-none focus:outline-none"
                         >
                           <span
-                            className={`font-sans text-[13px] md:text-sm font-bold transition-colors duration-200 ${
-                              openFaq === item.idx
+                            className={`font-sans text-[13px] md:text-sm font-bold transition-colors duration-200 ${openFaq === item.idx
                                 ? "text-[#ffdcd3]"
                                 : "text-white"
-                            }`}
+                              }`}
                           >
                             {item.question}
                           </span>
                           <span
-                            className={`material-symbols-outlined text-white/70 text-lg transition-transform duration-300 select-none ${
-                              openFaq === item.idx ? "rotate-180 text-[#cda195]" : ""
-                            }`}
+                            className={`material-symbols-outlined text-white/70 text-lg transition-transform duration-300 select-none ${openFaq === item.idx ? "rotate-180 text-[#cda195]" : ""
+                              }`}
                           >
                             expand_more
                           </span>
@@ -1299,137 +1296,149 @@ function Homepage() {
               </div>
             </section>
 
-            {/* Pricing Section (Calm Pink-Brown Theme with Glossy White Glassmorphic Cards) */}
-            <section className="py-24 px-6 border-b border-[#e8cdc1]/30 relative overflow-hidden bg-gradient-to-b from-[#ffe5db] to-[#cbb2a6]">
+            {/* Pricing Section (Vintage Manuscript Paper Backdrop + Compact Luxury Cards) */}
+            <section
+              className="py-12 lg:py-16 px-4 border-b border-[#e8cdc1]/20 relative overflow-hidden bg-cover bg-center"
+              style={{
+                backgroundImage: "linear-gradient(180deg, rgba(38, 22, 16, 0.82) 0%, rgba(26, 14, 10, 0.88) 100%), url('/vintage-manuscript-paper.jpg')",
+              }}
+            >
               {/* Symmetrical Ambient Warm Rose Glow */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-36 bg-[#dfa38f]/10 rounded-full blur-[80px] pointer-events-none z-0" />
-              {/* Background Looping Video Layer */}
-              <video 
-                ref={pricingVideoRef}
-                src="/videos/pricing.mp4"
-                autoPlay
-                muted 
-                loop
-                playsInline 
-                preload="auto"
-                className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none select-none opacity-15"
-              />
-              {/* Peach/Pink Overlay */}
-              <div className="absolute inset-0 z-0 bg-[#ffebe6] opacity-5 pointer-events-none" />
-              <div className="relative z-10 px-6 max-w-[1200px] mx-auto space-y-16">
-                {/* Header */}
-                <div className="text-center space-y-4">
-                  <h2 className="font-display-lg text-3xl md:text-4xl text-[#4a372e] font-bold leading-tight">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-64 bg-[#dfa38f]/10 rounded-full blur-[100px] pointer-events-none z-0" />
+
+              <div className="relative z-10 max-w-[860px] mx-auto space-y-8 lg:space-y-10 w-full">
+                {/* Section Header */}
+                <div className="text-center space-y-2 max-w-2xl mx-auto">
+                  <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#fceee8] font-bold leading-tight drop-shadow-sm">
                     Start Your Musical Journey
                   </h2>
-                  <p className="text-[#8b7368] font-sans text-xs md:text-sm font-bold uppercase tracking-widest">
+                  <p className="text-[#d8bead] font-sans text-xs md:text-sm font-bold uppercase tracking-widest">
                     Choose the plan that fits your pace of learning.
                   </p>
                 </div>
 
-                {/* 3 Price Cards in 1 Row */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                  {[
-                    {
-                      name: "Monthly",
-                      price: "$18.99",
-                      period: "/ month",
-                      desc: "Perfect for exploring the curriculum at your own pace.",
-                      popular: false,
-                      btnText: "Start Monthly Plan",
-                    },
-                    {
-                      name: "Quarterly",
-                      price: "$49.99",
-                      period: "/ 3 months",
-                      desc: "Our most balanced plan to build solid music foundations.",
-                      popular: false,
-                      btnText: "Start Quarterly Plan",
-                    },
-                    {
-                      name: "Annually",
-                      price: "$169.99",
-                      period: "/ year",
-                      desc: "All-access membership for maximum creative piano growth.",
-                      popular: true,
-                      btnText: "Become a Founding Member",
-                    },
-                  ].map((plan, idx) => (
-                    <div
-                      key={idx}
-                      className={`relative rounded-[24px] p-8 md:p-10 flex flex-col justify-between text-center transition-all duration-300 hover-move cursor-pointer ${
-                        plan.popular
-                          ? "border-2 border-[#c98d4c] bg-white shadow-[0_20px_50px_rgba(201,141,76,0.14)] text-[#5a453d] hover:bg-white/95"
-                          : "border border-white/80 bg-white/50 backdrop-blur-md shadow-[0_15px_35px_rgba(90,69,61,0.04)] hover:border-white hover:bg-white/80 text-[#5a453d]"
-                      }`}
-                    >
-                      {plan.popular && (
-                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-br from-[#ffd89b] to-[#c98d4c] text-[#524037] px-4 py-1 rounded-full font-sans text-xs font-bold uppercase tracking-wider whitespace-nowrap shadow-md">
-                          Best Value • Founding Member
+                {/* 2 Compact Price Cards in 1 Row (Exact Layout & Content matching Reference Screenshot) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch max-w-[720px] mx-auto w-full">
+                  
+                  {/* Card 1: Annual Plan */}
+                  <div
+                    style={{
+                      background: "#FFFFFF",
+                      boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35)",
+                    }}
+                    className="relative rounded-[20px] pt-9 p-6 lg:p-7 flex flex-col justify-between text-left transition-all duration-300 hover:scale-[1.02] cursor-pointer overflow-hidden border border-white/60"
+                  >
+                    {/* BEST VALUE Banner */}
+                    <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-r from-[#44ab96] to-[#369c88] text-white flex items-center justify-center text-[11px] font-bold uppercase tracking-widest shadow-xs">
+                      BEST VALUE
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="font-sans text-lg font-bold text-[#2399a0] tracking-tight">
+                        Annual Plan
+                      </h3>
+
+                      <div className="space-y-1">
+                        <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#2b2523]">
+                          $14.16 <span className="text-base lg:text-lg font-normal text-[#655b56]">/ month</span>
                         </div>
-                      )}
-
-                      <div className="space-y-6">
-                        <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-widest text-[#c98d4c]">
-                          {plan.name}
-                        </h3>
-                        <div className="space-y-1">
-                          <div className="text-3xl md:text-4xl lg:text-5xl font-display-lg font-bold tracking-tight text-[#4a372e]">
-                            {plan.price}
-                          </div>
-                          <div className="text-xs md:text-sm font-semibold text-[#81756f]">
-                            {plan.period}
-                          </div>
-                        </div>
-                        <p className="text-xs md:text-sm leading-relaxed font-semibold text-[#6e5a51]">
-                          {plan.desc}
-                        </p>
-
-                        <hr className="border-[#e8cdc1]/30" />
-
-                        <ul className="text-left space-y-4 text-xs md:text-sm list-none p-0 font-semibold text-[#5a453d]">
-                          <li className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-lg select-none text-[#c98d4c]">
-                              check_circle
-                            </span>
-                            <span>All Gospel &amp; Jazz Courses</span>
-                          </li>
-                          <li className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-lg select-none text-[#c98d4c]">
-                              check_circle
-                            </span>
-                            <span>Monthly Live Group Coaching</span>
-                          </li>
-                          <li className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-lg select-none text-[#c98d4c]">
-                              check_circle
-                            </span>
-                            <span>Sheet Music Library Access</span>
-                          </li>
-                          <li className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-lg select-none text-[#c98d4c]">
-                              check_circle
-                            </span>
-                            <span>Private Community Forum</span>
-                          </li>
-                        </ul>
                       </div>
 
-                      <div className="mt-8">
-                        <button
-                          onClick={() => setView("dashboard")}
-                          className={`w-full py-3 md:py-4 rounded-md font-label-md text-label-md border transition-all active:scale-95 cursor-pointer font-bold ${
-                            plan.popular
-                              ? "bg-gradient-to-br from-[#ffd89b] to-[#c98d4c] text-[#524037] border-none shadow-[0_4px_15px_rgba(201,141,76,0.3)] hover:opacity-95"
-                              : "bg-white border border-[#ab7e66]/40 text-[#4a372e] hover:bg-[#e8cdc1]/10 hover:border-[#ab7e66]"
-                          }`}
-                        >
-                          {plan.btnText}
-                        </button>
+                      <div className="space-y-1 pt-1">
+                        <span className="font-sans text-sm font-bold text-[#38c172] block">
+                          Free 14-Day Trial
+                        </span>
+                        <p className="text-xs text-[#786b65] font-medium leading-normal">
+                          Then billed annually at $169.99
+                        </p>
                       </div>
                     </div>
-                  ))}
+
+                    <div className="pt-6">
+                      <button
+                        onClick={() => setView("dashboard")}
+                        className="w-full py-3 rounded-full font-sans text-sm font-bold text-white bg-gradient-to-r from-[#17a2b8] to-[#138496] hover:from-[#138496] hover:to-[#117a8b] shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer border-none flex items-center justify-center"
+                      >
+                        Sign Up
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Monthly Plan */}
+                  <div
+                    style={{
+                      background: "#FFFFFF",
+                      boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35)",
+                    }}
+                    className="relative rounded-[20px] pt-9 p-6 lg:p-7 flex flex-col justify-between text-left transition-all duration-300 hover:scale-[1.02] cursor-pointer overflow-hidden border border-white/60"
+                  >
+                    <div className="space-y-4">
+                      <h3 className="font-sans text-lg font-bold text-[#2399a0] tracking-tight">
+                        Monthly Plan
+                      </h3>
+
+                      <div className="space-y-1">
+                        <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#2b2523]">
+                          $18.99 <span className="text-base lg:text-lg font-normal text-[#655b56]">/ month</span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 pt-1">
+                        <span className="font-sans text-sm font-bold text-[#38c172] block">
+                          Free 14-Day Trial
+                        </span>
+                        <p className="text-xs text-[#786b65] font-medium leading-normal">
+                          Then billed monthly at $18.99
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-6">
+                      <button
+                        onClick={() => setView("dashboard")}
+                        className="w-full py-3 rounded-full font-sans text-sm font-bold text-white bg-gradient-to-r from-[#17a2b8] to-[#138496] hover:from-[#138496] hover:to-[#117a8b] shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer border-none flex items-center justify-center"
+                      >
+                        Sign Up
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
+
+                {/* Bottom Shared Features Checklist */}
+                <div className="pt-2 max-w-[720px] mx-auto w-full">
+                  <div className="bg-white/10 backdrop-blur-md rounded-[16px] p-4 border border-white/20 shadow-md flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+                    <div className="shrink-0 pr-3 md:border-r border-white/20">
+                      <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#e2b0a4] block">
+                        Included in Every Plan
+                      </span>
+                      <span className="font-display-lg text-xs font-bold text-white">
+                        Full Access Pass
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
+                      {[
+                        "All Courses Access",
+                        "Live Group Coaching",
+                        "Sheet Music Library",
+                        "Community Forum",
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <div className="w-4 h-4 rounded-full bg-[#38c172] p-[1px] flex items-center justify-center shrink-0 shadow-xs">
+                            <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          </div>
+                          <span className="text-xs font-medium text-[#fceee8] leading-tight">
+                            {item}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </section>
           </>

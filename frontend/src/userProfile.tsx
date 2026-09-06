@@ -2,11 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { fetchUserProfile, updateUserProfile, fetchSubscriptionOverview, changePassword, type UserProfileDto, type SubscriptionOverviewDto } from './services/profileApi';
 
 interface UserProfileProps {
-  onNavigate?: (view: 'home' | 'dashboard' | 'library' | 'courses' | 'sessions' | 'forums' | 'profile') => void;
+  onNavigate?: (view: 'home' | 'dashboard' | 'library' | 'courses' | 'sessions' | 'forums' | 'profile' | 'subscription') => void;
+  initialTab?: 'profile' | 'subscription' | 'security';
 }
 
-export default function UserProfile({ onNavigate: _onNavigate }: UserProfileProps) {
-  const [activeTab, setActiveTab] = useState<'profile' | 'subscription' | 'security'>('profile');
+export default function UserProfile({ onNavigate: _onNavigate, initialTab = 'profile' }: UserProfileProps) {
+  const [activeTab, setActiveTab] = useState<'profile' | 'subscription' | 'security'>(initialTab);
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
   const [profile, setProfile] = useState<UserProfileDto | null>(null);
   const [subscription, setSubscription] = useState<SubscriptionOverviewDto | null>(null);
 

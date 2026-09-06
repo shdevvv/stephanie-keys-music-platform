@@ -233,7 +233,8 @@ export type ViewType =
   | "my-library"
   | "download-page"
   | "invoice"
-  | "profile";
+  | "profile"
+  | "subscription";
 
 export interface LayoutProps {
   children: ReactNode;
@@ -250,6 +251,20 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     return localStorage.getItem("guest_name") || localStorage.getItem("user_name") || "Student";
   });
   const [cartCount, setCartCount] = useState(0);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+        setIsProfileMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const updateCartCount = () => {
     try {
@@ -577,18 +592,20 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 )}
               </button>
 
-              {/* Sign Up / Account Action Button */}
+              {/* Sign In / Sign Up / Account Action Controls (Solid White Inside + Glossy Brown Rose-Gold Outer Border, No White Outline) */}
               {isLoggedIn ? (
-                /* Logged In User Button with Dropdown (Logout Only in Elegant Glossy Rose-Gold) */
-                <div className="relative group">
+                /* Logged In User Button with Dropdown */
+                <div className="relative" ref={profileMenuRef}>
                   <button
-                    onClick={() => onNavigate("dashboard")}
+                    onClick={() => setIsProfileMenuOpen((prev) => !prev)}
                     style={{
-                      background: "linear-gradient(135deg, #FFFDFB 0%, #FAECE6 50%, #F5D6CB 100%)",
-                      boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.9), inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #A66C5C",
-                      border: "1.5px solid #F6D6CC",
+                      background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
+                      border: "1.5px solid transparent",
+                      boxShadow: "0 4px 14px rgba(140, 85, 70, 0.15)",
                     }}
-                    className="relative h-9 px-3.5 rounded-none cursor-pointer transition-all duration-300 ease-out hover:brightness-106 hover:scale-[1.02] focus:outline-none flex items-center gap-1.5 text-[#4a3227] shadow-none"
+                    className="relative h-9 px-4 rounded-[8px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center gap-1.5 shadow-none"
                   >
                     {/* Glossy Specular Rose-Gold Semiquaver Icon */}
                     <svg className="w-3.5 h-4 shrink-0 drop-shadow-2xs" viewBox="0 0 100 130">
@@ -606,61 +623,162 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       <path d="M 50 10 C 68 22, 82 42, 75 66 C 72 72, 68 76, 65 80 C 72 65, 75 48, 50 32 Z" fill="url(#note-glossy-gold-user)" />
                       <path d="M 50 35 C 68 47, 82 67, 75 91 C 72 96, 68 100, 65 104 C 72 90, 75 73, 50 57 Z" fill="url(#note-glossy-gold-user)" />
                     </svg>
+
                     <span
                       style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                      className="text-xs font-bold text-[#4a3227] tracking-wider"
+                      className="text-xs font-bold text-[#3d2319] tracking-wider"
                     >
                       {userName}
                     </span>
-                    <span className="material-symbols-outlined text-sm text-[#805c51] ml-0.5">expand_more</span>
+
+                    {/* Royal Ruby Red Dropdown Arrow with Smooth Click Rotation */}
+                    <svg
+                      className={`w-3 h-3 shrink-0 ml-0.5 transition-transform duration-300 ease-out ${isProfileMenuOpen ? 'rotate-180' : ''}`}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#800A1D"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
                   </button>
 
-                  {/* Dropdown Menu (Logout Only, Glossy Rose-Gold) */}
-                  <div className="absolute right-0 top-full pt-2 w-44 hidden group-hover:block transition-all duration-200 z-50">
-                    <div className="bg-white/95 backdrop-blur-xl border border-[#e8cdc1]/40 rounded-2xl shadow-[0_12px_36px_rgba(45,41,38,0.12)] p-2 flex flex-col">
+                  {/* Dropdown Menu (Click Only - Solid White Inside + Glossy Brown Rose-Gold Outer Border) */}
+                  <div
+                    className={`absolute right-0 top-full pt-2 w-44 flex flex-col z-50 transition-all duration-300 ease-out ${
+                      isProfileMenuOpen
+                        ? "pointer-events-auto opacity-100 translate-y-0 scale-100"
+                        : "pointer-events-none opacity-0 -translate-y-1 scale-95"
+                    }`}
+                  >
+                    <div
+                      style={{
+                        background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
+                        backdropFilter: "blur(16px)",
+                        WebkitBackdropFilter: "blur(16px)",
+                        border: "1.5px solid transparent",
+                        boxShadow: "0 8px 24px rgba(140, 85, 70, 0.18)",
+                      }}
+                      className="p-1.5 rounded-[12px] flex flex-col gap-1 overflow-hidden"
+                    >
+                      {/* Profile Button */}
                       <button
-                        onClick={handleLogout}
-                        className="w-full text-left px-3 py-2 text-xs text-[#5c3a2e] hover:bg-[#faece6] font-bold rounded-xl bg-transparent border-none cursor-pointer transition-all duration-150 flex items-center gap-2"
+                        onClick={() => {
+                          onNavigate("profile");
+                          setIsProfileMenuOpen(false);
+                        }}
+                        className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#F8E3DB]/60 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#3d2319] hover:text-[#800A1D]"
                       >
-                        <span className="material-symbols-outlined text-base text-[#dfa38f]">logout</span>
-                        Logout
+                        <svg className="w-3.5 h-3.5 shrink-0 text-[#8C5446]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                          <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        <span
+                          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                          className="text-xs font-bold tracking-wider"
+                        >
+                          Profile
+                        </span>
+                      </button>
+
+                      {/* Subscription Button */}
+                      <button
+                        onClick={() => {
+                          onNavigate("subscription");
+                          setIsProfileMenuOpen(false);
+                        }}
+                        className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#F8E3DB]/60 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#3d2319] hover:text-[#800A1D]"
+                      >
+                        <svg className="w-3.5 h-3.5 shrink-0 text-[#8C5446]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="2" y="5" width="20" height="14" rx="2" />
+                          <line x1="2" y1="10" x2="22" y2="10" />
+                        </svg>
+                        <span
+                          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                          className="text-xs font-bold tracking-wider"
+                        >
+                          Subscription
+                        </span>
+                      </button>
+
+                      <div className="h-[1px] bg-[#E2B0A4]/40 my-0.5 mx-1" />
+
+                      {/* Log Out Button */}
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setIsProfileMenuOpen(false);
+                        }}
+                        className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#800A1D]/10 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#800A1D]"
+                      >
+                        <svg className="w-3.5 h-3.5 shrink-0 text-[#800A1D]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                          <polyline points="16 17 21 12 16 7" />
+                          <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        <span
+                          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                          className="text-xs font-bold tracking-wider"
+                        >
+                          Log Out
+                        </span>
                       </button>
                     </div>
                   </div>
                 </div>
               ) : (
-                /* Not Logged In: 1 Single Sign Up Button (No Dropdown) */
-                <button
-                  onClick={() => onNavigate("signup")}
-                  style={{
-                    background: "linear-gradient(135deg, #FFFDFB 0%, #FAECE6 50%, #F5D6CB 100%)",
-                    boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.9), inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #A66C5C",
-                    border: "1.5px solid #F6D6CC",
-                  }}
-                  className="relative h-9 px-3.5 rounded-none cursor-pointer transition-all duration-300 ease-out hover:brightness-106 hover:scale-[1.02] focus:outline-none flex items-center gap-1.5 text-[#4a3227] shadow-none"
-                >
-                  <svg className="w-3.5 h-4 shrink-0 drop-shadow-2xs" viewBox="0 0 100 130">
-                    <defs>
-                      <linearGradient id="note-glossy-gold-su" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#FFFFFF" />
-                        <stop offset="25%" stopColor="#FFF0EB" />
-                        <stop offset="55%" stopColor="#E2B0A4" />
-                        <stop offset="85%" stopColor="#C48B7C" />
-                        <stop offset="100%" stopColor="#8C5446" />
-                      </linearGradient>
-                    </defs>
-                    <ellipse cx="28" cy="98" rx="18" ry="12" transform="rotate(-25 28 98)" fill="url(#note-glossy-gold-su)" />
-                    <rect x="42" y="10" width="9" height="88" rx="2" fill="url(#note-glossy-gold-su)" />
-                    <path d="M 50 10 C 68 22, 82 42, 75 66 C 72 72, 68 76, 65 80 C 72 65, 75 48, 50 32 Z" fill="url(#note-glossy-gold-su)" />
-                    <path d="M 50 35 C 68 47, 82 67, 75 91 C 72 96, 68 100, 65 104 C 72 90, 75 73, 50 57 Z" fill="url(#note-glossy-gold-su)" />
-                  </svg>
-                  <span
-                    style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                    className="text-xs font-bold text-[#4a3227] tracking-wider"
+                /* Not Logged In: Clear Liquid Glass Controls */
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => onNavigate("signin")}
+                    style={{
+                      background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 100%)",
+                      backdropFilter: "blur(16px) saturate(180%)",
+                      WebkitBackdropFilter: "blur(16px) saturate(180%)",
+                      border: "1.5px solid rgba(255, 255, 255, 0.85)",
+                      boxShadow: "inset 0 1.5px 1px 0 #FFFFFF, inset 0 -1px 2px 0 rgba(0, 0, 0, 0.04)",
+                      fontFamily: "'Playfair Display', Georgia, serif",
+                    }}
+                    className="h-9 px-3.5 rounded-[8px] text-xs font-bold text-[#3d2319] hover:text-[#800A1D] hover:scale-[1.02] transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center"
                   >
-                    Sign Up
-                  </span>
-                </button>
+                    Sign In
+                  </button>
+                  <button
+                    onClick={() => onNavigate("signup")}
+                    style={{
+                      background: "linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.16) 100%)",
+                      backdropFilter: "blur(18px) saturate(190%)",
+                      WebkitBackdropFilter: "blur(18px) saturate(190%)",
+                      border: "1.5px solid rgba(255, 255, 255, 0.9)",
+                      boxShadow: "0 6px 18px -2px rgba(0, 0, 0, 0.06), inset 0 1.5px 1px 0 #FFFFFF, inset 0 -1px 2px 0 rgba(0, 0, 0, 0.05)",
+                    }}
+                    className="relative h-9 px-4 rounded-[8px] cursor-pointer transition-all duration-300 ease-out hover:brightness-120 hover:scale-[1.02] active:scale-97 focus:outline-none flex items-center justify-center gap-1.5 text-[#3d2319] shadow-none"
+                  >
+                    <svg className="w-3.5 h-4 shrink-0 drop-shadow-2xs" viewBox="0 0 100 130">
+                      <defs>
+                        <linearGradient id="note-glossy-gold-su" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#FFFFFF" />
+                          <stop offset="25%" stopColor="#FFF0EB" />
+                          <stop offset="55%" stopColor="#E2B0A4" />
+                          <stop offset="85%" stopColor="#C48B7C" />
+                          <stop offset="100%" stopColor="#8C5446" />
+                        </linearGradient>
+                      </defs>
+                      <ellipse cx="28" cy="98" rx="18" ry="12" transform="rotate(-25 28 98)" fill="url(#note-glossy-gold-su)" />
+                      <rect x="42" y="10" width="9" height="88" rx="2" fill="url(#note-glossy-gold-su)" />
+                      <path d="M 50 10 C 68 22, 82 42, 75 66 C 72 72, 68 76, 65 80 C 72 65, 75 48, 50 32 Z" fill="url(#note-glossy-gold-su)" />
+                      <path d="M 50 35 C 68 47, 82 67, 75 91 C 72 96, 68 100, 65 104 C 72 90, 75 73, 50 57 Z" fill="url(#note-glossy-gold-su)" />
+                    </svg>
+                    <span
+                      style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                      className="text-xs font-bold text-[#4A2B20] tracking-wider"
+                    >
+                      Sign Up
+                    </span>
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -694,304 +812,304 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
         {/* Footer */}
         <footer className={`w-full py-8 md:py-10 ${view === "dashboard" ? "mt-0 bg-[#fffdfb] border-t border-[#dfa38f]/30" : "mt-auto bg-[#fffdfb] border-[#dfa38f]/30"} relative`}>
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-8 gap-y-8 px-6 md:px-12 max-w-[1200px] mx-auto w-full">
-                {/* Column 1: Brand Info */}
-                <div className="flex flex-col gap-3.5 w-full">
-                  <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
-                    <h5
-                      style={{ fontFamily: "'Playfair Display', 'Cinzel', serif" }}
-                      className="text-xs md:text-[13px] font-bold uppercase tracking-[0.18em] text-[#8a5d4c]"
-                    >
-                      STEPHANIE KEYS
-                    </h5>
-                    <div
-                      style={{
-                        backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
-                      }}
-                      className="h-[1.5px] w-full rounded-full"
-                    />
-                  </div>
-                  <p
-                    style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                    className="text-[11.5px] md:text-xs leading-relaxed font-semibold text-[#7a594e] tracking-wide"
-                  >
-                    Premium Gospel and Jazz Piano Lessons. Elevating your full-piano potential.
-                  </p>
-                </div>
-
-                {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
-                <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
-                  <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
-                    <defs>
-                      <linearGradient id="clear-metal-line-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#F5D6CB" />
-                        <stop offset="50%" stopColor="#D9A998" />
-                        <stop offset="100%" stopColor="#B58474" />
-                      </linearGradient>
-                    </defs>
-                    <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-1)" />
-                    <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-1)" stroke="#FFFFFF" strokeWidth="1" />
-                    <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
-                    <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-1)" />
-                  </svg>
-                </div>
-                <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
-
-                {/* Column 2: Connect */}
-                <div className="flex flex-col gap-3.5 w-full">
-                  <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
-                    <h5
-                      style={{ fontFamily: "'Playfair Display', 'Cinzel', serif" }}
-                      className="text-xs md:text-[13px] font-bold uppercase tracking-[0.18em] text-[#8a5d4c]"
-                    >
-                      CONNECT
-                    </h5>
-                    <div
-                      style={{
-                        backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
-                      }}
-                      className="h-[1.5px] w-full rounded-full"
-                    />
-                  </div>
-                  {/* SVG Gradient definitions for darker glossy rose gold icon fills */}
-                  <svg className="w-0 h-0 absolute">
-                    <defs>
-                      <linearGradient
-                        id="glossy-rosegold-grad"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#8A5647" />
-                        <stop offset="50%" stopColor="#B37868" />
-                        <stop offset="100%" stopColor="#6E3E32" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  {/* Social Media Icons (Elegant Slow Hover Transition, Smaller Icons) */}
-                  <div className="flex flex-row items-center gap-3.5 mt-1">
-                    <a
-                      href="https://www.youtube.com/@phanilie"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-0.5 flex items-center justify-center transition-all duration-500 ease-out hover:opacity-80 hover:scale-[1.08] active:scale-95 cursor-pointer flex-shrink-0"
-                      aria-label="YouTube"
-                    >
-                      <svg
-                        className="w-4 h-4 block flex-shrink-0"
-                        fill="url(#glossy-rosegold-grad)"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://www.instagram.com/phanilie_?igsh=c2hzOWJpZ3lyN2l6"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-0.5 flex items-center justify-center transition-all duration-500 ease-out hover:opacity-80 hover:scale-[1.08] active:scale-95 cursor-pointer flex-shrink-0"
-                      aria-label="Instagram"
-                    >
-                      <svg
-                        className="w-4 h-4 block flex-shrink-0"
-                        fill="url(#glossy-rosegold-grad)"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://www.tiktok.com/@phanilie_?is_from_webapp=1&sender_device=pc"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-0.5 flex items-center justify-center transition-all duration-500 ease-out hover:opacity-80 hover:scale-[1.08] active:scale-95 cursor-pointer flex-shrink-0"
-                      aria-label="TikTok"
-                    >
-                      <svg
-                        className="w-4 h-4 block flex-shrink-0"
-                        fill="url(#glossy-rosegold-grad)"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M22.43 6.1a8.18 8.18 0 0 1-5.1-1.77v9.4a7.73 7.73 0 1 1-7.73-7.73 7.6 7.6 0 0 1 1.72.2V10a3.68 3.68 0 0 0-1.72-.4 3.73 3.73 0 1 0 3.73 3.73V0h4a8.14 8.14 0 0 0 5.1 1.77z" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-
-                {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
-                <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
-                  <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
-                    <defs>
-                      <linearGradient id="clear-metal-line-2" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#F5D6CB" />
-                        <stop offset="50%" stopColor="#D9A998" />
-                        <stop offset="100%" stopColor="#B58474" />
-                      </linearGradient>
-                    </defs>
-                    <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-2)" />
-                    <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-2)" stroke="#FFFFFF" strokeWidth="1" />
-                    <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
-                    <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-2)" />
-                  </svg>
-                </div>
-                <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
-
-                {/* Column 3: Legal & Support */}
-                <div className="flex flex-col gap-3.5 w-full">
-                  <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
-                    <h5
-                      style={{ fontFamily: "'Playfair Display', 'Cinzel', serif" }}
-                      className="text-xs md:text-[13px] font-bold uppercase tracking-[0.18em] text-[#8a5d4c]"
-                    >
-                      Legal &amp; Support
-                    </h5>
-                    <div
-                      style={{
-                        backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
-                      }}
-                      className="h-[1.5px] w-full rounded-full"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 mt-0.5">
-                    <button
-                      onClick={() => onNavigate("faq")}
-                      style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                      className="text-[11.5px] md:text-xs text-left bg-transparent border-none cursor-pointer p-0 font-bold text-[#7a594e] hover:text-[#5a3a2e] hover:underline underline-offset-4 decoration-[#dfa38f]/50 transition-colors tracking-wide"
-                    >
-                      FAQ
-                    </button>
-                    <button
-                      onClick={() => setShowContactModal(true)}
-                      style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                      className="text-[11.5px] md:text-xs text-left bg-transparent border-none cursor-pointer p-0 font-bold text-[#7a594e] hover:text-[#5a3a2e] hover:underline underline-offset-4 decoration-[#dfa38f]/50 transition-colors tracking-wide"
-                    >
-                      Contact Phanilie
-                    </button>
-                  </div>
-                </div>
-
-                {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
-                <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
-                  <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
-                    <defs>
-                      <linearGradient id="clear-metal-line-3" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#F5D6CB" />
-                        <stop offset="50%" stopColor="#D9A998" />
-                        <stop offset="100%" stopColor="#B58474" />
-                      </linearGradient>
-                    </defs>
-                    <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-3)" />
-                    <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-3)" stroke="#FFFFFF" strokeWidth="1" />
-                    <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
-                    <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-3)" />
-                  </svg>
-                </div>
-                <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
-
-                {/* Column 4: Piano Tips */}
-                <div className="flex flex-col gap-3.5 w-full">
-                  <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
-                    <h5
-                      style={{ fontFamily: "'Playfair Display', 'Cinzel', serif" }}
-                      className="text-xs md:text-[13px] font-bold uppercase tracking-[0.18em] text-[#8a5d4c]"
-                    >
-                      PIANO TIPS
-                    </h5>
-                    <div
-                      style={{
-                        backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
-                      }}
-                      className="h-[1.5px] w-full rounded-full"
-                    />
-                  </div>
-                  {isNewsletterSent ? (
-                    <div className="flex items-center gap-1.5 mt-1 text-xs font-bold text-emerald-700 bg-emerald-100/60 border border-emerald-200/50 py-2 px-4 rounded-xl w-fit animate-in fade-in duration-300">
-                      <span className="material-symbols-outlined text-sm font-bold">check_circle</span>
-                      Subscribed! Thank you.
-                    </div>
-                  ) : (
-                    <form
-                      className="flex flex-col gap-1.5 w-full max-w-[200px] mt-0"
-                      onSubmit={handleNewsletterSubmit}
-                    >
-                      <input
-                        style={{
-                          background: "#fffcfb",
-                          border: "1.5px solid #dfa38f",
-                          boxShadow: "inset 0 1px 3px rgba(223,163,143,0.1)",
-                        }}
-                        className="rounded-xl px-3.5 py-1.5 text-[11.5px] h-8 w-full text-[#7a594e] placeholder-[#ab7e66]/60 focus:outline-none focus:ring-1 focus:ring-[#dfa38f] focus:border-[#dfa38f] transition-all font-semibold"
-                        placeholder="Enter your email"
-                        type="email"
-                        required
-                        value={newsletterEmail}
-                        onChange={(e) => setNewsletterEmail(e.target.value)}
-                      />
-                      <button
-                        type="submit"
-                        style={{
-                          fontFamily: "'Great Vibes', 'Dancing Script', 'Playfair Display', cursive, serif",
-                          background: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
-                          boxShadow: "inset 0 1px 1px rgba(255,255,255,0.6), inset 0 -1.5px 2px rgba(92,58,46,0.3)",
-                          border: "1px solid #D9A998",
-                        }}
-                        className="w-full h-8 rounded-xl flex items-center justify-center cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xs text-base font-medium text-white tracking-wide capitalize"
-                      >
-                        Subscribe
-                      </button>
-                    </form>
-                  )}
-                </div>
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-8 gap-y-8 px-6 md:px-12 max-w-[1200px] mx-auto w-full">
+            {/* Column 1: Brand Info */}
+            <div className="flex flex-col gap-3.5 w-full">
+              <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
+                <h5
+                  style={{ fontFamily: "'Playfair Display', 'Cinzel', serif" }}
+                  className="text-xs md:text-[13px] font-bold uppercase tracking-[0.18em] text-[#8a5d4c]"
+                >
+                  STEPHANIE KEYS
+                </h5>
+                <div
+                  style={{
+                    backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
+                  }}
+                  className="h-[1.5px] w-full rounded-full"
+                />
               </div>
-            </footer>
+              <p
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                className="text-[11.5px] md:text-xs leading-relaxed font-semibold text-[#7a594e] tracking-wide"
+              >
+                Premium Gospel and Jazz Piano Lessons. Elevating your full-piano potential.
+              </p>
+            </div>
 
-            {/* Bright Rose-Gold Separator Line (No Glow) */}
-            <div
-              style={{
-                background: "linear-gradient(90deg, #EBC0B2 0%, #DFA898 50%, #EBC0B2 100%)",
-                boxShadow: "none",
-              }}
-              className="h-[2.5px] w-full relative z-20"
-            />
+            {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
+            <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
+              <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
+                <defs>
+                  <linearGradient id="clear-metal-line-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#F5D6CB" />
+                    <stop offset="50%" stopColor="#D9A998" />
+                    <stop offset="100%" stopColor="#B58474" />
+                  </linearGradient>
+                </defs>
+                <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-1)" />
+                <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-1)" stroke="#FFFFFF" strokeWidth="1" />
+                <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
+                <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-1)" />
+              </svg>
+            </div>
+            <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
 
-            {/* Sub-footer Section (Ultra-Lighter Delicate Blush Rose-Cream Solid Color) */}
-            <div
-              style={{
-                background: "#FAF0EB",
-                backgroundColor: "#FAF0EB",
-                backgroundImage: "none",
-                boxShadow: "none",
-                border: "none",
-              }}
-              className="py-3.5 px-6 md:px-12 w-full text-xs text-[#7A594E] relative z-20"
-            >
-              <div className="max-w-[1200px] mx-auto w-full">
-                <div className="flex flex-row flex-wrap items-center gap-x-4 gap-y-2 justify-between">
-                  <p className="whitespace-nowrap font-sans font-normal text-[#7A594E] tracking-normal text-[10.5px] md:text-xs">
-                    © 2026 Stephanie Keys. All rights reserved.
-                  </p>
-
-                  <div className="flex flex-row items-center gap-3.5 flex-wrap">
-                    <button
-                      onClick={() => onNavigate("privacy")}
-                      className="font-sans font-normal text-[#7A594E] hover:text-[#4A2E23] transition-colors bg-transparent border-none cursor-pointer p-0 text-[10.5px] md:text-xs whitespace-nowrap focus:outline-none hover:underline underline-offset-4"
-                    >
-                      Privacy Policy
-                    </button>
-
-                    <span className="text-[#7A594E]/40 font-light text-[10px]">|</span>
-
-                    <button
-                      onClick={() => onNavigate("terms")}
-                      className="font-sans font-normal text-[#7A594E] hover:text-[#4A2E23] transition-colors bg-transparent border-none cursor-pointer p-0 text-[10.5px] md:text-xs whitespace-nowrap focus:outline-none hover:underline underline-offset-4"
-                    >
-                      Terms of Use
-                    </button>
-                  </div>
-                </div>
+            {/* Column 2: Connect */}
+            <div className="flex flex-col gap-3.5 w-full">
+              <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
+                <h5
+                  style={{ fontFamily: "'Playfair Display', 'Cinzel', serif" }}
+                  className="text-xs md:text-[13px] font-bold uppercase tracking-[0.18em] text-[#8a5d4c]"
+                >
+                  CONNECT
+                </h5>
+                <div
+                  style={{
+                    backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
+                  }}
+                  className="h-[1.5px] w-full rounded-full"
+                />
+              </div>
+              {/* SVG Gradient definitions for darker glossy rose gold icon fills */}
+              <svg className="w-0 h-0 absolute">
+                <defs>
+                  <linearGradient
+                    id="glossy-rosegold-grad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" stopColor="#8A5647" />
+                    <stop offset="50%" stopColor="#B37868" />
+                    <stop offset="100%" stopColor="#6E3E32" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              {/* Social Media Icons (Elegant Slow Hover Transition, Smaller Icons) */}
+              <div className="flex flex-row items-center gap-3.5 mt-1">
+                <a
+                  href="https://www.youtube.com/@phanilie"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-0.5 flex items-center justify-center transition-all duration-500 ease-out hover:opacity-80 hover:scale-[1.08] active:scale-95 cursor-pointer flex-shrink-0"
+                  aria-label="YouTube"
+                >
+                  <svg
+                    className="w-4 h-4 block flex-shrink-0"
+                    fill="url(#glossy-rosegold-grad)"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/phanilie_?igsh=c2hzOWJpZ3lyN2l6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-0.5 flex items-center justify-center transition-all duration-500 ease-out hover:opacity-80 hover:scale-[1.08] active:scale-95 cursor-pointer flex-shrink-0"
+                  aria-label="Instagram"
+                >
+                  <svg
+                    className="w-4 h-4 block flex-shrink-0"
+                    fill="url(#glossy-rosegold-grad)"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.tiktok.com/@phanilie_?is_from_webapp=1&sender_device=pc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-0.5 flex items-center justify-center transition-all duration-500 ease-out hover:opacity-80 hover:scale-[1.08] active:scale-95 cursor-pointer flex-shrink-0"
+                  aria-label="TikTok"
+                >
+                  <svg
+                    className="w-4 h-4 block flex-shrink-0"
+                    fill="url(#glossy-rosegold-grad)"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22.43 6.1a8.18 8.18 0 0 1-5.1-1.77v9.4a7.73 7.73 0 1 1-7.73-7.73 7.6 7.6 0 0 1 1.72.2V10a3.68 3.68 0 0 0-1.72-.4 3.73 3.73 0 1 0 3.73 3.73V0h4a8.14 8.14 0 0 0 5.1 1.77z" />
+                  </svg>
+                </a>
               </div>
             </div>
+
+            {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
+            <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
+              <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
+                <defs>
+                  <linearGradient id="clear-metal-line-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#F5D6CB" />
+                    <stop offset="50%" stopColor="#D9A998" />
+                    <stop offset="100%" stopColor="#B58474" />
+                  </linearGradient>
+                </defs>
+                <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-2)" />
+                <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-2)" stroke="#FFFFFF" strokeWidth="1" />
+                <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
+                <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-2)" />
+              </svg>
+            </div>
+            <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
+
+            {/* Column 3: Legal & Support */}
+            <div className="flex flex-col gap-3.5 w-full">
+              <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
+                <h5
+                  style={{ fontFamily: "'Playfair Display', 'Cinzel', serif" }}
+                  className="text-xs md:text-[13px] font-bold uppercase tracking-[0.18em] text-[#8a5d4c]"
+                >
+                  Legal &amp; Support
+                </h5>
+                <div
+                  style={{
+                    backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
+                  }}
+                  className="h-[1.5px] w-full rounded-full"
+                />
+              </div>
+              <div className="flex flex-col gap-2 mt-0.5">
+                <button
+                  onClick={() => onNavigate("faq")}
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                  className="text-[11.5px] md:text-xs text-left bg-transparent border-none cursor-pointer p-0 font-bold text-[#7a594e] hover:text-[#5a3a2e] hover:underline underline-offset-4 decoration-[#dfa38f]/50 transition-colors tracking-wide"
+                >
+                  FAQ
+                </button>
+                <button
+                  onClick={() => setShowContactModal(true)}
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                  className="text-[11.5px] md:text-xs text-left bg-transparent border-none cursor-pointer p-0 font-bold text-[#7a594e] hover:text-[#5a3a2e] hover:underline underline-offset-4 decoration-[#dfa38f]/50 transition-colors tracking-wide"
+                >
+                  Contact Phanilie
+                </button>
+              </div>
+            </div>
+
+            {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
+            <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
+              <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
+                <defs>
+                  <linearGradient id="clear-metal-line-3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#F5D6CB" />
+                    <stop offset="50%" stopColor="#D9A998" />
+                    <stop offset="100%" stopColor="#B58474" />
+                  </linearGradient>
+                </defs>
+                <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-3)" />
+                <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-3)" stroke="#FFFFFF" strokeWidth="1" />
+                <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
+                <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-3)" />
+              </svg>
+            </div>
+            <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
+
+            {/* Column 4: Piano Tips */}
+            <div className="flex flex-col gap-3.5 w-full">
+              <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
+                <h5
+                  style={{ fontFamily: "'Playfair Display', 'Cinzel', serif" }}
+                  className="text-xs md:text-[13px] font-bold uppercase tracking-[0.18em] text-[#8a5d4c]"
+                >
+                  PIANO TIPS
+                </h5>
+                <div
+                  style={{
+                    backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
+                  }}
+                  className="h-[1.5px] w-full rounded-full"
+                />
+              </div>
+              {isNewsletterSent ? (
+                <div className="flex items-center gap-1.5 mt-1 text-xs font-bold text-emerald-700 bg-emerald-100/60 border border-emerald-200/50 py-2 px-4 rounded-xl w-fit animate-in fade-in duration-300">
+                  <span className="material-symbols-outlined text-sm font-bold">check_circle</span>
+                  Subscribed! Thank you.
+                </div>
+              ) : (
+                <form
+                  className="flex flex-col gap-1.5 w-full max-w-[200px] mt-0"
+                  onSubmit={handleNewsletterSubmit}
+                >
+                  <input
+                    style={{
+                      background: "#fffcfb",
+                      border: "1.5px solid #dfa38f",
+                      boxShadow: "inset 0 1px 3px rgba(223,163,143,0.1)",
+                    }}
+                    className="rounded-xl px-3.5 py-1.5 text-[11.5px] h-8 w-full text-[#7a594e] placeholder-[#ab7e66]/60 focus:outline-none focus:ring-1 focus:ring-[#dfa38f] focus:border-[#dfa38f] transition-all font-semibold"
+                    placeholder="Enter your email"
+                    type="email"
+                    required
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    style={{
+                      fontFamily: "'Great Vibes', 'Dancing Script', 'Playfair Display', cursive, serif",
+                      background: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
+                      boxShadow: "inset 0 1px 1px rgba(255,255,255,0.6), inset 0 -1.5px 2px rgba(92,58,46,0.3)",
+                      border: "1px solid #D9A998",
+                    }}
+                    className="w-full h-8 rounded-xl flex items-center justify-center cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xs text-base font-medium text-white tracking-wide capitalize"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </footer>
+
+        {/* Bright Rose-Gold Separator Line (No Glow) */}
+        <div
+          style={{
+            background: "linear-gradient(90deg, #EBC0B2 0%, #DFA898 50%, #EBC0B2 100%)",
+            boxShadow: "none",
+          }}
+          className="h-[2.5px] w-full relative z-20"
+        />
+
+        {/* Sub-footer Section (Ultra-Lighter Delicate Blush Rose-Cream Solid Color) */}
+        <div
+          style={{
+            background: "#FAF0EB",
+            backgroundColor: "#FAF0EB",
+            backgroundImage: "none",
+            boxShadow: "none",
+            border: "none",
+          }}
+          className="py-3.5 px-6 md:px-12 w-full text-xs text-[#7A594E] relative z-20"
+        >
+          <div className="max-w-[1200px] mx-auto w-full">
+            <div className="flex flex-row flex-wrap items-center gap-x-4 gap-y-2 justify-between">
+              <p className="whitespace-nowrap font-sans font-normal text-[#7A594E] tracking-normal text-[10.5px] md:text-xs">
+                © 2026 Stephanie Keys. All rights reserved.
+              </p>
+
+              <div className="flex flex-row items-center gap-3.5 flex-wrap">
+                <button
+                  onClick={() => onNavigate("privacy")}
+                  className="font-sans font-normal text-[#7A594E] hover:text-[#4A2E23] transition-colors bg-transparent border-none cursor-pointer p-0 text-[10.5px] md:text-xs whitespace-nowrap focus:outline-none hover:underline underline-offset-4"
+                >
+                  Privacy Policy
+                </button>
+
+                <span className="text-[#7A594E]/40 font-light text-[10px]">|</span>
+
+                <button
+                  onClick={() => onNavigate("terms")}
+                  className="font-sans font-normal text-[#7A594E] hover:text-[#4A2E23] transition-colors bg-transparent border-none cursor-pointer p-0 text-[10.5px] md:text-xs whitespace-nowrap focus:outline-none hover:underline underline-offset-4"
+                >
+                  Terms of Use
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Contact Modal */}
         {showContactModal && (

@@ -74,7 +74,7 @@ export default function SignUp({ onNavigate }: SignUpProps) {
               className="text-2xl md:text-3xl text-[#3d2f28] font-bold tracking-tight leading-snug"
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             >
-              Welcome to Phanilie Music!
+              Welcome to Stephanie Keys!
             </h2>
             <p className="text-xs text-[#81756f] leading-relaxed max-w-xs mx-auto">
               Your account for <span className="font-bold text-[#3d2f28]">{formData.email}</span> has been successfully created. Get ready to elevate your piano playing.
