@@ -1243,147 +1243,156 @@ function Homepage() {
               </div>
             </section>
 
-            {/* Pricing Section (Vintage Manuscript Paper Backdrop + Compact Luxury Cards) */}
+            {/* Pricing Section (Dark Sheet Music Backdrop + 3-Column Glassmorphic Layout) */}
             <section
-              className="py-12 lg:py-16 px-4 border-b border-[#e8cdc1]/20 relative overflow-hidden bg-cover bg-center"
+              className="py-14 lg:py-20 px-4 md:px-8 border-b border-[#ebd3cb]/15 relative overflow-hidden bg-cover bg-center"
               style={{
-                backgroundImage: "linear-gradient(180deg, rgba(38, 22, 16, 0.82) 0%, rgba(26, 14, 10, 0.88) 100%), url('/vintage-manuscript-paper.jpg')",
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(20, 9, 4, 0.88) 0%, rgba(13, 5, 2, 0.93) 100%), url('/sheetss.png')",
               }}
             >
               {/* Symmetrical Ambient Warm Rose Glow */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-64 bg-[#dfa38f]/10 rounded-full blur-[100px] pointer-events-none z-0" />
 
-              <div className="relative z-10 max-w-[860px] mx-auto space-y-8 lg:space-y-10 w-full">
+              <div className="relative z-10 max-w-[1140px] mx-auto space-y-10 w-full">
                 {/* Section Header */}
                 <div className="text-center space-y-2 max-w-2xl mx-auto">
-                  <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#fceee8] font-bold leading-tight drop-shadow-sm">
+                  <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#fff0ea] font-bold leading-tight drop-shadow-sm">
                     Start Your Musical Journey
                   </h2>
-                  <p className="text-[#d8bead] font-sans text-xs md:text-sm font-bold uppercase tracking-widest">
+                  <p className="text-[#dfa38f] font-sans text-xs md:text-sm font-bold uppercase tracking-widest">
                     Choose the plan that fits your pace of learning.
                   </p>
                 </div>
 
-                {/* 2 Compact Price Cards in 1 Row (Exact Layout & Content matching Reference Screenshot) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch max-w-[720px] mx-auto w-full">
+                {/* 3-Column Grid: Feature List on Left (col-span-4), 2 Cards in Middle & Right (col-span-4 each) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch w-full">
                   
-                  {/* Card 1: Annual Plan */}
-                  <div
-                    style={{
-                      background: "#FFFFFF",
-                      boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35)",
-                    }}
-                    className="relative rounded-[20px] pt-9 p-6 lg:p-7 flex flex-col justify-between text-left transition-all duration-300 hover:scale-[1.02] cursor-pointer overflow-hidden border border-white/60"
-                  >
-                    {/* BEST VALUE Banner */}
-                    <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-r from-[#44ab96] to-[#369c88] text-white flex items-center justify-center text-[11px] font-bold uppercase tracking-widest shadow-xs">
-                      BEST VALUE
-                    </div>
-
-                    <div className="space-y-4">
-                      <h3 className="font-sans text-lg font-bold text-[#2399a0] tracking-tight">
-                        Annual Plan
-                      </h3>
-
-                      <div className="space-y-1">
-                        <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#2b2523]">
-                          $14.16 <span className="text-base lg:text-lg font-normal text-[#655b56]">/ month</span>
-                        </div>
-                      </div>
-
-                      <div className="space-y-1 pt-1">
-                        <span className="font-sans text-sm font-bold text-[#38c172] block">
-                          Free 14-Day Trial
+                  {/* Left Column: Feature List Panel */}
+                  <div className="lg:col-span-4 bg-[#281710]/75 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#dfa38f]/40 shadow-[0_16px_40px_rgba(0,0,0,0.4)] flex flex-col justify-between text-left">
+                    <div className="space-y-6">
+                      <div>
+                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#dfa38f] block mb-1">
+                          Included in Every Plan
                         </span>
-                        <p className="text-xs text-[#786b65] font-medium leading-normal">
-                          Then billed annually at $169.99
+                        <h3 className="font-display-lg text-xl font-bold text-[#fff0ea]">
+                          Full Access Pass
+                        </h3>
+                        <p className="text-xs text-[#ebd3c7]/75 font-medium mt-1 leading-relaxed">
+                          Get immediate access to everything Stephanie Keys has to offer with no restrictions.
                         </p>
                       </div>
-                    </div>
 
-                    <div className="pt-6">
-                      <button
-                        onClick={() => setView("dashboard")}
-                        className="w-full py-3 rounded-full font-sans text-sm font-bold text-white bg-gradient-to-r from-[#17a2b8] to-[#138496] hover:from-[#138496] hover:to-[#117a8b] shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer border-none flex items-center justify-center"
-                      >
-                        Sign Up
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Card 2: Monthly Plan */}
-                  <div
-                    style={{
-                      background: "#FFFFFF",
-                      boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35)",
-                    }}
-                    className="relative rounded-[20px] pt-9 p-6 lg:p-7 flex flex-col justify-between text-left transition-all duration-300 hover:scale-[1.02] cursor-pointer overflow-hidden border border-white/60"
-                  >
-                    <div className="space-y-4">
-                      <h3 className="font-sans text-lg font-bold text-[#2399a0] tracking-tight">
-                        Monthly Plan
-                      </h3>
-
-                      <div className="space-y-1">
-                        <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#2b2523]">
-                          $18.99 <span className="text-base lg:text-lg font-normal text-[#655b56]">/ month</span>
-                        </div>
-                      </div>
-
-                      <div className="space-y-1 pt-1">
-                        <span className="font-sans text-sm font-bold text-[#38c172] block">
-                          Free 14-Day Trial
-                        </span>
-                        <p className="text-xs text-[#786b65] font-medium leading-normal">
-                          Then billed monthly at $18.99
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="pt-6">
-                      <button
-                        onClick={() => setView("dashboard")}
-                        className="w-full py-3 rounded-full font-sans text-sm font-bold text-white bg-gradient-to-r from-[#17a2b8] to-[#138496] hover:from-[#138496] hover:to-[#117a8b] shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer border-none flex items-center justify-center"
-                      >
-                        Sign Up
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Bottom Shared Features Checklist */}
-                <div className="pt-2 max-w-[720px] mx-auto w-full">
-                  <div className="bg-white/10 backdrop-blur-md rounded-[16px] p-4 border border-white/20 shadow-md flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
-                    <div className="shrink-0 pr-3 md:border-r border-white/20">
-                      <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#e2b0a4] block">
-                        Included in Every Plan
-                      </span>
-                      <span className="font-display-lg text-xs font-bold text-white">
-                        Full Access Pass
-                      </span>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
-                      {[
-                        "All Courses Access",
-                        "Live Group Coaching",
-                        "Sheet Music Library",
-                        "Community Forum",
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <div className="w-4 h-4 rounded-full bg-[#38c172] p-[1px] flex items-center justify-center shrink-0 shadow-xs">
-                            <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
+                      {/* Feature Items List */}
+                      <div className="space-y-4 pt-2">
+                        {[
+                          { title: "All Courses Access", desc: "Complete video library & roadmap" },
+                          { title: "Live Group Coaching", desc: "Interactive monthly Q&A sessions" },
+                          { title: "Sheet Music Library", desc: "Downloadable PDF charts & guides" },
+                          { title: "Community Forum", desc: "Connect with fellow pianists" },
+                        ].map((item, i) => (
+                          <div key={i} className="flex items-start gap-3">
+                            <div className="w-5 h-5 rounded-full bg-[#3a2219] border border-[#dfa38f]/60 text-[#dfa38f] flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                              <svg className="w-3 h-3 text-[#ffd0ab]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                              </svg>
+                            </div>
+                            <div>
+                              <span className="text-sm font-bold text-[#fff0ea] block leading-snug">
+                                {item.title}
+                              </span>
+                              <span className="text-[11px] text-[#ebd3c7]/70 font-medium block">
+                                {item.desc}
+                              </span>
+                            </div>
                           </div>
-                          <span className="text-xs font-medium text-[#fceee8] leading-tight">
-                            {item}
-                          </span>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-6 border-t border-[#ebd3cb]/10 mt-6">
+                      <p className="text-[11px] text-[#dfa38f]/90 font-semibold italic text-center">
+                        Cancel anytime with 1-click in account settings.
+                      </p>
                     </div>
                   </div>
+
+                  {/* Middle Column: Monthly Plan Card */}
+                  <div className="lg:col-span-4 bg-[#281710]/75 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#dfa38f]/40 shadow-[0_16px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#ffd0ab]/70 hover:scale-[1.01] flex flex-col justify-between text-left">
+                    <div className="space-y-5">
+                      <div className="space-y-1">
+                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#dfa38f] block">
+                          Flexible Monthly
+                        </span>
+                        <h3 className="font-display-lg text-xl font-bold text-[#fff0ea] tracking-tight">
+                          Monthly Plan
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#fff0ea]">
+                          $18.99 <span className="text-sm font-normal text-[#ebd3c7]/70">/ month</span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 pt-1">
+                        <span className="font-sans text-sm font-bold text-[#ffd0ab] block">
+                          Free 14-Day Trial
+                        </span>
+                        <p className="text-xs text-[#ebd3c7]/75 font-medium leading-normal">
+                          Billed monthly after trial ends. Cancel anytime.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-8">
+                      <button
+                        onClick={() => setView("dashboard")}
+                        className="w-full py-3 px-4 rounded-full font-sans text-sm font-bold text-[#fff0ea] bg-[#3d251c] hover:bg-[#4d2f23] border border-[#dfa38f]/60 hover:border-[#ffd0ab] shadow-[0_4px_16px_rgba(223,163,143,0.2)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
+                      >
+                        Start 14-Day Free Trial
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Annual Plan Card */}
+                  <div className="lg:col-span-4 bg-[#281710]/75 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#dfa38f]/40 shadow-[0_16px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#ffd0ab]/70 hover:scale-[1.01] flex flex-col justify-between text-left">
+                    <div className="space-y-5">
+                      <div className="space-y-1">
+                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#dfa38f] block">
+                          Save Over 25%
+                        </span>
+                        <h3 className="font-display-lg text-xl font-bold text-[#fff0ea] tracking-tight">
+                          Annual Plan
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#fff0ea]">
+                          $14.16 <span className="text-sm font-normal text-[#ebd3c7]/70">/ month</span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 pt-1">
+                        <span className="font-sans text-sm font-bold text-[#ffd0ab] block">
+                          Free 14-Day Trial
+                        </span>
+                        <p className="text-xs text-[#ebd3c7]/75 font-medium leading-normal">
+                          Billed annually at $169.99 after trial ends.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-8">
+                      <button
+                        onClick={() => setView("dashboard")}
+                        className="w-full py-3 px-4 rounded-full font-sans text-sm font-bold text-[#fff0ea] bg-[#3d251c] hover:bg-[#4d2f23] border border-[#dfa38f]/60 hover:border-[#ffd0ab] shadow-[0_4px_16px_rgba(223,163,143,0.2)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
+                      >
+                        Start 14-Day Free Trial
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
 
               </div>
