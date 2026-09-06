@@ -458,195 +458,142 @@ function Homepage() {
             </section>
 
 
-            <section className="py-24 px-6 border-b border-[#ebd3cb]/25 relative overflow-hidden">
-              {/* Background Marble Image Layer with smooth fade-in mask at the top */}
+            {/* Welcome to Stephanie Keys Section (Luxurious Dark Palace Background with Falling Glitters) */}
+            <section className="py-24 px-6 border-b border-[#ebd3cb]/15 relative overflow-hidden bg-gradient-to-b from-[#21110a] to-[#170a04]">
+              {/* Background Palace Image Layer */}
               <div
-                className="absolute inset-0 z-0 pointer-events-none select-none opacity-100"
+                className="absolute inset-0 z-0 pointer-events-none select-none opacity-[0.35]"
                 style={{
-                  backgroundImage: "url('/marble.png')",
-                  backgroundSize: "180%",
-                  backgroundPosition: "center -360px",
-                  maskImage: "linear-gradient(to bottom, transparent 0%, black 30px)",
-                  WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 30px)",
-                  filter: "hue-rotate(-14deg) saturate(75%)",
+                  backgroundImage: "url('/palacey.png')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
               />
-              {/* Soft overlay with a white-to-soft-whitish-peach-pink blend */}
-              <div
-                className="absolute inset-0 z-10 bg-gradient-to-b from-[#fff6f3] via-white/20 to-[#fff2ee]/10 pointer-events-none select-none"
-              />
-
-              {/* Floating Sparkling Elements (Moving from bottom to top, glossy gold stars with warm glows) */}
+              {/* CSS Keyframes for falling glitters */}
               <style dangerouslySetInnerHTML={{
                 __html: `
-                @keyframes sparkleFloat {
+                @keyframes glitter-fall {
                   0% {
-                    transform: translateY(0) scale(0) rotate(0deg);
+                    transform: translateY(-20px) rotate(0deg);
                     opacity: 0;
                   }
                   10% {
                     opacity: 0.9;
-                    transform: translateY(-80px) scale(1) rotate(30deg);
                   }
                   90% {
                     opacity: 0.9;
                   }
                   100% {
-                    transform: translateY(-650px) scale(0.2) rotate(220deg);
+                    transform: translateY(780px) rotate(360deg);
                     opacity: 0;
                   }
                 }
-                .animate-sparkle-float {
-                  animation-name: sparkleFloat;
-                }
               `}} />
-              <div className="absolute inset-0 pointer-events-none z-15 overflow-hidden">
-                {WELCOME_SPARKLES.map((spark, idx) => (
-                  <svg
-                    key={idx}
-                    viewBox="0 0 24 24"
-                    fill="white"
-                    className="absolute animate-sparkle-float opacity-0"
-                    style={{
-                      left: spark.left,
-                      width: `${spark.size}px`,
-                      height: `${spark.size}px`,
-                      bottom: "-20px",
-                      animationDelay: spark.delay,
-                      animationDuration: spark.duration,
-                      animationIterationCount: "infinite",
-                      animationTimingFunction: "linear",
-                      filter: "drop-shadow(0 0 4px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 8px rgba(255, 255, 255, 0.65))",
-                    }}
-                  >
-                    <path d="M12,0 L15,9 L24,12 L15,15 L12,24 L9,15 L0,12 L9,9 Z" />
-                  </svg>
-                ))}
-              </div>
-              <div className="relative z-20 max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                {/* Left Column: Text & Timeline Stepper */}
-                <div className="lg:col-span-7 space-y-10 text-left max-w-xl mx-auto lg:mx-0 relative z-10">
-                  <div className="space-y-3 pl-2">
-                    <h2 className="font-display-lg text-3xl md:text-4xl lg:text-5xl text-[#3d251c] font-black leading-tight tracking-tight">
-                      Welcome to Stephanie Keys.
-                    </h2>
-                    <p className="font-sans text-[10px] md:text-xs text-[#a27866] font-bold uppercase tracking-[0.2em] block">
-                      Your core focus
-                    </p>
-                  </div>
 
-                  {/* Vertical Timeline Stepper */}
-                  <div className="relative text-left w-full mt-8">
-                    {/* Step 1: Music Foundation */}
-                    <div className="relative flex items-start gap-6 pb-10 group">
-                      {/* Line segment from Circle 1 center to bottom of Step 1 container (connecting directly to Step 2 top) */}
-                      <div className="absolute left-[20px] md:left-[24px] top-[20px] md:top-[24px] bottom-0 w-[2px] bg-gradient-to-b from-[#cda195]/20 to-[#cda195]/40 -translate-x-1/2"></div>
+              {/* Glitter Particles (Snowfall) */}
+              {TESTIMONIAL_GLITTERS.map((p, idx) => (
+                <div
+                  key={idx}
+                  className="absolute pointer-events-none rounded-full bg-gradient-to-br from-[#dfa38f] via-[#f5b8c9] to-[#ffd0ab]"
+                  style={{
+                    left: p.left,
+                    top: '-20px',
+                    width: `${p.size}px`,
+                    height: `${p.size}px`,
+                    animation: `glitter-fall ${p.duration} linear infinite`,
+                    animationDelay: p.delay,
+                    boxShadow: `0 0 10px rgba(245, 184, 201, 0.9), 0 0 4px rgba(223, 163, 143, 0.6)`,
+                    zIndex: 1
+                  }}
+                />
+              ))}
 
-                      <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/80 backdrop-blur-md border border-[#cda195]/50 text-[#cda195] flex-shrink-0 shadow-[0_4px_12px_rgba(205,161,149,0.15)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#cda195] group-hover:shadow-[0_6px_16px_rgba(205,161,149,0.3)]">
-                        <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(201,141,128,0.25)]">
-                          widgets
-                        </span>
-                      </div>
+              {/* Ambient decorative glowing blobs */}
+              <div className="absolute top-12 left-1/4 w-72 h-72 bg-[#ffd89b]/12 rounded-full blur-[90px] pointer-events-none z-0"></div>
+              <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
-                      {/* Individual Glassmorphic Card for Step 1 */}
-                      <div className="flex-grow bg-white/45 backdrop-blur-md border border-white/50 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(205,161,149,0.03)] transition-all duration-300 hover:bg-white/65 hover:border-[#cda195]/40 hover:shadow-[0_12px_35px_rgba(205,161,149,0.08)] group-hover:translate-x-1">
-                        <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#3d251c] tracking-tight transition-colors duration-300 group-hover:text-[#a27866]">
-                          Music Foundation
-                        </h3>
-                        <p className="font-sans text-xs md:text-sm text-[#5c4a41] leading-relaxed font-medium mt-2">
-                          Master the core essentials of the keyboard. Learn the
-                          fundamental rhythms, chords, scales, and music theory
-                          required to build a rock-solid musical floor.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Step 2: Music Skills */}
-                    <div className="relative flex items-start gap-6 pb-10 group">
-                      {/* Line segment from top of Step 2 container (touching Step 1 line) to bottom of Step 2 (touching Circle 3 top) */}
-                      <div className="absolute left-[20px] md:left-[24px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#cda195]/40 to-[#cda195]/30 -translate-x-1/2"></div>
-
-                      <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/80 backdrop-blur-md border border-[#cda195]/50 text-[#cda195] flex-shrink-0 shadow-[0_4px_12px_rgba(205,161,149,0.15)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#cda195] group-hover:shadow-[0_6px_16px_rgba(205,161,149,0.3)]">
-                        <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(201,141,128,0.25)]">
-                          music_note
-                        </span>
-                      </div>
-
-                      {/* Individual Glassmorphic Card for Step 2 */}
-                      <div className="flex-grow bg-white/45 backdrop-blur-md border border-white/50 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(205,161,149,0.03)] transition-all duration-300 hover:bg-white/65 hover:border-[#cda195]/40 hover:shadow-[0_12px_35px_rgba(205,161,149,0.08)] group-hover:translate-x-1">
-                        <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#3d251c] tracking-tight transition-colors duration-300 group-hover:text-[#a27866]">
-                          Music Skills
-                        </h3>
-                        <p className="font-sans text-xs md:text-sm text-[#5c4a41] leading-relaxed font-medium mt-2">
-                          Unlock your creative freedom. Develop advanced skills in
-                          practical improvisation, rich chord voicings, harmonic
-                          progressions, and the art of reharmonization.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Step 3: Music Genres */}
-                    <div className="relative flex items-start gap-6 group">
-                      {/* NO LINE SEGMENT AT ALL for Step 3 - so the line stops exactly at the top of Circle 3! */}
-                      <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/80 backdrop-blur-md border border-[#cda195]/50 text-[#cda195] flex-shrink-0 shadow-[0_4px_12px_rgba(205,161,149,0.15)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#cda195] group-hover:shadow-[0_6px_16px_rgba(205,161,149,0.3)]">
-                        <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(201,141,128,0.25)]">
-                          equalizer
-                        </span>
-                      </div>
-
-                      {/* Individual Glassmorphic Card for Step 3 */}
-                      <div className="flex-grow bg-white/45 backdrop-blur-md border border-white/50 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(205,161,149,0.03)] transition-all duration-300 hover:bg-white/65 hover:border-[#cda195]/40 hover:shadow-[0_12px_35px_rgba(205,161,149,0.08)] group-hover:translate-x-1">
-                        <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#3d251c] tracking-tight transition-colors duration-300 group-hover:text-[#a27866]">
-                          Music Genres
-                        </h3>
-                        <p className="font-sans text-xs md:text-sm text-[#5c4a41] leading-relaxed font-medium mt-2">
-                          Bring the music to life. Apply your foundations and
-                          skills across a diverse range of genres, from the deep
-                          roots of blues, gospel, christian music, and R&B to the
-                          complex worlds of jazz swing, smooth jazz, bebop, funk,
-                          and classic performance styles.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+              <div className="max-w-[900px] mx-auto space-y-12 relative z-10">
+                {/* Header */}
+                <div className="text-center space-y-3">
+                  <h2 className="font-display-lg text-3xl md:text-4xl lg:text-5xl text-[#fff0ea] font-black leading-tight tracking-tight">
+                    Welcome to Stephanie Keys.
+                  </h2>
+                  <p className="font-sans text-xs md:text-sm text-[#dfa38f] font-bold uppercase tracking-[0.2em]">
+                    Your core focus
+                  </p>
                 </div>
 
-                {/* Right Column: Glowing 3D Piano Keys */}
-                <div className="lg:col-span-5 relative min-h-[350px] lg:min-h-[450px] flex justify-center lg:justify-end items-end z-0">
-                  {/* Ambient light glow */}
-                  <div className="absolute w-72 h-72 bg-[#ffd89b]/12 rounded-full blur-3xl right-0 bottom-0 z-0"></div>
-                  {/* Soft floor shadow to ground the keys */}
-                  <div className="absolute right-[-280px] bottom-[-265px] w-[420px] h-16 bg-[#5a453d]/20 rounded-full blur-2xl pointer-events-none transform rotate-[-22deg] z-0"></div>
+                {/* Vertical Timeline Stepper */}
+                <div className="relative text-left w-full mt-8 max-w-2xl mx-auto">
+                  {/* Step 1: Music Foundation */}
+                  <div className="relative flex items-start gap-6 pb-10 group">
+                    {/* Line segment connecting Step 1 to Step 2 */}
+                    <div className="absolute left-[20px] md:left-[24px] top-[20px] md:top-[24px] bottom-0 w-[2px] bg-gradient-to-b from-[#dfa38f]/30 to-[#dfa38f]/50 -translate-x-1/2"></div>
 
-                  {/* Crystalline keys image wrapper (Scaled significantly down to fit beautifully inside the 5-column space) */}
-                  <div className="absolute right-[-380px] bottom-[-440px] w-[140%] sm:w-[110%] md:w-[90%] lg:w-[168%] max-w-none origin-bottom-right transform scale-125 lg:scale-145 z-10">
-                    <img
-                      className="w-full h-auto object-contain select-none"
-                      alt="Glowing 3D crystalline piano keys"
-                      src="/glowing-3d-piano-keys.png?v=2"
-                      style={{
-                        maskImage:
-                          "linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 55%)",
-                        WebkitMaskImage:
-                          "linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 55%)",
-                        filter: "drop-shadow(-15px 15px 25px rgba(90, 69, 61, 0.28))",
-                      }}
-                    />
+                    <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#3a2219]/90 border border-[#dfa38f]/60 text-[#dfa38f] flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#ffd0ab] group-hover:text-[#ffd0ab] group-hover:shadow-[0_6px_20px_rgba(223,163,143,0.3)]">
+                      <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+                        widgets
+                      </span>
+                    </div>
+
+                    {/* Individual Glassmorphic Card for Step 1 */}
+                    <div className="flex-grow bg-[#2d1b14]/65 backdrop-blur-md border border-[#ebd3cb]/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-all duration-300 hover:bg-[#38231a]/80 hover:border-[#dfa38f]/40 hover:shadow-[0_12px_35px_rgba(223,163,143,0.15)] group-hover:translate-x-1">
+                      <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#fff0ea] tracking-tight transition-colors duration-300 group-hover:text-[#ffd0ab]">
+                        Music Foundation
+                      </h3>
+                      <p className="font-sans text-xs md:text-sm text-[#ebd3c7]/85 leading-relaxed font-medium mt-2">
+                        Master the core essentials of the keyboard. Learn the
+                        fundamental rhythms, chords, scales, and music theory
+                        required to build a rock-solid musical floor.
+                      </p>
+                    </div>
                   </div>
 
-                  {/* 3D Glass Floor Reflection (Mirrored, flipped vertically, blurred, and faded out) */}
-                  <div className="absolute right-[-380px] bottom-[-675px] w-[140%] sm:w-[110%] md:w-[90%] lg:w-[168%] max-w-none origin-top-right transform scale-125 lg:scale-145 scale-y-[-1] opacity-25 blur-[1px] pointer-events-none z-0">
-                    <img
-                      className="w-full h-auto object-contain select-none"
-                      alt="Glowing 3D crystalline piano keys reflection"
-                      src="/glowing-3d-piano-keys.png?v=2"
-                      style={{
-                        maskImage:
-                          "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 65%)",
-                        WebkitMaskImage:
-                          "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 65%)",
-                      }}
-                    />
+                  {/* Step 2: Music Skills */}
+                  <div className="relative flex items-start gap-6 pb-10 group">
+                    {/* Line segment connecting Step 2 to Step 3 */}
+                    <div className="absolute left-[20px] md:left-[24px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#dfa38f]/50 to-[#dfa38f]/40 -translate-x-1/2"></div>
+
+                    <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#3a2219]/90 border border-[#dfa38f]/60 text-[#dfa38f] flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#ffd0ab] group-hover:text-[#ffd0ab] group-hover:shadow-[0_6px_20px_rgba(223,163,143,0.3)]">
+                      <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+                        music_note
+                      </span>
+                    </div>
+
+                    {/* Individual Glassmorphic Card for Step 2 */}
+                    <div className="flex-grow bg-[#2d1b14]/65 backdrop-blur-md border border-[#ebd3cb]/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-all duration-300 hover:bg-[#38231a]/80 hover:border-[#dfa38f]/40 hover:shadow-[0_12px_35px_rgba(223,163,143,0.15)] group-hover:translate-x-1">
+                      <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#fff0ea] tracking-tight transition-colors duration-300 group-hover:text-[#ffd0ab]">
+                        Music Skills
+                      </h3>
+                      <p className="font-sans text-xs md:text-sm text-[#ebd3c7]/85 leading-relaxed font-medium mt-2">
+                        Unlock your creative freedom. Develop advanced skills in
+                        practical improvisation, rich chord voicings, harmonic
+                        progressions, and the art of reharmonization.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Step 3: Music Genres */}
+                  <div className="relative flex items-start gap-6 group">
+                    <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#3a2219]/90 border border-[#dfa38f]/60 text-[#dfa38f] flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#ffd0ab] group-hover:text-[#ffd0ab] group-hover:shadow-[0_6px_20px_rgba(223,163,143,0.3)]">
+                      <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+                        equalizer
+                      </span>
+                    </div>
+
+                    {/* Individual Glassmorphic Card for Step 3 */}
+                    <div className="flex-grow bg-[#2d1b14]/65 backdrop-blur-md border border-[#ebd3cb]/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-all duration-300 hover:bg-[#38231a]/80 hover:border-[#dfa38f]/40 hover:shadow-[0_12px_35px_rgba(223,163,143,0.15)] group-hover:translate-x-1">
+                      <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#fff0ea] tracking-tight transition-colors duration-300 group-hover:text-[#ffd0ab]">
+                        Music Genres
+                      </h3>
+                      <p className="font-sans text-xs md:text-sm text-[#ebd3c7]/85 leading-relaxed font-medium mt-2">
+                        Bring the music to life. Apply your foundations and
+                        skills across a diverse range of genres, from the deep
+                        roots of blues, gospel, christian music, and R&B to the
+                        complex worlds of jazz swing, smooth jazz, bebop, funk,
+                        and classic performance styles.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
