@@ -118,7 +118,9 @@ export const GlassDropdownButton: React.FC<GlassDropdownButtonProps> = ({
               key={opt.id}
               type="button"
               onClick={() => {
-                if (opt.onClick) opt.onClick()
+                if ('onClick' in opt && typeof opt.onClick === 'function') {
+                  opt.onClick()
+                }
                 setIsOpen(false)
               }}
               style={{

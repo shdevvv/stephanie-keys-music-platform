@@ -810,6 +810,15 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
           }
         >{children}</div>
 
+        {/* Ultra-Glossy Low-Contrast Rose Gold Divider Line right above Footer */}
+        <div
+          style={{
+            background: "linear-gradient(90deg, rgba(226, 176, 164, 0.05) 0%, rgba(226, 176, 164, 0.65) 15%, rgba(238, 192, 180, 0.85) 50%, rgba(226, 176, 164, 0.65) 85%, rgba(226, 176, 164, 0.05) 100%)",
+            boxShadow: "inset 0 1px 0.5px rgba(255, 255, 255, 0.95), 0 1.5px 3px rgba(160, 110, 95, 0.12)",
+          }}
+          className="w-full h-[4px] z-20 relative"
+        />
+
         {/* Footer */}
         <footer className={`w-full py-8 md:py-10 ${view === "dashboard" ? "mt-0 bg-[#fffdfb] border-t border-[#dfa38f]/30" : "mt-auto bg-[#fffdfb] border-[#dfa38f]/30"} relative`}>
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-8 gap-y-8 px-6 md:px-12 max-w-[1200px] mx-auto w-full">

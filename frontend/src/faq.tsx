@@ -76,7 +76,7 @@ function FAQ() {
             Frequently Asked Questions
           </h1>
           <p className="text-[#ffebe6] font-sans text-xs font-bold uppercase tracking-widest drop-shadow-[0_1px_2px_rgba(0,0,0,0.1)]">
-            Everything you need to know about the membership
+            Click each number to understand everything about the membership
           </p>
         </div>
 
@@ -168,8 +168,8 @@ function FAQ() {
               },
               {
                 idx: 3,
-                question: "What is the core learning approach of Phanilie Music?",
-                answer: "Phanilie Music bridges the gap between structured music theory and creative expression. We guide you through essential keyboard foundations first, immediately showing you how to turn those concepts into practical improvisation, and applying them across a rich variety of gospel, jazz, and popular music styles at your own comfortable pace.",
+                question: "What is the core learning approach of Stephanie Keys?",
+                answer: "Stephanie Keys bridges the gap between structured music theory and creative expression. We guide you through essential keyboard foundations first, immediately showing you how to turn those concepts into practical improvisation, and applying them across a rich variety of gospel and jazz at your own comfortable pace.",
               },
               {
                 idx: 5,

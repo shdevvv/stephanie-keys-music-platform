@@ -15,41 +15,6 @@ import Forums from "./forums";
 import UserProfile from "./userProfile";
 import { type Sheet } from "./sheetsData";
 
-const videoList = [
-  "/videos/cathedral1.mp4",
-  "/videos/cave.mp4",
-];
-
-const WELCOME_SPARKLES = [
-  { left: "5%", size: 11, delay: "0s", duration: "9s" },
-  { left: "12%", size: 15, delay: "3s", duration: "11s" },
-  { left: "19%", size: 9, delay: "1.5s", duration: "8s" },
-  { left: "26%", size: 13, delay: "5s", duration: "10s" },
-  { left: "32%", size: 10, delay: "2s", duration: "12s" },
-  { left: "38%", size: 18, delay: "0.5s", duration: "9s" },
-  { left: "44%", size: 9, delay: "4s", duration: "8s" },
-  { left: "50%", size: 13, delay: "2.5s", duration: "10s" },
-  { left: "56%", size: 15, delay: "6s", duration: "13s" },
-  { left: "62%", size: 11, delay: "1s", duration: "9s" },
-  { left: "68%", size: 14, delay: "4.5s", duration: "10s" },
-  { left: "74%", size: 10, delay: "7s", duration: "9s" },
-  { left: "80%", size: 12, delay: "5.5s", duration: "12s" },
-  { left: "86%", size: 16, delay: "1.8s", duration: "9.5s" },
-  { left: "93%", size: 11, delay: "3.2s", duration: "11.5s" },
-  { left: "9%", size: 12, delay: "2.2s", duration: "8.5s" },
-  { left: "22%", size: 16, delay: "4.1s", duration: "10.5s" },
-  { left: "36%", size: 9, delay: "0.8s", duration: "7.5s" },
-  { left: "47%", size: 14, delay: "3.7s", duration: "9.8s" },
-  { left: "60%", size: 13, delay: "1.9s", duration: "11.2s" },
-  { left: "71%", size: 19, delay: "5.2s", duration: "8.8s" },
-  { left: "83%", size: 11, delay: "2.8s", duration: "12.5s" },
-  { left: "90%", size: 15, delay: "4.8s", duration: "10.2s" },
-  { left: "15%", size: 10, delay: "6.5s", duration: "9.2s" },
-  { left: "29%", size: 13, delay: "0.3s", duration: "11.8s" },
-  { left: "53%", size: 16, delay: "3.1s", duration: "8.3s" },
-  { left: "65%", size: 10, delay: "5.9s", duration: "10.7s" },
-  { left: "77%", size: 14, delay: "1.2s", duration: "9.0s" },
-];
 
 const TESTIMONIAL_GLITTERS = [
   { left: "3%", size: 4, delay: "0s", duration: "7s" },
@@ -78,9 +43,8 @@ function Homepage() {
   const handleNavigate = (v: ViewType | string) => setView(v as ViewType);
 
 
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [currentVideoIdx, setCurrentVideoIdx] = useState(0);
-  const [prevVideoIdx, setPrevVideoIdx] = useState<number | null>(null);
+  const [activeFaq, setActiveFaq] = useState<number>(0);
+
 
   // Robust double-video looping ref-based system (always mounted)
   const videoARef = useRef<HTMLVideoElement>(null);
@@ -132,13 +96,6 @@ function Homepage() {
     }
   }, [view]);
 
-  useEffect(() => {
-    const videoTimer = setInterval(() => {
-      setPrevVideoIdx(currentVideoIdx);
-      setCurrentVideoIdx((prev) => (prev + 1) % videoList.length);
-    }, 7000); // Switch video every 7 seconds
-    return () => clearInterval(videoTimer);
-  }, [currentVideoIdx]);
 
 
   const renderContent = () => {
@@ -246,35 +203,42 @@ function Homepage() {
       default:
         return (
           <>
-            {/* Hero Section */}
-            <section className="relative min-h-[600px] lg:min-h-0 lg:aspect-[16/9] flex items-center overflow-hidden">
+            {/* Hero Section (Image Background Exclusive to Hero Section) */}
+            <section className="relative h-[calc(100vh-96px)] min-h-[440px] max-h-[640px] md:max-h-[750px] flex items-center overflow-hidden py-10 md:py-0">
               <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#fff8f6] via-[#fff8f6]/80 to-transparent z-10"></div>
+                {/* Truly Diagonal White Gradient Fading Overlay Across Entire Hero Image */}
+                <div
+                  className="absolute inset-0 z-15 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(125deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 28%, rgba(255, 255, 255, 0.35) 48%, transparent 68%)"
+                  }}
+                />
                 <img
-                  className="w-full h-full object-cover object-right"
-                  alt="A white grand piano in a sun-drenched luxury minimalist studio"
-                  src="/white-grand-piano-hero.jpg"
+                  className="w-full h-full object-cover object-[85%_25%] transform transition-all duration-500"
+                  alt="Luxury grand piano in palace music hall"
+                  src="/hero-sheet-palace.jpg?v=5"
                 />
               </div>
+
               <div className="relative z-20 px-6 max-w-[1200px] mx-auto w-full">
-                <div className="max-w-2xl space-y-8">
-                  <h1 className="font-curvy-vibes text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-[#5a453d] to-[#8b7368] bg-clip-text text-transparent leading-tight py-2">
-                    Learn Gospel, Jazz, and Classical Piano Step by Step
+                <div className="max-w-md sm:max-w-lg md:max-w-xl space-y-5">
+                  <h1 className="font-curvy-vibes text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#5c3328] font-normal leading-tight py-1">
+                    Learn Gospel and Jazz Piano Step by Step
                   </h1>
-                  <p className="text-sm md:text-base lg:text-lg font-medium text-[#4f4540] leading-relaxed max-w-xl">
+                  <p className="text-xs md:text-sm lg:text-base font-semibold text-[#6e4236] leading-relaxed max-w-lg">
                     Transform your playing with a step-by-step method that takes
                     you from beginner to advanced.
                   </p>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3.5 pt-1">
                     <button
                       onClick={() => setView("dashboard")}
-                      className="bg-gradient-to-br from-[#dcc1b5] to-[#f9ddd1] text-[#271811] px-8 py-4 rounded-xl font-bold text-sm md:text-base shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer border-none"
+                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
                     >
                       Start Learning
                     </button>
                     <button
                       onClick={() => setView("videos")}
-                      className="border-2 border-[#b5a39a] text-[#4a372e] px-8 py-4 rounded-xl font-bold text-sm md:text-base hover:bg-[#e8cdc1]/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer bg-transparent"
+                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
                     >
                       Watch S Keys Videos
                     </button>
@@ -283,1120 +247,1117 @@ function Homepage() {
               </div>
             </section>
 
-            {/* Current Musical Limitations Section */}
-            <section className="py-24 px-6 bg-gradient-to-br from-[#dfa38f] via-[#5c4033] to-[#251610] border-y border-[#251610]/30 relative overflow-hidden">
-              {/* Background Image Layer */}
-              <div
-                className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none select-none"
-                style={{
-                  backgroundImage: "url('/keys.png')",
-                  opacity: 0.22,
-                }}
-              />
-              <div className="relative z-10 max-w-[1200px] mx-auto space-y-12">
-                {/* Centered Editorial Intro */}
-                <div className="max-w-3xl mx-auto text-center">
-                  <h2 className="font-curvy-vibes text-4xl md:text-5xl lg:text-6xl text-white leading-normal py-1 drop-shadow-sm">
-                    Feeling stuck on the piano?
-                  </h2>
-                </div>
+            {/* Glossy Rose Gold Divider Line between Hero Section and Quote Section */}
+            <div className="w-full h-[4.5px] bg-gradient-to-r from-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] to-[#c48b7c] z-20 relative shadow-[0_0_12px_rgba(226,176,164,0.5)]" />
 
-                {/* 5-Column Grid Card Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                  {[
-                    {
-                      title: "Melodic Stagnation",
-                      desc: "Finding it hard to create melodies on the spot.",
-                    },
-                    {
-                      title: "Sheet Music Dependency",
-                      desc: "Relying too much on sheet music to play.",
-                    },
-                    {
-                      title: "Harmonic Limitations",
-                      desc: "Having limited knowledge of chords, scales, and harmony.",
-                    },
-                    {
-                      title: "Translational Deficit",
-                      desc: "Not knowing how to turn musical ideas into sound.",
-                    },
-                    {
-                      title: "Improvisational Anxiety",
-                      desc: "Feeling unsure when improvising creatively at the piano.",
-                    },
-                  ].map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-white/10 border border-white/45 p-5 rounded-2xl shadow-sm hover-move flex flex-col gap-3 text-center min-h-[160px] justify-center cursor-pointer"
-                    >
-                      <h4 className="font-bold text-xs md:text-sm text-white leading-snug">
-                        {item.title}
-                      </h4>
-                      <p className="text-[11px] md:text-xs text-white/80 leading-relaxed font-medium">
-                        {item.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+            {/* Standalone God-Given Creativity Quote Section (Pure Clean White Background) */}
+            <section className="py-1 md:py-2.5 px-6 bg-white text-center relative overflow-hidden">
+              {/* CSS Keyframe Animations for Faster Shiny Rose Gold Sparkles */}
+              <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes roseGoldSparkle1 {
+                  0% { transform: translate(0, 10px) scale(0.3) rotate(0deg); opacity: 0; }
+                  40% { opacity: 1; filter: drop-shadow(0 0 6px #e2b0a4) drop-shadow(0 0 14px #ffd0ab) drop-shadow(0 0 18px #ffffff); }
+                  80% { opacity: 1; filter: drop-shadow(0 0 6px #e2b0a4) drop-shadow(0 0 14px #ffd0ab) drop-shadow(0 0 18px #ffffff); }
+                  100% { transform: translate(14px, -38px) scale(1.05) rotate(120deg); opacity: 0; }
+                }
+                @keyframes roseGoldSparkle2 {
+                  0% { transform: translate(0, 5px) scale(0.25) rotate(0deg); opacity: 0; }
+                  50% { opacity: 1; filter: drop-shadow(0 0 7px #f5c6b9) drop-shadow(0 0 16px #ffffff); }
+                  100% { transform: translate(-14px, -42px) scale(1.1) rotate(-140deg); opacity: 0; }
+                }
+                @keyframes roseGoldSparkle3 {
+                  0% { transform: translate(0, 8px) scale(0.35) rotate(0deg); opacity: 0; }
+                  45% { opacity: 0.95; filter: drop-shadow(0 0 6px #dfa38f) drop-shadow(0 0 12px #f8e3db); }
+                  100% { transform: translate(16px, -36px) scale(0.95) rotate(160deg); opacity: 0; }
+                }
+              `}} />
+
+              {/* Floating Shiny Rose Gold Sparkle Elements */}
+              <div className="absolute inset-0 pointer-events-none select-none z-0">
+                <svg className="absolute text-[#e2b0a4] fill-current" style={{ top: '12%', left: '4%', width: '15px', height: '15px', animation: 'roseGoldSparkle1 3.2s infinite ease-in-out' }} viewBox="0 0 24 24">
+                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                </svg>
+                <svg className="absolute text-[#f8e3db] fill-current" style={{ top: '18%', left: '93%', width: '13px', height: '13px', animation: 'roseGoldSparkle2 2.8s infinite ease-in-out', animationDelay: '0.6s' }} viewBox="0 0 24 24">
+                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                </svg>
+                <svg className="absolute text-[#dfa38f] fill-current" style={{ top: '8%', left: '20%', width: '11px', height: '11px', animation: 'roseGoldSparkle3 3.5s infinite ease-in-out', animationDelay: '0.3s' }} viewBox="0 0 24 24">
+                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                </svg>
+              </div>
+
+              {/* Pure Text Block formatted in exactly 2 lines on desktop */}
+              <div className="relative z-10 max-w-4xl mx-auto py-0">
+                <p
+                  className="font-display-lg text-xs sm:text-sm md:text-base lg:text-[16px] italic text-[#8a5d4c] leading-relaxed font-medium tracking-wide"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  "You’re already in the right place where God-given creativity in music can grow"
+                </p>
               </div>
             </section>
 
-            {/* Faith, Creativity, and Technique Section (Merged Background with Crystal Heaven Vibes & Looping Video) */}
-            <section className="py-24 px-6 bg-gradient-to-b from-white to-[#fff3ef] border-b border-[#ebd3cb]/30 overflow-hidden relative">
-              {/* Background Video Layer */}
-              <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
-                {/* Tone matching color overlay (Adjust color and opacity here) */}
-                <div
-                  className="absolute inset-0 z-10 pointer-events-none mix-blend-color"
-                  style={{
-                    backgroundColor: "#5a453d", // Warm dark brown theme color
-                    opacity: 0.08, // Adjustable overlay color strength
-                  }}
-                />
-                {/* Readability softening overlay - warm soft peach/champagne gradient to tint the background */}
-                <div
-                  className="absolute inset-0 z-10 pointer-events-none"
-                  style={{
-                    background: "linear-gradient(to bottom, rgba(255, 235, 228, 0.45) 0%, rgba(255, 220, 205, 0.35) 100%)",
-                  }}
-                />
+            {/* Bottom Glossy Thick Rose Gold Divider Line after Quote Section */}
+            <div className="w-full h-[4.5px] bg-gradient-to-r from-[#c48b7c] via-[#e2b0a4] via-[#f8e3db] to-[#e2b0a4] z-20 relative shadow-[0_0_10px_rgba(226,176,164,0.4)]" />
 
-                {/* Videos Container (Increased video background opacity for better visibility) */}
-                <div className="w-full h-full opacity-[0.88]">
-                  {videoList.map((src, idx) => {
-                    const isActive = idx === currentVideoIdx;
-                    const isPrev = idx === prevVideoIdx;
+            {/* Unified Continuous Palace Background Container for Welcome, About Mentor, and What You Will Get */}
+            <div className="relative overflow-hidden bg-[#faf5f0]">
+              {/* Single Continuous Background Palace Image Layer Across All 3 Sections */}
+              <div
+                className="absolute inset-0 z-0 pointer-events-none select-none opacity-80"
+                style={{
+                  backgroundImage: "url('/palacey.png')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+              {/* White 20% Opacity Brightening Overlay Layer */}
+              <div className="absolute inset-0 bg-white/20 z-0 pointer-events-none" />
 
-                    return (
-                      <video
-                        key={src}
-                        ref={(el) => {
-                          if (el) {
-                            if (isActive || isPrev) {
-                              el.play().catch(() => { });
-                            } else {
-                              el.pause();
-                            }
-                          }
-                        }}
-                        src={src}
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
-                        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
-                        style={{
-                          filter: "sepia(30%) hue-rotate(345deg) saturate(112%) brightness(96%) contrast(100%)",
-                          zIndex: isActive ? 20 : isPrev ? 10 : 0,
-                          opacity: isActive ? 1 : 0,
-                        }}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
+              {/* CSS Keyframes for falling glitters */}
+              <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes glitter-fall {
+                  0% {
+                    transform: translateY(-20px) rotate(0deg);
+                    opacity: 0;
+                  }
+                  10% {
+                    opacity: 0.9;
+                  }
+                  90% {
+                    opacity: 0.9;
+                  }
+                  100% {
+                    transform: translateY(1600px) rotate(360deg);
+                    opacity: 0;
+                  }
+                }
+              `}} />
 
-              {/* Decorative glowing 3D crystal heaven-like orbs for a peaceful, calm, royal ambiance */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-10">
-                <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[550px] h-[320px] bg-white/45 rounded-full blur-[140px] opacity-90"></div>
-              </div>
+              {/* Shared SVG Gradient Definition for Luxury Rose Gold Vector Icons */}
+              <svg className="w-0 h-0 absolute overflow-hidden pointer-events-none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="roseGoldIconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#f3beae" />
+                    <stop offset="50%" stopColor="#dfa38f" />
+                    <stop offset="100%" stopColor="#b87463" />
+                  </linearGradient>
+                </defs>
+              </svg>
 
-              <div className="relative z-20 max-w-[1200px] mx-auto flex flex-col items-center">
-                {/* Unified Glassmorphic Canvas Card */}
-                <div className="w-full max-w-3xl bg-white/45 backdrop-blur-lg border border-white/60 p-8 md:p-12 rounded-3xl shadow-sm space-y-10 text-center">
+              {/* Section 1: Welcome to Stephanie Keys */}
+              <section className="py-24 px-6 border-b border-[#ebd3cb]/15 relative z-10">
+                {/* Glitter Particles (Snowfall) */}
+                {TESTIMONIAL_GLITTERS.map((p, idx) => (
+                  <div
+                    key={idx}
+                    className="absolute pointer-events-none rounded-full bg-gradient-to-br from-[#dfa38f] via-[#f5b8c9] to-[#ffd0ab]"
+                    style={{
+                      left: p.left,
+                      top: '-20px',
+                      width: `${p.size}px`,
+                      height: `${p.size}px`,
+                      animation: `glitter-fall ${p.duration} linear infinite`,
+                      animationDelay: p.delay,
+                      boxShadow: `0 0 10px rgba(245, 184, 201, 0.9), 0 0 4px rgba(223, 163, 143, 0.6)`,
+                      zIndex: 1
+                    }}
+                  />
+                ))}
 
-                  {/* Quote Block */}
-                  <div className="space-y-4">
-                    <p className="font-display-lg text-lg md:text-xl lg:text-2xl italic text-[#5a453d] leading-relaxed font-bold">
-                      "You’re already in the right place where God-given
-                      creativity can grow, and music becomes a way to express joy,
-                      faith, and purpose."
+                {/* Ambient decorative glowing blobs */}
+                <div className="absolute top-12 left-1/4 w-72 h-72 bg-[#ffd89b]/25 rounded-full blur-[90px] pointer-events-none z-0"></div>
+                <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+                <div className="max-w-[1100px] mx-auto space-y-10 relative z-10">
+                  {/* Header */}
+                  <div className="text-center space-y-3 max-w-2xl mx-auto">
+                    <h2
+                      className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#885748] font-bold leading-tight tracking-tight drop-shadow-xs"
+                      style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
+                      Welcome to Stephanie Keys.
+                    </h2>
+                    <p className="font-sans text-[11px] md:text-xs text-[#a06d5e] font-bold uppercase tracking-[0.16em]">
+                      If you join Stephanie Keys, you will be able to:
                     </p>
                   </div>
 
-                  {/* Elegant Glossy Rose Gold Gradient Divider */}
-                  <div className="h-[2px] w-full max-w-md mx-auto bg-gradient-to-r from-transparent via-[#c58b73] via-[#dfa38f] via-[#c58b73] to-transparent rounded-full" />
+                  {/* 3-Column Luxury Water-Droplet Glassmorphic Treasure Cards Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch w-full">
+                    {[
+                      {
+                        pillar: "PILLAR 01 • HARMONY",
+                        title: "Reharms & Voicings",
+                        desc: "Revoice, reharm, and transpose any standard by ear using rich rootless voicings, altered extensions, and smooth voice leading without needing sheet music.",
+                        renderIcon: () => (
+                          <svg className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="21" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeDasharray="1 3" />
+                            <path d="M24 2C11.85 2 2 11.85 2 24s9.85 22 22 22 22-9.85 22-22S36.15 2 24 2z" stroke="url(#roseGoldIconGrad)" strokeWidth="1" opacity="0.3" />
+                            <path d="M18 10c2 0 3-3 6-3s4 3 6 3" stroke="url(#roseGoldIconGrad)" strokeWidth="1.4" strokeLinecap="round" />
+                            <rect x="12" y="16" width="24" height="16" rx="2" stroke="url(#roseGoldIconGrad)" strokeWidth="1.6" fill="url(#roseGoldIconGrad)" fillOpacity="0.08" />
+                            <line x1="18" y1="16" x2="18" y2="32" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" />
+                            <line x1="24" y1="16" x2="24" y2="32" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" />
+                            <line x1="30" y1="16" x2="30" y2="32" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" />
+                            <rect x="16" y="16" width="3" height="9" fill="url(#roseGoldIconGrad)" />
+                            <rect x="22" y="16" width="3" height="9" fill="url(#roseGoldIconGrad)" />
+                            <rect x="28" y="16" width="3" height="9" fill="url(#roseGoldIconGrad)" />
+                            <path d="M24 35l1.5 2.5L28 39l-2.5 1.5L24 43l-1.5-2.5L20 39l2.5-1.5z" fill="url(#roseGoldIconGrad)" opacity="0.8" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        pillar: "PILLAR 02 • RHYTHM",
+                        title: "Groove",
+                        desc: "Lock down the time pocket, comp responsively with live rhythm sections, and balance independent hands to drive the groove solo or in a full band.",
+                        renderIcon: () => (
+                          <svg className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="21" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeDasharray="2 2" />
+                            <path d="M16 38l6-26c.5-2 3.5-2 4 0l6 26z" stroke="url(#roseGoldIconGrad)" strokeWidth="1.6" fill="url(#roseGoldIconGrad)" fillOpacity="0.08" />
+                            <line x1="13" y1="38" x2="35" y2="38" stroke="url(#roseGoldIconGrad)" strokeWidth="1.8" strokeLinecap="round" />
+                            <line x1="24" y1="32" x2="33" y2="15" stroke="url(#roseGoldIconGrad)" strokeWidth="1.8" strokeLinecap="round" />
+                            <rect x="29" y="18" width="5" height="5" rx="1" fill="url(#roseGoldIconGrad)" stroke="white" strokeWidth="0.8" />
+                            <path d="M8 24c0-6 3-10 6-10" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeLinecap="round" opacity="0.6" />
+                            <path d="M40 24c0-6-3-10-6-10" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeLinecap="round" opacity="0.6" />
+                            <path d="M24 6l1.5 2L27 9l-2 1L24 12l-1-2-2-1 2-1z" fill="url(#roseGoldIconGrad)" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        pillar: "PILLAR 03 • IMPROV",
+                        title: "Solos",
+                        desc: "Improvise fluent, expressive solos through rapid changes using authentic bebop vocabulary, chromatic guide tones, and dynamic touch instead of guessing scales.",
+                        renderIcon: () => (
+                          <svg className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="21" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeDasharray="3 3" />
+                            <path d="M26 8v20.5a5.5 5.5 0 1 1-4-5.3V14l12-3v14.5a5.5 5.5 0 1 1-4-5.3V8z" fill="url(#roseGoldIconGrad)" fillOpacity="0.15" stroke="url(#roseGoldIconGrad)" strokeWidth="1.6" strokeLinejoin="round" />
+                            <path d="M12 14l1.5 2.5L16 18l-2.5 1.5L12 22l-1.5-2.5L8 18l2.5-1.5z" fill="url(#roseGoldIconGrad)" />
+                            <path d="M36 30l1 1.8L39 33l-1.8 1L36 36l-1-1.8L33 33l1.8-1z" fill="url(#roseGoldIconGrad)" opacity="0.8" />
+                          </svg>
+                        ),
+                      },
+                    ].map((card, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          background:
+                            "linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(253, 245, 238, 0.78) 50%, rgba(255, 250, 246, 0.88) 100%)",
+                          boxShadow:
+                            "0 14px 40px rgba(226, 176, 164, 0.18), 0 0 20px rgba(255, 255, 255, 0.8), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
+                        }}
+                        className="relative overflow-hidden p-6 md:p-7 rounded-[28px] md:rounded-tl-[38px] md:rounded-br-[38px] md:rounded-tr-[18px] md:rounded-bl-[18px] border-2 border-[#e2b0a4]/80 backdrop-blur-2xl transition-all duration-700 ease-out hover:border-[#f3beae] hover:bg-white/95 hover:shadow-[0_20px_50px_rgba(226,176,164,0.30)] flex flex-col justify-between group cursor-pointer"
+                      >
+                        {/* Subtle Glass Reflection */}
+                        <div className="absolute -top-24 -left-24 w-48 h-48 bg-gradient-to-br from-white/50 via-white/10 to-transparent rounded-full blur-xl pointer-events-none group-hover:scale-125 transition-transform duration-700" />
 
-                  {/* Checklist Block */}
-                  <div className="space-y-6 flex flex-col items-center">
-                    <div className="py-1">
-                      <h3 className="font-sans text-xs md:text-sm text-[#7c6a60] font-bold uppercase tracking-widest">
-                        You will be able to:
-                      </h3>
-                    </div>
+                        <div className="space-y-4 relative z-10">
+                          {/* Top Header: Pillar Tag & Ornate Royal Engraved Icon */}
+                          <div className="flex items-center justify-between gap-2.5">
+                            {/* Glossy Soft Rose Gold Ribbon Tag */}
+                            <span className="font-sans text-[9.5px] font-black uppercase tracking-[0.18em] text-[#885748] bg-gradient-to-r from-white via-[#ffd0ab]/60 to-[#e2b0a4]/40 border border-[#e2b0a4]/60 px-3 py-1 rounded-full shadow-xs backdrop-blur-md flex items-center gap-1.5 transition-colors duration-300">
+                              <span className="text-[#c48b7c] font-bold text-[8.5px]">✦</span>
+                              {card.pillar}
+                            </span>
 
-                    <div className="w-full max-w-md mx-auto">
-                      <ul className="flex flex-col gap-3 list-none p-0 m-0 text-left">
-                        {[
-                          "Play what you hear",
-                          "Worship without limitation",
-                          "Express the music already inside you",
-                          "Grow in confidence at the piano",
-                          "Use your gift to serve others",
-                        ].map((text, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-center gap-4 py-3.5 px-5 rounded-2xl border border-[#dfa38f]/30 bg-white/20 transition-all duration-250 hover:bg-white/85 hover:border-white hover:scale-[1.02] hover:shadow-md cursor-pointer"
+                            {/* Seamless Ornate Royal Engraved Vector Icon */}
+                            {card.renderIcon()}
+                          </div>
+
+                          {/* Title */}
+                          <h3
+                            className="font-display-lg text-lg md:text-xl font-bold text-[#885748] tracking-tight group-hover:text-[#78493a] transition-colors duration-300"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
                           >
-                            {/* Premium Gold/Bronze Gradient Check Circle */}
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#ffd89b] to-[#c98d4c] text-white flex items-center justify-center flex-shrink-0 shadow-[0_2px_6px_rgba(201,141,76,0.15)]">
-                              <span className="material-symbols-outlined text-xs select-none font-bold">
-                                check
-                              </span>
-                            </div>
-                            <span className="font-sans text-sm md:text-base lg:text-lg font-bold text-[#5a453d]">
-                              {text}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                            {card.title}
+                          </h3>
 
-                </div>
-              </div>
-            </section>
-
-
-            {/* Welcome to Stephanie Keys Section (Luxurious Dark Palace Background with Falling Glitters) */}
-            <section className="py-24 px-6 border-b border-[#ebd3cb]/15 relative overflow-hidden bg-gradient-to-b from-[#21110a] to-[#170a04]">
-              {/* Background Palace Image Layer */}
-              <div
-                className="absolute inset-0 z-0 pointer-events-none select-none opacity-[0.35]"
-                style={{
-                  backgroundImage: "url('/palacey.png')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-              {/* CSS Keyframes for falling glitters */}
-              <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes glitter-fall {
-                  0% {
-                    transform: translateY(-20px) rotate(0deg);
-                    opacity: 0;
-                  }
-                  10% {
-                    opacity: 0.9;
-                  }
-                  90% {
-                    opacity: 0.9;
-                  }
-                  100% {
-                    transform: translateY(780px) rotate(360deg);
-                    opacity: 0;
-                  }
-                }
-              `}} />
-
-              {/* Glitter Particles (Snowfall) */}
-              {TESTIMONIAL_GLITTERS.map((p, idx) => (
-                <div
-                  key={idx}
-                  className="absolute pointer-events-none rounded-full bg-gradient-to-br from-[#dfa38f] via-[#f5b8c9] to-[#ffd0ab]"
-                  style={{
-                    left: p.left,
-                    top: '-20px',
-                    width: `${p.size}px`,
-                    height: `${p.size}px`,
-                    animation: `glitter-fall ${p.duration} linear infinite`,
-                    animationDelay: p.delay,
-                    boxShadow: `0 0 10px rgba(245, 184, 201, 0.9), 0 0 4px rgba(223, 163, 143, 0.6)`,
-                    zIndex: 1
-                  }}
-                />
-              ))}
-
-              {/* Ambient decorative glowing blobs */}
-              <div className="absolute top-12 left-1/4 w-72 h-72 bg-[#ffd89b]/12 rounded-full blur-[90px] pointer-events-none z-0"></div>
-              <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
-
-              <div className="max-w-[900px] mx-auto space-y-12 relative z-10">
-                {/* Header */}
-                <div className="text-center space-y-3">
-                  <h2 className="font-display-lg text-3xl md:text-4xl lg:text-5xl text-[#fff0ea] font-black leading-tight tracking-tight">
-                    Welcome to Stephanie Keys.
-                  </h2>
-                  <p className="font-sans text-xs md:text-sm text-[#dfa38f] font-bold uppercase tracking-[0.2em]">
-                    Your core focus
-                  </p>
-                </div>
-
-                {/* Vertical Timeline Stepper */}
-                <div className="relative text-left w-full mt-8 max-w-2xl mx-auto">
-                  {/* Step 1: Music Foundation */}
-                  <div className="relative flex items-start gap-6 pb-10 group">
-                    {/* Line segment connecting Step 1 to Step 2 */}
-                    <div className="absolute left-[20px] md:left-[24px] top-[20px] md:top-[24px] bottom-0 w-[2px] bg-gradient-to-b from-[#dfa38f]/30 to-[#dfa38f]/50 -translate-x-1/2"></div>
-
-                    <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#3a2219]/90 border border-[#dfa38f]/60 text-[#dfa38f] flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#ffd0ab] group-hover:text-[#ffd0ab] group-hover:shadow-[0_6px_20px_rgba(223,163,143,0.3)]">
-                      <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
-                        widgets
-                      </span>
-                    </div>
-
-                    {/* Individual Glassmorphic Card for Step 1 */}
-                    <div className="flex-grow bg-[#2d1b14]/65 backdrop-blur-md border border-[#ebd3cb]/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-all duration-300 hover:bg-[#38231a]/80 hover:border-[#dfa38f]/40 hover:shadow-[0_12px_35px_rgba(223,163,143,0.15)] group-hover:translate-x-1">
-                      <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#fff0ea] tracking-tight transition-colors duration-300 group-hover:text-[#ffd0ab]">
-                        Music Foundation
-                      </h3>
-                      <p className="font-sans text-xs md:text-sm text-[#ebd3c7]/85 leading-relaxed font-medium mt-2">
-                        Master the core essentials of the keyboard. Learn the
-                        fundamental rhythms, chords, scales, and music theory
-                        required to build a rock-solid musical floor.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Step 2: Music Skills */}
-                  <div className="relative flex items-start gap-6 pb-10 group">
-                    {/* Line segment connecting Step 2 to Step 3 */}
-                    <div className="absolute left-[20px] md:left-[24px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#dfa38f]/50 to-[#dfa38f]/40 -translate-x-1/2"></div>
-
-                    <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#3a2219]/90 border border-[#dfa38f]/60 text-[#dfa38f] flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#ffd0ab] group-hover:text-[#ffd0ab] group-hover:shadow-[0_6px_20px_rgba(223,163,143,0.3)]">
-                      <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
-                        music_note
-                      </span>
-                    </div>
-
-                    {/* Individual Glassmorphic Card for Step 2 */}
-                    <div className="flex-grow bg-[#2d1b14]/65 backdrop-blur-md border border-[#ebd3cb]/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-all duration-300 hover:bg-[#38231a]/80 hover:border-[#dfa38f]/40 hover:shadow-[0_12px_35px_rgba(223,163,143,0.15)] group-hover:translate-x-1">
-                      <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#fff0ea] tracking-tight transition-colors duration-300 group-hover:text-[#ffd0ab]">
-                        Music Skills
-                      </h3>
-                      <p className="font-sans text-xs md:text-sm text-[#ebd3c7]/85 leading-relaxed font-medium mt-2">
-                        Unlock your creative freedom. Develop advanced skills in
-                        practical improvisation, rich chord voicings, harmonic
-                        progressions, and the art of reharmonization.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Step 3: Music Genres */}
-                  <div className="relative flex items-start gap-6 group">
-                    <div className="relative z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#3a2219]/90 border border-[#dfa38f]/60 text-[#dfa38f] flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#ffd0ab] group-hover:text-[#ffd0ab] group-hover:shadow-[0_6px_20px_rgba(223,163,143,0.3)]">
-                      <span className="material-symbols-outlined text-lg md:text-xl select-none font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
-                        equalizer
-                      </span>
-                    </div>
-
-                    {/* Individual Glassmorphic Card for Step 3 */}
-                    <div className="flex-grow bg-[#2d1b14]/65 backdrop-blur-md border border-[#ebd3cb]/20 rounded-2xl p-5 md:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-all duration-300 hover:bg-[#38231a]/80 hover:border-[#dfa38f]/40 hover:shadow-[0_12px_35px_rgba(223,163,143,0.15)] group-hover:translate-x-1">
-                      <h3 className="font-display-lg text-lg md:text-xl font-bold text-[#fff0ea] tracking-tight transition-colors duration-300 group-hover:text-[#ffd0ab]">
-                        Music Genres
-                      </h3>
-                      <p className="font-sans text-xs md:text-sm text-[#ebd3c7]/85 leading-relaxed font-medium mt-2">
-                        Bring the music to life. Apply your foundations and
-                        skills across a diverse range of genres, from the deep
-                        roots of blues, gospel, christian music, and R&B to the
-                        complex worlds of jazz swing, smooth jazz, bebop, funk,
-                        and classic performance styles.
-                      </p>
-                    </div>
+                          {/* Description */}
+                          <p className="font-sans text-[11.5px] md:text-xs text-[#9c6d5e] leading-relaxed font-medium">
+                            {card.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </section>
-            {/* Feedbacks / Testimonials Section (Clean Soft White-Brown Blend with Chocolate Cards) */}
-            <section className="py-24 px-6 border-b border-[#ebd3cb]/15 relative overflow-hidden bg-gradient-to-b from-[#21110a] to-[#170a04]">
-              {/* Background Palace Image Layer */}
-              <div
-                className="absolute inset-0 z-0 pointer-events-none select-none opacity-[0.35]"
-                style={{
-                  backgroundImage: "url('/palacey.png')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-              {/* CSS Keyframes for falling glitters */}
-              <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes glitter-fall {
-                  0% {
-                    transform: translateY(-20px) rotate(0deg);
-                    opacity: 0;
-                  }
-                  10% {
-                    opacity: 0.9;
-                  }
-                  90% {
-                    opacity: 0.9;
-                  }
-                  100% {
-                    transform: translateY(780px) rotate(360deg);
-                    opacity: 0;
-                  }
-                }
-              `}} />
+              </section>
 
-              {/* Glitter Particles (Snowfall) */}
-              {TESTIMONIAL_GLITTERS.map((p, idx) => (
-                <div
-                  key={idx}
-                  className="absolute pointer-events-none rounded-full bg-gradient-to-br from-[#dfa38f] via-[#f5b8c9] to-[#ffd0ab]"
-                  style={{
-                    left: p.left,
-                    top: '-20px',
-                    width: `${p.size}px`,
-                    height: `${p.size}px`,
-                    animation: `glitter-fall ${p.duration} linear infinite`,
-                    animationDelay: p.delay,
-                    boxShadow: `0 0 10px rgba(245, 184, 201, 0.9), 0 0 4px rgba(223, 163, 143, 0.6)`,
-                    zIndex: 1
-                  }}
-                />
-              ))}
 
-              {/* Ambient decorative glowing blobs */}
-              <div className="absolute top-12 left-1/4 w-72 h-72 bg-[#ffd89b]/12 rounded-full blur-[90px] pointer-events-none z-0"></div>
-              <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+              {/* Top Thick Glossy Rose Gold Divider Line for About Mentor Section */}
+              <div className="w-full h-[6.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative shadow-[0_0_15px_rgba(196,139,124,0.6)]" />
 
-              <div className="max-w-[1200px] mx-auto space-y-16 relative z-10">
-                {/* Header */}
-                <div className="text-center space-y-4 max-w-2xl mx-auto">
-                  <h2 className="font-display-lg text-3xl md:text-4xl text-[#fff0ea] font-bold leading-tight">
-                    Students Feedbacks
-                  </h2>
-                  <p className="font-sans text-sm md:text-base text-[#ebd3c7]/80 leading-relaxed">
-                    Discover how pianists of all backgrounds found their creative freedom and built a solid foundation with Stephanie Keys.
-                  </p>
-                </div>
+              {/* Section 2: About Mentor Section with 60% White Opacity */}
+              <section className="py-16 md:py-20 px-6 relative z-10 overflow-hidden bg-white/60">
+                <div className="max-w-[1250px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
+                  {/* Left Column: Rectangular Mentor Photo with Heavy Glossy Rose Gold Luxury Frame */}
+                  <div className="lg:col-span-5 flex items-center justify-center relative">
+                    {/* Glowing Soft Warm Ambient Blobs behind Photo */}
+                    <div className="absolute w-72 h-72 bg-[#ffd89b]/20 rounded-full blur-[80px] pointer-events-none -z-10" />
+                    <div className="absolute w-80 h-80 bg-[#dfa38f]/18 rounded-full blur-[90px] pointer-events-none -z-10" />
 
-                {/* Testimonial Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {[
-                    {
-                      name: "Sarah Jenkins",
-                      role: "Worship Keyboardist",
-                      date: "June 14, 2025",
-                      stars: 5,
-                      comment:
-                        "I was stuck relying 100% on sheet music for years. Phanilie taught me how to actually listen to chords and play by ear. Within 3 months, I was playing worship songs at my church without any paper!",
-                      avatar:
-                        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
-                    },
-                    {
-                      name: "David Chen",
-                      role: "Jazz Enthusiast",
-                      date: "August 2, 2025",
-                      stars: 5,
-                      comment:
-                        "The jazz and gospel progressions taught in the genres section are gold. The way chords are broken down step-by-step made complex voicings feel so simple. Incredible course!",
-                      avatar:
-                        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
-                    },
-                    {
-                      name: "Jessica Taylor",
-                      role: "Classical & Gospel Player",
-                      date: "September 28, 2025",
-                      stars: 5,
-                      comment:
-                        "I used to feel so anxious trying to improvise on the spot. Now, the music just flows. It's truly helped me connect my faith with my playing. Highly recommend Phanilie!",
-                      avatar:
-                        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
-                    },
-                  ].map((item, idx) => (
+                    {/* Rectangular Heavy Glossy Rose Gold Frame Container */}
                     <div
-                      key={idx}
-                      className="relative overflow-hidden p-8 rounded-[24px] border-2 border-[#dfa38f] shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 flex flex-col justify-between gap-6 group cursor-pointer bg-transparent"
+                      style={{
+                        background: "linear-gradient(135deg, #FFF0EB 0%, #E2B0A4 35%, #C48B7C 70%, #8C5446 100%) padding-box, linear-gradient(135deg, #ffffff 0%, #f8e3db 20%, #e2b0a4 45%, #c48b7c 75%, #7a4639 100%) border-box",
+                        border: "6px solid transparent",
+                        boxShadow: "0 22px 55px rgba(160, 105, 90, 0.28), 0 0 30px rgba(226, 176, 164, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.95)",
+                      }}
+                      className="relative overflow-hidden w-full max-w-[350px] sm:max-w-[390px] h-[440px] sm:h-[480px] lg:h-[500px] rounded-2xl transition-all duration-500 hover:shadow-[0_28px_65px_rgba(160,105,90,0.35)]"
                     >
-                      {/* Decorative quote mark */}
-                      <span className="absolute top-1 right-6 text-6xl font-serif text-white/5 select-none group-hover:scale-105 transition-transform duration-300">
-                        “
-                      </span>
+                      <img
+                        className="w-full h-full object-cover object-[45%_15%] scale-[1.22] transform transition-all duration-700"
+                        style={{
+                          filter: "brightness(1.06) contrast(1.01)",
+                        }}
+                        src="/profile-photo.jpg"
+                        alt="Stephanie Halim - Mentor"
+                      />
+                    </div>
+                  </div>
 
-                      <div className="space-y-4 relative z-10">
-                        {/* Rating Stars (Luxurious Rose-Bronze Gold) */}
-                        <div className="flex gap-0.5 text-[#dfa38f]">
-                          {[...Array(item.stars)].map((_, i) => (
-                            <span
-                              key={i}
-                              className="material-symbols-outlined text-base"
-                              style={{ fontVariationSettings: "'FILL' 1" }}
+                  {/* Right Column: About Mentor Text without any card wrapper/box/border/background */}
+                  <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
+                    <div>
+                      <span className="font-curvy-vibes text-4xl text-[#ab7e66] block mb-1">
+                        The Founder's Story
+                      </span>
+                      <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#4a372e] font-bold leading-tight tracking-tight">
+                        About Mentor
+                      </h2>
+                    </div>
+
+                    <div className="space-y-4 font-sans text-sm md:text-base text-[#6e5a51] leading-relaxed">
+                      <p className="font-semibold text-[#5a453d] text-base md:text-lg">
+                        Hello, I’m Stephanie Halim. Welcome to a peaceful space to
+                        learn and grow.
+                      </p>
+                      <p>
+                        Music has always been my happy place. My own journey began
+                        in the deeply disciplined world of classical music. While
+                        I cherish that beautiful foundation, I found a different
+                        kind of peace and creative freedom when I began exploring
+                        the warm, soulful sounds of jazz and gospel piano.
+                      </p>
+                      <p>
+                        You don’t need a formal music college degree or years of
+                        rigid training to experience the joy of sitting down at
+                        the keys and playing what's in your heart. I’ve designed
+                        this platform to be a structured guide, yet flexible
+                        enough to let you explore and express your own musical
+                        voice.
+                      </p>
+
+                      <div className="pl-4 border-l-2 border-[#ab7e66] pt-1 pb-1 mt-4">
+                        <p className="font-display-lg italic text-[#5a453d] font-semibold text-base md:text-lg leading-relaxed">
+                          "In Stephanie Keys, we will explore rich chords, and help
+                          you find your own voice on the piano at your own
+                          comfortable pace."
+                        </p>
+                        <span className="block mt-2 text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-[#ab7e66]">
+                          — Stephanie Halim, 2026
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Bottom Thick Glossy Rose Gold Divider Line for About Mentor Section */}
+              <div className="w-full h-[6.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative shadow-[0_0_15px_rgba(196,139,124,0.6)]" />
+
+
+              {/* Section 3: What You Will Get Section */}
+              <section className="py-14 md:py-18 px-6 text-center relative z-10">
+                {/* Floating Sparkle Elements */}
+                <div className="absolute inset-0 z-0 pointer-events-none select-none">
+                  {/* Sparkle 1 (Top Left) */}
+                  <svg className="absolute text-[#d49a8b] fill-current" style={{ top: '10%', left: '5%', width: '10px', height: '10px', animation: 'sparkleFloat1 5s infinite ease-in-out' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 2 (Top Right) */}
+                  <svg className="absolute text-[#c58b73] fill-current" style={{ top: '15%', left: '92%', width: '8px', height: '8px', animation: 'sparkleFloat2 4s infinite ease-in-out', animationDelay: '1.2s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 3 (Mid Left) */}
+                  <svg className="absolute text-[#d49a8b] fill-current" style={{ top: '25%', left: '12%', width: '12px', height: '12px', animation: 'sparkleFloat3 6s infinite ease-in-out', animationDelay: '0.5s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 4 (Mid Right) */}
+                  <svg className="absolute text-[#c58b73] fill-current" style={{ top: '32%', left: '88%', width: '9px', height: '9px', animation: 'sparkleFloat1 5.5s infinite ease-in-out', animationDelay: '2.0s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 5 (Bottom Left) */}
+                  <svg className="absolute text-[#d49a8b] fill-current" style={{ top: '40%', left: '4%', width: '11px', height: '11px', animation: 'sparkleFloat2 4.8s infinite ease-in-out', animationDelay: '1.0s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 6 (Bottom Right) */}
+                  <svg className="absolute text-[#c58b73] fill-current" style={{ top: '48%', left: '94%', width: '8px', height: '8px', animation: 'sparkleFloat3 5.2s infinite ease-in-out', animationDelay: '2.5s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 7 (Top Mid-Left) */}
+                  <svg className="absolute text-[#d49a8b] fill-current" style={{ top: '60%', left: '15%', width: '10px', height: '10px', animation: 'sparkleFloat1 6.2s infinite ease-in-out', animationDelay: '0.2s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 8 (Bottom Mid-Right) */}
+                  <svg className="absolute text-[#c58b73] fill-current" style={{ top: '65%', left: '85%', width: '12px', height: '12px', animation: 'sparkleFloat2 5s infinite ease-in-out', animationDelay: '1.8s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                </div>
+
+                <div className="relative z-10 max-w-[1200px] mx-auto space-y-10">
+                  {/* Header */}
+                  <div className="space-y-1">
+                    <h2 className="font-display-lg text-xl md:text-2xl lg:text-[28px] text-[#784d40] font-medium leading-tight tracking-wide">
+                      What You Will Get
+                    </h2>
+                    <p className="font-curvy-vibes text-2xl md:text-3xl lg:text-4xl text-[#a06d5e] block leading-snug">
+                      from Stephanie Keys Course
+                    </p>
+                  </div>
+
+                  {/* Horizontal Features Grid (5 columns on desktop) with Rose Gold Glossy Outline Borders */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5 max-w-[1200px] mx-auto">
+                    {[
+                      {
+                        title: "Structured Learning",
+                        desc: "A clear, step-by-step roadmap to guide your daily practice.",
+                        renderIcon: () => (
+                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
+                            <path d="M5 24C8 24 10 17 16 17C22 17 24 7 27 7" stroke="url(#roseGoldIconGrad)" strokeWidth="2.4" strokeLinecap="round" />
+                            <circle cx="5" cy="24" r="3.5" fill="url(#roseGoldIconGrad)" />
+                            <circle cx="16" cy="17" r="3" fill="#ffffff" stroke="url(#roseGoldIconGrad)" strokeWidth="2" />
+                            <circle cx="27" cy="7" r="3.5" fill="url(#roseGoldIconGrad)" />
+                            <path d="M23 5L24.5 6.5L27 7L24.5 7.5L23 9L21.5 7.5L19 7L21.5 6.5Z" fill="#e2b0a4" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        title: "Full Access",
+                        desc: "Unlimited access to the entire music courses.",
+                        renderIcon: () => (
+                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
+                            <circle cx="11" cy="11" r="6.5" stroke="url(#roseGoldIconGrad)" strokeWidth="2.4" fill="url(#roseGoldIconGrad)" fillOpacity="0.15" />
+                            <circle cx="11" cy="11" r="2.5" fill="url(#roseGoldIconGrad)" />
+                            <path d="M15.5 15.5L25.5 25.5M22 22L24.5 24.5M19.5 24.5L21.5 26.5" stroke="url(#roseGoldIconGrad)" strokeWidth="2.4" strokeLinecap="round" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        title: "Downloadable PDF Notes",
+                        desc: "Guidance to your music practice",
+                        renderIcon: () => (
+                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
+                            <rect x="7" y="4" width="18" height="24" rx="4" stroke="url(#roseGoldIconGrad)" strokeWidth="2.2" fill="url(#roseGoldIconGrad)" fillOpacity="0.1" />
+                            <line x1="11" y1="9" x2="21" y2="9" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinecap="round" />
+                            <line x1="11" y1="13" x2="17" y2="13" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinecap="round" />
+                            <path d="M16 16V22M16 22L13 19M16 22L19 19" stroke="url(#roseGoldIconGrad)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        title: "Drum Tracks",
+                        desc: "Practice your improvisation and timing with jazz drum tracks.",
+                        renderIcon: () => (
+                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
+                            <ellipse cx="16" cy="11" rx="9" ry="3.5" stroke="url(#roseGoldIconGrad)" strokeWidth="2" fill="url(#roseGoldIconGrad)" fillOpacity="0.15" />
+                            <path d="M7 11V18C7 20.2 11 22 16 22C21 22 25 20.2 25 18V11" stroke="url(#roseGoldIconGrad)" strokeWidth="2" />
+                            <path d="M8 12L12 21L16 13L20 21L24 12" stroke="url(#roseGoldIconGrad)" strokeWidth="1.6" opacity="0.8" />
+                            <line x1="7" y1="5" x2="25" y2="24" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinecap="round" />
+                            <line x1="25" y1="5" x2="7" y2="24" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinecap="round" />
+                            <circle cx="7" cy="5" r="1.5" fill="url(#roseGoldIconGrad)" />
+                            <circle cx="25" cy="5" r="1.5" fill="url(#roseGoldIconGrad)" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        title: "Monthly Coaching",
+                        desc: "Interactive online music live sessions with Stephanie",
+                        renderIcon: () => (
+                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 5L18.5 9.5L23.5 10L19.5 13.5L20.8 18.5L16 16L11.2 18.5L12.5 13.5L8.5 10L13.5 9.5Z" fill="url(#roseGoldIconGrad)" fillOpacity="0.25" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinejoin="round" />
+                            <circle cx="16" cy="11" r="2.5" fill="url(#roseGoldIconGrad)" />
+                            <path d="M9 25C9 21.5 12 19.5 16 19.5C20 19.5 23 21.5 23 25" stroke="url(#roseGoldIconGrad)" strokeWidth="2.2" strokeLinecap="round" />
+                          </svg>
+                        ),
+                      },
+                    ].map((item, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(252, 246, 243, 0.90) 100%) padding-box, linear-gradient(135deg, #ffffff 0%, #f8e3db 20%, #e2b0a4 45%, #c48b7c 75%, #7a4639 100%) border-box",
+                          backdropFilter: "blur(14px)",
+                          WebkitBackdropFilter: "blur(14px)",
+                          border: "2.5px solid transparent",
+                          boxShadow: "0 10px 30px rgba(160, 110, 95, 0.14), inset 0 1.5px 2px #ffffff",
+                        }}
+                        className="flex flex-col items-center p-5 md:p-6 rounded-[26px] transition-all duration-500 ease-out hover:scale-[1.04] hover:shadow-[0_18px_40px_rgba(226,176,164,0.35)] cursor-pointer w-full group text-center"
+                      >
+                        {/* Standalone Ornate Rose Gold Vector Icon (No Square Box Container) */}
+                        <div className="mb-4 transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
+                          {item.renderIcon()}
+                        </div>
+
+                        {/* Title & Description stacked */}
+                        <div className="space-y-2 flex-grow flex flex-col justify-start">
+                          <h3 className="font-display-lg text-sm md:text-base font-bold text-[#885748] tracking-tight leading-snug">
+                            {item.title}
+                          </h3>
+                          <p className="font-sans text-[11.5px] md:text-xs text-[#a06d5e] leading-relaxed font-medium">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            {/* Ultra-Glossy Low-Contrast Rose Gold Divider Line */}
+            <div
+              style={{
+                background: "linear-gradient(90deg, rgba(226, 176, 164, 0.05) 0%, rgba(226, 176, 164, 0.65) 15%, rgba(238, 192, 180, 0.85) 50%, rgba(226, 176, 164, 0.65) 85%, rgba(226, 176, 164, 0.05) 100%)",
+                boxShadow: "inset 0 1px 0.5px rgba(255, 255, 255, 0.95), 0 1.5px 3px rgba(160, 110, 95, 0.12)",
+              }}
+              className="w-full h-[4px] z-20 relative"
+            />
+
+            {/* Master Seamless Grand White Marble Hall Container for FAQ, Students Feedbacks, and Pricing */}
+            <div className="relative overflow-hidden bg-[#faf5f0]">
+              {/* Grand Marble Hall Shared Background Image Layer */}
+              <div className="absolute inset-0 z-0 pointer-events-none select-none">
+                <img
+                  className="w-full h-full object-cover object-[50%_30%] transform-gpu"
+                  alt="Grand Marble Hall Background"
+                  src="/grand-marble-hall.jpg?v=2"
+                />
+                {/* 
+                  Vertical Gradient Overlay across FAQ, Students Feedbacks & Start Your Musical Journey:
+                  - Top (FAQ): Silky smooth, feather-blended soft white top glow (from-white/60 via-white/25)
+                  - Middle (Students Feedbacks / Mid-Palace): Elegant warm peach tint glow (#fcdcd0 / #f7beae)
+                  - Bottom (Start Your Musical Journey): Bright soft white glass finish
+                  - 100% smooth, seamless transition without any harsh lines
+                */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/25 via-[#faf5f0]/15 via-[#fcdcd0]/30 via-[#f7beae]/35 via-white/50 to-white/78" />
+              </div>
+
+              {/* Section 4: FAQ Section */}
+              <section className="py-16 px-6 relative z-10">
+                <style dangerouslySetInnerHTML={{
+                  __html: `
+                  @keyframes faqSparkle1 {
+                    0% { transform: translate(0, 15px) scale(0.3) rotate(0deg); opacity: 0; }
+                    35% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
+                    75% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
+                    100% { transform: translate(10px, -45px) scale(0.85) rotate(90deg); opacity: 0; }
+                  }
+                  @keyframes faqSparkle2 {
+                    0% { transform: translate(0, 8px) scale(0.2) rotate(0deg); opacity: 0; }
+                    50% { opacity: 1; filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 9px #ffffff); }
+                    100% { transform: translate(-15px, -55px) scale(0.95) rotate(-120deg); opacity: 0; }
+                  }
+                  @keyframes faqSparkle3 {
+                    0% { transform: translate(0, 12px) scale(0.25) rotate(0deg); opacity: 0; }
+                    30% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 7px #ffd89b); }
+                    80% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 7px #ffd89b); }
+                    100% { transform: translate(20px, -50px) scale(0.9) rotate(140deg); opacity: 0; }
+                  }
+                `}} />
+
+                {/* Floating Sparkle Elements */}
+                <div className="absolute inset-0 z-0 pointer-events-none select-none">
+                  {/* Sparkle 1 */}
+                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '8%', left: '4%', width: '10px', height: '10px', animation: 'faqSparkle1 5s infinite ease-in-out' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 2 */}
+                  <svg className="absolute text-white fill-current" style={{ top: '12%', left: '94%', width: '8px', height: '8px', animation: 'faqSparkle2 4s infinite ease-in-out', animationDelay: '1.2s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 3 */}
+                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '22%', left: '10%', width: '12px', height: '12px', animation: 'faqSparkle3 6s infinite ease-in-out', animationDelay: '0.5s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 4 */}
+                  <svg className="absolute text-white fill-current" style={{ top: '30%', left: '90%', width: '9px', height: '9px', animation: 'faqSparkle1 5.5s infinite ease-in-out', animationDelay: '2s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 5 */}
+                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '42%', left: '3%', width: '11px', height: '11px', animation: 'faqSparkle2 4.8s infinite ease-in-out', animationDelay: '1s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 6 */}
+                  <svg className="absolute text-white fill-current" style={{ top: '50%', left: '95%', width: '8px', height: '8px', animation: 'faqSparkle3 5.2s infinite ease-in-out', animationDelay: '2.5s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 7 */}
+                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '65%', left: '12%', width: '10px', height: '10px', animation: 'faqSparkle1 6.2s infinite ease-in-out', animationDelay: '0.2s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 8 */}
+                  <svg className="absolute text-white fill-current" style={{ top: '70%', left: '88%', width: '12px', height: '12px', animation: 'faqSparkle2 5s infinite ease-in-out', animationDelay: '1.8s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 9 */}
+                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '80%', left: '6%', width: '8px', height: '8px', animation: 'faqSparkle3 4.5s infinite ease-in-out', animationDelay: '3s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                  {/* Sparkle 10 */}
+                  <svg className="absolute text-white fill-current" style={{ top: '88%', left: '92%', width: '11px', height: '11px', animation: 'faqSparkle1 5.8s infinite ease-in-out', animationDelay: '0.7s' }} viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                  </svg>
+                </div>
+
+                <div className="relative z-10 max-w-[1000px] mx-auto space-y-10">
+                  <div className="text-center space-y-2">
+                    <h2
+                      className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#5c3328] font-bold leading-tight tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]"
+                      style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
+                      Frequently Asked Questions
+                    </h2>
+                    <p className="text-[#8a5a4c] font-sans text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
+                      Click each number to understand everything about the membership
+                    </p>
+                  </div>
+
+                  {/* Rose Gold Interactive Timeline FAQ Container */}
+                  <div className="max-w-[720px] mx-auto space-y-4">
+                    {/* Timeline Array Data */}
+                    {(() => {
+                      const faqItems = [
+                        {
+                          idx: 0,
+                          num: "01",
+                          question: "Why choose this membership over free tutorials on YouTube?",
+                          answer: "While YouTube has plenty of quick tutorials, it lacks a structured path. Free videos often leave you guessing what to practice next, leading to bad habits or gaps in your playing. This platform provides a step-by-step, organized curriculum that guarantees steady progress without the confusion.",
+                        },
+                        {
+                          idx: 1,
+                          num: "02",
+                          question: "Is it possible to buy a single course instead of a membership?",
+                          answer: "Our courses are designed to work together as a complete learning ecosystem, which is why we offer them exclusively through our all-access membership. This gives you the freedom to move between foundations, skills, and various styles at your own pace without paying for individual packages.",
+                        },
+                        {
+                          idx: 2,
+                          num: "03",
+                          question: "Are the video lessons available for download?",
+                          answer: "No, the video lessons are streaming-only and require an internet connection to watch. This allows us to constantly update our library and ensure you always have access to the highest-quality video playback on any device.",
+                        },
+                        {
+                          idx: 3,
+                          num: "04",
+                          question: "What is the core learning approach of Stephanie Keys?",
+                          answer: "Stephanie Keys bridges the gap between structured music theory and creative expression. We guide you through essential keyboard foundations first, immediately showing you how to turn those concepts into practical improvisation, and applying them across a rich variety of gospel and jazz at your own comfortable pace.",
+                        },
+                        {
+                          idx: 4,
+                          num: "05",
+                          question: "How easy is it to cancel my subscription?",
+                          answer: "Very easy. You have complete control over your subscription and can cancel at any time directly from your account settings with just a few clicks. There are no hidden fees, contracts, or cancellation penalties.",
+                        },
+                        {
+                          idx: 5,
+                          num: "06",
+                          question: "Do you provide a lifetime access option?",
+                          answer: "We currently focus on monthly, 3 months, and annual membership plans to ensure we can continually support our community, host live events, and release fresh course content for our active members.",
+                        },
+                        {
+                          idx: 6,
+                          num: "07",
+                          question: "Am I allowed to keep the downloaded PDF resources forever?",
+                          answer: "Yes! Any sheet music, chord charts, or practice worksheets you download during your active membership period are yours to keep and use offline forever.",
+                        },
+                        {
+                          idx: 7,
+                          num: "08",
+                          question: "What happens when my free trial period finishes?",
+                          answer: "Once your trial ends, your selected membership plan (monthly or annual) will automatically begin using the payment method you provided. If you choose to cancel before the trial period is up, you will not be charged a single cent.",
+                        },
+                        {
+                          idx: 8,
+                          num: "09",
+                          question: "Are private, 1-on-1 coaching sessions included?",
+                          answer: "If private 1-on-1 lessons are preferred, please reach out to the support team for upgrade options.",
+                        },
+                        {
+                          idx: 9,
+                          num: "10",
+                          question: "Will I lose access to the platform immediately after canceling?",
+                          answer: "No, you will retain full access to all courses, live sessions, and downloadable resources until the final day of your current billing cycle. After that date, your account will simply pause, and you won't be billed again.",
+                        },
+                      ];
+                      const currentItem = faqItems[activeFaq] || faqItems[0];
+
+                      return (
+                        <>
+                          {/* Putih Peach Glass Horizontal Timeline Track */}
+                          <div
+                            style={{
+                              background: "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(253, 245, 238, 0.86) 50%, rgba(255, 250, 246, 0.94) 100%)",
+                              boxShadow: "0 8px 25px rgba(226, 176, 164, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.9)",
+                            }}
+                            className="relative py-3 px-3 md:px-5 rounded-xl border border-[#e2b0a4]/70 backdrop-blur-xl"
+                          >
+                            {/* Background Track Line */}
+                            <div className="absolute top-1/2 left-5 right-5 -translate-y-1/2 h-[2.5px] bg-[#f0d0c5] rounded-full hidden sm:block" />
+                            {/* Animated Rose Gold Active Progress Line */}
+                            <div
+                              className="absolute top-1/2 left-5 -translate-y-1/2 h-[2.5px] bg-gradient-to-r from-[#e2b0a4] via-[#ffd0ab] to-[#c48b7c] rounded-full transition-all duration-500 ease-out hidden sm:block"
+                              style={{
+                                width: `calc(${(activeFaq / (faqItems.length - 1)) * 100}% * ((100% - 2.5rem) / 100%))`
+                              }}
+                            />
+
+                            {/* Timeline Nodes 1 - 10 */}
+                            <div className="relative z-10 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar py-0.5 px-0.5">
+                              {faqItems.map((item, idx) => {
+                                const isActive = activeFaq === idx;
+                                return (
+                                  <button
+                                    key={item.idx}
+                                    onClick={() => setActiveFaq(idx)}
+                                    className="group flex flex-col items-center gap-1 cursor-pointer outline-none focus:outline-none focus:ring-0 active:outline-none border-0 flex-shrink-0 transition-transform duration-200 hover:scale-105 select-none"
+                                    style={{ WebkitTapHighlightColor: "transparent", outline: "none" }}
+                                    title={`Question ${item.num}: ${item.question}`}
+                                  >
+                                    <div
+                                      className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold transition-all duration-300 ${isActive
+                                        ? "bg-gradient-to-br from-[#ffffff] via-[#fff0eb] to-[#ffd0ab] text-[#7a493b] border-2 border-[#e2b0a4] shadow-[0_0_14px_rgba(226,176,164,0.8)] scale-110 ring-2 ring-[#ffd0ab]/40"
+                                        : "bg-[#fceee8] border border-[#e2b0a4]/60 text-[#855749] group-hover:bg-[#fff0eb] group-hover:text-[#6a4033] group-hover:shadow-[0_0_8px_rgba(226,176,164,0.3)]"
+                                        }`}
+                                    >
+                                      {item.num}
+                                    </div>
+                                    <span
+                                      className={`text-[8px] md:text-[9px] uppercase font-extrabold tracking-wider transition-colors duration-200 ${isActive ? "text-[#7a493b]" : "text-[#9e6c5e] group-hover:text-[#6a4033]"
+                                        }`}
+                                    >
+                                      Q{item.num}
+                                    </span>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          {/* Active Question & Answer Putih Peach Glass Display Card */}
+                          <div
+                            style={{
+                              background: "linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(254, 247, 242, 0.90) 50%, rgba(255, 250, 246, 0.96) 100%)",
+                              boxShadow: "0 12px 35px rgba(226, 176, 164, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
+                            }}
+                            className="border-2 border-[#e2b0a4]/80 rounded-xl p-4 md:p-5 backdrop-blur-2xl transition-all duration-300"
+                          >
+                            {/* Header Badge */}
+                            <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#e2b0a4]/30">
+                              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#e2b0a4]/20 border border-[#e2b0a4]/50 text-[#885748] text-[10px] font-bold tracking-wider uppercase">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#dfa38f] animate-pulse" />
+                                Question {currentItem.num} of 10
+                              </div>
+                            </div>
+
+                            {/* Question Title */}
+                            <h3
+                              className="mt-3 font-display-lg text-sm md:text-lg text-[#885748] font-bold leading-relaxed tracking-tight"
+                              style={{ fontFamily: "'Playfair Display', serif" }}
                             >
-                              star
-                            </span>
+                              {currentItem.question}
+                            </h3>
+
+                            {/* Answer Box */}
+                            <div className="mt-3 pl-3 border-l-3 border-[#dfa38f] bg-white/80 py-2.5 px-3.5 rounded-r-lg shadow-xs">
+                              <p className="font-sans text-[11.5px] md:text-xs text-[#a06d5e] leading-relaxed font-medium">
+                                {currentItem.answer}
+                              </p>
+                            </div>
+
+                            {/* Navigation Controls */}
+                            <div className="mt-4 pt-3 border-t border-[#e2b0a4]/30 flex items-center justify-between gap-3">
+                              <button
+                                onClick={() => setActiveFaq(Math.max(0, activeFaq - 1))}
+                                disabled={activeFaq === 0}
+                                className={`flex items-center gap-1 px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider transition-all duration-200 group ${activeFaq === 0
+                                  ? "opacity-40 cursor-not-allowed text-[#a87a6d] border border-[#e2b0a4]/40 bg-white/40"
+                                  : "bg-gradient-to-r from-[#ffffff] via-[#fff5f2] to-[#fdeae3] text-[#7a493b] border-2 border-[#e2b0a4] shadow-[0_2px_10px_rgba(226,176,164,0.22)] hover:shadow-[0_4px_15px_rgba(226,176,164,0.38)] hover:scale-105 active:scale-95 cursor-pointer"
+                                  }`}
+                              >
+                                <svg className="w-3 h-3 group-hover:-translate-x-1 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none">
+                                  <path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="#7a493b" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                                Previous
+                              </button>
+
+                              {/* Indicator step dots */}
+                              <div className="hidden sm:flex items-center gap-1.5">
+                                {faqItems.map((_, i) => (
+                                  <button
+                                    key={i}
+                                    onClick={() => setActiveFaq(i)}
+                                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeFaq === i
+                                      ? "w-4 bg-gradient-to-r from-[#e2b0a4] to-[#ffd0ab]"
+                                      : "w-1.5 bg-[#e2b0a4]/40 hover:bg-[#e2b0a4]"
+                                      }`}
+                                  />
+                                ))}
+                              </div>
+
+                              <button
+                                onClick={() => setActiveFaq(Math.min(faqItems.length - 1, activeFaq + 1))}
+                                disabled={activeFaq === faqItems.length - 1}
+                                className={`flex items-center gap-1 px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider transition-all duration-200 group ${activeFaq === faqItems.length - 1
+                                  ? "opacity-40 cursor-not-allowed text-[#a87a6d] border border-[#e2b0a4]/40 bg-white/40"
+                                  : "bg-gradient-to-r from-[#ffffff] via-[#fff5f2] to-[#fdeae3] text-[#7a493b] border-2 border-[#e2b0a4] shadow-[0_2px_10px_rgba(226,176,164,0.22)] hover:shadow-[0_4px_15px_rgba(226,176,164,0.38)] hover:scale-105 active:scale-95 cursor-pointer"
+                                  }`}
+                              >
+                                Next
+                                <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none">
+                                  <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#7a493b" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                </div>
+              </section>
+
+              {/* Section 5: Feedbacks / Testimonials Section */}
+              <section className="py-16 px-6 relative z-10">
+                {/* CSS Keyframes for falling glitters */}
+                <style dangerouslySetInnerHTML={{
+                  __html: `
+                  @keyframes glitter-fall {
+                    0% {
+                      transform: translateY(-20px) rotate(0deg);
+                      opacity: 0;
+                    }
+                    10% {
+                      opacity: 0.9;
+                    }
+                    90% {
+                      opacity: 0.9;
+                    }
+                    100% {
+                      transform: translateY(780px) rotate(360deg);
+                      opacity: 0;
+                    }
+                  }
+                `}} />
+
+                {/* Glitter Particles (Snowfall) */}
+                {TESTIMONIAL_GLITTERS.map((p, idx) => (
+                  <div
+                    key={idx}
+                    className="absolute pointer-events-none rounded-full bg-gradient-to-br from-[#dfa38f] via-[#f5b8c9] to-[#ffd0ab]"
+                    style={{
+                      left: p.left,
+                      top: '-20px',
+                      width: `${p.size}px`,
+                      height: `${p.size}px`,
+                      animation: `glitter-fall ${p.duration} linear infinite`,
+                      animationDelay: p.delay,
+                      boxShadow: `0 0 10px rgba(245, 184, 201, 0.9), 0 0 4px rgba(223, 163, 143, 0.6)`,
+                      zIndex: 1
+                    }}
+                  />
+                ))}
+
+                {/* Ambient decorative glowing blobs */}
+                <div className="absolute top-12 left-1/4 w-72 h-72 bg-[#ffd89b]/15 rounded-full blur-[90px] pointer-events-none z-0"></div>
+                <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/12 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+                <div className="max-w-[1100px] mx-auto space-y-12 relative z-10">
+                  {/* Header */}
+                  <div className="text-center space-y-2.5 max-w-2xl mx-auto">
+                    <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#5c3328] font-bold leading-tight drop-shadow-[0_1px_3px_rgba(255,255,255,0.7)]">
+                      Students Feedbacks
+                    </h2>
+                    <p className="font-sans text-xs md:text-sm text-[#7a4b3d] font-semibold leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
+                      Discover how pianists of all backgrounds found their creative freedom and built a solid foundation with Stephanie Keys.
+                    </p>
+                  </div>
+
+                  {/* Testimonial Cards Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[
+                      {
+                        name: "Sarah Jenkins",
+                        role: "Worship Keyboardist",
+                        date: "June 14, 2025",
+                        stars: 5,
+                        comment:
+                          "I was stuck relying 100% on sheet music for years. Stephanie Keys taught me how to actually listen to chords and play by ear. Within 3 months, I was playing worship songs at my church without any paper!",
+                        avatar:
+                          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+                      },
+                      {
+                        name: "David Chen",
+                        role: "Jazz Enthusiast",
+                        date: "August 2, 2025",
+                        stars: 5,
+                        comment:
+                          "The jazz and gospel progressions taught in the genres section are gold. The way chords are broken down step-by-step made complex voicings feel so simple. Incredible course!",
+                        avatar:
+                          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                      },
+                      {
+                        name: "Jessica Taylor",
+                        role: "Classical & Gospel Player",
+                        date: "September 28, 2025",
+                        stars: 5,
+                        comment:
+                          "I used to feel so anxious trying to improvise on the spot. Now, the music just flows. It's truly helped me connect my faith with my playing. Highly recommend Stephanie Keys!",
+                        avatar:
+                          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+                      },
+                    ].map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="relative overflow-hidden p-6 rounded-[20px] border-2 border-[#e2b0a4]/80 shadow-md hover:-translate-y-1.5 hover:shadow-lg transition-all duration-300 flex flex-col justify-between gap-5 group cursor-pointer bg-white/92 backdrop-blur-xl"
+                      >
+                        <div className="space-y-3 relative z-10">
+                          {/* Comment */}
+                          <p className="font-sans text-xs md:text-[12.5px] text-[#70493a] leading-relaxed italic font-medium">
+                            {item.comment}
+                          </p>
+                        </div>
+
+                        {/* Profile Details */}
+                        <div className="flex items-center gap-3 pt-3.5 border-t border-[#dfa38f]/30 mt-auto relative z-10">
+                          <div className="w-9 h-9 rounded-full overflow-hidden border border-[#dfa38f]/40 bg-[#f4ebe6] shrink-0">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={item.avatar}
+                              alt={item.name}
+                            />
+                          </div>
+                          <div>
+                            <h4 className="font-sans text-xs font-bold text-[#6b4334] leading-tight">
+                              {item.name}
+                            </h4>
+                            <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 mt-0.5 text-[10px] text-[#7a5244] font-medium font-sans">
+                              <span>{item.role}</span>
+                              <span className="text-[#d48b78]">•</span>
+                              <span>{item.date}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+
+              {/* Section 6: Pricing Section (Start Your Musical Journey - Brighter White Atmosphere) */}
+              <section className="py-12 lg:py-16 px-4 md:px-6 relative z-10">
+                <div className="relative z-10 max-w-[1020px] mx-auto space-y-7 w-full">
+                  {/* Section Header */}
+                  <div className="text-center space-y-1.5 max-w-xl mx-auto">
+                    <h2 className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#5c3328] font-bold leading-tight">
+                      Start Your Musical Journey
+                    </h2>
+                    <p className="text-[#8a5a4c] font-sans text-[11px] md:text-xs font-extrabold uppercase tracking-widest">
+                      Choose the plan that fits your pace of learning.
+                    </p>
+                  </div>
+
+                  {/* 3-Column Grid: Feature List on Left, Monthly Card in Middle, Annual Card on Right */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-stretch w-full">
+
+                    {/* Left Column: Included in Every Plan */}
+                    <div
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(253, 245, 238, 0.86) 50%, rgba(255, 250, 246, 0.94) 100%)",
+                        boxShadow:
+                          "0 10px 25px rgba(0, 0, 0, 0.12), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
+                      }}
+                      className="lg:col-span-4 backdrop-blur-2xl rounded-[20px] p-4.5 lg:p-5 border-2 border-[#e2b0a4]/80 shadow-md flex flex-col justify-between text-left"
+                    >
+                      <div className="space-y-4">
+                        <div>
+                          <span className="font-sans text-[9px] font-black uppercase tracking-[0.18em] text-[#7a4b3d] bg-[#f8e3db] border border-[#e2b0a4]/60 px-2.5 py-0.5 rounded-full inline-block mb-1.5 shadow-xs">
+                            Included in Every Plan
+                          </span>
+                          <h3 className="font-display-lg text-lg font-bold text-[#7a4b3d]">
+                            Full Access Pass
+                          </h3>
+                          <p className="text-[11px] text-[#8d5d4f] font-medium mt-0.5 leading-relaxed">
+                            Get immediate access to everything Stephanie Keys has to offer with no restrictions.
+                          </p>
+                        </div>
+
+                        {/* Feature Items List */}
+                        <div className="space-y-2.5 pt-0.5">
+                          {[
+                            { title: "All Courses Access", desc: "Complete video library & roadmap" },
+                            { title: "Live Group Coaching", desc: "Interactive monthly Q&A sessions" },
+                            { title: "Sheet Music Library", desc: "Downloadable PDF charts & guides" },
+                            { title: "Community Forum", desc: "Connect with fellow pianists" },
+                          ].map((item, i) => (
+                            <div key={i} className="flex items-start gap-2.5">
+                              <div className="w-4.5 h-4.5 rounded-full bg-[#f8e3db] border border-[#e2b0a4]/80 text-[#7a4b3d] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                                <svg className="w-2.5 h-2.5 text-[#7a4b3d]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                              </div>
+                              <div>
+                                <span className="text-xs font-bold text-[#7a4b3d] block leading-snug">
+                                  {item.title}
+                                </span>
+                                <span className="text-[10px] text-[#8d5d4f] font-medium block">
+                                  {item.desc}
+                                </span>
+                              </div>
+                            </div>
                           ))}
                         </div>
-                        {/* Comment */}
-                        <p className="font-sans text-[13px] text-[#f4eae4] leading-relaxed italic">
-                          "{item.comment}"
+                      </div>
+
+                      <div className="pt-4 border-t border-[#e2b0a4]/30 mt-4">
+                        <p className="text-[10px] text-[#8a5a4c] font-bold italic text-center">
+                          Cancel anytime with 1-click in account settings.
                         </p>
                       </div>
-
-                      {/* Profile Details */}
-                      <div className="flex items-center gap-3 pt-4 border-t border-white/10 mt-auto relative z-10">
-                        <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20 bg-zinc-800 shrink-0">
-                          <img
-                            className="w-full h-full object-cover"
-                            src={item.avatar}
-                            alt={item.name}
-                          />
-                        </div>
-                        <div>
-                          <h4 className="font-sans text-[13px] font-bold text-white leading-tight">
-                            {item.name}
-                          </h4>
-                          <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 mt-0.5 text-[10.5px] text-[#d5c2b7] font-sans">
-                            <span>{item.role}</span>
-                            <span className="text-[#dfa38f]">•</span>
-                            <span>{item.date}</span>
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </section>
 
-            {/* About Mentor Section (Jonny May Style Full-Height Image Split Layout with Soft Parent Marble Background) */}
-            <section
-              className="bg-[#fffbf9] overflow-hidden border-b border-[#e5d5cd]/30 relative"
-              style={{
-                backgroundImage: "url('/mar.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              {/* White overlay to soften the marble background texture across the entire section */}
-              <div className="absolute inset-0 bg-white/65 pointer-events-none z-0" />
-
-              <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[500px] relative z-10">
-                {/* Left Column: Full-height Mentor Image */}
-                <div className="lg:col-span-5 relative min-h-[350px] lg:min-h-0 overflow-hidden">
-                  <img
-                    className="absolute inset-0 w-full h-full object-cover object-center"
-                    src="/profile-photo.jpg"
-                    alt="Stephanie Halim - Mentor"
-                  />
-                </div>
-
-                {/* Right Column: About Mentor Text with vertical alignment and paddings */}
-                <div className="lg:col-span-7 py-16 lg:py-24 px-8 lg:px-16 flex flex-col justify-center text-left space-y-8">
-                  <div>
-                    <span className="font-curvy-vibes text-4xl text-[#cda195] block mb-1">
-                      The Founder's Story
-                    </span>
-                    <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#4a372e] font-bold leading-tight tracking-tight">
-                      About Mentor
-                    </h2>
-                  </div>
-
-                  <div className="space-y-5 font-sans text-sm md:text-base text-[#6e5a51] leading-relaxed">
-                    <p className="font-semibold text-[#5a453d] text-base md:text-lg">
-                      Hello, I’m Stephanie Halim. Welcome to a peaceful space to
-                      learn and grow.
-                    </p>
-                    <p>
-                      Music has always been my happy place. My own journey began
-                      in the deeply disciplined world of classical music. While
-                      I cherish that beautiful foundation, I found a different
-                      kind of peace and creative freedom when I began exploring
-                      the warm, soulful sounds of jazz and gospel piano.
-                    </p>
-                    <p>
-                      You don’t need a formal music college degree or years of
-                      rigid training to experience the joy of sitting down at
-                      the keys and playing what's in your heart. I’ve designed
-                      this platform to be a structured guide, yet flexible
-                      enough to let you explore and express your own musical
-                      voice.
-                    </p>
-
-                    <div className="pl-4 border-l-2 border-[#cda195] pt-1 pb-1">
-                      <p className="font-display-lg italic text-[#5a453d] font-semibold text-base md:text-lg leading-relaxed">
-                        "In Stephanie Keys, we will explore rich chords, and help
-                        you find your own voice on the piano at your own
-                        comfortable pace."
-                      </p>
-                      <span className="block mt-2 text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-[#ab7e66]">
-                        — Stephanie Halim, 2026
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* What You Will Get Section */}
-            <section className="py-24 px-6 bg-gradient-to-br from-[#614639] via-[#543c31] to-[#664b3f] border-b border-[#ebd3cb]/15 text-center relative overflow-hidden">
-              <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes sparkleFloat1 {
-                  0% { transform: translate(0, 15px) scale(0.3) rotate(0deg); opacity: 0; }
-                  35% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
-                  75% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
-                  100% { transform: translate(10px, -45px) scale(0.85) rotate(90deg); opacity: 0; }
-                }
-                @keyframes sparkleFloat2 {
-                  0% { transform: translate(0, 8px) scale(0.2) rotate(0deg); opacity: 0; }
-                  50% { opacity: 1; filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 9px #ffffff); }
-                  100% { transform: translate(-15px, -55px) scale(0.95) rotate(-120deg); opacity: 0; }
-                }
-                @keyframes sparkleFloat3 {
-                  0% { transform: translate(0, 12px) scale(0.25) rotate(0deg); opacity: 0; }
-                  30% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 7px #ffd89b); }
-                  80% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 7px #ffd89b); }
-                  100% { transform: translate(20px, -50px) scale(0.9) rotate(140deg); opacity: 0; }
-                }
-              `}} />
-
-              {/* Background Strings Image Layer */}
-              <div
-                className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none select-none opacity-[0.08]"
-                style={{
-                  backgroundImage: "url('/strings.png')",
-                }}
-              />
-
-              {/* Floating Sparkle Elements */}
-              <div className="absolute inset-0 z-0 pointer-events-none select-none">
-                {/* Sparkle 1 (Top Left) */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '10%', left: '5%', width: '10px', height: '10px', animation: 'sparkleFloat1 5s infinite ease-in-out' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 2 (Top Right) */}
-                <svg className="absolute text-white fill-current" style={{ top: '15%', left: '92%', width: '8px', height: '8px', animation: 'sparkleFloat2 4s infinite ease-in-out', animationDelay: '1.2s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 3 (Mid Left) */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '25%', left: '12%', width: '12px', height: '12px', animation: 'sparkleFloat3 6s infinite ease-in-out', animationDelay: '0.5s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 4 (Mid Right) */}
-                <svg className="absolute text-white fill-current" style={{ top: '32%', left: '88%', width: '9px', height: '9px', animation: 'sparkleFloat1 5.5s infinite ease-in-out', animationDelay: '2.0s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 5 (Bottom Left) */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '40%', left: '4%', width: '11px', height: '11px', animation: 'sparkleFloat2 4.8s infinite ease-in-out', animationDelay: '1.0s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 6 (Bottom Right) */}
-                <svg className="absolute text-white fill-current" style={{ top: '48%', left: '94%', width: '8px', height: '8px', animation: 'sparkleFloat3 5.2s infinite ease-in-out', animationDelay: '2.5s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 7 (Top Mid-Left) */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '60%', left: '15%', width: '10px', height: '10px', animation: 'sparkleFloat1 6.2s infinite ease-in-out', animationDelay: '0.2s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 8 (Bottom Mid-Right) */}
-                <svg className="absolute text-white fill-current" style={{ top: '65%', left: '85%', width: '12px', height: '12px', animation: 'sparkleFloat2 5s infinite ease-in-out', animationDelay: '1.8s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 9 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '75%', left: '8%', width: '8px', height: '8px', animation: 'sparkleFloat3 4.5s infinite ease-in-out', animationDelay: '3.0s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 10 */}
-                <svg className="absolute text-white fill-current" style={{ top: '85%', left: '90%', width: '11px', height: '11px', animation: 'sparkleFloat1 5.8s infinite ease-in-out', animationDelay: '0.7s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 11 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '8%', left: '30%', width: '9px', height: '9px', animation: 'sparkleFloat2 6.5s infinite ease-in-out', animationDelay: '2.2s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 12 */}
-                <svg className="absolute text-white fill-current" style={{ top: '18%', left: '70%', width: '10px', height: '10px', animation: 'sparkleFloat3 5.4s infinite ease-in-out', animationDelay: '0.9s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 13 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '78%', left: '25%', width: '12px', height: '12px', animation: 'sparkleFloat1 5.2s infinite ease-in-out', animationDelay: '1.5s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 14 */}
-                <svg className="absolute text-white fill-current" style={{ top: '88%', left: '75%', width: '8px', height: '8px', animation: 'sparkleFloat2 6s infinite ease-in-out', animationDelay: '3.2s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 15 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '35%', left: '20%', width: '9px', height: '9px', animation: 'sparkleFloat3 5.1s infinite ease-in-out', animationDelay: '0.4s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 16 */}
-                <svg className="absolute text-white fill-current" style={{ top: '50%', left: '80%', width: '10px', height: '10px', animation: 'sparkleFloat1 4.7s infinite ease-in-out', animationDelay: '1.1s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-              </div>
-
-              <div className="relative z-10 max-w-[1200px] mx-auto space-y-16">
-                {/* Header */}
-                <div className="space-y-3">
-                  <h2 className="font-display-lg text-3xl md:text-4xl text-white font-bold leading-tight tracking-tight">
-                    What You Will Get
-                  </h2>
-                  <p className="font-sans text-[10px] md:text-xs text-[#ffdcd3] font-bold uppercase tracking-[0.2em] block">
-                    Your enrollment package includes
-                  </p>
-                </div>
-
-                {/* Horizontal Features Grid (5 columns on desktop) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-[1200px] mx-auto">
-                  {[
-                    {
-                      title: "Structured Learning Path",
-                      desc: "A clear, step-by-step roadmap to guide your daily practice.",
-                      icon: "route",
-                    },
-                    {
-                      title: "All-Access Pass",
-                      desc: "Instant, unlimited access to the entire library of music courses.",
-                      icon: "key",
-                    },
-                    {
-                      title: "Monthly Group Coaching",
-                      desc: "Interactive live sessions with our team of instructors.",
-                      icon: "groups",
-                    },
-                    {
-                      title: "Downloadable PDF Notes",
-                      desc: "High-quality worksheets, charts, and guides to practice offline.",
-                      icon: "description",
-                    },
-                    {
-                      title: "Interactive Quizzes",
-                      desc: "Fun ear-training and music theory challenges to test your progress.",
-                      icon: "quiz",
-                    },
-                  ].map((item, idx) => (
+                    {/* Middle Column: Monthly Plan Card */}
                     <div
-                      key={idx}
-                      className="flex flex-col items-center p-6 md:p-8 rounded-[36px] border-[3.5px] border-[#cda195] bg-white/5 hover:bg-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.03)] hover:border-[#cda195] hover:shadow-[0_15px_45px_rgba(205,161,149,0.3),_0_0_25px_rgba(205,161,149,0.25)] transition-all duration-300 cursor-pointer w-full group text-center"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(253, 245, 238, 0.86) 50%, rgba(255, 250, 246, 0.94) 100%)",
+                        boxShadow:
+                          "0 10px 25px rgba(0, 0, 0, 0.12), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
+                      }}
+                      className="lg:col-span-4 backdrop-blur-2xl rounded-[20px] p-4.5 lg:p-5 border-2 border-[#e2b0a4]/80 transition-all duration-300 hover:border-[#ffd0ab] hover:bg-white/95 hover:scale-[1.01] flex flex-col justify-between text-left"
                     >
-                      {/* Icon inside premium glowing circle */}
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#ffdcd3] to-[#cda195] text-[#4a372e] flex items-center justify-center flex-shrink-0 shadow-[0_6px_16px_rgba(205,161,149,0.25)] mb-6 transition-transform duration-300 group-hover:scale-110">
-                        <span className="material-symbols-outlined text-xl select-none">
-                          {item.icon}
-                        </span>
+                      <div className="space-y-4">
+                        <div className="space-y-0.5">
+                          <span className="font-sans text-[9px] font-black uppercase tracking-[0.18em] text-[#7a4b3d] bg-[#f8e3db] border border-[#e2b0a4]/60 px-2.5 py-0.5 rounded-full inline-block shadow-xs">
+                            Flexible Monthly
+                          </span>
+                          <h3 className="font-display-lg text-lg font-bold text-[#7a4b3d] tracking-tight mt-0.5">
+                            Monthly Plan
+                          </h3>
+                        </div>
+
+                        <div className="space-y-0.5">
+                          <div className="text-2xl lg:text-3xl font-sans font-bold tracking-tight text-[#7a4b3d]">
+                            $18.99 <span className="text-xs font-medium text-[#8d5d4f]">/ month</span>
+                          </div>
+                        </div>
+
+                        <div className="space-y-0.5">
+                          <span className="font-sans text-[11px] font-bold text-[#8a5a4c] block">
+                            Free 14-Day Trial
+                          </span>
+                          <p className="text-[11px] text-[#8d5d4f] font-medium leading-normal">
+                            Billed monthly after trial ends. Cancel anytime.
+                          </p>
+                        </div>
+
+                        {/* Included Perks in Card */}
+                        <div className="space-y-2 pt-2.5 border-t border-[#e2b0a4]/30">
+                          {[
+                            "Unlimited Video Lessons Access",
+                            "Downloadable Practice Sheets",
+                            "Monthly Live Q&A Sessions",
+                            "Full 14-Day Trial Guarantee",
+                          ].map((perk, i) => (
+                            <div key={i} className="flex items-center gap-2 text-[11px] text-[#7a4b3d]">
+                              <span className="w-3.5 h-3.5 rounded-full bg-[#f8e3db] border border-[#e2b0a4]/60 text-[#7a4b3d] flex items-center justify-center text-[9px] shrink-0 font-bold">✓</span>
+                              <span className="font-semibold text-[#805244]">{perk}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                      {/* Title & Description stacked */}
-                      <div className="space-y-3 flex-grow flex flex-col justify-start">
-                        <h3 className="font-display-lg text-base md:text-[17px] font-bold text-white tracking-tight leading-snug">
-                          {item.title}
-                        </h3>
-                        <p className="font-sans text-xs text-[#f5e1d8] leading-relaxed font-medium">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-            {/* FAQ Section */}
-            <section className="py-24 px-6 bg-gradient-to-br from-[#a38777] via-[#94786d] to-[#c4a296] border-b border-[#e8cdc1]/20 relative overflow-hidden">
-              <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes faqSparkle1 {
-                  0% { transform: translate(0, 15px) scale(0.3) rotate(0deg); opacity: 0; }
-                  35% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
-                  75% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
-                  100% { transform: translate(10px, -45px) scale(0.85) rotate(90deg); opacity: 0; }
-                }
-                @keyframes faqSparkle2 {
-                  0% { transform: translate(0, 8px) scale(0.2) rotate(0deg); opacity: 0; }
-                  50% { opacity: 1; filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 9px #ffffff); }
-                  100% { transform: translate(-15px, -55px) scale(0.95) rotate(-120deg); opacity: 0; }
-                }
-                @keyframes faqSparkle3 {
-                  0% { transform: translate(0, 12px) scale(0.25) rotate(0deg); opacity: 0; }
-                  30% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 7px #ffd89b); }
-                  80% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 7px #ffd89b); }
-                  100% { transform: translate(20px, -50px) scale(0.9) rotate(140deg); opacity: 0; }
-                }
-              `}} />
 
-              {/* Background Piano Grand Image Layer */}
-              <div
-                className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none select-none opacity-[0.16]"
-                style={{
-                  backgroundImage: "url('/pianogrand.jpg')",
-                }}
-              />
-
-              {/* Floating Sparkle Elements */}
-              <div className="absolute inset-0 z-0 pointer-events-none select-none">
-                {/* Sparkle 1 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '8%', left: '4%', width: '10px', height: '10px', animation: 'faqSparkle1 5s infinite ease-in-out' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 2 */}
-                <svg className="absolute text-white fill-current" style={{ top: '12%', left: '94%', width: '8px', height: '8px', animation: 'faqSparkle2 4s infinite ease-in-out', animationDelay: '1.2s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 3 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '22%', left: '10%', width: '12px', height: '12px', animation: 'faqSparkle3 6s infinite ease-in-out', animationDelay: '0.5s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 4 */}
-                <svg className="absolute text-white fill-current" style={{ top: '30%', left: '90%', width: '9px', height: '9px', animation: 'faqSparkle1 5.5s infinite ease-in-out', animationDelay: '2s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 5 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '42%', left: '3%', width: '11px', height: '11px', animation: 'faqSparkle2 4.8s infinite ease-in-out', animationDelay: '1s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 6 */}
-                <svg className="absolute text-white fill-current" style={{ top: '50%', left: '95%', width: '8px', height: '8px', animation: 'faqSparkle3 5.2s infinite ease-in-out', animationDelay: '2.5s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 7 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '65%', left: '12%', width: '10px', height: '10px', animation: 'faqSparkle1 6.2s infinite ease-in-out', animationDelay: '0.2s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 8 */}
-                <svg className="absolute text-white fill-current" style={{ top: '70%', left: '88%', width: '12px', height: '12px', animation: 'faqSparkle2 5s infinite ease-in-out', animationDelay: '1.8s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 9 */}
-                <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '80%', left: '6%', width: '8px', height: '8px', animation: 'faqSparkle3 4.5s infinite ease-in-out', animationDelay: '3s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-                {/* Sparkle 10 */}
-                <svg className="absolute text-white fill-current" style={{ top: '88%', left: '92%', width: '11px', height: '11px', animation: 'faqSparkle1 5.8s infinite ease-in-out', animationDelay: '0.7s' }} viewBox="0 0 24 24">
-                  <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
-                </svg>
-              </div>
-
-              <div className="relative z-10 max-w-[1100px] mx-auto space-y-12">
-                <div className="text-center space-y-3">
-                  <h2
-                    className="font-display-lg text-3xl md:text-4xl text-white font-bold leading-tight tracking-tight drop-shadow-[0_1px_4px_rgba(0,0,0,0.15)]"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
-                  >
-                    Frequently Asked Questions
-                  </h2>
-                  <p className="text-[#ffebe6] font-sans text-xs font-bold uppercase tracking-widest drop-shadow-[0_1px_2px_rgba(0,0,0,0.1)]">
-                    Everything you need to know about the membership
-                  </p>
-                </div>
-
-                {/* 2-Column Responsive Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                  {/* Column 1 */}
-                  <div className="space-y-4">
-                    {[
-                      {
-                        idx: 0,
-                        question:
-                          "Why choose this membership over free tutorials on YouTube?",
-                        answer:
-                          "While YouTube has plenty of quick tutorials, it lacks a structured path. Free videos often leave you guessing what to practice next, leading to bad habits or gaps in your playing. This platform provides a step-by-step, organized curriculum that guarantees steady progress without the confusion.",
-                      },
-                      {
-                        idx: 2,
-                        question: "Are the video lessons available for download?",
-                        answer:
-                          "No, the video lessons are streaming-only and require an internet connection to watch. This allows us to constantly update our library and ensure you always have access to the highest-quality video playback on any device.",
-                      },
-                      {
-                        idx: 4,
-                        question: "How easy is it to cancel my subscription?",
-                        answer:
-                          "Very easy. You have complete control over your subscription and can cancel at any time directly from your account settings with just a few clicks. There are no hidden fees, contracts, or cancellation penalties.",
-                      },
-                      {
-                        idx: 6,
-                        question:
-                          "Am I allowed to keep the downloaded PDF resources forever?",
-                        answer:
-                          "Yes! Any sheet music, chord charts, or practice worksheets you download during your active membership period are yours to keep and use offline forever.",
-                      },
-                      {
-                        idx: 8,
-                        question:
-                          "Are private, 1-on-1 coaching sessions included?",
-                        answer:
-                          "If private 1-on-1 lessons are preferred, please reach out to the support team for upgrade options.",
-                      },
-                    ].map((item) => (
-                      <div
-                        key={item.idx}
-                        className={`border rounded-2xl overflow-hidden transition-all duration-300 backdrop-blur-lg ${openFaq === item.idx
-                            ? "border-[#cda195] shadow-[0_12px_30px_rgba(0,0,0,0.15)] bg-black/50"
-                            : "border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-black/20 hover:bg-black/30 hover:border-white/40 hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)]"
-                          }`}
-                      >
+                      <div className="pt-4 mt-3">
                         <button
-                          onClick={() => setOpenFaq(openFaq === item.idx ? null : item.idx)}
-                          className="w-full py-4.5 px-5 flex items-center justify-between gap-4 cursor-pointer text-left bg-transparent border-none focus:outline-none"
+                          onClick={() => setView("dashboard")}
+                          className="w-full py-2.5 px-3 rounded-full font-sans text-xs font-extrabold text-[#5c3a30] bg-gradient-to-r from-[#fff5f2] via-[#ffd0ab] to-[#e2b0a4] hover:brightness-105 border border-white shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
                         >
-                          <span
-                            className={`font-sans text-[13px] md:text-sm font-bold transition-colors duration-200 ${openFaq === item.idx
-                                ? "text-[#ffdcd3]"
-                                : "text-white"
-                              }`}
-                          >
-                            {item.question}
-                          </span>
-                          <span
-                            className={`material-symbols-outlined text-white/70 text-lg transition-transform duration-300 select-none ${openFaq === item.idx ? "rotate-180 text-[#cda195]" : ""
-                              }`}
-                          >
-                            expand_more
-                          </span>
+                          Start 14-Day Free Trial
                         </button>
+                      </div>
+                    </div>
 
-                        <div
-                          className="grid transition-all duration-300 ease-in-out"
-                          style={{
-                            gridTemplateRows: openFaq === item.idx ? "1fr" : "0fr",
-                            opacity: openFaq === item.idx ? 1 : 0,
-                          }}
-                        >
-                          <div className="overflow-hidden">
-                            <div className="border-t border-white/10 py-4 px-5 bg-black/10">
-                              <p className="font-sans text-[12.5px] text-[#f5e1d8] leading-relaxed font-semibold">
-                                {item.answer}
-                              </p>
-                            </div>
+                    {/* Right Column: Annual Plan Card (Featured Best Value) */}
+                    <div
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 245, 238, 0.91) 50%, rgba(255, 250, 246, 0.96) 100%)",
+                        boxShadow:
+                          "0 12px 30px rgba(0, 0, 0, 0.15), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
+                      }}
+                      className="lg:col-span-4 backdrop-blur-2xl rounded-[20px] p-4.5 lg:p-5 border-2 border-[#d48b78] transition-all duration-300 hover:scale-[1.02] flex flex-col justify-between text-left relative"
+                    >
+                      {/* Badge */}
+                      <div className="absolute -top-3 right-5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#ffd0ab] via-[#e2b0a4] to-[#c48b7c] text-[#4d2d22] font-sans text-[9px] font-black uppercase tracking-wider shadow-sm">
+                        Best Value
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="space-y-0.5">
+                          <span className="font-sans text-[9px] font-black uppercase tracking-[0.18em] text-[#7a4b3d] bg-[#f8e3db] border border-[#e2b0a4]/60 px-2.5 py-0.5 rounded-full inline-block shadow-xs">
+                            Save Over 25%
+                          </span>
+                          <h3 className="font-display-lg text-lg font-bold text-[#7a4b3d] tracking-tight mt-0.5">
+                            Annual Plan
+                          </h3>
+                        </div>
+
+                        <div className="space-y-0.5">
+                          <div className="text-2xl lg:text-3xl font-sans font-bold tracking-tight text-[#7a4b3d]">
+                            $14.16 <span className="text-xs font-medium text-[#8d5d4f]">/ month</span>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
 
-                  {/* Column 2 */}
-                  <div className="space-y-4">
-                    {[
-                      {
-                        idx: 1,
-                        question:
-                          "Is it possible to buy a single course instead of a membership?",
-                        answer:
-                          "Our courses are designed to work together as a complete learning ecosystem, which is why we offer them exclusively through our all-access membership. This gives you the freedom to move between foundations, skills, and various styles at your own pace without paying for individual packages.",
-                      },
-                      {
-                        idx: 3,
-                        question:
-                          "What is the core learning approach of Phanilie Music?",
-                        answer:
-                          "Phanilie Music bridges the gap between structured music theory and creative expression. We guide you through essential keyboard foundations first, immediately showing you how to turn those concepts into practical improvisation, and applying them across a rich variety of gospel, jazz, and popular music styles at your own comfortable pace.",
-                      },
-                      {
-                        idx: 5,
-                        question: "Do you provide a lifetime access option?",
-                        answer:
-                          "We currently focus on monthly, 3 months, and annual membership plans to ensure we can continually support our community, host live events, and release fresh course content for our active members.",
-                      },
-                      {
-                        idx: 7,
-                        question:
-                          "What happens when my free trial period finishes?",
-                        answer:
-                          "Once your trial ends, your selected membership plan (monthly or annual) will automatically begin using the payment method you provided. If you choose to cancel before the trial period is up, you will not be charged a single cent.",
-                      },
-                      {
-                        idx: 9,
-                        question:
-                          "Will I lose access to the platform immediately after canceling?",
-                        answer:
-                          "No, you will retain full access to all courses, live sessions, and downloadable resources until the final day of your current billing cycle. After that date, your account will simply pause, and you won't be billed again.",
-                      },
-                    ].map((item) => (
-                      <div
-                        key={item.idx}
-                        className={`border rounded-2xl overflow-hidden transition-all duration-300 backdrop-blur-lg ${openFaq === item.idx
-                            ? "border-[#cda195] shadow-[0_12px_30px_rgba(0,0,0,0.15)] bg-black/50"
-                            : "border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-black/20 hover:bg-black/30 hover:border-white/40 hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)]"
-                          }`}
-                      >
+                        <div className="space-y-0.5">
+                          <span className="font-sans text-[11px] font-bold text-[#8a5a4c] block">
+                            Free 14-Day Trial
+                          </span>
+                          <p className="text-[11px] text-[#8d5d4f] font-medium leading-normal">
+                            Billed annually at $169.99 after trial ends.
+                          </p>
+                        </div>
+
+                        {/* Included Perks in Card */}
+                        <div className="space-y-2 pt-2.5 border-t border-[#e2b0a4]/30">
+                          {[
+                            "All Monthly Perks Included",
+                            "Save Over 25% Every Year",
+                            "Unlimited Sheet Music & PDFs",
+                            "Priority Community & Live Q&A",
+                          ].map((perk, i) => (
+                            <div key={i} className="flex items-center gap-2 text-[11px] text-[#7a4b3d]">
+                              <span className="w-3.5 h-3.5 rounded-full bg-[#e2b0a4] text-[#4d2d22] flex items-center justify-center text-[9px] shrink-0 font-extrabold">✓</span>
+                              <span className="font-bold text-[#7a4b3d]">{perk}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="pt-4 mt-3">
                         <button
-                          onClick={() => setOpenFaq(openFaq === item.idx ? null : item.idx)}
-                          className="w-full py-4.5 px-5 flex items-center justify-between gap-4 cursor-pointer text-left bg-transparent border-none focus:outline-none"
+                          onClick={() => setView("dashboard")}
+                          className="w-full py-2.5 px-3 rounded-full font-sans text-xs font-extrabold text-[#4d2d22] bg-gradient-to-r from-[#fff0eb] via-[#ffd0ab] to-[#e2b0a4] hover:brightness-105 border border-white shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
                         >
-                          <span
-                            className={`font-sans text-[13px] md:text-sm font-bold transition-colors duration-200 ${openFaq === item.idx
-                                ? "text-[#ffdcd3]"
-                                : "text-white"
-                              }`}
-                          >
-                            {item.question}
-                          </span>
-                          <span
-                            className={`material-symbols-outlined text-white/70 text-lg transition-transform duration-300 select-none ${openFaq === item.idx ? "rotate-180 text-[#cda195]" : ""
-                              }`}
-                          >
-                            expand_more
-                          </span>
+                          Start 14-Day Free Trial
                         </button>
-
-                        <div
-                          className="grid transition-all duration-300 ease-in-out"
-                          style={{
-                            gridTemplateRows: openFaq === item.idx ? "1fr" : "0fr",
-                            opacity: openFaq === item.idx ? 1 : 0,
-                          }}
-                        >
-                          <div className="overflow-hidden">
-                            <div className="border-t border-white/10 py-4 px-5 bg-black/10">
-                              <p className="font-sans text-[12.5px] text-[#f5e1d8] leading-relaxed font-semibold">
-                                {item.answer}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Pricing Section (Soft Warm Brown & Gentle Peach Gradient Backdrop + 3-Column Glassmorphic Layout) */}
-            <section
-              className="py-14 lg:py-20 px-4 md:px-8 border-b border-[#ebd3cb]/15 relative overflow-hidden bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  "linear-gradient(135deg, rgba(58, 36, 29, 0.68) 0%, rgba(85, 52, 42, 0.62) 40%, rgba(140, 92, 76, 0.55) 100%), url('/sheetss.png')",
-              }}
-            >
-              {/* Symmetrical Soft Ambient Warm Peach & Rose Glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-80 bg-gradient-to-r from-[#dfa38f]/25 via-[#f5b8c9]/20 to-[#ffd0ab]/25 rounded-full blur-[90px] pointer-events-none z-0" />
-
-              <div className="relative z-10 max-w-[1140px] mx-auto space-y-10 w-full">
-                {/* Section Header */}
-                <div className="text-center space-y-2 max-w-2xl mx-auto">
-                  <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#fff0ea] font-bold leading-tight drop-shadow-sm">
-                    Start Your Musical Journey
-                  </h2>
-                  <p className="text-[#ffd0ab] font-sans text-xs md:text-sm font-bold uppercase tracking-widest">
-                    Choose the plan that fits your pace of learning.
-                  </p>
-                </div>
-
-                {/* 3-Column Grid: Feature List on Left (col-span-4), 2 Cards in Middle & Right (col-span-4 each) */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch w-full">
-                  
-                  {/* Left Column: Feature List Panel */}
-                  <div className="lg:col-span-4 bg-[#4a2e24]/55 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#ebd3cb]/30 shadow-[0_12px_35px_rgba(0,0,0,0.22)] flex flex-col justify-between text-left">
-                    <div className="space-y-6">
-                      <div>
-                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffd0ab] block mb-1">
-                          Included in Every Plan
-                        </span>
-                        <h3 className="font-display-lg text-xl font-bold text-[#fff0ea]">
-                          Full Access Pass
-                        </h3>
-                        <p className="text-xs text-[#ebd3c7]/90 font-medium mt-1 leading-relaxed">
-                          Get immediate access to everything Stephanie Keys has to offer with no restrictions.
-                        </p>
-                      </div>
-
-                      {/* Feature Items List */}
-                      <div className="space-y-4 pt-2">
-                        {[
-                          { title: "All Courses Access", desc: "Complete video library & roadmap" },
-                          { title: "Live Group Coaching", desc: "Interactive monthly Q&A sessions" },
-                          { title: "Sheet Music Library", desc: "Downloadable PDF charts & guides" },
-                          { title: "Community Forum", desc: "Connect with fellow pianists" },
-                        ].map((item, i) => (
-                          <div key={i} className="flex items-start gap-3">
-                            <div className="w-5 h-5 rounded-full bg-[#5c3a2e]/80 border border-[#dfa38f]/60 text-[#ffd0ab] flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-                              <svg className="w-3 h-3 text-[#ffd0ab]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="20 6 9 17 4 12" />
-                              </svg>
-                            </div>
-                            <div>
-                              <span className="text-sm font-bold text-[#fff0ea] block leading-snug">
-                                {item.title}
-                              </span>
-                              <span className="text-[11px] text-[#ebd3c7]/80 font-medium block">
-                                {item.desc}
-                              </span>
-                            </div>
-                          </div>
-                        ))}
                       </div>
                     </div>
 
-                    <div className="pt-6 border-t border-[#ebd3cb]/15 mt-6">
-                      <p className="text-[11px] text-[#ffd0ab]/95 font-semibold italic text-center">
-                        Cancel anytime with 1-click in account settings.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Middle Column: Monthly Plan Card */}
-                  <div className="lg:col-span-4 bg-[#4a2e24]/55 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#ebd3cb]/30 shadow-[0_12px_35px_rgba(0,0,0,0.22)] transition-all duration-300 hover:bg-[#57372b]/65 hover:border-[#ffd0ab]/70 hover:scale-[1.01] flex flex-col justify-between text-left">
-                    <div className="space-y-5">
-                      <div className="space-y-1">
-                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffd0ab] block">
-                          Flexible Monthly
-                        </span>
-                        <h3 className="font-display-lg text-xl font-bold text-[#fff0ea] tracking-tight">
-                          Monthly Plan
-                        </h3>
-                      </div>
-
-                      <div className="space-y-1">
-                        <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#fff0ea]">
-                          $18.99 <span className="text-sm font-normal text-[#ebd3c7]/80">/ month</span>
-                        </div>
-                      </div>
-
-                      <div className="space-y-1 pt-1">
-                        <span className="font-sans text-sm font-bold text-[#ffd0ab] block">
-                          Free 14-Day Trial
-                        </span>
-                        <p className="text-xs text-[#ebd3c7]/85 font-medium leading-normal">
-                          Billed monthly after trial ends. Cancel anytime.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="pt-8">
-                      <button
-                        onClick={() => setView("dashboard")}
-                        className="w-full py-3 px-4 rounded-full font-sans text-sm font-bold text-[#fff0ea] bg-gradient-to-r from-[#6b4334] to-[#59372a] hover:from-[#7a4e3d] hover:to-[#684132] border border-[#ebd3cb]/50 hover:border-[#ffd0ab] shadow-[0_4px_16px_rgba(223,163,143,0.25)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
-                      >
-                        Start 14-Day Free Trial
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Right Column: Annual Plan Card */}
-                  <div className="lg:col-span-4 bg-[#4a2e24]/55 backdrop-blur-xl rounded-[24px] p-6 lg:p-7 border border-[#ebd3cb]/30 shadow-[0_12px_35px_rgba(0,0,0,0.22)] transition-all duration-300 hover:bg-[#57372b]/65 hover:border-[#ffd0ab]/70 hover:scale-[1.01] flex flex-col justify-between text-left">
-                    <div className="space-y-5">
-                      <div className="space-y-1">
-                        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffd0ab] block">
-                          Save Over 25%
-                        </span>
-                        <h3 className="font-display-lg text-xl font-bold text-[#fff0ea] tracking-tight">
-                          Annual Plan
-                        </h3>
-                      </div>
-
-                      <div className="space-y-1">
-                        <div className="text-3xl lg:text-4xl font-sans font-bold tracking-tight text-[#fff0ea]">
-                          $14.16 <span className="text-sm font-normal text-[#ebd3c7]/80">/ month</span>
-                        </div>
-                      </div>
-
-                      <div className="space-y-1 pt-1">
-                        <span className="font-sans text-sm font-bold text-[#ffd0ab] block">
-                          Free 14-Day Trial
-                        </span>
-                        <p className="text-xs text-[#ebd3c7]/85 font-medium leading-normal">
-                          Billed annually at $169.99 after trial ends.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="pt-8">
-                      <button
-                        onClick={() => setView("dashboard")}
-                        className="w-full py-3 px-4 rounded-full font-sans text-sm font-bold text-[#fff0ea] bg-gradient-to-r from-[#6b4334] to-[#59372a] hover:from-[#7a4e3d] hover:to-[#684132] border border-[#ebd3cb]/50 hover:border-[#ffd0ab] shadow-[0_4px_16px_rgba(223,163,143,0.25)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
-                      >
-                        Start 14-Day Free Trial
-                      </button>
-                    </div>
                   </div>
 
                 </div>
-
-              </div>
-            </section>
+              </section>
+            </div>
           </>
         );
     }
