@@ -1069,7 +1069,7 @@ function Homepage() {
 
                 {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks (No Gradient Fill / 100% Transparent Background) */}
                 <div
-                  className="max-w-[1100px] mx-auto p-7 md:p-9 rounded-[32px] border-2 border-[#e2b0a4] bg-transparent space-y-10 relative z-10 shadow-[0_10px_30px_rgba(160,110,95,0.1)]"
+                  className="max-w-[1100px] mx-auto p-7 md:p-9 rounded-[32px] border-[3.5px] border-[#e2b0a4] bg-transparent space-y-10 relative z-10 shadow-[0_10px_30px_rgba(160,110,95,0.1)]"
                 >
                   {/* Header */}
                   <div className="text-center space-y-2.5 max-w-2xl mx-auto">
@@ -1117,7 +1117,7 @@ function Homepage() {
                     ].map((item, idx) => (
                       <div
                         key={idx}
-                        className="relative overflow-hidden p-6 rounded-[22px] border border-[#e2b0a4]/50 bg-transparent transition-all duration-300 hover:-translate-y-1.5 hover:border-[#e2b0a4] hover:bg-white/10 flex flex-col justify-between gap-5 group cursor-pointer"
+                        className="relative overflow-hidden p-6 rounded-[22px] border-[2px] border-[#e2b0a4]/80 bg-transparent transition-all duration-300 hover:-translate-y-1.5 hover:border-[#e2b0a4] hover:bg-white/10 flex flex-col justify-between gap-5 group cursor-pointer"
                       >
                         <div className="space-y-3 relative z-10">
                           {/* Comment */}
@@ -1127,8 +1127,8 @@ function Homepage() {
                         </div>
 
                         {/* Profile Details */}
-                        <div className="flex items-center gap-3 pt-3.5 border-t border-[#e2b0a4]/40 mt-auto relative z-10">
-                          <div className="w-9 h-9 rounded-full overflow-hidden border border-[#e2b0a4] bg-[#f4ebe6] shrink-0 shadow-xs">
+                        <div className="flex items-center gap-3 pt-3.5 border-t-2 border-[#e2b0a4]/60 mt-auto relative z-10">
+                          <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[#e2b0a4] bg-[#f4ebe6] shrink-0 shadow-xs">
                             <img
                               className="w-full h-full object-cover"
                               src={item.avatar}
