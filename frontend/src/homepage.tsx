@@ -732,8 +732,14 @@ function Homepage() {
                   alt="Grand Marble Hall Background"
                   src="/grand-marble-hall.jpg?v=2"
                 />
-                {/* Clean soft white overlay across FAQ, Students Feedbacks & Pricing */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/20 to-white/50" />
+                {/* 
+                  Vertical Gradient Overlay across FAQ, Students Feedbacks & Start Your Musical Journey:
+                  - Top (FAQ): Silky smooth, feather-blended soft white top glow (from-white/60 via-white/25)
+                  - Middle (Students Feedbacks / Mid-Palace): Elegant warm peach tint glow (#fcdcd0 / #f7beae)
+                  - Bottom (Start Your Musical Journey): Bright soft white glass finish
+                  - 100% smooth, seamless transition without any harsh lines
+                */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/25 via-[#faf5f0]/15 via-[#fcdcd0]/30 via-[#f7beae]/35 via-white/50 to-white/78" />
               </div>
 
               {/* Section 4: FAQ Section */}
