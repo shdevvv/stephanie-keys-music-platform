@@ -641,31 +641,23 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
           onClick={() => setActiveVideo(null)}
         >
           <div 
-            className="relative w-full max-w-2xl bg-[#fffcf9] rounded-[16px] p-3 sm:p-4 shadow-[0_20px_50px_rgba(45,25,20,0.25)] border border-[#e8cdc1]/60 animate-modal-card flex flex-col gap-2.5 overflow-hidden"
+            className="relative w-full max-w-2xl bg-[#fffcf9] rounded-[14px] p-2 sm:p-2.5 shadow-[0_20px_50px_rgba(45,25,20,0.3)] border-2 border-[#dca698] animate-modal-card flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header inside Card */}
-            <div className="flex items-center justify-between px-1 pt-0.5">
-              <h4 
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="text-xs sm:text-sm font-bold text-[#5c3328] truncate pr-4"
-              >
-                {activeVideo.title}
-              </h4>
-              <button
-                onClick={() => setActiveVideo(null)}
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#f5e9e4] hover:bg-[#ead9d1] text-[#7a483b] transition-all cursor-pointer flex items-center justify-center shrink-0 border-none outline-none active:scale-95"
-                title="Close"
-              >
-                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-current" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
-            </div>
+            {/* Close Button - 100% INSIDE the top-right corner of the card */}
+            <button
+              onClick={() => setActiveVideo(null)}
+              className="absolute top-4 right-4 z-30 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black/80 text-white/90 hover:text-white backdrop-blur-md transition-all cursor-pointer flex items-center justify-center border border-white/30 shadow-md active:scale-95"
+              title="Close"
+            >
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-current" viewBox="0 0 24 24" fill="none" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
 
             {/* Video Frame */}
-            <div className="aspect-[16/9] bg-black w-full rounded-[10px] overflow-hidden shadow-xs border border-[#e2b0a4]/30 relative">
+            <div className="aspect-[16/9] bg-black w-full rounded-[8px] overflow-hidden shadow-xs border border-[#e2b0a4]/30 relative">
               <iframe
                 title={activeVideo.title}
                 className="w-full h-full border-none"
