@@ -34,6 +34,24 @@ const TESTIMONIAL_GLITTERS = [
   { left: "96%", size: 5, delay: "0.6s", duration: "9.5s" }
 ];
 
+const PRICING_WHITE_SPARKLES = [
+  { left: "4%", size: 10, duration: "6.5s", delay: "0s", type: "star" },
+  { left: "12%", size: 6, duration: "8.2s", delay: "1.2s", type: "dot" },
+  { left: "22%", size: 14, duration: "7.0s", delay: "2.5s", type: "star" },
+  { left: "31%", size: 8, duration: "9.0s", delay: "0.6s", type: "dot" },
+  { left: "41%", size: 12, duration: "6.0s", delay: "3.1s", type: "star" },
+  { left: "50%", size: 7, duration: "8.5s", delay: "1.8s", type: "dot" },
+  { left: "60%", size: 13, duration: "7.2s", delay: "0.3s", type: "star" },
+  { left: "72%", size: 8, duration: "6.8s", delay: "2.9s", type: "dot" },
+  { left: "81%", size: 15, duration: "8.0s", delay: "1.5s", type: "star" },
+  { left: "92%", size: 9, duration: "7.5s", delay: "0.9s", type: "dot" },
+  { left: "8%", size: 7, duration: "8.8s", delay: "3.8s", type: "dot" },
+  { left: "27%", size: 11, duration: "6.2s", delay: "4.2s", type: "star" },
+  { left: "48%", size: 8, duration: "7.8s", delay: "4.9s", type: "dot" },
+  { left: "67%", size: 14, duration: "6.6s", delay: "3.4s", type: "star" },
+  { left: "88%", size: 6, duration: "9.2s", delay: "4.5s", type: "dot" }
+];
+
 function Homepage() {
   const [view, setView] = useState<ViewType>("home");
 
@@ -1179,6 +1197,55 @@ function Homepage() {
 
             {/* Section 6: Dedicated Background Container for Start Your Musical Journey (Focused Piano Keys Background) */}
             <div className="relative overflow-hidden bg-[#faf5f0] flex-grow flex flex-col">
+              {/* CSS Keyframes for Rising Shiny White Sparkle Glow Animation */}
+              <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes whiteSparkleRise {
+                  0% {
+                    transform: translateY(680px) scale(0.2) rotate(0deg);
+                    opacity: 0;
+                  }
+                  20% {
+                    opacity: 0.95;
+                    filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 12px #ffffff);
+                  }
+                  80% {
+                    opacity: 0.95;
+                    filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px #ffebe6);
+                  }
+                  100% {
+                    transform: translateY(-80px) scale(1) rotate(180deg);
+                    opacity: 0;
+                  }
+                }
+              `}} />
+
+              {/* Rising Shiny White Sparkles & Glitters Layer */}
+              <div className="absolute inset-0 pointer-events-none select-none z-1 overflow-hidden">
+                {PRICING_WHITE_SPARKLES.map((sp, idx) => (
+                  <div
+                    key={idx}
+                    className="absolute"
+                    style={{
+                      left: sp.left,
+                      bottom: '-30px',
+                      width: `${sp.size}px`,
+                      height: `${sp.size}px`,
+                      animation: `whiteSparkleRise ${sp.duration} linear infinite`,
+                      animationDelay: sp.delay,
+                    }}
+                  >
+                    {sp.type === 'star' ? (
+                      <svg viewBox="0 0 24 24" className="w-full h-full text-white fill-current drop-shadow-[0_0_8px_#ffffff]">
+                        <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                      </svg>
+                    ) : (
+                      <div className="w-full h-full rounded-full bg-white shadow-[0_0_10px_#ffffff,0_0_18px_#ffffff]" />
+                    )}
+                  </div>
+                ))}
+              </div>
+
               {/* Zoomed Background Layer focusing EXCLUSIVELY on Piano Keys (No Wooden Frame) */}
               <div
                 className="absolute inset-0 z-0 pointer-events-none select-none"
