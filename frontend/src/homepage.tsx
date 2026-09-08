@@ -518,13 +518,10 @@ function Homepage() {
                         border: "6px solid transparent",
                         boxShadow: "0 22px 55px rgba(160, 105, 90, 0.28), 0 0 30px rgba(226, 176, 164, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.95)",
                       }}
-                      className="relative overflow-hidden w-full max-w-[350px] sm:max-w-[390px] h-[440px] sm:h-[480px] lg:h-[500px] rounded-2xl transition-all duration-500 hover:shadow-[0_28px_65px_rgba(160,105,90,0.35)]"
+                      className="relative overflow-hidden w-full max-w-[350px] sm:max-w-[390px] h-[440px] sm:h-[480px] lg:h-[500px] rounded-2xl"
                     >
                       <img
-                        className="w-full h-full object-cover object-[45%_15%] scale-[1.22] transform transition-all duration-700 hover:scale-[1.26]"
-                        style={{
-                          filter: "brightness(1.06) contrast(1.02) saturate(1.02)",
-                        }}
+                        className="w-full h-full object-cover object-[center_20%]"
                         src="/profile-photo.jpg"
                         alt="Stephanie Halim - Mentor"
                       />
