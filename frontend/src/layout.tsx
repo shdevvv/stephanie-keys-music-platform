@@ -470,7 +470,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 1. HOME */}
                 <button
                   onClick={() => onNavigate("home")}
-                  className="relative font-sans text-[10.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
                 >
                   <span
                     className={`${view === "home" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
@@ -485,7 +485,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 2. VIDEOS */}
                 <button
                   onClick={() => onNavigate("videos")}
-                  className="relative font-sans text-[10.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
                 >
                   <span
                     className={`${(view === "videos" || view === "library") ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
@@ -500,7 +500,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 3. LEARN */}
                 <button
                   onClick={() => onNavigate("courses")}
-                  className="relative font-sans text-[10.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
                 >
                   <span
                     className={`${view === "courses" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
@@ -515,7 +515,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 4. PROGRESS */}
                 <button
                   onClick={() => onNavigate("dashboard")}
-                  className="relative font-sans text-[10.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
                 >
                   <span
                     className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
@@ -530,7 +530,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 5. SHEETS */}
                 <button
                   onClick={() => onNavigate("sheets")}
-                  className="relative font-sans text-[10.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
                 >
                   <span
                     className={`${view === "sheets" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
