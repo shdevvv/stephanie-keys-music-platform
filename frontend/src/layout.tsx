@@ -382,8 +382,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
       document.body.style.backgroundColor = "#eae3e0";
       document.documentElement.style.backgroundColor = "#eae3e0";
     } else {
-      document.body.style.backgroundColor = "";
-      document.documentElement.style.backgroundColor = "";
+      document.body.style.backgroundColor = "#fff8f6";
+      document.documentElement.style.backgroundColor = "#fff8f6";
     }
     return () => {
       document.body.style.backgroundColor = "";
@@ -408,7 +408,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   };
 
   return (
-    <div className={`w-full ${view === "dashboard" ? "h-auto bg-[#eae3e0]" : "min-h-screen bg-[#eae3e0]"} text-[#1d1b1a] font-body-md antialiased flex flex-col`}>
+    <div className={`w-full ${view === "dashboard" ? "h-auto bg-[#eae3e0]" : "min-h-screen bg-[#fff8f6]"} text-[#1d1b1a] font-body-md antialiased flex flex-col`}>
       <style>{`
         ::selection,
         ::-moz-selection,
@@ -810,12 +810,12 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
           }
         >{children}</div>
 
-        {/* Glossy Balanced Soft-Rose Gold Divider Line between Start Your Musical Journey & Footer */}
-        <div className="w-full h-[4.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] z-20 relative shadow-[0_0_10px_rgba(226,171,160,0.45)]" />
-
         {/* Footer */}
-        <footer className="w-full py-8 md:py-10 bg-[#fffdfb] border-t border-[#dfa38f]/30 relative">
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-8 gap-y-8 px-6 md:px-12 max-w-[1200px] mx-auto w-full">
+        <footer className="w-full mt-auto bg-[#fffdfb] relative">
+          {/* Glossy Balanced Soft-Rose Gold Divider Line between Content & Footer */}
+          <div className="w-full h-[4.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] z-20 relative shadow-[0_0_10px_rgba(226,171,160,0.45)]" />
+
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-8 gap-y-8 py-8 md:py-10 px-6 md:px-12 max-w-[1200px] mx-auto w-full">
             {/* Column 1: Brand Info */}
             <div className="flex flex-col gap-3.5 w-full">
               <div className="w-fit flex flex-col gap-1.5 h-9 justify-between">
