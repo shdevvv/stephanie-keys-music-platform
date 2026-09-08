@@ -786,7 +786,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
         {/* Main Content Area */}
         <div
-          className={`flex flex-col ${(view === "dashboard" || view === "videos" || view === "library") ? "h-auto flex-grow-0 pb-0" : "flex-grow"}`}
+          className="flex flex-col flex-grow"
           style={
             view === "dashboard" ? {
               backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('/sonata.png')`,
@@ -814,7 +814,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         <div className="w-full h-[4.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] z-20 relative shadow-[0_0_10px_rgba(226,171,160,0.45)]" />
 
         {/* Footer */}
-        <footer className={`w-full py-8 md:py-10 ${view === "dashboard" ? "mt-0 bg-[#fffdfb] border-t border-[#dfa38f]/30" : "mt-auto bg-[#fffdfb] border-[#dfa38f]/30"} relative`}>
+        <footer className="w-full py-8 md:py-10 bg-[#fffdfb] border-t border-[#dfa38f]/30 relative">
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-8 gap-y-8 px-6 md:px-12 max-w-[1200px] mx-auto w-full">
             {/* Column 1: Brand Info */}
             <div className="flex flex-col gap-3.5 w-full">

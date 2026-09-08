@@ -115,8 +115,8 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
   };
 
   // Multiselect Filters State for Covers
-  const [selectedCoverCategories, setSelectedCoverCategories] = useState<string[]>(['All'])
-  const [currentPage, setCurrentPage] = useState(1)
+  const [selectedCoverCategories] = useState<string[]>(['All'])
+  // const [currentPage] = useState(1)
 
 
 
@@ -155,8 +155,9 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
   }
   */
 
+  /*
   // Covers Toggle Category
-  const toggleCoverCategory = (cat: string) => {
+  const _toggleCoverCategory = (cat: string) => {
     setCurrentPage(1)
     if (cat === 'All') {
       setSelectedCoverCategories(['All'])
@@ -173,6 +174,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
       setSelectedCoverCategories(next)
     }
   }
+  */
 
   // Sheets Toggle Genre
   const toggleSheetGenre = (genre: string) => {
@@ -288,13 +290,15 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
     ? covers
     : covers.filter(c => c.categories.some(cat => selectedCoverCategories.includes(cat)))
 
+  /*
   // Pagination logic for Covers
   const itemsPerPage = 10
   const totalPages = Math.ceil(filteredCovers.length / itemsPerPage)
   const validCurrentPage = Math.min(Math.max(1, currentPage), totalPages || 1)
   const startIndex = (validCurrentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const paginatedCovers = filteredCovers.slice(startIndex, endIndex)
+  // const _paginatedCovers = filteredCovers.slice(startIndex, endIndex)
+  */
 
   // Filtered Sheets (Supporting select one or more)
   const filteredSheets = dbSheets.filter(sheet => {
@@ -338,11 +342,11 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
   }, []);
 
   return (
-    <main className={`bg-[#fffcf9] ${activeTab === "videos" ? "h-auto flex-grow-0" : "flex-grow flex flex-col"}`}>
+    <main className="bg-[#fffcf9] flex-grow flex flex-col">
 
       {/* SECTION 1: COVERS SHOWCASE */}
       {(activeTab === "all" || activeTab === "videos") && (
-        <section className={`pt-10 pb-12 relative overflow-hidden flex flex-col ${activeTab === "all" ? "border-b border-[#e8cdc1]/20 flex-grow" : "h-auto flex-grow-0"}`}>
+        <section className="pt-10 pb-12 relative overflow-hidden flex flex-col flex-grow">
           {/* Background image layer - Studio Keyboard setup */}
           <div 
             className="absolute inset-0 z-0 pointer-events-none"
