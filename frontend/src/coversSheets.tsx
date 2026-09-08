@@ -199,85 +199,85 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
       title: "Fly Me to the Moon",
       description: "An elegant jazz swing arrangement featuring walking basslines, modern bebop extensions, and premium block chord voicings.",
       categories: ["Jazz Standards"],
-      thumbnail: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "Amazing Grace (Gospel Reharmonization)",
       description: "Lush gospel passing chords, 2-5-1 turnarounds, tritone substitutions, and warm neo-soul movements in F Major.",
       categories: ["Gospel", "Jazz Standards"],
-      thumbnail: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "O Holy Night",
       description: "A magical, flowing Christmas piano cover blending classical touch with smooth jazz voicings and sparkling arpeggios.",
       categories: ["Christmas", "Gospel"],
-      thumbnail: "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "Bapa Sentuh Hatiku (Father Touch My Heart)",
       description: "A peaceful, reflective prayer-like Indonesian Christian piano arrangement with gentle reharmonizations.",
       categories: ["English-Indonesian Christian Songs", "Gospel"],
-      thumbnail: "https://images.unsplash.com/photo-1442504028989-ab58b5f29a4a?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "A Whole New World (Disney's Aladdin)",
       description: "Sparkling, dream-like Disney piano arrangement featuring running right-hand arpeggios, pentatonic fills, and lush 9th/11th chords.",
       categories: ["Disney"],
-      thumbnail: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "Over the Rainbow",
       description: "Lush jazz ballad cover with delicate voice-leading, chromatic alterations, and sophisticated extensions.",
       categories: ["Jazz Standards", "Disney"],
-      thumbnail: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "Total Praise (Richard Smallwood Cover)",
       description: "Majestic gospel chords, massive triadic structures, and dramatic dynamic builds in Eb Major.",
       categories: ["Gospel"],
-      thumbnail: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "Beauty and the Beast",
       description: "A warm and nostalgic rendition of the Disney classic, focusing on gentle flow and lyrical melody projection.",
       categories: ["Disney", "Jazz Standards"],
-      thumbnail: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "Can You Feel the Love Tonight",
       description: "A romantic Disney ballad arranged with rich warm extensions, elegant classical touch, and flowing arpeggios.",
       categories: ["Disney"],
-      thumbnail: "https://images.unsplash.com/photo-1488372759477-a7f4df085184?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "Moon River",
       description: "An elegant, cinematic jazz standard arrangement in 3/4 waltz time with lush extensions and voice-leading.",
       categories: ["Jazz Standards"],
-      thumbnail: "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "He Ain't Heavy, He's My Brother",
       description: "A moving, warm Indonesian-English Christian arrangement focusing on deep expression and soulful voicings.",
       categories: ["English-Indonesian Christian Songs", "Gospel"],
-      thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     },
     {
       title: "What a Wonderful World",
       description: "A peaceful, dream-like jazz standard cover featuring sparkling upper-structure triads and smooth voice leading.",
       categories: ["Jazz Standards"],
-      thumbnail: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&fit=crop&w=600&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     }
   ]
 
@@ -338,97 +338,36 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
   }, []);
 
   return (
-    <main className="bg-[#fffcf9] flex-grow flex flex-col">
+    <main className={`bg-[#fffcf9] ${activeTab === "videos" ? "h-auto flex-grow-0" : "flex-grow flex flex-col"}`}>
 
       {/* SECTION 1: COVERS SHOWCASE */}
       {(activeTab === "all" || activeTab === "videos") && (
-        <section className={`pt-12 pb-16 relative overflow-hidden flex-grow flex flex-col ${activeTab === "all" ? "border-b border-[#e8cdc1]/20" : ""}`}>
-          {/* Blurred background image layer */}
+        <section className={`pt-10 pb-12 relative overflow-hidden flex flex-col ${activeTab === "all" ? "border-b border-[#e8cdc1]/20 flex-grow" : "h-auto flex-grow-0"}`}>
+          {/* Background image layer - Studio Keyboard setup */}
           <div 
             className="absolute inset-0 z-0 pointer-events-none"
             style={{
-              backgroundImage: "url('/floral.png')",
+              backgroundImage: "url('/video-studio-bg.jpg')",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              filter: 'blur(12px) scale(1.06)',
             }}
           />
-          {/* Soft pastel overlay with adjusted opacity for higher image visibility */}
+          {/* High white overlay opacity */}
           <div 
-            className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-white/72 via-[#fbf5f1]/76 to-[#fdf9f7]/80"
+            className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-white/78 via-white/82 to-white/86"
           />
           {/* Ambient background decoration */}
           <div className="absolute top-12 left-1/4 w-72 h-72 bg-[#ffd89b]/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
           <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/8 rounded-full blur-[90px] pointer-events-none z-0"></div>
 
-          <div className="max-w-[1200px] mx-auto px-6 relative z-10 space-y-8">
-
-            {/* Category Filter Tabs (Select one or more) */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between gap-4 flex-wrap">
-                <div className="space-y-1">
-                  <h2 className="font-display-lg text-2xl md:text-3xl text-[#7a4b3d] font-extrabold">
-                    Stephanie Keys Covers
-                  </h2>
-                  <span className="text-xs md:text-sm font-extrabold text-[#966052] uppercase tracking-wider block">
-                    Filter by Category (Select one or more):
-                  </span>
-                </div>
-                
-                {/* Compact Top Pagination Controls */}
-                {totalPages > 1 && (
-                  <div className="flex items-center gap-2.5 bg-white/60 backdrop-blur-md px-2.5 py-1.5 rounded-[4px] border border-[#e8cdc1]/30 text-xs text-[#5c453c] font-bold shadow-sm">
-                    <button
-                      type="button"
-                      disabled={validCurrentPage === 1}
-                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                      className="p-0.5 hover:bg-[#f6eae0] text-[#ab7e66] disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer border-none bg-transparent flex items-center justify-center rounded"
-                      title="Previous Page"
-                    >
-                      <span className="material-symbols-outlined text-base">chevron_left</span>
-                    </button>
-                    <span className="select-none text-[#4a372e] font-sans">
-                      Page {validCurrentPage} of {totalPages}
-                    </span>
-                    <button
-                      type="button"
-                      disabled={validCurrentPage === totalPages}
-                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                      className="p-0.5 hover:bg-[#f6eae0] text-[#ab7e66] disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer border-none bg-transparent flex items-center justify-center rounded"
-                      title="Next Page"
-                    >
-                      <span className="material-symbols-outlined text-base">chevron_right</span>
-                    </button>
-                  </div>
-                )}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['All', 'Jazz Standards', 'Gospel', 'Christmas', 'English-Indonesian Christian Songs', 'Disney'].map((cat) => {
-                  const isSelected = selectedCoverCategories.includes(cat)
-                  return (
-                    <button
-                      key={cat}
-                      onClick={() => toggleCoverCategory(cat)}
-                      className={`px-5 py-2.5 rounded-[4px] text-xs font-bold transition-all duration-300 border cursor-pointer ${
-                        isSelected
-                          ? 'bg-gradient-to-br from-[#d29070] via-[#ab7e66] to-[#856758] border-none text-white shadow-md'
-                          : 'bg-white/70 backdrop-blur-md border-[#e8cdc1]/30 text-[#6e5a51] hover:bg-white hover:border-[#ab7e66]'
-                      }`}
-                    >
-                      {cat} {isSelected && cat !== 'All' && '✓'}
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
-
+          <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 space-y-6">
             {/* Video Covers Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {paginatedCovers.map((cover, index) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
+              {covers.slice(0, 10).map((cover, index) => (
                 <div
                   key={index}
                   onClick={() => setActiveVideo(cover)}
-                  className="group relative flex flex-col bg-white/40 backdrop-blur-xl border border-white rounded-[6px] shadow-[0_8px_32px_rgba(90,69,61,0.03)] hover:shadow-[0_16px_40px_rgba(90,69,61,0.06)] hover:-translate-y-1 hover:bg-white/50 transition-all duration-300 overflow-hidden cursor-pointer"
+                  className="group relative flex flex-col bg-white/35 hover:bg-white/50 border-2 border-[#e2b0a4] hover:border-[#c88879] rounded-[8px] shadow-[0_8px_24px_rgba(189,129,116,0.12)] hover:shadow-[0_12px_32px_rgba(189,129,116,0.22)] hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer"
                 >
                   {/* Thumbnail Layer */}
                   <div className="relative aspect-[16/9] overflow-hidden bg-[#5c4337] rounded-t-[6px]">
@@ -437,45 +376,43 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                       src={cover.thumbnail}
                       alt={cover.title}
                     />
-                    {/* Glassmorphic Play Overlay */}
-                    <div className="absolute inset-0 bg-black/25 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-md border border-white/40 flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 transition-transform duration-300">
-                        <span className="material-symbols-outlined text-xl font-medium translate-x-[1px] select-none">
-                          play_arrow
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Category Pills */}
-                    <div className="absolute bottom-2 left-2 flex flex-wrap gap-0.5 max-w-[90%]">
-                      {cover.categories.map((cat, i) => (
-                        <span
-                          key={i}
-                          className="bg-[#856758]/95 backdrop-blur-md px-1.5 py-0.5 rounded-[1px] text-[7px] font-bold text-white uppercase tracking-wider select-none whitespace-nowrap"
+                    {/* Play Overlay with Rose Gold Circle & Outlined Triangle (No blur) */}
+                    <div className="absolute inset-0 bg-black/25 flex items-center justify-center opacity-85 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-11 h-11 rounded-full bg-black/55 border-2 border-[#f0c3b7] shadow-[0_0_14px_rgba(226,176,164,0.7)] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                        <svg
+                          className="w-5 h-5 translate-x-[1.5px] transition-transform duration-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                          viewBox="0 0 24 24"
+                          fill="#fceee9"
+                          stroke="#bd8174"
+                          strokeWidth="2.2"
+                          strokeLinejoin="round"
                         >
-                          {cat}
-                        </span>
-                      ))}
+                          <polygon points="6 3 20 12 6 21 6 3" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Content details */}
-                  <div className="p-3.5 flex-grow flex flex-col justify-between gap-2.5">
-                    <div className="space-y-1">
-                      <h3 className="font-sans text-xs font-bold text-[#4a372e] group-hover:text-[#ab7e66] transition-colors leading-snug line-clamp-2">
-                        {cover.title}
-                      </h3>
-                      <p className="font-sans text-[10.5px] text-[#7c6a60] leading-relaxed line-clamp-2">
-                        {cover.description}
-                      </p>
-                    </div>
-                    <div className="flex items-center text-[10px] font-bold text-[#ab7e66] uppercase tracking-wider gap-1">
-                      <span>Watch Tutorial</span>
-                      <span className="material-symbols-outlined text-xs">arrow_forward</span>
-                    </div>
+                  {/* Content details - Clean Calm Song Title */}
+                  <div className="p-3 flex-grow flex flex-col justify-center">
+                    <h3 className="font-sans text-xs font-medium text-[#73574b] group-hover:text-[#b56e60] transition-colors leading-snug line-clamp-2">
+                      {cover.title}
+                    </h3>
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* WATCH MORE Button -> YouTube Channel (No blur, no black hover outline) */}
+            <div className="flex justify-center items-center pt-2">
+              <a
+                href="https://www.youtube.com/@stephaniekeyss"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-2.5 rounded-[6px] bg-white/40 hover:bg-white/60 border-2 border-[#dca698] hover:border-[#c88879] shadow-[0_4px_16px_rgba(220,166,152,0.2)] hover:shadow-[0_6px_22px_rgba(220,166,152,0.35)] text-[#73574b] hover:text-[#52352b] font-sans text-xs font-bold tracking-widest uppercase transition-all duration-300 active:scale-95 no-underline cursor-pointer outline-none focus:outline-none ring-0 focus:ring-0"
+              >
+                WATCH MORE
+              </a>
             </div>
 
             {filteredCovers.length === 0 && (
@@ -696,27 +633,25 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
       {/* MODAL 1: SIMULATED VIDEO PLAYER MODAL */}
       {activeVideo && (
-        <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
+        <div 
+          className="fixed inset-0 z-[100] bg-black/[0.04] backdrop-blur-[1px] flex items-center justify-center p-4 sm:p-6 animate-modal-backdrop"
+          onClick={() => setActiveVideo(null)}
+        >
           <div 
-            className="w-full max-w-4xl bg-white rounded-[6px] overflow-hidden shadow-2xl border border-white/20 animate-fade-in flex flex-col"
+            className="relative w-full max-w-2xl bg-gradient-to-b from-[#fffcfb] via-[#fdf7f4] to-[#faede6] rounded-[8px] p-1.5 sm:p-2 shadow-[0_16px_40px_rgba(100,50,40,0.18),0_0_24px_rgba(220,166,152,0.4)] border-2 border-[#dca698] animate-modal-card flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
-            <div className="flex justify-between items-center px-6 py-4 border-b border-[#e8cdc1]/20">
-              <div className="space-y-0.5">
-                <span className="text-[10px] font-bold text-[#856758] uppercase tracking-widest">{activeVideo.categories.join(', ')} Cover</span>
-                <h3 className="font-sans text-base font-bold text-[#4a372e]">{activeVideo.title}</h3>
-              </div>
-              <button
-                onClick={() => setActiveVideo(null)}
-                className="w-9 h-9 rounded-[4px] bg-[#f3ecea] hover:bg-[#e8cdc1] text-[#6e5a51] flex items-center justify-center transition-colors cursor-pointer border-none"
-              >
-                <span className="material-symbols-outlined text-lg select-none">close</span>
-              </button>
-            </div>
+            {/* Floating Close Button on Corner (No extra white space at top) */}
+            <button
+              onClick={() => setActiveVideo(null)}
+              className="absolute -top-3 -right-3 sm:-top-3.5 sm:-right-3.5 z-30 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white hover:bg-[#faeee8] text-[#7a483b] border-2 border-[#dca698] shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-90 hover:scale-105"
+              title="Close"
+            >
+              <span className="material-symbols-outlined text-sm sm:text-base font-bold select-none">close</span>
+            </button>
 
-            {/* Video Frame */}
-            <div className="aspect-[16/9] bg-black w-full relative">
+            {/* Video Frame - Symmetrical Padding All Around */}
+            <div className="aspect-[16/9] bg-black w-full rounded-[6px] overflow-hidden shadow-xs border border-[#e2b0a4]/40 relative">
               <iframe
                 title={activeVideo.title}
                 className="w-full h-full border-none"
@@ -724,13 +659,6 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-            </div>
-
-            {/* Description Footer */}
-            <div className="p-6 bg-[#fbf5f1]/60">
-              <p className="font-sans text-xs text-[#7c6a60] leading-relaxed">
-                {activeVideo.description}
-              </p>
             </div>
           </div>
         </div>

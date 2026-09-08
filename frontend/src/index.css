@@ -301,5 +301,31 @@ footer *::-moz-selection {
   text-shadow: none !important;
 }
 
+/* Elegant Smooth Modal Transitions */
+@keyframes modalBackdropIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
+@keyframes modalCardSmoothIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
 
+.animate-modal-backdrop {
+  animation: modalBackdropIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-modal-card {
+  animation: modalCardSmoothIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

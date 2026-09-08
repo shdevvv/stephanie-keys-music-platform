@@ -90,7 +90,7 @@ function getFallbackSummary(): DashboardSummaryDto {
       topicTitle: 'C Major & A Minor',
       lessonTitle: 'The A Minor Scale',
       durationMinutes: 14,
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+      videoUrl: 'https://www.youtube.com/embed/opeWi7v1Lqc'
     }
   };
 }

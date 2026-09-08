@@ -482,17 +482,17 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   )}
                 </button>
 
-                {/* 2. PROGRESS */}
+                {/* 2. VIDEOS */}
                 <button
-                  onClick={() => onNavigate("dashboard")}
+                  onClick={() => onNavigate("videos")}
                   className="relative font-sans text-[10.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
                 >
                   <span
-                    className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
+                    className={`${(view === "videos" || view === "library") ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
-                    Progress
+                    Videos
                   </span>
-                  {view === "dashboard" && (
+                  {(view === "videos" || view === "library") && (
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3.5px] h-[3.5px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
                   )}
                 </button>
@@ -512,17 +512,17 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   )}
                 </button>
 
-                {/* 4. VIDEOS */}
+                {/* 4. PROGRESS */}
                 <button
-                  onClick={() => onNavigate("videos")}
+                  onClick={() => onNavigate("dashboard")}
                   className="relative font-sans text-[10.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
                 >
                   <span
-                    className={`${(view === "videos" || view === "library") ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
+                    className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
-                    Videos
+                    Progress
                   </span>
-                  {(view === "videos" || view === "library") && (
+                  {view === "dashboard" && (
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3.5px] h-[3.5px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
                   )}
                 </button>
@@ -786,7 +786,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
         {/* Main Content Area */}
         <div
-          className={`flex flex-col ${view === "dashboard" ? "h-auto flex-grow-0 pb-10" : "flex-grow"}`}
+          className={`flex flex-col ${(view === "dashboard" || view === "videos" || view === "library") ? "h-auto flex-grow-0 pb-0" : "flex-grow"}`}
           style={
             view === "dashboard" ? {
               backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('/sonata.png')`,

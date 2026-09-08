@@ -715,8 +715,8 @@ function Homepage() {
               </section>
             </div>
 
-            {/* Glossy Slightly Darker & Thicker Rose Gold Divider Line between What You Will Get & FAQ */}
-            <div className="w-full h-[5.5px] bg-gradient-to-r from-[#b36f61] via-[#d6988c] via-[#ebb1a4] to-[#b36f61] z-20 relative shadow-[0_0_12px_rgba(179,111,97,0.45)]" />
+            {/* Glossy Rose Gold Divider Line between What You Will Get & FAQ */}
+            <div className="w-full h-[3px] bg-gradient-to-r from-[#b36f61] via-[#d6988c] via-[#ebb1a4] to-[#b36f61] z-20 relative shadow-[0_0_8px_rgba(179,111,97,0.35)]" />
 
             {/* Master Seamless Grand White Marble Hall Container for FAQ, Students Feedbacks, and Pricing */}
             <div className="relative overflow-hidden bg-[#faf5f0]">
