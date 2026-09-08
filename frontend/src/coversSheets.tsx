@@ -342,7 +342,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
       {/* SECTION 1: COVERS SHOWCASE */}
       {(activeTab === "all" || activeTab === "videos") && (
-        <section className="pt-12 pb-16 border-b border-[#e8cdc1]/20 relative overflow-hidden">
+        <section className={`pt-12 pb-16 relative overflow-hidden flex-grow flex flex-col ${activeTab === "all" ? "border-b border-[#e8cdc1]/20" : ""}`}>
           {/* Blurred background image layer */}
           <div 
             className="absolute inset-0 z-0 pointer-events-none"
@@ -367,10 +367,10 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
             <div className="space-y-4">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="space-y-1">
-                  <h2 className="font-display-lg text-2xl md:text-3xl text-[#4a372e] font-extrabold">
-                    Phanilie Music Covers &amp; Video Tutorials
+                  <h2 className="font-display-lg text-2xl md:text-3xl text-[#7a4b3d] font-extrabold">
+                    Stephanie Keys Covers
                   </h2>
-                  <span className="text-xs md:text-sm font-extrabold text-[#5c4439] uppercase tracking-wider block">
+                  <span className="text-xs md:text-sm font-extrabold text-[#966052] uppercase tracking-wider block">
                     Filter by Category (Select one or more):
                   </span>
                 </div>
@@ -491,7 +491,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
       {/* SECTION 2: SHEET MUSIC SHOP */}
       {(activeTab === "all" || activeTab === "sheets") && (
         <section 
-          className="py-20 relative overflow-hidden"
+          className="py-20 relative overflow-hidden flex-grow flex flex-col"
           style={{
             backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/sheetss.png')",
             backgroundSize: "150%",

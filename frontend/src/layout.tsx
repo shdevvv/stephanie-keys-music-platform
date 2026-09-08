@@ -408,7 +408,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   };
 
   return (
-    <div className={`w-full ${view === "dashboard" ? "h-auto bg-[#eae3e0]" : "min-h-screen bg-[#eae3e0]"} text-[#1d1b1a] font-body-md antialiased`}>
+    <div className={`w-full ${view === "dashboard" ? "h-auto bg-[#eae3e0]" : "min-h-screen bg-[#eae3e0]"} text-[#1d1b1a] font-body-md antialiased flex flex-col`}>
       <style>{`
         ::selection,
         ::-moz-selection,
@@ -810,14 +810,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
           }
         >{children}</div>
 
-        {/* Ultra-Glossy Low-Contrast Rose Gold Divider Line right above Footer */}
-        <div
-          style={{
-            background: "linear-gradient(90deg, rgba(226, 176, 164, 0.05) 0%, rgba(226, 176, 164, 0.65) 15%, rgba(238, 192, 180, 0.85) 50%, rgba(226, 176, 164, 0.65) 85%, rgba(226, 176, 164, 0.05) 100%)",
-            boxShadow: "inset 0 1px 0.5px rgba(255, 255, 255, 0.95), 0 1.5px 3px rgba(160, 110, 95, 0.12)",
-          }}
-          className="w-full h-[4px] z-20 relative"
-        />
+        {/* Glossy Balanced Soft-Rose Gold Divider Line between Start Your Musical Journey & Footer */}
+        <div className="w-full h-[4.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] z-20 relative shadow-[0_0_10px_rgba(226,171,160,0.45)]" />
 
         {/* Footer */}
         <footer className={`w-full py-8 md:py-10 ${view === "dashboard" ? "mt-0 bg-[#fffdfb] border-t border-[#dfa38f]/30" : "mt-auto bg-[#fffdfb] border-[#dfa38f]/30"} relative`}>
