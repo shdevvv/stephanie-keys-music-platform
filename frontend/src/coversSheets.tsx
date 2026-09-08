@@ -447,8 +447,8 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
               <h2 className="font-display-lg text-2xl md:text-3xl text-[#7a483a] font-black tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
                 Sheet Music Shop
               </h2>
-              <p className="font-sans text-xs text-[#b06f5e] font-bold mt-2 tracking-widest uppercase">
-                GET HIGH-QUALITY PDF TRANSCRIPTIONS AND LEARN TO PLAY THEM YOURSELF.
+              <p className="font-sans text-xs sm:text-sm text-[#b06f5e] font-bold mt-1.5 tracking-wide">
+                Get high-quality sheet music PDFs to play from Stephanie Keys.
               </p>
             </div>
             
