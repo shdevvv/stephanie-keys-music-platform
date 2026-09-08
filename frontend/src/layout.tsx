@@ -812,8 +812,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
         {/* Footer */}
         <footer className="w-full mt-0 bg-[#fffdfb] relative">
-          {/* Glossy Balanced Soft-Rose Gold Divider Line between Content & Footer */}
-          <div className="w-full h-[4.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] z-20 relative shadow-[0_0_10px_rgba(226,171,160,0.45)]" />
+          {/* Glossy Delicate Soft-Rose Gold Divider Line between Content & Footer */}
+          <div className="w-full h-[1.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] z-20 relative opacity-90" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-x-8 gap-y-8 py-8 md:py-10 px-6 md:px-12 max-w-[1200px] mx-auto w-full">
             {/* Column 1: Brand Info */}
@@ -1073,7 +1073,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
             background: "linear-gradient(90deg, #EBC0B2 0%, #DFA898 50%, #EBC0B2 100%)",
             boxShadow: "none",
           }}
-          className="h-[2.5px] w-full relative z-20"
+          className="h-[1.5px] w-full relative z-20"
         />
 
         {/* Sub-footer Section (Ultra-Lighter Delicate Blush Rose-Cream Solid Color) */}
