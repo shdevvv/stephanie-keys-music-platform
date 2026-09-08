@@ -641,21 +641,9 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
           onClick={() => setActiveVideo(null)}
         >
           <div 
-            className="relative w-full max-w-2xl bg-[#fffcf9] rounded-[14px] p-2 sm:p-2.5 shadow-[0_20px_50px_rgba(45,25,20,0.3)] border-2 border-[#dca698] animate-modal-card flex flex-col overflow-hidden"
+            className="relative w-full max-w-2xl bg-[#fffcf9] rounded-[14px] p-2.5 sm:p-3 shadow-[0_20px_50px_rgba(45,25,20,0.3)] border-2 border-[#dca698] animate-modal-card flex flex-col gap-2.5 items-center overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button - 100% INSIDE the top-right corner of the card */}
-            <button
-              onClick={() => setActiveVideo(null)}
-              className="absolute top-4 right-4 z-30 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black/80 text-white/90 hover:text-white backdrop-blur-md transition-all cursor-pointer flex items-center justify-center border border-white/30 shadow-md active:scale-95"
-              title="Close"
-            >
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-current" viewBox="0 0 24 24" fill="none" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-
             {/* Video Frame */}
             <div className="aspect-[16/9] bg-black w-full rounded-[8px] overflow-hidden shadow-xs border border-[#e2b0a4]/30 relative">
               <iframe
@@ -666,6 +654,14 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                 allowFullScreen
               />
             </div>
+
+            {/* Flat Slim CLOSE Button Centered Below Video */}
+            <button
+              onClick={() => setActiveVideo(null)}
+              className="px-6 py-1 rounded-[6px] bg-white/80 hover:bg-[#faeee8] text-[#7a483b] hover:text-[#4a2e23] border border-[#dca698] hover:border-[#c88879] shadow-xs text-[10px] font-sans font-bold tracking-widest uppercase transition-all duration-200 cursor-pointer active:scale-95 outline-none focus:outline-none"
+            >
+              CLOSE
+            </button>
           </div>
         </div>
       )}
