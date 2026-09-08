@@ -444,10 +444,10 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
           {/* Section Header */}
           <div className="pb-6 border-b border-[#dfa38f]/30 flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <h2 className="font-display-lg text-2xl md:text-3xl text-[#3d251c] font-black tracking-tight">
+              <h2 className="font-display-lg text-2xl md:text-3xl text-[#7a483a] font-black tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
                 Sheet Music Shop
               </h2>
-              <p className="font-sans text-xs text-[#8a6858] font-bold mt-2 tracking-widest uppercase">
+              <p className="font-sans text-xs text-[#b06f5e] font-bold mt-2 tracking-widest uppercase">
                 GET HIGH-QUALITY PDF TRANSCRIPTIONS AND LEARN TO PLAY THEM YOURSELF.
               </p>
             </div>
