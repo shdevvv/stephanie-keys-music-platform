@@ -656,7 +656,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => onNavigate("home")}
                   className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
-                  <NavHomeIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                  <span className="w-6 h-6 rounded-[5px] bg-white/90 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)] flex items-center justify-center border-none shrink-0 group-hover:bg-white group-hover:shadow-[0_2px_5px_rgba(138,93,76,0.22)] group-hover:scale-105 transition-all duration-300">
+                    <NavHomeIcon className="w-3.5 h-3.5 shrink-0" />
+                  </span>
                   <span
                     className={`${view === "home" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -672,7 +674,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => onNavigate("videos")}
                   className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
-                  <NavVideosIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                  <span className="w-6 h-6 rounded-[5px] bg-white/90 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)] flex items-center justify-center border-none shrink-0 group-hover:bg-white group-hover:shadow-[0_2px_5px_rgba(138,93,76,0.22)] group-hover:scale-105 transition-all duration-300">
+                    <NavVideosIcon className="w-3.5 h-3.5 shrink-0" />
+                  </span>
                   <span
                     className={`${(view === "videos" || view === "library") ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -688,7 +692,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => onNavigate("courses")}
                   className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
-                  <NavLearnIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                  <span className="w-6 h-6 rounded-[5px] bg-white/90 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)] flex items-center justify-center border-none shrink-0 group-hover:bg-white group-hover:shadow-[0_2px_5px_rgba(138,93,76,0.22)] group-hover:scale-105 transition-all duration-300">
+                    <NavLearnIcon className="w-3.5 h-3.5 shrink-0" />
+                  </span>
                   <span
                     className={`${view === "courses" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -704,7 +710,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => onNavigate("dashboard")}
                   className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
-                  <NavProgressIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                  <span className="w-6 h-6 rounded-[5px] bg-white/90 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)] flex items-center justify-center border-none shrink-0 group-hover:bg-white group-hover:shadow-[0_2px_5px_rgba(138,93,76,0.22)] group-hover:scale-105 transition-all duration-300">
+                    <NavProgressIcon className="w-3.5 h-3.5 shrink-0" />
+                  </span>
                   <span
                     className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -720,7 +728,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => onNavigate("sheets")}
                   className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
-                  <NavSheetsIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                  <span className="w-6 h-6 rounded-[5px] bg-white/90 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)] flex items-center justify-center border-none shrink-0 group-hover:bg-white group-hover:shadow-[0_2px_5px_rgba(138,93,76,0.22)] group-hover:scale-105 transition-all duration-300">
+                    <NavSheetsIcon className="w-3.5 h-3.5 shrink-0" />
+                  </span>
                   <span
                     className={`${view === "sheets" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -977,8 +987,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => { onNavigate("home"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "home" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <div className="flex items-center gap-2">
-                    <NavHomeIcon className="w-4 h-4 shrink-0" />
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-7 h-7 rounded-[6px] bg-white flex items-center justify-center border-none shrink-0 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)]">
+                      <NavHomeIcon className="w-4 h-4 shrink-0" />
+                    </span>
                     <span>Home</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
@@ -987,8 +999,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => { onNavigate("videos"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${(view === "videos" || view === "library") ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <div className="flex items-center gap-2">
-                    <NavVideosIcon className="w-4 h-4 shrink-0" />
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-7 h-7 rounded-[6px] bg-white flex items-center justify-center border-none shrink-0 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)]">
+                      <NavVideosIcon className="w-4 h-4 shrink-0" />
+                    </span>
                     <span>Videos</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
@@ -997,8 +1011,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => { onNavigate("courses"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "courses" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <div className="flex items-center gap-2">
-                    <NavLearnIcon className="w-4 h-4 shrink-0" />
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-7 h-7 rounded-[6px] bg-white flex items-center justify-center border-none shrink-0 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)]">
+                      <NavLearnIcon className="w-4 h-4 shrink-0" />
+                    </span>
                     <span>Learn</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
@@ -1007,8 +1023,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => { onNavigate("dashboard"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "dashboard" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <div className="flex items-center gap-2">
-                    <NavProgressIcon className="w-4 h-4 shrink-0" />
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-7 h-7 rounded-[6px] bg-white flex items-center justify-center border-none shrink-0 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)]">
+                      <NavProgressIcon className="w-4 h-4 shrink-0" />
+                    </span>
                     <span>Progress</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
@@ -1017,8 +1035,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => { onNavigate("sheets"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "sheets" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <div className="flex items-center gap-2">
-                    <NavSheetsIcon className="w-4 h-4 shrink-0" />
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-7 h-7 rounded-[6px] bg-white flex items-center justify-center border-none shrink-0 shadow-[0_1px_3.5px_rgba(138,93,76,0.14)]">
+                      <NavSheetsIcon className="w-4 h-4 shrink-0" />
+                    </span>
                     <span>Sheets</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
