@@ -541,21 +541,6 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3.5px] h-[3.5px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
                   )}
                 </button>
-
-                {/* 6. LIVE */}
-                <button
-                  onClick={() => onNavigate("sessions")}
-                  className="relative font-sans text-[10.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
-                >
-                  <span
-                    className={`${view === "sessions" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
-                  >
-                    Live
-                  </span>
-                  {view === "sessions" && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3.5px] h-[3.5px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
-                  )}
-                </button>
               </div>
 
               {/* Shopping Cart Pill Button (Ornate White Treble Clef, Readable Calligraphy 'Cart' font, Luxury Italic Serif Number 1) */}

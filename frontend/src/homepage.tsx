@@ -3,7 +3,6 @@ import Layout, { type ViewType } from "./layout";
 import CoversSheets from "./coversSheets";
 import Dashboard from "./dashboard";
 import Courses from "./courses";
-import LiveSessions from "./liveSessions";
 import FAQ from "./faq";
 import PrivacyPolicy from "./privacyPolicy";
 import TermsOfService from "./termsOfService";
@@ -179,8 +178,6 @@ function Homepage() {
         return <Dashboard onNavigate={handleNavigate} />;
       case "courses":
         return <Courses />;
-      case "sessions":
-        return <LiveSessions />;
       case "forums":
         return <Forums onNavigate={handleNavigate} />;
       case "profile":
