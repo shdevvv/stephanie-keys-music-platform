@@ -521,7 +521,7 @@ function Homepage() {
                       className="relative overflow-hidden w-full max-w-[350px] sm:max-w-[390px] h-[440px] sm:h-[480px] lg:h-[500px] rounded-2xl transition-all duration-500 hover:shadow-[0_28px_65px_rgba(160,105,90,0.35)]"
                     >
                       <img
-                        className="w-full h-full object-cover object-[65%_center] transform transition-all duration-700 hover:scale-105"
+                        className="w-full h-full object-cover object-[85%_center] transform transition-all duration-700 hover:scale-105"
                         src="/stephanie-about-mentor.jpg"
                         alt="Stephanie Halim - Mentor"
                       />
