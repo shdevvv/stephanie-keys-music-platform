@@ -637,15 +637,15 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
       {/* MODAL 1: SIMULATED VIDEO PLAYER MODAL */}
       {activeVideo && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-modal-backdrop"
+          className="fixed inset-0 z-[100] bg-black/[0.08] backdrop-blur-[2px] flex items-center justify-center p-4 sm:p-6 animate-modal-backdrop"
           onClick={() => setActiveVideo(null)}
         >
           <div 
-            className="relative w-full max-w-2xl bg-[#fffcf9] rounded-[14px] p-2.5 sm:p-3 shadow-[0_20px_50px_rgba(45,25,20,0.3)] border-2 border-[#dca698] animate-modal-card flex flex-col gap-2.5 items-center overflow-hidden"
+            className="relative w-full max-w-2xl bg-white/75 backdrop-blur-md rounded-[10px] p-1.5 sm:p-2 shadow-[0_16px_45px_rgba(100,50,40,0.15)] border-2 border-[#dca698] animate-modal-card flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Video Frame */}
-            <div className="aspect-[16/9] bg-black w-full rounded-[8px] overflow-hidden shadow-xs border border-[#e2b0a4]/30 relative">
+            {/* Video Frame - Symmetrical Tight Padding All Around */}
+            <div className="aspect-[16/9] bg-black w-full rounded-[6px] overflow-hidden shadow-xs border border-[#e2b0a4]/30 relative">
               <iframe
                 title={activeVideo.title}
                 className="w-full h-full border-none"
@@ -655,10 +655,10 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
               />
             </div>
 
-            {/* Flat Slim CLOSE Button Centered Below Video */}
+            {/* Flat Slim CLOSE Button Straddling Outer Bottom Border Line */}
             <button
               onClick={() => setActiveVideo(null)}
-              className="px-6 py-1 rounded-[6px] bg-white/80 hover:bg-[#faeee8] text-[#7a483b] hover:text-[#4a2e23] border border-[#dca698] hover:border-[#c88879] shadow-xs text-[10px] font-sans font-bold tracking-widest uppercase transition-all duration-200 cursor-pointer active:scale-95 outline-none focus:outline-none"
+              className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 z-30 px-5 py-0.5 rounded-full bg-white hover:bg-[#faeee8] text-[#7a483b] hover:text-[#4a2e23] border-2 border-[#dca698] shadow-md text-[9.5px] font-sans font-bold tracking-widest uppercase transition-all duration-200 cursor-pointer active:scale-95 outline-none focus:outline-none"
             >
               CLOSE
             </button>
