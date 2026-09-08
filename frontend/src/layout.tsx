@@ -242,6 +242,162 @@ export interface LayoutProps {
   onNavigate: (view: ViewType) => void;
 }
 
+/* -------------------------------------------------------------------------- */
+/* LUXURY ROYAL GLOSSY NAV ICONS (Rose Gold Specular Metallic Gradients)     */
+/* -------------------------------------------------------------------------- */
+
+const NavHomeIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="luxHomeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="35%" stopColor="#EBBDAE" />
+        <stop offset="75%" stopColor="#AA6452" />
+        <stop offset="100%" stopColor="#693729" />
+      </linearGradient>
+      <linearGradient id="luxHomeGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
+        <stop offset="100%" stopColor="#E5A695" stopOpacity="0.2" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M12 2.2L3 9.2V10.2L4.5 10.7V20C4.5 20.8 5.2 21.5 6 21.5H18C18.8 21.5 19.5 20.8 19.5 20V10.7L21 10.2V9.2L12 2.2Z"
+      fill="url(#luxHomeGrad)"
+      stroke="#7A3D2E"
+      strokeWidth="0.6"
+    />
+    <path d="M12 4.2L14 7.2H10L12 4.2Z" fill="url(#luxHomeGlow)" />
+    <path
+      d="M9.5 21.5V14C9.5 12.6 10.6 11.5 12 11.5C13.4 11.5 14.5 12.6 14.5 14V21.5"
+      fill="#FFF7F5"
+      stroke="url(#luxHomeGrad)"
+      strokeWidth="0.8"
+    />
+    <circle cx="17.5" cy="6" r="1.1" fill="#FFFFFF" />
+  </svg>
+);
+
+const NavVideosIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="luxVidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="30%" stopColor="#E29E8C" />
+        <stop offset="70%" stopColor="#A85B49" />
+        <stop offset="100%" stopColor="#5E2A1E" />
+      </linearGradient>
+      <linearGradient id="luxVidPlay" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="100%" stopColor="#F8D3C8" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M7 2H17L22 7V17L17 22H7L2 17V7L7 2Z"
+      fill="url(#luxVidGrad)"
+      stroke="#7A3D2E"
+      strokeWidth="0.6"
+    />
+    <path
+      d="M7.8 3.5H16.2L20.5 7.8V16.2L16.2 20.5H7.8L3.5 16.2V7.8L7.8 3.5Z"
+      stroke="#FFE5DC"
+      strokeWidth="0.6"
+      strokeDasharray="2 1"
+      fill="none"
+    />
+    <path
+      d="M10 8.2L16.5 12L10 15.8V8.2Z"
+      fill="url(#luxVidPlay)"
+      stroke="#7A3F31"
+      strokeWidth="0.5"
+    />
+    <path
+      d="M3 7L12 3L21 7C21 7 17 9 12 9C7 9 3 7 3 7Z"
+      fill="#FFFFFF"
+      fillOpacity="0.38"
+    />
+  </svg>
+);
+
+const NavLearnIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="luxLearnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="35%" stopColor="#E29E8C" />
+        <stop offset="70%" stopColor="#A85B49" />
+        <stop offset="100%" stopColor="#612C20" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M12 5C10 3.5 6.5 3 2 4V19C6.5 18 10 18.5 12 20C14 18.5 17.5 18 22 19V4C17.5 3 14 3.5 12 5Z"
+      fill="url(#luxLearnGrad)"
+      stroke="#7D4234"
+      strokeWidth="0.6"
+    />
+    <path
+      d="M12 5V20"
+      stroke="#FFFFFF"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+    />
+    <path d="M7 9L7.8 11.2L10 12L7.8 12.8L7 15L6.2 12.8L4 12L6.2 11.2L7 9Z" fill="#FFF5F0" />
+    <path d="M17 9L17.8 11.2L20 12L17.8 12.8L17 15L16.2 12.8L14 12L16.2 11.2L17 9Z" fill="#FFF5F0" />
+  </svg>
+);
+
+const NavProgressIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="luxProgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="30%" stopColor="#EAAB9B" />
+        <stop offset="70%" stopColor="#B56D5B" />
+        <stop offset="100%" stopColor="#693427" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M3 17.5L4.5 8.5L9 12.5L12 4.5L15 12.5L19.5 8.5L21 17.5H3Z"
+      fill="url(#luxProgGrad)"
+      stroke="#7D4234"
+      strokeWidth="0.6"
+    />
+    <circle cx="4.5" cy="8.2" r="1.3" fill="#FFFFFF" stroke="#8C4E3F" strokeWidth="0.4" />
+    <circle cx="12" cy="4.2" r="1.7" fill="#FFFFFF" stroke="#8C4E3F" strokeWidth="0.4" />
+    <circle cx="19.5" cy="8.2" r="1.3" fill="#FFFFFF" stroke="#8C4E3F" strokeWidth="0.4" />
+    <path d="M3 17.5H21V20.2C21 20.8 20.5 21.2 20 21.2H4C3.5 21.2 3 20.8 3 20.2V17.5Z" fill="#693427" />
+    <circle cx="8" cy="19.3" r="0.8" fill="#FCE8E2" />
+    <circle cx="12" cy="19.3" r="0.9" fill="#FFFFFF" />
+    <circle cx="16" cy="19.3" r="0.8" fill="#FCE8E2" />
+  </svg>
+);
+
+const NavSheetsIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="luxSheetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="35%" stopColor="#E29E8C" />
+        <stop offset="70%" stopColor="#AB5F4E" />
+        <stop offset="100%" stopColor="#632F23" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M14.5 2.5C14.5 2.5 11.5 1 9.5 4C8 6.2 8.5 8.5 10 9.8C10.8 10.5 11.8 11.2 11.8 12.5C11.8 13.8 10.5 15.2 9 15.2C7.5 15.2 6.5 14 6.8 12.5C7.1 11.2 8.2 10.5 8.2 10.5"
+      stroke="url(#luxSheetGrad)"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M12 2V20C12 21.8 10.2 22.8 8.5 22C7.2 21.4 6.8 19.8 7.8 18.8C8.8 17.8 10.5 18.2 11.2 19"
+      stroke="url(#luxSheetGrad)"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path d="M18 4L18.6 5.8L20.4 6.4L18.6 7L18 8.8L17.4 7L15.6 6.4L17.4 5.8L18 4Z" fill="#FFF2EE" />
+    <path d="M19 12L19.4 13.2L20.6 13.6L19.4 14L19 15.2L18.6 14L17.4 13.6L18.6 13.2L19 12Z" fill="#E29E8C" />
+  </svg>
+);
+
 function Layout({ children, view, onNavigate }: LayoutProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -481,8 +637,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 1. HOME */}
                 <button
                   onClick={() => onNavigate("home")}
-                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
+                  <NavHomeIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span
                     className={`${view === "home" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -496,8 +653,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 2. VIDEOS */}
                 <button
                   onClick={() => onNavigate("videos")}
-                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
+                  <NavVideosIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span
                     className={`${(view === "videos" || view === "library") ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -511,8 +669,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 3. LEARN */}
                 <button
                   onClick={() => onNavigate("courses")}
-                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
+                  <NavLearnIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span
                     className={`${view === "courses" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -526,8 +685,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 4. PROGRESS */}
                 <button
                   onClick={() => onNavigate("dashboard")}
-                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
+                  <NavProgressIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span
                     className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -541,8 +701,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 5. SHEETS */}
                 <button
                   onClick={() => onNavigate("sheets")}
-                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group"
+                  className="relative font-sans text-[12.5px] uppercase tracking-[0.06em] font-semibold px-2 py-1 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.5"
                 >
+                  <NavSheetsIcon className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span
                     className={`${view === "sheets" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
                   >
@@ -799,35 +960,50 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   onClick={() => { onNavigate("home"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "home" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <span>Home</span>
+                  <div className="flex items-center gap-2">
+                    <NavHomeIcon className="w-4 h-4 shrink-0" />
+                    <span>Home</span>
+                  </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </button>
                 <button
                   onClick={() => { onNavigate("videos"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${(view === "videos" || view === "library") ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <span>Videos</span>
+                  <div className="flex items-center gap-2">
+                    <NavVideosIcon className="w-4 h-4 shrink-0" />
+                    <span>Videos</span>
+                  </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </button>
                 <button
                   onClick={() => { onNavigate("courses"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "courses" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <span>Learn</span>
+                  <div className="flex items-center gap-2">
+                    <NavLearnIcon className="w-4 h-4 shrink-0" />
+                    <span>Learn</span>
+                  </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </button>
                 <button
                   onClick={() => { onNavigate("dashboard"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "dashboard" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <span>Progress</span>
+                  <div className="flex items-center gap-2">
+                    <NavProgressIcon className="w-4 h-4 shrink-0" />
+                    <span>Progress</span>
+                  </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </button>
                 <button
                   onClick={() => { onNavigate("sheets"); setIsMobileMenuOpen(false); }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "sheets" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
-                  <span>Sheets</span>
+                  <div className="flex items-center gap-2">
+                    <NavSheetsIcon className="w-4 h-4 shrink-0" />
+                    <span>Sheets</span>
+                  </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </button>
               </div>
