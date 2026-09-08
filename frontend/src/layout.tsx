@@ -348,53 +348,70 @@ const NavLearnIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => 
 const NavProgressIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="luxProgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id="luxProgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#FFFFFF" />
-        <stop offset="30%" stopColor="#EAAB9B" />
-        <stop offset="70%" stopColor="#B56D5B" />
-        <stop offset="100%" stopColor="#693427" />
+        <stop offset="30%" stopColor="#EEB9AA" />
+        <stop offset="70%" stopColor="#B86A58" />
+        <stop offset="100%" stopColor="#673124" />
+      </linearGradient>
+      <linearGradient id="luxProgGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FFF8F5" />
+        <stop offset="100%" stopColor="#E29E8C" />
       </linearGradient>
     </defs>
+    {/* Ornate Royal Gem Shield / Diamond Trophy */}
     <path
-      d="M3 17.5L4.5 8.5L9 12.5L12 4.5L15 12.5L19.5 8.5L21 17.5H3Z"
-      fill="url(#luxProgGrad)"
-      stroke="#7D4234"
+      d="M12 2L15.2 6.2L20.5 7L16.8 11.2L17.8 16.5L12 14L6.2 16.5L7.2 11.2L3.5 7L8.8 6.2L12 2Z"
+      fill="url(#luxProgGrad2)"
+      stroke="#7A3D2E"
       strokeWidth="0.6"
     />
-    <circle cx="4.5" cy="8.2" r="1.3" fill="#FFFFFF" stroke="#8C4E3F" strokeWidth="0.4" />
-    <circle cx="12" cy="4.2" r="1.7" fill="#FFFFFF" stroke="#8C4E3F" strokeWidth="0.4" />
-    <circle cx="19.5" cy="8.2" r="1.3" fill="#FFFFFF" stroke="#8C4E3F" strokeWidth="0.4" />
-    <path d="M3 17.5H21V20.2C21 20.8 20.5 21.2 20 21.2H4C3.5 21.2 3 20.8 3 20.2V17.5Z" fill="#693427" />
-    <circle cx="8" cy="19.3" r="0.8" fill="#FCE8E2" />
-    <circle cx="12" cy="19.3" r="0.9" fill="#FFFFFF" />
-    <circle cx="16" cy="19.3" r="0.8" fill="#FCE8E2" />
+    {/* Inner Specular Facet Lines */}
+    <path d="M12 2V14M3.5 7L12 14M20.5 7L12 14" stroke="#FFFFFF" strokeWidth="0.5" strokeOpacity="0.7" />
+    {/* Center Glossy Diamond Sparkle */}
+    <circle cx="12" cy="9.5" r="2" fill="url(#luxProgGold)" stroke="#7A3D2E" strokeWidth="0.4" />
+    <circle cx="11.4" cy="8.9" r="0.6" fill="#FFFFFF" />
+    {/* Ascending Royal Base Pedestal */}
+    <path d="M7 19.5H17L18 22H6L7 19.5Z" fill="#673124" stroke="#7A3D2E" strokeWidth="0.4" />
+    <line x1="8" y1="20.8" x2="16" y2="20.8" stroke="#FFEAE3" strokeWidth="0.6" />
   </svg>
 );
 
 const NavSheetsIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="luxSheetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id="luxSheetGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#FFFFFF" />
-        <stop offset="35%" stopColor="#E29E8C" />
-        <stop offset="70%" stopColor="#AB5F4E" />
+        <stop offset="35%" stopColor="#E5A796" />
+        <stop offset="75%" stopColor="#AC5F4E" />
         <stop offset="100%" stopColor="#632F23" />
       </linearGradient>
+      <linearGradient id="luxFoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FFF5F2" />
+        <stop offset="100%" stopColor="#D98D7B" />
+      </linearGradient>
     </defs>
+    {/* Ornate Royal Sheet Music Document Page */}
     <path
-      d="M14.5 2.5C14.5 2.5 11.5 1 9.5 4C8 6.2 8.5 8.5 10 9.8C10.8 10.5 11.8 11.2 11.8 12.5C11.8 13.8 10.5 15.2 9 15.2C7.5 15.2 6.5 14 6.8 12.5C7.1 11.2 8.2 10.5 8.2 10.5"
-      stroke="url(#luxSheetGrad)"
-      strokeWidth="2.2"
-      strokeLinecap="round"
+      d="M5 3C4.4 3 4 3.4 4 4V20C4 20.6 4.4 21 5 21H19C19.6 21 20 20.6 20 20V9L14 3H5Z"
+      fill="url(#luxSheetGrad2)"
+      stroke="#7A3D2E"
+      strokeWidth="0.6"
     />
+    {/* Turned Royal Page Corner Fold */}
     <path
-      d="M12 2V20C12 21.8 10.2 22.8 8.5 22C7.2 21.4 6.8 19.8 7.8 18.8C8.8 17.8 10.5 18.2 11.2 19"
-      stroke="url(#luxSheetGrad)"
-      strokeWidth="2"
-      strokeLinecap="round"
+      d="M14 3V8C14 8.6 14.4 9 15 9H20"
+      fill="url(#luxFoldGrad)"
+      stroke="#7A3D2E"
+      strokeWidth="0.6"
     />
-    <path d="M18 4L18.6 5.8L20.4 6.4L18.6 7L18 8.8L17.4 7L15.6 6.4L17.4 5.8L18 4Z" fill="#FFF2EE" />
-    <path d="M19 12L19.4 13.2L20.6 13.6L19.4 14L19 15.2L18.6 14L17.4 13.6L18.6 13.2L19 12Z" fill="#E29E8C" />
+    {/* Musical Staff Lines on Sheet */}
+    <line x1="7" y1="10" x2="12" y2="10" stroke="#FFFFFF" strokeWidth="0.7" strokeOpacity="0.9" />
+    <line x1="7" y1="12.5" x2="16" y2="12.5" stroke="#FFFFFF" strokeWidth="0.7" strokeOpacity="0.9" />
+    <line x1="7" y1="15" x2="16" y2="15" stroke="#FFFFFF" strokeWidth="0.7" strokeOpacity="0.9" />
+    <line x1="7" y1="17.5" x2="14" y2="17.5" stroke="#FFFFFF" strokeWidth="0.7" strokeOpacity="0.9" />
+    {/* Glossy Musical Note Inset (Eighth Note) */}
+    <path d="M16 9.5V14.5C15.6 14.2 15.1 14 14.5 14C13.1 14 12 14.9 12 16C12 17.1 13.1 18 14.5 18C15.9 18 17 17.1 17 16V11.2L19 10.5V9L16 9.5Z" fill="#FFF2EE" stroke="#632F23" strokeWidth="0.4" />
   </svg>
 );
 
