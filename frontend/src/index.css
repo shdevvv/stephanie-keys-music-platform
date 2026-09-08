@@ -75,6 +75,9 @@ body {
   margin: 0;
   background-color: var(--color-background);
   color: var(--color-on-background);
+  zoom: 0.90;
+  -moz-transform: scale(0.90);
+  -moz-transform-origin: top center;
 }
 
 /* Custom selection highlight color (soft rose gold highlight with warm dark brown text - never black!) */

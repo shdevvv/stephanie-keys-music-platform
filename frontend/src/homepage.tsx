@@ -526,7 +526,7 @@ function Homepage() {
                           filter: "contrast(1.05) saturate(1.03) brightness(1.02)",
                           imageRendering: "crisp-edges",
                         }}
-                        src="/profile-photo.jpg"
+                        src="/profile-photo.jpg?v=3"
                         alt="Stephanie Halim - Mentor"
                       />
                     </div>
@@ -747,14 +747,13 @@ function Homepage() {
                 />
                 {/* 
                   Vertical Gradient Overlay across FAQ, Students Feedbacks & Start Your Musical Journey:
-                  - Top (FAQ): Silky smooth, feather-blended soft white top glow (from-white/60 via-white/25)
-                  - Middle (Students Feedbacks / Mid-Palace): Elegant warm peach tint glow (#fcdcd0 / #f7beae)
-                  - Bottom (Start Your Musical Journey): Bright soft white glass finish
-                  - 100% smooth, seamless transition without any harsh lines
+                  - Top (FAQ): Subtle, thin soft white top fade (from-white/20 via-transparent)
+                  - Middle (Students Feedbacks / Mid-Palace): Soft warm peach tint glow
+                  - Bottom (Start Your Musical Journey): Gentle white finish
                 */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/25 via-[#faf5f0]/15 via-[#fcdcd0]/30 via-[#f7beae]/35 via-white/50 to-white/78" />
-                {/* Soft Low-Opacity White Overlay across FAQ & Students Feedbacks */}
-                <div className="absolute inset-0 bg-white/35 z-0 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/10 via-[#faf5f0]/10 via-[#fcdcd0]/20 via-[#f7beae]/25 via-white/30 to-white/60" />
+                {/* Subtle Low-Opacity White Overlay across FAQ & Students Feedbacks */}
+                <div className="absolute inset-0 bg-white/15 z-0 pointer-events-none" />
               </div>
 
               {/* Section 4: FAQ Section */}
@@ -907,17 +906,16 @@ function Homepage() {
 
                       return (
                         <>
-                          {/* Brown Milk Glass Horizontal Timeline Track */}
+                          {/* Soft Lightened Peach-Chocolate Horizontal Timeline Track */}
                           <div
                             style={{
-                              /* Inner Brown Milk (Bisa diatur warna / kepekatannya di sini) */
-                              background: "linear-gradient(135deg, rgba(236, 218, 206, 0.95) 0%, rgba(220, 196, 180, 0.90) 50%, rgba(229, 209, 195, 0.96) 100%)",
-                              boxShadow: "0 8px 25px rgba(189, 129, 116, 0.22), inset 0 1.5px 2px rgba(255, 255, 255, 0.8)",
+                              backgroundColor: "rgba(248, 222, 212, 0.35)",
+                              boxShadow: "0 8px 25px rgba(129, 89, 79, 0.06), inset 0 1.5px 2px rgba(255, 255, 255, 0.75)",
                             }}
-                            className="relative py-3 px-3 md:px-5 rounded-xl border border-[#bd8174]/80 backdrop-blur-xl"
+                            className="relative py-3 px-3 md:px-5 rounded-xl border border-[#D9A998]/50"
                           >
                             {/* Background Track Line */}
-                            <div className="absolute top-1/2 left-5 right-5 -translate-y-1/2 h-[2.5px] bg-[#d6b4a6] rounded-full hidden sm:block" />
+                            <div className="absolute top-1/2 left-5 right-5 -translate-y-1/2 h-[2.5px] bg-[#d6b4a6]/80 rounded-full hidden sm:block" />
                             {/* Animated Rose Gold Active Progress Line */}
                             <div
                               className="absolute top-1/2 left-5 -translate-y-1/2 h-[2.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] to-[#bd8174] rounded-full transition-all duration-500 ease-out hidden sm:block"
@@ -941,12 +939,12 @@ function Homepage() {
                                     <div className="relative w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
                                       {/* Pure Circular Shiny White Aura Glow */}
                                       {isActive && (
-                                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#ffffff] via-[#ffffff] to-[#ffebe6] blur-[5px] opacity-95 pointer-events-none" />
+                                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#ffffff] via-[#ffffff] to-[#ffebe6] opacity-95 pointer-events-none" />
                                       )}
                                       <div
                                         className={`relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold transition-all duration-300 ${isActive
                                           ? "bg-gradient-to-br from-[#ffffff] via-[#fff7f5] to-[#f5ded6] text-[#4d281d] border-2 border-[#bd8174] scale-105"
-                                          : "bg-[#f5e3d7] border border-[#bd8174]/50 text-[#6a3d30] group-hover:bg-[#faede4] group-hover:text-[#4d281d]"
+                                          : "bg-[#f5e3d7]/90 border border-[#bd8174]/50 text-[#6a3d30] group-hover:bg-[#faede4] group-hover:text-[#4d281d]"
                                           }`}
                                       >
                                         {item.num}
@@ -964,81 +962,66 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Active Question & Answer Brown Milk Glass Display Card */}
+                          {/* Active Question & Answer Single Transparent Milk Brown Card (Brightened, Medium Chocolate Font, Top Arrow Nav) */}
                           <div
                             style={{
-                              /* Inner Brown Milk (Bisa diatur warna / kepekatannya di sini) */
-                              background: "linear-gradient(135deg, rgba(236, 218, 206, 0.96) 0%, rgba(220, 196, 180, 0.92) 50%, rgba(229, 209, 195, 0.97) 100%)",
-                              boxShadow: "0 12px 35px rgba(189, 129, 116, 0.22), inset 0 1.5px 2px rgba(255, 255, 255, 0.85)",
+                              backgroundColor: "rgba(217, 169, 152, 0.24)",
+                              boxShadow: "0 10px 30px rgba(129, 89, 79, 0.06), inset 0 1.5px 2px rgba(255, 255, 255, 0.8)",
                             }}
-                            className="border-2 border-[#bd8174] rounded-xl p-4 md:p-5 backdrop-blur-2xl transition-all duration-300"
+                            className="border border-[#B58474]/50 rounded-xl p-4 md:p-5 transition-all duration-300"
                           >
-                            {/* Header Badge */}
-                            <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#bd8174]/30">
-                              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#bd8174]/20 border border-[#bd8174]/60 text-[#4d281d] text-[10px] font-bold tracking-wider uppercase">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#bd8174] animate-pulse" />
+                            {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
+                            <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
+                              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/85 border border-[#B58474]/50 text-[#6E4234] text-[10px] font-bold tracking-wider uppercase shadow-2xs">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#B58474] animate-pulse" />
                                 Question {currentItem.num} of 10
+                              </div>
+
+                              {/* Left & Right Arrow Navigation Buttons */}
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => setActiveFaq(Math.max(0, activeFaq - 1))}
+                                  disabled={activeFaq === 0}
+                                  title="Previous Question"
+                                  className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === 0
+                                      ? "opacity-30 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/40"
+                                      : "bg-white/85 hover:bg-[#b58474] text-[#6E4234] hover:text-white border border-[#B58474]/60 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                    }`}
+                                >
+                                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="15 18 9 12 15 6" />
+                                  </svg>
+                                </button>
+
+                                <button
+                                  onClick={() => setActiveFaq(Math.min(faqItems.length - 1, activeFaq + 1))}
+                                  disabled={activeFaq === faqItems.length - 1}
+                                  title="Next Question"
+                                  className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === faqItems.length - 1
+                                      ? "opacity-30 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/40"
+                                      : "bg-white/85 hover:bg-[#b58474] text-[#6E4234] hover:text-white border border-[#B58474]/60 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                    }`}
+                                >
+                                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="9 18 15 12 9 6" />
+                                  </svg>
+                                </button>
                               </div>
                             </div>
 
-                            {/* Question Title */}
+                            {/* Question Title (Soft, Calm & Elegant 'Kalem' Typography) */}
                             <h3
-                              className="mt-3 font-display-lg text-sm md:text-lg text-[#4d281d] font-bold leading-relaxed tracking-tight"
+                              className="mt-3 text-sm md:text-base text-[#5E3A2E] font-semibold leading-relaxed tracking-normal"
                               style={{ fontFamily: "'Playfair Display', serif" }}
                             >
                               {currentItem.question}
                             </h3>
 
-                            {/* Answer Box */}
-                            <div className="mt-3 pl-3 border-l-3 border-[#bd8174] bg-[#fffaf6]/85 py-2.5 px-3.5 rounded-r-lg shadow-xs">
-                              <p className="font-sans text-[11.5px] md:text-xs text-[#542d20] leading-relaxed font-medium">
+                            {/* Answer Box (Brighter Soft Transparent Layer, Calm Medium Chocolate Text) */}
+                            <div className="mt-3 pl-3.5 border-l-3 border-[#B58474] bg-[#fffaf7]/65 py-2.5 px-3.5 rounded-r-lg shadow-2xs">
+                              <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-normal">
                                 {currentItem.answer}
                               </p>
-                            </div>
-
-                            {/* Navigation Controls */}
-                            <div className="mt-4 pt-3 border-t border-[#bd8174]/30 flex items-center justify-between gap-3">
-                              <button
-                                onClick={() => setActiveFaq(Math.max(0, activeFaq - 1))}
-                                disabled={activeFaq === 0}
-                                className={`flex items-center gap-1 px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider transition-all duration-200 group ${activeFaq === 0
-                                  ? "opacity-40 cursor-not-allowed text-[#8f6456] border border-[#bd8174]/40 bg-white/40"
-                                  : "bg-gradient-to-r from-[#ffffff] via-[#faede4] to-[#f4dfd2] text-[#4d281d] border-2 border-[#bd8174] shadow-[0_2px_10px_rgba(189,129,116,0.22)] hover:shadow-[0_4px_15px_rgba(189,129,116,0.38)] hover:scale-105 active:scale-95 cursor-pointer"
-                                  }`}
-                              >
-                                <svg className="w-3 h-3 group-hover:-translate-x-1 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none">
-                                  <path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="#4d281d" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                Previous
-                              </button>
-
-                              {/* Indicator step dots */}
-                              <div className="hidden sm:flex items-center gap-1.5">
-                                {faqItems.map((_, i) => (
-                                  <button
-                                    key={i}
-                                    onClick={() => setActiveFaq(i)}
-                                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeFaq === i
-                                      ? "w-4 bg-gradient-to-r from-[#e2b0a4] to-[#ffd0ab]"
-                                      : "w-1.5 bg-[#e2b0a4]/40 hover:bg-[#e2b0a4]"
-                                      }`}
-                                  />
-                                ))}
-                              </div>
-
-                              <button
-                                onClick={() => setActiveFaq(Math.min(faqItems.length - 1, activeFaq + 1))}
-                                disabled={activeFaq === faqItems.length - 1}
-                                className={`flex items-center gap-1 px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider transition-all duration-200 group ${activeFaq === faqItems.length - 1
-                                  ? "opacity-40 cursor-not-allowed text-[#8f6456] border border-[#bd8174]/40 bg-white/40"
-                                  : "bg-gradient-to-r from-[#ffffff] via-[#faede4] to-[#f4dfd2] text-[#4d281d] border-2 border-[#bd8174] shadow-[0_2px_10px_rgba(189,129,116,0.22)] hover:shadow-[0_4px_15px_rgba(189,129,116,0.38)] hover:scale-105 active:scale-95 cursor-pointer"
-                                  }`}
-                              >
-                                Next
-                                <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none">
-                                  <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#4d281d" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              </button>
                             </div>
                           </div>
                         </>
@@ -1097,20 +1080,20 @@ function Homepage() {
                     border: "2px solid #bd8174",
                     boxShadow: "0 0 14px rgba(189, 129, 116, 0.35), 0 10px 30px rgba(160,110,95,0.1)",
                   }}
-                  className="max-w-[1100px] mx-auto p-7 md:p-9 rounded-[32px] space-y-10 relative z-10"
+                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-[26px] space-y-7 relative z-10"
                 >
                   {/* Header */}
-                  <div className="text-center space-y-2.5 max-w-2xl mx-auto">
-                    <h2 className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#5c3328] font-bold leading-tight drop-shadow-[0_1px_3px_rgba(255,255,255,0.7)]">
+                  <div className="text-center space-y-2 max-w-xl mx-auto">
+                    <h2 className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#5c3328] font-bold leading-tight drop-shadow-[0_1px_3px_rgba(255,255,255,0.7)]">
                       Students Feedbacks
                     </h2>
-                    <p className="font-sans text-xs md:text-sm text-[#7a4b3d] font-semibold leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
+                    <p className="font-sans text-[11px] md:text-xs text-[#7a4b3d] font-semibold leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
                       Discover how pianists of all backgrounds found their creative freedom and built a solid foundation with Stephanie Keys.
                     </p>
                   </div>
 
                   {/* Testimonial Cards Grid (Inner cards bolong / transparent, no background color) */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
                     {[
                       {
                         name: "Sarah Jenkins",
@@ -1149,18 +1132,18 @@ function Homepage() {
                           border: "1.5px solid #bd8174",
                           boxShadow: "0 0 8px rgba(189, 129, 116, 0.2)",
                         }}
-                        className="relative overflow-hidden p-6 rounded-[22px] bg-[#FBF8F5] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#c48b7c] hover:bg-white flex flex-col justify-between gap-5 group cursor-pointer"
+                        className="relative overflow-hidden p-4.5 rounded-[18px] bg-[#FBF8F5] transition-all duration-300 hover:-translate-y-1 hover:border-[#c48b7c] hover:bg-white flex flex-col justify-between gap-4 group cursor-pointer"
                       >
-                        <div className="space-y-3 relative z-10">
+                        <div className="space-y-2.5 relative z-10">
                           {/* Comment */}
-                          <p className="font-sans text-xs md:text-[12.5px] text-[#5c3328] leading-relaxed italic font-semibold drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
+                          <p className="font-sans text-[11px] md:text-[11.5px] text-[#5c3328] leading-relaxed italic font-semibold drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
                             "{item.comment}"
                           </p>
                         </div>
 
                         {/* Profile Details */}
-                        <div className="flex items-center gap-3 pt-3.5 border-t-2 border-[#e2b0a4]/60 mt-auto relative z-10">
-                          <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[#e2b0a4] bg-[#f4ebe6] shrink-0 shadow-xs">
+                        <div className="flex items-center gap-2.5 pt-3 border-t border-[#e2b0a4]/60 mt-auto relative z-10">
+                          <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#e2b0a4] bg-[#f4ebe6] shrink-0 shadow-xs">
                             <img
                               className="w-full h-full object-cover"
                               src={item.avatar}
@@ -1168,10 +1151,10 @@ function Homepage() {
                             />
                           </div>
                           <div>
-                            <h4 className="font-sans text-xs font-bold text-[#5c3328] leading-tight drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
+                            <h4 className="font-sans text-[11.5px] font-bold text-[#5c3328] leading-tight drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
                               {item.name}
                             </h4>
-                            <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 mt-0.5 text-[10px] text-[#7a4b3d] font-bold font-sans">
+                            <div className="flex flex-wrap items-center gap-x-1 gap-y-0.5 mt-0.5 text-[9.5px] text-[#7a4b3d] font-bold font-sans">
                               <span>{item.role}</span>
                               <span className="text-[#d48b78]">•</span>
                               <span>{item.date}</span>
@@ -1396,7 +1379,12 @@ function Homepage() {
                       <div className="pt-4 mt-3">
                         <button
                           onClick={() => setView("dashboard")}
-                          className="w-full py-2.5 px-3 rounded-full font-sans text-xs font-extrabold text-[#5c3a30] bg-gradient-to-r from-[#fff5f2] via-[#ffd0ab] to-[#e2b0a4] hover:brightness-105 border border-white shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
+                          style={{
+                            background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 4px 14px rgba(129, 89, 79, 0.22)",
+                            border: "1px solid #D9A998",
+                          }}
+                          className="w-full py-2.5 px-3 rounded-[7px] font-sans text-xs font-extrabold text-[#FFFFFF] drop-shadow-2xs hover:brightness-110 transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
                         >
                           Start 14-Day Free Trial
                         </button>
@@ -1414,7 +1402,7 @@ function Homepage() {
                       className="lg:col-span-4 backdrop-blur-2xl rounded-[20px] p-4.5 lg:p-5 border-2 border-[#d48b78] transition-all duration-300 flex flex-col justify-between text-left relative"
                     >
                       {/* Badge */}
-                      <div className="absolute -top-3 right-5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#ffd0ab] via-[#e2b0a4] to-[#c48b7c] text-[#4d2d22] font-sans text-[9px] font-black uppercase tracking-wider shadow-sm">
+                      <div className="absolute -top-3 right-5 px-3 py-0.5 rounded-full bg-white text-[#81594F] border border-[#d9a998] font-sans text-[9px] font-black uppercase tracking-wider shadow-md">
                         Best Value
                       </div>
 
@@ -1462,7 +1450,12 @@ function Homepage() {
                       <div className="pt-4 mt-3">
                         <button
                           onClick={() => setView("dashboard")}
-                          className="w-full py-2.5 px-3 rounded-full font-sans text-xs font-extrabold text-[#4d2d22] bg-gradient-to-r from-[#fff0eb] via-[#ffd0ab] to-[#e2b0a4] hover:brightness-105 border border-white shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
+                          style={{
+                            background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 4px 14px rgba(129, 89, 79, 0.22)",
+                            border: "1px solid #D9A998",
+                          }}
+                          className="w-full py-2.5 px-3 rounded-[7px] font-sans text-xs font-extrabold text-[#FFFFFF] drop-shadow-2xs hover:brightness-110 transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
                         >
                           Start 14-Day Free Trial
                         </button>

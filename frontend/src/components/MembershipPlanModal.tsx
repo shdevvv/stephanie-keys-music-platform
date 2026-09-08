@@ -92,7 +92,11 @@ export const MembershipPlanModal: React.FC<MembershipPlanModalProps> = ({
               }`}
             >
               {plan.badge && (
-                <span className="absolute -top-3 right-4 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#dfa38f] to-[#ab7e66] text-white text-[9px] font-bold uppercase tracking-wider shadow-sm">
+                <span className={`absolute -top-3 right-4 px-3 py-0.5 rounded-full font-sans text-[9px] font-black uppercase tracking-wider shadow-sm ${
+                  plan.badge === 'Best Value'
+                    ? 'bg-white text-[#81594F] border border-[#d9a998]'
+                    : 'bg-gradient-to-r from-[#dfa38f] to-[#ab7e66] text-white'
+                }`}>
                   {plan.badge}
                 </span>
               )}
@@ -116,9 +120,11 @@ export const MembershipPlanModal: React.FC<MembershipPlanModalProps> = ({
                 type="button"
                 onClick={() => handleSubscribeNow(plan.name)}
                 style={{
-                  backgroundImage: 'linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #f5b8c9 100%)',
+                  background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                  boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 4px 14px rgba(129, 89, 79, 0.22)",
+                  border: "1px solid #D9A998",
                 }}
-                className="w-full text-white text-xs font-bold uppercase tracking-wider py-3 rounded-xl border border-white/20 cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md mt-6"
+                className="w-full text-white text-xs font-bold uppercase tracking-wider py-2.5 rounded-[7px] cursor-pointer hover:brightness-110 active:scale-[0.98] transition-all shadow-md mt-6"
               >
                 Subscribe Now
               </button>
