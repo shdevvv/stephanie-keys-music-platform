@@ -342,11 +342,11 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
   }, []);
 
   return (
-    <main className="bg-[#fffcf9] flex flex-col">
+    <main className="bg-[#fffcf9] flex flex-col h-auto">
 
       {/* SECTION 1: COVERS SHOWCASE */}
       {(activeTab === "all" || activeTab === "videos") && (
-        <section className="pt-10 pb-16 relative overflow-hidden flex flex-col">
+        <section className="pt-10 pb-6 relative overflow-hidden flex flex-col h-auto">
           {/* Background image layer - Studio Keyboard setup */}
           <div 
             className="absolute inset-0 z-0 pointer-events-none"

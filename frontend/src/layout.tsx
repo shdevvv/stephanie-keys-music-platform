@@ -408,7 +408,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   };
 
   return (
-    <div className={`w-full ${view === "dashboard" ? "h-auto bg-[#eae3e0]" : "min-h-screen bg-[#fff8f6]"} text-[#1d1b1a] font-body-md antialiased flex flex-col`}>
+    <div className={`w-full ${view === "dashboard" ? "h-auto bg-[#eae3e0]" : "h-auto bg-[#fff8f6]"} text-[#1d1b1a] font-body-md antialiased flex flex-col`}>
       <style>{`
         ::selection,
         ::-moz-selection,
@@ -440,7 +440,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         }
       `}</style>
       <CustomCursor />
-      <div className={`max-w-[1440px] mx-auto w-full ${view === "dashboard" ? "h-auto bg-[#fff8f6]" : (view === "my-library" || view === "download-page" || view === "invoice" ? "min-h-screen bg-transparent" : "min-h-screen bg-[#fff8f6]")} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}>
+      <div className={`max-w-[1440px] mx-auto w-full ${view === "dashboard" ? "h-auto bg-[#fff8f6]" : (view === "my-library" || view === "download-page" || view === "invoice" ? "h-auto bg-transparent" : "h-auto bg-[#fff8f6]")} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}>
         {/* Top Navigation Bar */}
         <nav
           className={`sticky top-0 w-full z-50 transition-all duration-300 ${isScrolled
@@ -786,7 +786,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
         {/* Main Content Area */}
         <div
-          className="flex flex-col flex-grow"
+          className="flex flex-col h-auto flex-grow-0"
           style={
             view === "dashboard" ? {
               backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('/sonata.png')`,
@@ -811,7 +811,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         >{children}</div>
 
         {/* Footer */}
-        <footer className="w-full mt-auto bg-[#fffdfb] relative">
+        <footer className="w-full mt-0 bg-[#fffdfb] relative">
           {/* Glossy Balanced Soft-Rose Gold Divider Line between Content & Footer */}
           <div className="w-full h-[4.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] z-20 relative shadow-[0_0_10px_rgba(226,171,160,0.45)]" />
 
