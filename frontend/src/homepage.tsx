@@ -521,7 +521,11 @@ function Homepage() {
                       className="relative overflow-hidden w-full max-w-[350px] sm:max-w-[390px] h-[440px] sm:h-[480px] lg:h-[500px] rounded-2xl"
                     >
                       <img
-                        className="w-full h-full object-cover object-[center_20%]"
+                        className="w-full h-full object-cover object-[45%_16%] scale-[1.22] transform-gpu"
+                        style={{
+                          filter: "contrast(1.05) saturate(1.03) brightness(1.02)",
+                          imageRendering: "crisp-edges",
+                        }}
                         src="/profile-photo.jpg"
                         alt="Stephanie Halim - Mentor"
                       />
