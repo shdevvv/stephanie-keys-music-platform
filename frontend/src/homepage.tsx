@@ -484,8 +484,8 @@ function Homepage() {
               </section>
 
 
-              {/* Top Thick Glossy Rose Gold Divider Line for About Mentor Section */}
-              <div className="w-full h-[6.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative shadow-[0_0_15px_rgba(196,139,124,0.6)]" />
+              {/* Top Delicate Rose Gold Divider Line for About Mentor Section */}
+              <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative opacity-90" />
 
               {/* Section 2: About Mentor Section with 60% White Opacity */}
               <section className="py-16 md:py-20 px-6 relative z-10 overflow-hidden bg-white/60">
@@ -564,8 +564,8 @@ function Homepage() {
                 </div>
               </section>
 
-              {/* Bottom Thick Glossy Rose Gold Divider Line for About Mentor Section */}
-              <div className="w-full h-[6.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative shadow-[0_0_15px_rgba(196,139,124,0.6)]" />
+              {/* Bottom Delicate Rose Gold Divider Line for About Mentor Section */}
+              <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative opacity-90" />
 
 
               {/* Section 3: What You Will Get Section */}
@@ -716,7 +716,7 @@ function Homepage() {
             </div>
 
             {/* Glossy Rose Gold Divider Line between What You Will Get & FAQ */}
-            <div className="w-full h-[3px] bg-gradient-to-r from-[#b36f61] via-[#d6988c] via-[#ebb1a4] to-[#b36f61] z-20 relative shadow-[0_0_8px_rgba(179,111,97,0.35)]" />
+            <div className="w-full h-[1.5px] bg-gradient-to-r from-[#b36f61] via-[#d6988c] via-[#ebb1a4] to-[#b36f61] z-20 relative opacity-90" />
 
             {/* Master Seamless Grand White Marble Hall Container for FAQ, Students Feedbacks, and Pricing */}
             <div className="relative overflow-hidden bg-[#faf5f0]">
@@ -1167,11 +1167,11 @@ function Homepage() {
             </div>
 
             {/* Double Glossy Rose-Gold Divider Lines between Students Feedbacks & Start Your Musical Journey */}
-            <div className="w-full z-20 relative flex flex-col gap-[3.5px]">
+            <div className="w-full z-20 relative flex flex-col gap-[2px]">
               {/* Garis Pertama */}
-              <div className="w-full h-[4px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] shadow-[0_0_8px_rgba(226,171,160,0.4)]" />
+              <div className="w-full h-[1.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] opacity-90" />
               {/* Garis Kedua (Jarak dekat di bawahnya) */}
-              <div className="w-full h-[2.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] shadow-[0_0_6px_rgba(226,171,160,0.35)]" />
+              <div className="w-full h-[1px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] via-[#f0c3b7] to-[#bd8174] opacity-75" />
             </div>
 
             {/* Section 6: Dedicated Background Container for Start Your Musical Journey (Focused Piano Keys Background) */}
