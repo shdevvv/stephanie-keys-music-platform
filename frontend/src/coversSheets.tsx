@@ -366,7 +366,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
           <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 space-y-6">
             {/* Video Covers Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
               {covers.slice(0, 10).map((cover, index) => (
                 <div
                   key={index}
@@ -529,7 +529,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
           </div>
 
           {/* Sheets Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {paginatedSheets.map((sheet, index) => (
               <div
                 key={index}

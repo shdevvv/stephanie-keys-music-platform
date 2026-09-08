@@ -226,7 +226,7 @@ function Homepage() {
                     Transform your playing with a step-by-step method that takes
                     you from beginner to advanced.
                   </p>
-                  <div className="flex items-center gap-3.5 pt-1">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                     <button
                       onClick={() => setView("dashboard")}
                       className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"

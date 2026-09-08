@@ -288,9 +288,14 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   }, []);
 
   const [isSlideCartOpen, setIsSlideCartOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [cartItems, setCartItems] = useState<any[]>([]);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [view]);
 
   const refreshCart = () => {
     try {
@@ -440,7 +445,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         }
       `}</style>
       <CustomCursor />
-      <div className={`max-w-[1440px] mx-auto w-full ${view === "dashboard" ? "h-auto bg-[#fff8f6]" : (view === "my-library" || view === "download-page" || view === "invoice" ? "h-auto bg-transparent" : "h-auto bg-[#fff8f6]")} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}>
+      <div className={`max-w-[1440px] mx-auto w-full overflow-x-hidden ${view === "dashboard" ? "h-auto bg-[#fff8f6]" : (view === "my-library" || view === "download-page" || view === "invoice" ? "h-auto bg-transparent" : "h-auto bg-[#fff8f6]")} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}>
         {/* Top Navigation Bar */}
         <nav
           className={`sticky top-0 w-full z-50 transition-all duration-300 ${isScrolled
@@ -448,24 +453,30 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
             : "bg-white/60 backdrop-blur-md border-b border-[#e8cdc1]/10"
             }`}
         >
-          <div className="flex justify-between items-center h-24 px-6 md:px-12 w-full">
+          <div className="flex justify-between items-center h-20 md:h-24 px-3 sm:px-6 md:px-12 w-full">
             {/* Left side: Logo + Search Bar */}
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex items-center gap-2 sm:gap-4 md:gap-6 shrink-0">
               <button
-                onClick={() => onNavigate("home")}
-                className="flex items-center bg-transparent border-none cursor-pointer focus:outline-none group text-left p-0"
+                onClick={() => {
+                  onNavigate("home");
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center bg-transparent border-none cursor-pointer focus:outline-none group text-left p-0 shrink-0"
               >
                 <img
                   src="/stephanie-logo.png"
                   alt="Stephanie Keys"
-                  className="h-11 md:h-15 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="h-9 sm:h-11 md:h-15 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </button>
-              <GlobalSearchInput onNavigate={onNavigate} />
+              <GlobalSearchInput onNavigate={(v) => {
+                onNavigate(v);
+                setIsMobileMenuOpen(false);
+              }} />
             </div>
 
             {/* Right side: Nav Links + Shopping Cart & Account Dropdown */}
-            <div className="flex items-center gap-3 md:gap-4 lg:gap-5 xl:gap-6 2xl:gap-8">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 2xl:gap-8">
               <div className="hidden lg:flex items-center gap-2 xl:gap-3.5 2xl:gap-4 -ml-2 lg:-ml-3.5">
                 {/* 1. HOME */}
                 <button
@@ -551,18 +562,18 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
                   border: "1px solid #D9A998",
                 }}
-                className="relative h-9 px-3.5 rounded-full cursor-pointer transition-all duration-300 ease-out hover:brightness-120 hover:scale-[1.03] active:scale-95 text-[#FFFFFF] flex items-center gap-1.5 shadow-none group"
+                className="relative h-8 sm:h-9 px-2.5 sm:px-3.5 rounded-full cursor-pointer transition-all duration-300 ease-out hover:brightness-120 hover:scale-[1.03] active:scale-95 text-[#FFFFFF] flex items-center gap-1 sm:gap-1.5 shadow-none group shrink-0"
                 aria-label="View Shopping Cart"
               >
                 {/* Classic Treble Clef (Kunci G) Icon Matching User's Image 1 Reference Exactly */}
-                <svg className="w-[13px] h-[20px] fill-current text-white shrink-0 drop-shadow-2xs transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 140">
+                <svg className="w-[11px] sm:w-[13px] h-[16px] sm:h-[20px] fill-current text-white shrink-0 drop-shadow-2xs transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 140">
                   <path d="M 54.7 115.5 C 50.5 119.3 45.3 121.2 39.7 120.7 C 33.2 120.1 27.7 116.5 24.9 110.6 C 22.2 104.9 22.8 98.3 26.4 93 C 30.5 87 37.3 83.2 44.6 82.8 L 44.6 45.8 C 41.5 47 38.6 48.9 36.1 51.3 C 30.2 57.1 27.1 64.8 27.5 73 C 27.9 81.5 32.2 89 39.3 93.4 C 41.4 94.7 42 97.5 40.7 99.6 C 39.4 101.7 36.6 102.3 34.5 101 C 25.2 95.2 19.5 85.3 19 74.2 C 18.5 63.5 22.5 53.5 30.2 45.9 C 34.2 41.9 39 39 44.3 37.4 L 44.3 25 C 44.3 20.4 46.3 16.1 49.7 13.2 C 53.5 10 58.4 8.5 63.4 9.1 C 68.4 9.7 72.8 12.5 75.5 16.7 C 78.2 20.9 78.9 26.1 77.4 30.9 C 76.1 35.1 73.2 38.6 69.3 40.6 C 67.1 41.7 64.5 41 63.4 38.8 C 62.3 36.6 63 34 65.2 32.9 C 67.7 31.6 69.6 29.4 70.4 26.7 C 71.3 23.6 70.9 20.2 69.2 17.5 C 67.5 14.8 64.6 13 61.4 12.6 C 58.1 12.2 54.9 13.2 52.4 15.3 C 50.3 17.1 49 19.8 49 22.7 L 49 36.2 C 53.7 37.3 58.1 39.6 61.8 42.9 C 67.7 48.2 71 55.5 71 63.3 C 71 71.4 67.4 78.9 61.1 83.9 C 55.3 88.5 48 90.7 40.7 90 C 42.7 87.4 46.1 85.6 49.8 84.8 L 49.8 110.7 C 53.7 110.5 57.4 108.9 60.1 106.2 C 63.8 102.6 65.9 97.6 65.9 92.4 C 65.9 88 63.6 83.8 59.7 81 C 57.5 79.4 57 76.6 58.6 74.4 C 60.2 72.2 63 71.7 65.2 73.3 C 70.7 77.3 73.9 83.5 73.9 90.1 C 73.9 99 69.9 107.5 63 113.5 C 60.6 115.6 57.7 116.5 54.7 115.5 Z M 39.7 112.5 C 43.5 112.5 46.5 109.5 46.5 105.7 C 46.5 101.9 43.5 98.9 39.7 98.9 C 35.9 98.9 32.9 101.9 32.9 105.7 C 32.9 109.5 35.9 112.5 39.7 112.5 Z" />
                 </svg>
 
                 {/* Readable Calligraphy 'Cart' Font */}
                 <span
                   style={{ fontFamily: "'Great Vibes', 'Alex Brush', 'Playfair Display', cursive, serif" }}
-                  className="text-[15px] font-medium text-[#FFFFFF] tracking-wide drop-shadow-2xs leading-none pt-0.5"
+                  className="text-xs sm:text-[15px] font-medium text-[#FFFFFF] tracking-wide drop-shadow-2xs leading-none pt-0.5"
                 >
                   Cart
                 </span>
@@ -570,14 +581,14 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* Transparent Count Badge with Thin White Border */}
                 {cartCount > 0 && (
                   <span
-                    className="bg-transparent text-white border border-white/85 font-sans font-bold text-[11px] px-1.5 min-w-[20px] h-5 rounded-[5px] flex items-center justify-center text-center ml-0.5 shadow-2xs leading-none select-none shrink-0 transition-transform duration-300 group-hover:scale-105"
+                    className="bg-transparent text-white border border-white/85 font-sans font-bold text-[10px] sm:text-[11px] px-1 sm:px-1.5 min-w-[18px] sm:min-w-[20px] h-4.5 sm:h-5 rounded-[5px] flex items-center justify-center text-center ml-0.5 shadow-2xs leading-none select-none shrink-0 transition-transform duration-300 group-hover:scale-105"
                   >
                     {cartCount}
                   </span>
                 )}
               </button>
 
-              {/* Sign In / Sign Up / Account Action Controls (Solid White Inside + Glossy Brown Rose-Gold Outer Border, No White Outline) */}
+              {/* Sign In / Sign Up / Account Action Controls */}
               {isLoggedIn ? (
                 /* Logged In User Button with Dropdown */
                 <div className="relative" ref={profileMenuRef}>
@@ -590,10 +601,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       border: "1.5px solid transparent",
                       boxShadow: "0 4px 14px rgba(140, 85, 70, 0.15)",
                     }}
-                    className="relative h-9 px-4 rounded-[8px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center gap-1.5 shadow-none"
+                    className="relative h-8 sm:h-9 px-2.5 sm:px-4 rounded-[8px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center gap-1 sm:gap-1.5 shadow-none"
                   >
                     {/* Glossy Specular Rose-Gold Semiquaver Icon */}
-                    <svg className="w-3.5 h-4 shrink-0 drop-shadow-2xs" viewBox="0 0 100 130">
+                    <svg className="w-3.5 h-4 shrink-0 drop-shadow-2xs hidden sm:block" viewBox="0 0 100 130">
                       <defs>
                         <linearGradient id="note-glossy-gold-user" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" stopColor="#FFFFFF" />
@@ -611,7 +622,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
                     <span
                       style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                      className="text-xs font-bold text-[#3d2319] tracking-wider"
+                      className="text-[11px] sm:text-xs font-bold text-[#3d2319] tracking-wider truncate max-w-[80px] sm:max-w-none"
                     >
                       {userName}
                     </span>
@@ -630,7 +641,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     </svg>
                   </button>
 
-                  {/* Dropdown Menu (Click Only - Solid White Inside + Glossy Brown Rose-Gold Outer Border) */}
+                  {/* Dropdown Menu */}
                   <div
                     className={`absolute right-0 top-full pt-2 w-44 flex flex-col z-50 transition-all duration-300 ease-out ${
                       isProfileMenuOpen
@@ -715,7 +726,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 </div>
               ) : (
                 /* Not Logged In: Clear Liquid Glass Controls */
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <button
                     onClick={() => onNavigate("signin")}
                     style={{
@@ -726,7 +737,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       boxShadow: "inset 0 1.5px 1px 0 #FFFFFF, inset 0 -1px 2px 0 rgba(0, 0, 0, 0.04)",
                       fontFamily: "'Playfair Display', Georgia, serif",
                     }}
-                    className="h-9 px-3.5 rounded-[8px] text-xs font-bold text-[#3d2319] hover:text-[#800A1D] hover:scale-[1.02] transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center"
+                    className="h-8 sm:h-9 px-2.5 sm:px-3.5 rounded-[8px] text-[11px] sm:text-xs font-bold text-[#3d2319] hover:text-[#800A1D] hover:scale-[1.02] transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center shrink-0"
                   >
                     Sign In
                   </button>
@@ -739,9 +750,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       border: "1.5px solid rgba(255, 255, 255, 0.9)",
                       boxShadow: "0 6px 18px -2px rgba(0, 0, 0, 0.06), inset 0 1.5px 1px 0 #FFFFFF, inset 0 -1px 2px 0 rgba(0, 0, 0, 0.05)",
                     }}
-                    className="relative h-9 px-4 rounded-[8px] cursor-pointer transition-all duration-300 ease-out hover:brightness-120 hover:scale-[1.02] active:scale-97 focus:outline-none flex items-center justify-center gap-1.5 text-[#3d2319] shadow-none"
+                    className="relative h-8 sm:h-9 px-3 sm:px-4 rounded-[8px] cursor-pointer transition-all duration-300 ease-out hover:brightness-120 hover:scale-[1.02] active:scale-97 focus:outline-none flex items-center justify-center gap-1 sm:gap-1.5 text-[#3d2319] shadow-none shrink-0"
                   >
-                    <svg className="w-3.5 h-4 shrink-0 drop-shadow-2xs" viewBox="0 0 100 130">
+                    <svg className="w-3.5 h-4 shrink-0 drop-shadow-2xs hidden sm:block" viewBox="0 0 100 130">
                       <defs>
                         <linearGradient id="note-glossy-gold-su" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" stopColor="#FFFFFF" />
@@ -758,15 +769,70 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     </svg>
                     <span
                       style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                      className="text-xs font-bold text-[#4A2B20] tracking-wider"
+                      className="text-[11px] sm:text-xs font-bold text-[#4A2B20] tracking-wider"
                     >
                       Sign Up
                     </span>
                   </button>
                 </div>
               )}
+
+              {/* Mobile Hamburger Drawer Toggle Button (Visible on HP & Tablet < lg) */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/80 border border-[#dfa38f] flex items-center justify-center text-[#8a5d4c] hover:bg-[#f8e3db]/60 transition-all cursor-pointer shadow-none shrink-0 ml-1"
+                aria-label="Toggle Mobile Menu"
+              >
+                <span className="material-symbols-outlined text-lg sm:text-xl">
+                  {isMobileMenuOpen ? "close" : "menu"}
+                </span>
+              </button>
             </div>
           </div>
+
+          {/* Mobile Navigation Drawer Overlay (Visible on HP & Tablet < lg) */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden w-full bg-white/95 backdrop-blur-xl border-b border-[#e8cdc1]/40 shadow-xl p-4 sm:p-5 transition-all duration-300 animate-in slide-in-from-top-3">
+              <div className="flex flex-col gap-2.5 max-w-md mx-auto">
+                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#ab7e66] px-2">Navigation</span>
+                <button
+                  onClick={() => { onNavigate("home"); setIsMobileMenuOpen(false); }}
+                  className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "home" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
+                >
+                  <span>Home</span>
+                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                </button>
+                <button
+                  onClick={() => { onNavigate("videos"); setIsMobileMenuOpen(false); }}
+                  className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${(view === "videos" || view === "library") ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
+                >
+                  <span>Videos</span>
+                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                </button>
+                <button
+                  onClick={() => { onNavigate("courses"); setIsMobileMenuOpen(false); }}
+                  className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "courses" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
+                >
+                  <span>Learn</span>
+                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                </button>
+                <button
+                  onClick={() => { onNavigate("dashboard"); setIsMobileMenuOpen(false); }}
+                  className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "dashboard" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
+                >
+                  <span>Progress</span>
+                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                </button>
+                <button
+                  onClick={() => { onNavigate("sheets"); setIsMobileMenuOpen(false); }}
+                  className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "sheets" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
+                >
+                  <span>Sheets</span>
+                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                </button>
+              </div>
+            </div>
+          )}
         </nav>
 
         {/* Main Content Area */}
