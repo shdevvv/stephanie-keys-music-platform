@@ -658,7 +658,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
             {/* Flat Slim CLOSE Button Straddling Outer Bottom Border Line */}
             <button
               onClick={() => setActiveVideo(null)}
-              className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 z-30 px-5 py-0.5 rounded-full bg-white hover:bg-[#faeee8] text-[#7a483b] hover:text-[#4a2e23] border-2 border-[#dca698] shadow-md text-[9.5px] font-sans font-bold tracking-widest uppercase transition-all duration-200 cursor-pointer active:scale-95 outline-none focus:outline-none"
+              className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-30 px-3.5 py-[1px] rounded-full bg-white hover:bg-[#faeee8] text-[#7a483b] hover:text-[#4a2e23] border-[1.5px] border-[#dca698] shadow-sm text-[8px] font-sans font-bold tracking-widest uppercase transition-all duration-200 cursor-pointer active:scale-95 outline-none focus:outline-none"
             >
               CLOSE
             </button>
