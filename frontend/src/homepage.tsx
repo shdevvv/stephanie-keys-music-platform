@@ -916,17 +916,23 @@ function Homepage() {
                                   <button
                                     key={item.idx}
                                     onClick={() => setActiveFaq(idx)}
-                                    className="group flex flex-col items-center gap-1 cursor-pointer outline-none focus:outline-none focus:ring-0 active:outline-none border-0 flex-shrink-0 transition-transform duration-200 hover:scale-105 select-none"
+                                    className="group flex flex-col items-center gap-1 cursor-pointer outline-none focus:outline-none focus:ring-0 active:outline-none border-0 flex-shrink-0 transition-transform duration-200 hover:scale-105 select-none relative py-1 px-0.5"
                                     style={{ WebkitTapHighlightColor: "transparent", outline: "none" }}
                                     title={`Question ${item.num}: ${item.question}`}
                                   >
-                                    <div
-                                      className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold transition-all duration-300 ${isActive
-                                        ? "bg-gradient-to-br from-[#ffffff] via-[#f7e6dc] to-[#e2b0a4] text-[#4d281d] border-2 border-[#bd8174] shadow-[0_0_14px_rgba(189,129,116,0.8)] scale-110 ring-2 ring-[#bd8174]/40"
-                                        : "bg-[#f5e3d7] border border-[#bd8174]/50 text-[#6a3d30] group-hover:bg-[#faede4] group-hover:text-[#4d281d] group-hover:shadow-[0_0_8px_rgba(189,129,116,0.3)]"
-                                        }`}
-                                    >
-                                      {item.num}
+                                    <div className="relative w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
+                                      {/* Pure Circular Gold Shining Aura Glow */}
+                                      {isActive && (
+                                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#ffe8b3] via-[#ffd700] to-[#ff9900] blur-[4px] opacity-85 pointer-events-none" />
+                                      )}
+                                      <div
+                                        className={`relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold transition-all duration-300 ${isActive
+                                          ? "bg-gradient-to-br from-[#ffffff] via-[#fff6db] to-[#ffd700] text-[#4d281d] border-2 border-[#d49a15] scale-105"
+                                          : "bg-[#f5e3d7] border border-[#bd8174]/50 text-[#6a3d30] group-hover:bg-[#faede4] group-hover:text-[#4d281d]"
+                                          }`}
+                                      >
+                                        {item.num}
+                                      </div>
                                     </div>
                                     <span
                                       className={`text-[8px] md:text-[9px] uppercase font-extrabold tracking-wider transition-colors duration-200 ${isActive ? "text-[#4d281d]" : "text-[#7a493b] group-hover:text-[#4d281d]"
