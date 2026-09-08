@@ -634,28 +634,38 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
         </div>
       </section>
       )}
-
       {/* MODAL 1: SIMULATED VIDEO PLAYER MODAL */}
       {activeVideo && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/[0.04] backdrop-blur-[1px] flex items-center justify-center p-4 sm:p-6 animate-modal-backdrop"
+          className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-modal-backdrop"
           onClick={() => setActiveVideo(null)}
         >
           <div 
-            className="relative w-full max-w-2xl bg-gradient-to-b from-[#fffcfb] via-[#fdf7f4] to-[#faede6] rounded-[8px] p-1.5 sm:p-2 shadow-[0_16px_40px_rgba(100,50,40,0.18),0_0_24px_rgba(220,166,152,0.4)] border-2 border-[#dca698] animate-modal-card flex flex-col"
+            className="relative w-full max-w-2xl bg-[#fffcf9] rounded-[16px] p-3 sm:p-4 shadow-[0_20px_50px_rgba(45,25,20,0.25)] border border-[#e8cdc1]/60 animate-modal-card flex flex-col gap-2.5 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Floating Close Button on Corner (No extra white space at top) */}
-            <button
-              onClick={() => setActiveVideo(null)}
-              className="absolute -top-3 -right-3 sm:-top-3.5 sm:-right-3.5 z-30 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white hover:bg-[#faeee8] text-[#7a483b] border-2 border-[#dca698] shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-90 hover:scale-105"
-              title="Close"
-            >
-              <span className="material-symbols-outlined text-sm sm:text-base font-bold select-none">close</span>
-            </button>
+            {/* Modal Header inside Card */}
+            <div className="flex items-center justify-between px-1 pt-0.5">
+              <h4 
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                className="text-xs sm:text-sm font-bold text-[#5c3328] truncate pr-4"
+              >
+                {activeVideo.title}
+              </h4>
+              <button
+                onClick={() => setActiveVideo(null)}
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#f5e9e4] hover:bg-[#ead9d1] text-[#7a483b] transition-all cursor-pointer flex items-center justify-center shrink-0 border-none outline-none active:scale-95"
+                title="Close"
+              >
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-current" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
 
-            {/* Video Frame - Symmetrical Padding All Around */}
-            <div className="aspect-[16/9] bg-black w-full rounded-[6px] overflow-hidden shadow-xs border border-[#e2b0a4]/40 relative">
+            {/* Video Frame */}
+            <div className="aspect-[16/9] bg-black w-full rounded-[10px] overflow-hidden shadow-xs border border-[#e2b0a4]/30 relative">
               <iframe
                 title={activeVideo.title}
                 className="w-full h-full border-none"
