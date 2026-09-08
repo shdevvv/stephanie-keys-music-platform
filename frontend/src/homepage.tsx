@@ -921,13 +921,13 @@ function Homepage() {
                                     title={`Question ${item.num}: ${item.question}`}
                                   >
                                     <div className="relative w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
-                                      {/* Pure Circular Gold Shining Aura Glow */}
+                                      {/* Pure Circular Shiny White Aura Glow */}
                                       {isActive && (
-                                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#ffe8b3] via-[#ffd700] to-[#ff9900] blur-[4px] opacity-85 pointer-events-none" />
+                                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#ffffff] via-[#ffffff] to-[#ffebe6] blur-[5px] opacity-95 pointer-events-none" />
                                       )}
                                       <div
                                         className={`relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold transition-all duration-300 ${isActive
-                                          ? "bg-gradient-to-br from-[#ffffff] via-[#fff6db] to-[#ffd700] text-[#4d281d] border-2 border-[#d49a15] scale-105"
+                                          ? "bg-gradient-to-br from-[#ffffff] via-[#fff7f5] to-[#f5ded6] text-[#4d281d] border-2 border-[#bd8174] scale-105"
                                           : "bg-[#f5e3d7] border border-[#bd8174]/50 text-[#6a3d30] group-hover:bg-[#faede4] group-hover:text-[#4d281d]"
                                           }`}
                                       >
@@ -1184,7 +1184,7 @@ function Homepage() {
                 className="absolute inset-0 z-0 pointer-events-none select-none"
                 style={{
                   backgroundImage: "url('/piano%20tuts.png')",
-                  backgroundSize: "200%",
+                  backgroundSize: "205%",
                   backgroundPosition: "45% 58%",
                   backgroundRepeat: "no-repeat",
                   filter: "sepia(0.35) saturate(0.40) hue-rotate(-30deg) brightness(0.95)",
