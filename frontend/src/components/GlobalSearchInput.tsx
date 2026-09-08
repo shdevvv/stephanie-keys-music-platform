@@ -127,7 +127,7 @@ export const GlobalSearchInput: React.FC<GlobalSearchInputProps> = ({ onNavigate
   };
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] lg:max-w-[260px]">
+    <div ref={containerRef} className="relative w-full max-w-[220px] sm:max-w-[260px] md:max-w-[300px] lg:max-w-[340px] xl:max-w-[380px]">
       {/* Desktop Search Bar */}
       <div className="hidden md:flex items-center relative">
         <input
@@ -140,10 +140,10 @@ export const GlobalSearchInput: React.FC<GlobalSearchInputProps> = ({ onNavigate
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder="Search lessons, sheets, and more..."
-          className="w-full bg-[#fffcfb]/90 border-[1.5px] border-[#dfa38f] hover:border-[#b76e79] focus:border-[#b76e79] rounded-lg py-2 pl-9 pr-8 text-[11px] text-[#5c3a2e] placeholder-[#a17a6e]/70 focus:outline-none transition-colors duration-200 shadow-none"
+          className="w-full bg-[#fffcfb]/90 border-[1.5px] border-[#dfa38f] hover:border-[#b76e79] focus:border-[#b76e79] rounded-lg py-2.5 pl-9.5 pr-8.5 text-xs text-[#5c3a2e] placeholder-[#a17a6e]/70 focus:outline-none transition-colors duration-200 shadow-none"
         />
         {/* Luxury Ornate Carved Metallic Rose-Gold Magnifying Glass Icon */}
-        <svg className="absolute left-2.5 w-4 h-4 shrink-0 pointer-events-none drop-shadow-2xs" viewBox="0 0 24 24" fill="none">
+        <svg className="absolute left-3 w-4 h-4 shrink-0 pointer-events-none drop-shadow-2xs" viewBox="0 0 24 24" fill="none">
           <path 
             d="M10.5 3a7.5 7.5 0 104.83 13.25l4.71 4.71a1 1 0 001.42-1.42l-4.71-4.71A7.5 7.5 0 0010.5 3zm0 2a5.5 5.5 0 110 11 5.5 5.5 0 010-11z" 
             fill="url(#magnifier-logo-gold)" 
