@@ -35,21 +35,30 @@ const TESTIMONIAL_GLITTERS = [
 ];
 
 const PRICING_WHITE_SPARKLES = [
-  { left: "4%", size: 10, duration: "6.5s", delay: "0s", type: "star" },
-  { left: "12%", size: 6, duration: "8.2s", delay: "1.2s", type: "dot" },
-  { left: "22%", size: 14, duration: "7.0s", delay: "2.5s", type: "star" },
-  { left: "31%", size: 8, duration: "9.0s", delay: "0.6s", type: "dot" },
-  { left: "41%", size: 12, duration: "6.0s", delay: "3.1s", type: "star" },
-  { left: "50%", size: 7, duration: "8.5s", delay: "1.8s", type: "dot" },
-  { left: "60%", size: 13, duration: "7.2s", delay: "0.3s", type: "star" },
-  { left: "72%", size: 8, duration: "6.8s", delay: "2.9s", type: "dot" },
-  { left: "81%", size: 15, duration: "8.0s", delay: "1.5s", type: "star" },
-  { left: "92%", size: 9, duration: "7.5s", delay: "0.9s", type: "dot" },
-  { left: "8%", size: 7, duration: "8.8s", delay: "3.8s", type: "dot" },
-  { left: "27%", size: 11, duration: "6.2s", delay: "4.2s", type: "star" },
-  { left: "48%", size: 8, duration: "7.8s", delay: "4.9s", type: "dot" },
-  { left: "67%", size: 14, duration: "6.6s", delay: "3.4s", type: "star" },
-  { left: "88%", size: 6, duration: "9.2s", delay: "4.5s", type: "dot" }
+  { left: "3%", size: 12, duration: "7.5s", delay: "0s", type: "star" },
+  { left: "9%", size: 6, duration: "9.2s", delay: "1.2s", type: "dot" },
+  { left: "16%", size: 16, duration: "8.0s", delay: "2.5s", type: "star" },
+  { left: "23%", size: 8, duration: "10.0s", delay: "0.6s", type: "dot" },
+  { left: "30%", size: 14, duration: "7.2s", delay: "3.1s", type: "star" },
+  { left: "37%", size: 7, duration: "9.5s", delay: "1.8s", type: "dot" },
+  { left: "44%", size: 18, duration: "8.5s", delay: "0.3s", type: "star" },
+  { left: "51%", size: 9, duration: "11.0s", delay: "2.9s", type: "dot" },
+  { left: "58%", size: 15, duration: "7.8s", delay: "1.5s", type: "star" },
+  { left: "65%", size: 8, duration: "9.8s", delay: "0.9s", type: "dot" },
+  { left: "72%", size: 13, duration: "8.4s", delay: "3.8s", type: "star" },
+  { left: "79%", size: 6, duration: "10.5s", delay: "4.2s", type: "dot" },
+  { left: "86%", size: 16, duration: "7.6s", delay: "2.1s", type: "star" },
+  { left: "93%", size: 7, duration: "9.0s", delay: "4.9s", type: "dot" },
+  { left: "6%", size: 10, duration: "8.8s", delay: "5.2s", type: "star" },
+  { left: "20%", size: 7, duration: "11.2s", delay: "4.0s", type: "dot" },
+  { left: "34%", size: 15, duration: "8.2s", delay: "5.5s", type: "star" },
+  { left: "48%", size: 8, duration: "10.2s", delay: "3.5s", type: "dot" },
+  { left: "62%", size: 14, duration: "7.4s", delay: "5.8s", type: "star" },
+  { left: "76%", size: 9, duration: "9.6s", delay: "4.7s", type: "dot" },
+  { left: "90%", size: 12, duration: "8.6s", delay: "5.0s", type: "star" },
+  { left: "12%", size: 8, duration: "10.8s", delay: "3.0s", type: "dot" },
+  { left: "55%", size: 13, duration: "8.9s", delay: "6.2s", type: "star" },
+  { left: "83%", size: 7, duration: "11.5s", delay: "2.7s", type: "dot" }
 ];
 
 function Homepage() {
@@ -1185,20 +1194,26 @@ function Homepage() {
                 __html: `
                 @keyframes whiteSparkleRise {
                   0% {
-                    transform: translateY(680px) scale(0.2) rotate(0deg);
+                    transform: translateY(780px) scale(0.15) rotate(0deg);
                     opacity: 0;
+                    filter: drop-shadow(0 0 4px #ffffff);
                   }
-                  20% {
-                    opacity: 0.95;
-                    filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 12px #ffffff);
+                  15% {
+                    opacity: 1;
+                    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #fff0eb);
                   }
-                  80% {
-                    opacity: 0.95;
-                    filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px #ffebe6);
+                  50% {
+                    opacity: 0.9;
+                    filter: drop-shadow(0 0 12px #ffffff) drop-shadow(0 0 24px #ffd5c8);
+                  }
+                  85% {
+                    opacity: 0.85;
+                    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 18px #ffffff);
                   }
                   100% {
-                    transform: translateY(-80px) scale(1) rotate(180deg);
+                    transform: translateY(-90px) scale(1.15) rotate(220deg);
                     opacity: 0;
+                    filter: drop-shadow(0 0 4px #ffffff);
                   }
                 }
               `}} />
@@ -1211,25 +1226,25 @@ function Homepage() {
                     className="absolute"
                     style={{
                       left: sp.left,
-                      bottom: '-30px',
+                      bottom: '-40px',
                       width: `${sp.size}px`,
                       height: `${sp.size}px`,
-                      animation: `whiteSparkleRise ${sp.duration} linear infinite`,
+                      animation: `whiteSparkleRise ${sp.duration} ease-in-out infinite`,
                       animationDelay: sp.delay,
                     }}
                   >
                     {sp.type === 'star' ? (
-                      <svg viewBox="0 0 24 24" className="w-full h-full text-white fill-current drop-shadow-[0_0_8px_#ffffff]">
+                      <svg viewBox="0 0 24 24" className="w-full h-full text-white fill-current drop-shadow-[0_0_10px_#ffffff] drop-shadow-[0_0_18px_rgba(255,255,255,0.95)]">
                         <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                       </svg>
                     ) : (
-                      <div className="w-full h-full rounded-full bg-white shadow-[0_0_10px_#ffffff,0_0_18px_#ffffff]" />
+                      <div className="w-full h-full rounded-full bg-white shadow-[0_0_12px_#ffffff,0_0_22px_#ffffff,0_0_30px_#fceee8]" />
                     )}
                   </div>
                 ))}
               </div>
 
-              {/* Zoomed Background Layer focusing EXCLUSIVELY on Piano Keys (No Wooden Frame) */}
+              {/* Glossy Rose Gold Piano Keys Background Image */}
               <div
                 className="absolute inset-0 z-0 pointer-events-none select-none"
                 style={{
@@ -1237,20 +1252,28 @@ function Homepage() {
                   backgroundSize: "205%",
                   backgroundPosition: "45% 58%",
                   backgroundRepeat: "no-repeat",
-                  filter: "sepia(0.35) saturate(0.40) hue-rotate(-30deg) brightness(0.95)",
+                  filter: "sepia(0.48) saturate(1.45) hue-rotate(-22deg) brightness(1.06) contrast(1.12)",
                 }}
               />
-              {/* Overlay Brown Tone (Dibuat dikit banget lebih pink / rosy-mahogany wood) */}
-              {/* Bisa Anda atur warna atau kepekatannya langsung di sini */}
+              {/* Glossy Rose Gold Tint Overlay */}
               <div
                 className="absolute inset-0 z-0 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(126, 68, 60, 0.34) 0%, rgba(118, 62, 54, 0.37) 100%)",
+                    "linear-gradient(135deg, rgba(223, 163, 143, 0.46) 0%, rgba(206, 137, 118, 0.40) 35%, rgba(154, 88, 74, 0.50) 70%, rgba(223, 163, 143, 0.44) 100%)",
                 }}
               />
-              {/* Smooth Medium White Gradient from Top (Menghaluskan area judul 'Start Your Musical Journey') */}
-              <div className="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-white/90 via-white/50 to-transparent z-0 pointer-events-none" />
+              {/* Metallic Rose Gold Gloss Reflection Sheen */}
+              <div
+                className="absolute inset-0 z-0 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at 50% 30%, rgba(255, 238, 232, 0.35) 0%, rgba(223, 163, 143, 0.15) 50%, transparent 80%)",
+                  mixBlendMode: "soft-light",
+                }}
+              />
+              {/* Smooth Soft Gradient Transition from Top */}
+              <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-white/80 via-white/40 to-transparent z-0 pointer-events-none" />
 
               {/* Pricing Section (Start Your Musical Journey) */}
               <section className="py-16 lg:py-24 px-4 md:px-6 relative z-10">

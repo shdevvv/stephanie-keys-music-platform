@@ -104,7 +104,7 @@ export default function UserProfile({ onNavigate: _onNavigate, initialTab = 'pro
           />
           <div className="space-y-1 text-center md:text-left flex-grow">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
-              <h1 className="font-display-lg text-2xl font-bold text-[#4a372e]">{name}</h1>
+              <h1 className="font-display-lg text-3xl font-bold text-[#4a372e]" style={{ fontFamily: "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive" }}>{name || 'StephanieHalim06'}</h1>
               <span className="px-2.5 py-0.5 rounded-full bg-[#dfa38f]/20 text-[#854d38] text-[10px] font-extrabold uppercase border border-[#dfa38f]/30">
                 {skillLevel}
               </span>

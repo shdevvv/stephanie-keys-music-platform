@@ -54,7 +54,7 @@ function simulateClientSearch(query: string): SearchResponse {
       title: 'Mastering Gospel & Jazz Progression Essentials',
       category: 'Lesson' as const,
       subtitle: 'Advanced Chords • Stephanie Halim',
-      thumbnailUrl: '/coversheets/sheet1.png',
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       badgeText: 'Video Lesson',
       priceOrDuration: '24 mins',
       routeUrl: '/courses'
@@ -64,7 +64,7 @@ function simulateClientSearch(query: string): SearchResponse {
       title: 'Classical Piano Technique: Beethoven & Chopin',
       category: 'Lesson' as const,
       subtitle: 'Classical Mastery • Phanilie',
-      thumbnailUrl: '/coversheets/sheet2.png',
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       badgeText: 'Video Lesson',
       priceOrDuration: '30 mins',
       routeUrl: '/courses'
@@ -77,7 +77,7 @@ function simulateClientSearch(query: string): SearchResponse {
       title: 'Moonlight Sonata (Gospel Jazz Re-Arrangement)',
       category: 'Performance Cover' as const,
       subtitle: 'Arranged by Phanilie',
-      thumbnailUrl: '/coversheets/sheet3.png',
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       badgeText: 'Performance Video',
       priceOrDuration: '4 mins',
       routeUrl: '/covers-sheets'
@@ -87,7 +87,7 @@ function simulateClientSearch(query: string): SearchResponse {
       title: 'Fur Elise (Jazz Ballad Solo Piano)',
       category: 'Performance Cover' as const,
       subtitle: 'Arranged by Stephanie Halim',
-      thumbnailUrl: '/coversheets/sheet4.png',
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       badgeText: 'Performance Video',
       priceOrDuration: '5 mins',
       routeUrl: '/covers-sheets'
@@ -100,7 +100,7 @@ function simulateClientSearch(query: string): SearchResponse {
       title: 'Moonlight Sonata - Full Piano Sheet PDF',
       category: 'Sheet Music' as const,
       subtitle: 'L. v. Beethoven • Arr. Stephanie',
-      thumbnailUrl: '/coversheets/sheet1.png',
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       badgeText: 'PDF Score',
       priceOrDuration: '$14.99',
       routeUrl: '/covers-sheets'
@@ -110,7 +110,7 @@ function simulateClientSearch(query: string): SearchResponse {
       title: 'Amazing Grace (Modern Jazz Re-Harmonization)',
       category: 'Sheet Music' as const,
       subtitle: 'Gospel Jazz • Arr. Phanilie',
-      thumbnailUrl: '/coversheets/sheet2.png',
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       badgeText: 'PDF Score',
       priceOrDuration: '$12.00',
       routeUrl: '/covers-sheets'

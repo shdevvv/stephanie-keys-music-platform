@@ -18,6 +18,33 @@ interface Cover {
 }
 
 
+const cleanTitle = (title: string) => title.replace(/\s*\([^)]*\)/g, '').trim();
+
+const TrebleClefCartIcon = ({ className = "w-3 h-3.5 text-current" }: { className?: string }) => (
+  <svg className={`${className} fill-current shrink-0`} viewBox="0 0 100 140">
+    <path d="M 54.7 115.5 C 50.5 119.3 45.3 121.2 39.7 120.7 C 33.2 120.1 27.7 116.5 24.9 110.6 C 22.2 104.9 22.8 98.3 26.4 93 C 30.5 87 37.3 83.2 44.6 82.8 L 44.6 45.8 C 41.5 47 38.6 48.9 36.1 51.3 C 30.2 57.1 27.1 64.8 27.5 73 C 27.9 81.5 32.2 89 39.3 93.4 C 41.4 94.7 42 97.5 40.7 99.6 C 39.4 101.7 36.6 102.3 34.5 101 C 25.2 95.2 19.5 85.3 19 74.2 C 18.5 63.5 22.5 53.5 30.2 45.9 C 34.2 41.9 39 39 44.3 37.4 L 44.3 25 C 44.3 20.4 46.3 16.1 49.7 13.2 C 53.5 10 58.4 8.5 63.4 9.1 C 68.4 9.7 72.8 12.5 75.5 16.7 C 78.2 20.9 78.9 26.1 77.4 30.9 C 76.1 35.1 73.2 38.6 69.3 40.6 C 67.1 41.7 64.5 41 63.4 38.8 C 62.3 36.6 63 34 65.2 32.9 C 67.7 31.6 69.6 29.4 70.4 26.7 C 71.3 23.6 70.9 20.2 69.2 17.5 C 67.5 14.8 64.6 13 61.4 12.6 C 58.1 12.2 54.9 13.2 52.4 15.3 C 50.3 17.1 49 19.8 49 22.7 L 49 36.2 C 53.7 37.3 58.1 39.6 61.8 42.9 C 67.7 48.2 71 55.5 71 63.3 C 71 71.4 67.4 78.9 61.1 83.9 C 55.3 88.5 48 90.7 40.7 90 C 42.7 87.4 46.1 85.6 49.8 84.8 L 49.8 110.7 C 53.7 110.5 57.4 108.9 60.1 106.2 C 63.8 102.6 65.9 97.6 65.9 92.4 C 65.9 88 63.6 83.8 59.7 81 C 57.5 79.4 57 76.6 58.6 74.4 C 60.2 72.2 63 71.7 65.2 73.3 C 70.7 77.3 73.9 83.5 73.9 90.1 C 73.9 99 69.9 107.5 63 113.5 C 60.6 115.6 57.7 116.5 54.7 115.5 Z M 39.7 112.5 C 43.5 112.5 46.5 109.5 46.5 105.7 C 46.5 101.9 43.5 98.9 39.7 98.9 C 35.9 98.9 32.9 101.9 32.9 105.7 C 32.9 109.5 35.9 112.5 39.7 112.5 Z" />
+  </svg>
+);
+
+const OrnateDownloadIcon = ({ className = "w-3.5 h-3.5 text-current" }: { className?: string }) => (
+  <svg className={`${className} shrink-0`} viewBox="0 0 24 24" fill="none">
+    <path 
+      d="M12 2.5V13.5M12 13.5L8.5 10M12 13.5L15.5 10" 
+      stroke="currentColor" 
+      strokeWidth="2.2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+    />
+    <path 
+      d="M4 16.5C4 18.5 7.58 20 12 20C16.42 20 20 18.5 20 16.5" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+    />
+    <circle cx="12" cy="13.5" r="0.8" fill="currentColor" />
+  </svg>
+);
+
 function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: CoverProps) {
   const [activeTab, setActiveTab] = useState<"videos" | "sheets" | "all">(initialTab)
 
@@ -28,9 +55,50 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
   }, [initialTab]);
 
   const [dbSheets, setDbSheets] = useState<Sheet[]>(localSheets)
-  // State for modals
-  const [activeVideo, setActiveVideo] = useState<Cover | null>(null)
-  const [activePreview, setActivePreview] = useState<Sheet | null>(null)
+  // State for modals with smooth 2-phase entry & exit transitions
+  const [activeVideo, setActiveVideoState] = useState<Cover | null>(null);
+  const [isVideoMounted, setIsVideoMounted] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+
+  const [activePreview, setActivePreviewState] = useState<Sheet | null>(null);
+  const [isPreviewMounted, setIsPreviewMounted] = useState(false);
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+
+  const setActivePreview = (sheet: Sheet | null) => {
+    if (sheet) {
+      setActivePreviewState(sheet);
+      setIsPreviewMounted(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsPreviewVisible(true);
+        });
+      });
+    } else {
+      setIsPreviewVisible(false);
+      setTimeout(() => {
+        setIsPreviewMounted(false);
+        setActivePreviewState(null);
+      }, 300);
+    }
+  };
+
+  const setActiveVideo = (cover: Cover | null) => {
+    if (cover) {
+      setActiveVideoState(cover);
+      setIsVideoMounted(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsVideoVisible(true);
+        });
+      });
+    } else {
+      setIsVideoVisible(false);
+      setTimeout(() => {
+        setIsVideoMounted(false);
+        setActiveVideoState(null);
+      }, 300);
+    }
+  };
 
   const [cartItems, setCartItems] = useState<string[]>([])
   const [purchasedSheets, setPurchasedSheets] = useState<string[]>([])
@@ -40,13 +108,31 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
       if (catalog && catalog.length > 0) {
         const mapped: Sheet[] = catalog.map(s => ({
           title: s.title,
-          description: `Arrangement by ${s.arranger || s.composer}. Key of ${s.keySignature || 'C Major'}. Difficulty: ${s.difficulty}.`,
+          description: '',
           price: `$${s.priceUSD ? s.priceUSD.toFixed(2) : '5.00'}`,
           genres: [(s.genre || 'Gospel') as any],
-          image: s.thumbnailUrl || '/coversheets/sheet1.png',
-          previews: ['/coversheets/sheet1.png', '/coversheets/sheet2.png']
+          image: s.thumbnailUrl || '/over-the-rainbow-cover.png',
+          previews: [
+            '/over-the-rainbow-page1.png',
+            '/over-the-rainbow-page2.png',
+            '/over-the-rainbow-page3.png',
+            '/over-the-rainbow-page4.png',
+            '/over-the-rainbow-page5.png',
+            '/over-the-rainbow-page6.png'
+          ],
+          keySignature: s.keySignature,
+          difficulty: s.difficulty,
+          pageCount: s.pageCount,
+          arranger: s.arranger || s.composer
         }));
-        setDbSheets(mapped);
+        // Ensure at least 5 items for display
+        if (mapped.length < 5) {
+          const existingTitles = new Set(mapped.map(m => m.title));
+          const extra = localSheets.filter(ls => !existingTitles.has(ls.title)).slice(0, 5 - mapped.length);
+          setDbSheets([...mapped, ...extra]);
+        } else {
+          setDbSheets(mapped);
+        }
       }
     }).catch(err => console.error("Error loading DB sheet music catalog:", err));
   }, []);
@@ -63,10 +149,10 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
       try {
         const purchasedSaved = localStorage.getItem('purchased_sheets')
-        const purchasedArr = purchasedSaved ? JSON.parse(purchasedSaved) : ['Mercy in the Keys']
+        const purchasedArr = purchasedSaved ? JSON.parse(purchasedSaved) : []
         setPurchasedSheets(purchasedArr)
       } catch (e) {
-        setPurchasedSheets(['Mercy in the Keys'])
+        setPurchasedSheets([])
       }
     }
 
@@ -75,25 +161,38 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
     return () => window.removeEventListener('storage', updateStatus)
   }, [])
 
-  const handleAddToCart = (sheet: Sheet) => {
+  const handleToggleCart = (sheet: Sheet) => {
     const cartSaved = localStorage.getItem('phanilie_cart');
     const cartArr = cartSaved ? JSON.parse(cartSaved) : [];
     const normalizedCart = cartArr.map((item: any) => {
       const freshSheet = dbSheets.find(s => s.title === item.sheet.title);
       return { ...item, sheet: freshSheet || item.sheet };
     });
-    const existingItem = normalizedCart.find((item: any) => item.sheet.title === sheet.title);
-    if (!existingItem) {
+    const existingIndex = normalizedCart.findIndex((item: any) => item.sheet.title === sheet.title);
+
+    if (existingIndex >= 0) {
+      // Remove from cart
+      normalizedCart.splice(existingIndex, 1);
+      localStorage.setItem('phanilie_cart', JSON.stringify(normalizedCart));
+      window.dispatchEvent(new Event('storage'));
+      setCartItems(prev => prev.filter(t => t !== sheet.title));
+      window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: { message: `"${cleanTitle(sheet.title)}" dihapus dari keranjang` }
+      }));
+    } else {
+      // Add to cart
       normalizedCart.push({ sheet, quantity: 1 });
       localStorage.setItem('phanilie_cart', JSON.stringify(normalizedCart));
+      window.dispatchEvent(new Event('storage'));
+      setCartItems(prev => prev.includes(sheet.title) ? prev : [...prev, sheet.title]);
+      window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: { message: `"${cleanTitle(sheet.title)}" ditambahkan ke keranjang` }
+      }));
     }
-    window.dispatchEvent(new Event('storage'));
-    setCartItems(prev => prev.includes(sheet.title) ? prev : [...prev, sheet.title]);
-    window.dispatchEvent(new CustomEvent('show-toast', { 
-      detail: { message: `"${sheet.title}" ditambahkan ke keranjang` } 
-    }));
-    window.dispatchEvent(new Event('open-slide-cart'));
   };
+  const handleAddToCart = handleToggleCart;
+  void cartItems;
+  void handleAddToCart;
 
   const handleDirectBuy = (sheet: Sheet) => {
     if (onSetBuyNowSheet) {
@@ -112,6 +211,18 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
       }
       if (onNavigate) onNavigate('checkout');
     }
+  };
+
+  const handleDownloadSheet = (sheetTitle: string) => {
+    const link = document.createElement('a');
+    link.href = '/Over the Rainbow.pdf';
+    link.download = `${cleanTitle(sheetTitle)}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.dispatchEvent(new CustomEvent('show-toast', {
+      detail: { message: `Mengunduh "${cleanTitle(sheetTitle)}.pdf"...` }
+    }));
   };
 
   // Multiselect Filters State for Covers
@@ -280,6 +391,27 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
       categories: ["Jazz Standards"],
       thumbnail: "/stephanie-piano-cover-thumb.jpg",
       videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
+    },
+    {
+      title: "How Great Is Our God (Indonesian-English)",
+      description: "A triumphant, rich worship piano cover blending grand gospel chords with delicate melodic embellishments.",
+      categories: ["English-Indonesian Christian Songs", "Gospel"],
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
+    },
+    {
+      title: "When You Wish Upon a Star",
+      description: "An enchanting Disney classic arranged with delicate jazz extensions, lush counter-point, and sparkling runs.",
+      categories: ["Disney", "Jazz Standards"],
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
+    },
+    {
+      title: "Silent Night (Lush Gospel Jazz Ballad)",
+      description: "A serene Christmas ballad featuring sophisticated gospel reharmonization, tritone passes, and warm voicings.",
+      categories: ["Christmas", "Gospel", "Jazz Standards"],
+      thumbnail: "/stephanie-piano-cover-thumb.jpg",
+      videoUrl: "https://www.youtube.com/embed/opeWi7v1Lqc"
     }
   ]
 
@@ -303,14 +435,14 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
   // Filtered Sheets (Supporting select one or more)
   const filteredSheets = dbSheets.filter(sheet => {
     const matchesGenre = selectedSheetGenres.includes('All') ||
-                         sheet.genres.some(g => selectedSheetGenres.includes(g))
+      sheet.genres.some(g => selectedSheetGenres.includes(g))
     const matchesSearch = sheet.title.toLowerCase().includes(sheetSearchQuery.toLowerCase()) ||
-                          sheet.description.toLowerCase().includes(sheetSearchQuery.toLowerCase())
+      sheet.description.toLowerCase().includes(sheetSearchQuery.toLowerCase())
     return matchesGenre && matchesSearch
   })
 
   // Pagination logic for Sheets
-  const sheetsPerPage = 10
+  const sheetsPerPage = 5
   const totalSheetPages = Math.ceil(filteredSheets.length / sheetsPerPage)
   const validCurrentSheetPage = Math.min(Math.max(1, currentSheetPage), totalSheetPages || 1)
   const sheetStartIndex = (validCurrentSheetPage - 1) * sheetsPerPage
@@ -348,7 +480,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
       {(activeTab === "all" || activeTab === "videos") && (
         <section className="pt-10 pb-6 relative overflow-hidden flex flex-col h-auto">
           {/* Background image layer - Studio Keyboard setup */}
-          <div 
+          <div
             className="absolute inset-0 z-0 pointer-events-none"
             style={{
               backgroundImage: "url('/video-studio-bg.jpg')",
@@ -357,7 +489,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
             }}
           />
           {/* High white overlay opacity */}
-          <div 
+          <div
             className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-white/78 via-white/82 to-white/86"
           />
           {/* Ambient background decoration */}
@@ -366,8 +498,8 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
           <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 space-y-6">
             {/* Video Covers Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
-              {covers.slice(0, 10).map((cover, index) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
+              {covers.slice(0, 15).map((cover, index) => (
                 <div
                   key={index}
                   onClick={() => setActiveVideo(cover)}
@@ -399,7 +531,10 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
                   {/* Content details - Clean Calm Song Title */}
                   <div className="p-3 flex-grow flex flex-col justify-center">
-                    <h3 className="font-sans text-xs font-medium text-[#73574b] group-hover:text-[#b56e60] transition-colors leading-snug line-clamp-2">
+                    <h3 
+                      style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
+                      className="text-[12.5px] font-bold text-[#4a2c20] group-hover:text-[#9e5241] transition-colors leading-snug line-clamp-2 tracking-tight"
+                    >
                       {cover.title}
                     </h3>
                   </div>
@@ -431,217 +566,291 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
       {/* SECTION 2: SHEET MUSIC SHOP */}
       {(activeTab === "all" || activeTab === "sheets") && (
-        <section 
-          className="py-20 relative overflow-hidden flex-grow flex flex-col"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/sheetss.png')",
-            backgroundSize: "150%",
-            backgroundPosition: "center",
-          }}
-        >
-
-        <div className="max-w-[1200px] mx-auto px-6 space-y-12 relative z-10">
-          {/* Section Header */}
-          <div className="pb-6 border-b border-[#dfa38f]/30 flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <h2 className="font-display-lg text-2xl md:text-3xl text-[#7a483a] font-black tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
-                Sheet Music Shop
-              </h2>
-              <p className="font-sans text-xs sm:text-sm text-[#b06f5e] font-bold mt-1.5 tracking-wide">
-                Get high-quality sheet music PDFs to play from Stephanie Keys.
-              </p>
-            </div>
-            
-            {/* Compact Top Pagination Controls for Sheets */}
-            {totalSheetPages > 1 && (
-              <div className="flex items-center gap-2.5 bg-white/60 backdrop-blur-md px-2.5 py-1.5 rounded-[4px] border border-[#e8cdc1]/30 text-xs text-[#5c453c] font-bold shadow-sm ml-auto">
-                <button
-                  type="button"
-                  disabled={validCurrentSheetPage === 1}
-                  onClick={() => setCurrentSheetPage(prev => Math.max(prev - 1, 1))}
-                  className="p-0.5 hover:bg-[#f6eae0] text-[#ab7e66] disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer border-none bg-transparent flex items-center justify-center rounded"
-                  title="Previous Page"
-                >
-                  <span className="material-symbols-outlined text-base">chevron_left</span>
-                </button>
-                <span className="select-none text-[#4a372e] font-sans">
-                  Page {validCurrentSheetPage} of {totalSheetPages}
-                </span>
-                <button
-                  type="button"
-                  disabled={validCurrentSheetPage === totalSheetPages}
-                  onClick={() => setCurrentSheetPage(prev => Math.min(prev + 1, totalSheetPages))}
-                  className="p-0.5 hover:bg-[#f6eae0] text-[#ab7e66] disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer border-none bg-transparent flex items-center justify-center rounded"
-                  title="Next Page"
-                >
-                  <span className="material-symbols-outlined text-base">chevron_right</span>
-                </button>
-              </div>
-            )}
+        <section className="py-20 relative overflow-hidden flex-grow flex flex-col">
+          {/* Zoomed Background Image Layer (Cropping plants/leaves on left & right) */}
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+            <img
+              src="/stephanie-music-shop.png"
+              alt="Sheet Music Shop Background"
+              className="w-full h-full object-cover object-center scale-135 sm:scale-140 md:scale-145 lg:scale-150 transition-transform duration-500"
+            />
+            {/* White overlay 0.45 */}
+            <div className="absolute inset-0 bg-white/45" />
           </div>
 
-          {/* Unified 1-Row Control Bar (Search left, Filters right) */}
-          <div className="flex flex-wrap items-center gap-4 bg-white/60 backdrop-blur-md p-3 rounded-[6px] border border-white/50">
-            {/* Search Input inline (LEFT) */}
-            <div className="relative flex-grow sm:flex-grow-0 sm:w-60">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#ab7e66] select-none">
-                search
-              </span>
-              <input
-                type="text"
-                value={sheetSearchQuery}
-                onChange={(e) => {
-                  setSheetSearchQuery(e.target.value)
-                  setCurrentSheetPage(1)
-                }}
-                placeholder="Search sheet music..."
-                className="w-full pl-9 pr-4 py-2 bg-white border border-[#e8cdc1]/40 rounded-[4px] text-xs text-[#4a372e] focus:outline-none focus:ring-2 focus:ring-[#856758]/30 placeholder-[#ab7e66]/50 shadow-xs"
-              />
-            </div>
+          <div className="max-w-[1200px] mx-auto px-6 space-y-12 relative z-10">
+            {/* LUXURY 1-LINE HORIZONTAL BAR IN GLOSSY ROSE GOLD */}
+            <div 
+              style={{
+                background: "linear-gradient(135deg, #FAF0EB 0%, #F5DACE 30%, #E8BCAC 60%, #D49C8B 85%, #C28675 100%)",
+                boxShadow: "inset 0 1.5px 2px #FFFFFF, inset 0 -2px 4px #996252, 0 8px 30px rgba(181, 114, 98, 0.22)",
+                border: "2px solid #EAC4B1",
+              }}
+              className="relative rounded-2xl p-3.5 md:p-4 overflow-hidden"
+            >
+              {/* Single Horizontal Flex Row */}
+              <div className="flex flex-wrap lg:flex-nowrap items-center gap-4 lg:gap-6 relative z-10">
+                {/* 1. Refined, Elegant & Compact Title (Sharp Vector Text) */}
+                <h2 
+                  style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
+                  className="font-display-lg text-lg md:text-xl lg:text-[22px] text-[#5e2b1e] font-extrabold tracking-tight whitespace-nowrap shrink-0 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]"
+                >
+                  Sheet Music Shop
+                </h2>
 
-            {/* Vertical Divider (Hidden on small screens) */}
-            <div className="hidden lg:block w-px h-6 bg-[#dfa38f]/30 mx-2"></div>
-
-            {/* Filter pills (RIGHT) */}
-            <div className="flex flex-wrap items-center gap-3 lg:ml-auto">
-              <span className="text-xs font-extrabold text-[#4a372e] uppercase tracking-wider whitespace-nowrap">
-                Filter by Genre:
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {['All', 'Jazz', 'Gospel', 'Christmas', 'Disney'].map((genre) => {
-                  const isSelected = selectedSheetGenres.includes(genre)
-                  return (
-                    <button
-                      key={genre}
-                      onClick={() => toggleSheetGenre(genre)}
-                      className={`px-5 py-2.5 rounded-[4px] text-xs font-bold transition-all duration-300 border cursor-pointer ${
-                        isSelected
-                          ? 'bg-gradient-to-br from-[#d29070] via-[#ab7e66] to-[#856758] border-none text-white shadow-md'
-                          : 'bg-white/70 backdrop-blur-md border-[#e8cdc1]/30 text-[#6e5a51] hover:bg-white hover:border-[#ab7e66]'
-                      }`}
-                    >
-                      {genre} {isSelected && genre !== 'All' && '✓'}
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Sheets Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {paginatedSheets.map((sheet, index) => (
-              <div
-                key={index}
-                className="group bg-white/90 backdrop-blur-xl border border-white rounded-[6px] shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
-              >
-                {/* Image Preview Container */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#fcf8f6] border-b border-[#e8cdc1]/20 rounded-t-[6px]">
-                  <img
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102 select-none"
-                    src={sheet.image}
-                    alt={sheet.title}
+                {/* 2. Light Soft Translucent Search Bar (Rose Gold Border From Start) */}
+                <div className="relative flex-grow min-w-[200px] max-w-sm lg:max-w-md">
+                  <input
+                    type="text"
+                    value={sheetSearchQuery}
+                    onChange={(e) => {
+                      setSheetSearchQuery(e.target.value)
+                      setCurrentSheetPage(1)
+                    }}
+                    placeholder="Search sheet music..."
+                    className="w-full pl-9.5 pr-3.5 py-2 md:py-2.5 bg-white/85 hover:bg-white focus:bg-white border-2 border-[#dfa38f] hover:border-[#c58270] focus:border-[#c58270] focus:ring-2 focus:ring-[#e8b4a2]/40 rounded-xl text-xs font-semibold text-[#52352b] placeholder-[#8c675a] transition-all duration-300 outline-none shadow-xs"
                   />
-                  <div className="absolute top-2 left-2 flex flex-wrap gap-0.5 max-w-[65%]">
-                    {sheet.genres.map((g, i) => (
-                      <span key={i} className="bg-white/95 backdrop-blur-md px-1.5 py-0.5 rounded-[2px] text-[8px] font-extrabold text-[#856758] uppercase tracking-wider border border-[#e8cdc1]/25 select-none">
-                        {g}
-                      </span>
-                    ))}
+                    {/* Ornate Metallic Rose-Gold Magnifying Glass Icon (Matching Navbar Precision Exactly) */}
+                    <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 shrink-0 pointer-events-none" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M10.5 3a7.5 7.5 0 104.83 13.25l4.71 4.71a1 1 0 001.42-1.42l-4.71-4.71A7.5 7.5 0 0010.5 3zm0 2a5.5 5.5 0 110 11 5.5 5.5 0 010-11z"
+                        fill="url(#sheet-magnifier-gold)"
+                      />
+                      <path
+                        d="M10.5 5.5a5 5 0 100 10 5 5 0 000-10z"
+                        fill="none"
+                        stroke="url(#sheet-magnifier-gold)"
+                        strokeWidth="0.6"
+                      />
+                      <circle cx="10.5" cy="10.5" r="3.2" fill="none" stroke="url(#sheet-magnifier-highlight)" strokeWidth="0.5" strokeDasharray="1 1" />
+                      <defs>
+                        <linearGradient id="sheet-magnifier-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#f8e8df" />
+                          <stop offset="35%" stopColor="#eac4b1" />
+                          <stop offset="70%" stopColor="#dfa38f" />
+                          <stop offset="100%" stopColor="#996252" />
+                        </linearGradient>
+                        <linearGradient id="sheet-magnifier-highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#ffffff" />
+                          <stop offset="100%" stopColor="#eac4b1" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
                   </div>
 
-                </div>
-
-                {/* Content and Buy triggers */}
-                <div className="p-3.5 flex-grow flex flex-col justify-between gap-3">
-                  <div className="space-y-1">
-                    <h3 className="font-sans text-xs font-bold text-[#4a372e] leading-snug group-hover:text-[#856758] transition-colors duration-250 truncate">
-                      {sheet.title}
-                    </h3>
-                    <p className="font-sans text-[10px] text-[#7c6a60] leading-relaxed line-clamp-2">
-                      {sheet.description}
-                    </p>
-                  </div>
-
-                  <div className="flex gap-1 pt-3 border-t border-dashed border-[#e8cdc1]/40 mt-auto">
-                    <button
-                      onClick={() => setActivePreview(sheet)}
-                      className="flex-1 py-2 px-1 bg-[#f3ecea] hover:bg-[#e8cdc1] text-[#6e5a51] font-bold text-[9px] rounded-[4px] transition-all duration-200 cursor-pointer flex items-center justify-center gap-0.5 border-none active:scale-[0.97]"
-                    >
-                      Preview
-                    </button>
-                    {(() => {
-                      const isOwned = purchasedSheets.includes(sheet.title);
-                      const isInCart = cartItems.includes(sheet.title);
-                      if (isOwned) {
+                  {/* 3. Filter by Genre (Light Soft Translucent Buttons, Zero Blur) */}
+                  <div className="flex items-center gap-2.5 flex-wrap shrink-0 ml-auto">
+                    <span className="text-[11px] md:text-xs font-black text-[#5e2b1e] uppercase tracking-wider whitespace-nowrap">
+                      FILTER BY GENRE:
+                    </span>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {['All', 'Jazz', 'Gospel', 'Christmas'].map((genre) => {
+                        const isSelected = selectedSheetGenres.includes(genre)
                         return (
                           <button
-                            disabled
-                            className="flex-1 py-2 px-1 bg-[#e3dbd8] text-[#8b7a72] font-bold text-[9px] rounded-[4px] cursor-default flex items-center justify-center gap-0.5 border-none opacity-85"
+                            key={genre}
+                            type="button"
+                            onClick={() => toggleSheetGenre(genre)}
+                            style={{
+                              outline: 'none',
+                              WebkitTapHighlightColor: 'transparent',
+                              ...(isSelected ? {
+                                background: "linear-gradient(135deg, #FFFFFF 0%, #FFF5F0 50%, #FCE8DF 100%)",
+                                boxShadow: "0 2px 8px rgba(181, 116, 98, 0.3), inset 0 1px 1px #FFFFFF",
+                                border: "1.5px solid #d48f7d"
+                              } : {
+                                background: "rgba(255, 255, 255, 0.65)",
+                                border: "1px solid #e5c3b6"
+                              })
+                            }}
+                            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-250 cursor-pointer outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 select-none ${isSelected
+                              ? 'text-[#5e2b1e] font-extrabold shadow-sm'
+                              : 'text-[#6b463b] hover:bg-white/95 hover:text-[#5e2b1e] hover:border-[#c58270]'
+                              }`}
                           >
-                            <span className="material-symbols-outlined text-xs select-none font-bold">check</span>
-                            Owned
+                            {genre} {isSelected && genre !== 'All' && <span className="text-[#c55338] font-black ml-0.5">✓</span>}
                           </button>
-                        );
-                      }
-                      return (
-                        <>
-                          {isInCart ? (
-                            <button
-                              onClick={() => window.dispatchEvent(new Event('open-slide-cart'))}
-                              className="flex-1 py-2 px-1 bg-[#f5e2dc] hover:bg-[#eed5cb] text-[#c28472] font-bold text-[9px] rounded-[4px] cursor-pointer flex items-center justify-center gap-0.5 border-none transition-all"
-                              title="View in cart"
-                            >
-                              <span className="material-symbols-outlined text-xs select-none font-bold">shopping_cart</span>
-                              In Cart
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => handleAddToCart(sheet)}
-                              className="flex-1 py-2 px-1 bg-[#fbf3ef] hover:bg-[#f3e4dc] border border-[#dfa38f]/40 text-[#856758] font-bold text-[9px] rounded-[4px] transition-all duration-200 cursor-pointer flex items-center justify-center gap-0.5 active:scale-[0.97]"
-                              title="Add to cart"
-                            >
-                              <span className="material-symbols-outlined text-xs select-none font-bold">add_shopping_cart</span>
-                              Cart
-                            </button>
-                          )}
-                          <button
-                            onClick={() => handleDirectBuy(sheet)}
-                            className="flex-1 py-2 px-1 bg-gradient-to-br from-[#d29070] via-[#ab7e66] to-[#856758] text-white hover:shadow-md font-bold text-[9px] rounded-[4px] transition-all duration-200 cursor-pointer flex items-center justify-center gap-0.5 border-none active:scale-[0.97]"
-                            title="Buy Now"
-                          >
-                            <span className="material-symbols-outlined text-xs select-none font-bold">bolt</span>
-                            Buy
-                          </button>
-                        </>
-                      );
-                    })()}
+                        )
+                      })}
+                    </div>
+
+                    {/* 4. Compact Pagination Controls */}
+                    {totalSheetPages > 1 && (
+                      <div className="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-full border border-[#e5b3a3] text-xs text-[#5c453c] font-bold shrink-0 ml-1">
+                        <button
+                          type="button"
+                          disabled={validCurrentSheetPage === 1}
+                          onClick={() => setCurrentSheetPage(prev => Math.max(prev - 1, 1))}
+                          className="p-0.5 hover:bg-[#f6eae0] text-[#a65d4c] disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer border-none bg-transparent flex items-center justify-center rounded-full"
+                          title="Previous Page"
+                        >
+                          <span className="material-symbols-outlined text-sm">chevron_left</span>
+                        </button>
+                        <span className="select-none text-[#4a372e] font-sans font-extrabold px-1 text-[11px]">
+                          {validCurrentSheetPage}/{totalSheetPages}
+                        </span>
+                        <button
+                          type="button"
+                          disabled={validCurrentSheetPage === totalSheetPages}
+                          onClick={() => setCurrentSheetPage(prev => Math.min(prev + 1, totalSheetPages))}
+                          className="p-0.5 hover:bg-[#f6eae0] text-[#a65d4c] disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer border-none bg-transparent flex items-center justify-center rounded-full"
+                          title="Next Page"
+                        >
+                          <span className="material-symbols-outlined text-sm">chevron_right</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {filteredSheets.length === 0 && (
-            <div className="text-center py-20 bg-white/90 border border-dashed border-[#e8cdc1]/30 rounded-[6px] max-w-md mx-auto">
-              <span className="material-symbols-outlined text-4xl text-[#ab7e66]/40 select-none">library_books</span>
-              <p className="font-sans text-sm text-[#4a372e] mt-3 font-bold">No sheet music found</p>
-              <p className="font-sans text-xs text-[#7c6a60] mt-1 max-w-xs mx-auto leading-relaxed">
-                We couldn't find any sheet music matching "{sheetSearchQuery}". Try looking for another title or genre.
-              </p>
+            {/* Sheets Grid Wrapper with Fixed Minimum Height so box doesn't shrink when empty or low items */}
+            <div className="min-h-[440px] flex flex-col justify-start">
+              {filteredSheets.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                  {paginatedSheets.map((sheet, index) => (
+                    <div
+                      key={index}
+                      className="group bg-white border-[2.5px] border-[#dfa38f] hover:border-[#c58270] rounded-xl shadow-[0_4px_16px_rgba(223,163,143,0.2)] hover:shadow-[0_8px_24px_rgba(197,130,112,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden"
+                    >
+                      {/* Image Preview Container - Taller Portrait Sheet View */}
+                      <div className="relative aspect-[4/5] overflow-hidden bg-white border-b border-[#e8cdc1]/40 rounded-t-lg">
+                        <img
+                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-102 select-none"
+                          src={sheet.image}
+                          alt={sheet.title}
+                        />
+                      </div>
+
+                      {/* Content and Buy triggers */}
+                      <div className="p-3 flex-grow flex flex-col justify-between gap-2.5">
+                        <div className="flex items-center justify-between gap-1.5 min-w-0">
+                          <h3 
+                            style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
+                            className="text-[13px] md:text-[13.5px] font-bold text-[#4a2c20] leading-snug group-hover:text-[#995343] transition-colors duration-250 truncate flex-1 tracking-tight" 
+                            title={cleanTitle(sheet.title)}
+                          >
+                            {cleanTitle(sheet.title)}
+                          </h3>
+                          {(() => {
+                            const isOwned = purchasedSheets.includes(sheet.title);
+                            const isInCart = cartItems.includes(sheet.title);
+                            if (isOwned) return null;
+                            return (
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleAddToCart(sheet);
+                                }}
+                                style={{
+                                  outline: "none",
+                                  WebkitTapHighlightColor: "transparent",
+                                  boxShadow: "none",
+                                }}
+                                className={`w-6.5 h-6.5 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 ease-out border-[1.5px] shrink-0 select-none outline-none focus:outline-none focus-visible:outline-none ${
+                                  isInCart
+                                    ? "bg-[#b58474] border-[#a47363] text-white scale-105"
+                                    : "bg-white border-[#dfa38f] text-[#dfa38f] hover:border-[#c58270] hover:scale-110 active:scale-95"
+                                }`}
+                                title={isInCart ? "In Cart (Click to remove)" : "Add to Cart"}
+                              >
+                                <svg className="w-3.5 h-3.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <circle cx="9" cy="21" r="1" fill="currentColor" />
+                                  <circle cx="20" cy="21" r="1" fill="currentColor" />
+                                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                                </svg>
+                              </button>
+                            );
+                          })()}
+                        </div>
+
+                        <div className="flex gap-2 pt-2.5 border-t border-dashed border-[#e8cdc1]/40 mt-auto">
+                          <button
+                            onClick={() => {
+                              setActivePreview(sheet);
+                            }}
+                            className="flex-1 py-2 px-2 bg-[#faf5f2] hover:bg-[#f3ece8] text-[#644137] font-semibold text-xs rounded-[4px] transition-all duration-300 ease-out cursor-pointer flex items-center justify-center border-[1.5px] border-[#dfa38f] hover:border-[#c58270] shadow-[0_2px_6px_rgba(223,163,143,0.15)] active:scale-[0.98]"
+                          >
+                            View
+                          </button>
+                          {(() => {
+                            const isOwned = purchasedSheets.includes(sheet.title);
+                            if (isOwned) {
+                              return (
+                                <button
+                                  onClick={() => handleDownloadSheet(sheet.title)}
+                                  style={{
+                                    background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                                    boxShadow: "inset 0 1px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 3px 8px rgba(181, 116, 98, 0.28)",
+                                  }}
+                                  className="flex-1 py-2 px-2 text-white font-bold text-xs rounded-[4px] border border-[#dfa38f] hover:brightness-110 transition-all duration-300 ease-out cursor-pointer flex items-center justify-center gap-1 active:scale-[0.98]"
+                                  title="Download PDF"
+                                >
+                                  <OrnateDownloadIcon className="w-3.5 h-3.5 text-white" />
+                                  Download
+                                </button>
+                              );
+                            }
+                            return (
+                              <button
+                                onClick={() => handleDirectBuy(sheet)}
+                                style={{
+                                  background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                                  boxShadow: "inset 0 1px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 3px 8px rgba(181, 116, 98, 0.28)",
+                                }}
+                                className="flex-1 py-2 px-2 text-white font-bold text-xs rounded-[4px] border border-[#dfa38f] hover:brightness-110 transition-all duration-300 ease-out cursor-pointer flex items-center justify-center gap-1 active:scale-[0.98]"
+                                title="Buy Sheet Music"
+                              >
+                                <TrebleClefCartIcon className="w-3 h-3 text-white" />
+                                Buy
+                              </button>
+                            );
+                          })()}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-[#fdf9f7] rounded-2xl p-8 md:p-10 text-center border-[2.5px] border-[#dfa38f] shadow-[0_8px_30px_rgba(223,163,143,0.22)] max-w-md mx-auto my-auto flex flex-col items-center justify-center space-y-3.5 w-full">
+                  <div 
+                    style={{
+                      background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 30%, #D9A998 60%, #B58474 100%)",
+                      boxShadow: "inset 0 1px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 4px 12px rgba(181, 116, 98, 0.25)",
+                      border: "1.5px solid #F5D3C4",
+                    }}
+                    className="w-13 h-13 rounded-full flex items-center justify-center text-white shrink-0 mb-0.5"
+                  >
+                    <span className="material-symbols-outlined text-2xl select-none font-bold drop-shadow-[0_1px_2px_rgba(100,40,30,0.4)]">queue_music</span>
+                  </div>
+                  <h3 className="font-sans text-base md:text-[17px] font-semibold text-[#543d33] tracking-tight">
+                    No sheet music found
+                  </h3>
+                  <p 
+                    style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
+                    className="text-sm md:text-base text-[#7d5e52] italic leading-relaxed max-w-xs font-semibold tracking-wide"
+                  >
+                    Try looking for another title or genre.
+                  </p>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
       )}
       {/* MODAL 1: SIMULATED VIDEO PLAYER MODAL */}
-      {activeVideo && (
-        <div 
-          className="fixed inset-0 z-[100] bg-black/[0.08] backdrop-blur-[2px] flex items-center justify-center p-4 sm:p-6 animate-modal-backdrop"
+      {isVideoMounted && activeVideo && (
+        <div
+          className={`fixed inset-0 z-[100] bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 transition-all duration-300 ease-out ${
+            isVideoVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
           onClick={() => setActiveVideo(null)}
         >
-          <div 
-            className="relative w-full max-w-2xl bg-white/75 backdrop-blur-md rounded-[10px] p-1.5 sm:p-2 shadow-[0_16px_45px_rgba(100,50,40,0.15)] border-2 border-[#dca698] animate-modal-card flex flex-col items-center"
+          <div
+            className={`relative w-full max-w-2xl bg-white rounded-[10px] p-1.5 sm:p-2 shadow-[0_20px_50px_rgba(100,50,40,0.22)] border-2 border-[#dca698] flex flex-col items-center transition-all duration-300 ease-out transform ${
+              isVideoVisible ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 translate-y-4"
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Video Frame - Symmetrical Tight Padding All Around */}
@@ -666,129 +875,137 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
         </div>
       )}
 
-      {/* MODAL 2: SHEET MUSIC PREVIEW OVERLAY */}
-      {activePreview && (
-        <div 
-          className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
+      {/* MODAL 2: SHEET MUSIC PREVIEW OVERLAY (Compact Size & Clean Portrait Paper) */}
+      {isPreviewMounted && activePreview && (
+        <div
+          className={`fixed inset-0 z-[100] bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 md:p-6 transition-all duration-300 ease-out ${
+            isPreviewVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
           onClick={() => setActivePreview(null)}
         >
-          <div 
-            className="max-w-5xl w-full h-full max-h-[90vh] bg-white border border-[#e8cdc1]/30 shadow-2xl rounded-[6px] flex flex-col overflow-hidden"
+          <div
+            className={`relative w-full max-w-[680px] max-h-[85vh] bg-white border border-[#dfa38f] shadow-[0_20px_60px_rgba(100,50,40,0.25)] rounded-xl flex flex-col overflow-hidden mx-auto transition-all duration-300 ease-out transform ${
+              isPreviewVisible ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 translate-y-4"
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
-            <div className="flex justify-between items-center px-8 py-5 border-b border-[#e8cdc1]/20">
-              <div>
-                <h2 className="font-sans text-base font-bold text-[#4a372e]">{activePreview.title} - Arrangement Preview</h2>
-                <p className="text-[#7c6a60] text-[11px] font-medium mt-0.5">Previewing first 2 pages of the arrangement</p>
-              </div>
-              <button 
-                className="w-9 h-9 flex items-center justify-center rounded-[4px] bg-[#f3ecea] hover:bg-[#e8cdc1] transition-colors border-none cursor-pointer" 
-                onClick={() => setActivePreview(null)}
-              >
-                <span className="material-symbols-outlined text-lg select-none">close</span>
-              </button>
-            </div>
+            {/* Close Button Top Right - Rose Gold Outline & Cross Icon */}
+            <button
+              onClick={() => setActivePreview(null)}
+              className="absolute top-3 right-3 z-30 w-7.5 h-7.5 flex items-center justify-center rounded-full bg-white hover:bg-[#fbf2ee] text-[#c58270] hover:text-[#995343] border-[1.5px] border-[#dfa38f] hover:border-[#c58270] transition-all duration-200 cursor-pointer active:scale-95 shadow-xs"
+              title="Close"
+            >
+              <span className="material-symbols-outlined text-base select-none font-bold">close</span>
+            </button>
 
-            {/* Modal Content */}
-            <div className="flex-grow flex flex-col md:flex-row gap-6 p-6 overflow-hidden bg-[#fcf8f6]">
-              {/* Preview Pages Scroll */}
-              <div className="flex-grow bg-[#fff5f2]/80 border border-[#e8cdc1]/10 rounded-[6px] p-6 md:p-10 overflow-y-auto shadow-inner relative max-h-[50vh] md:max-h-full">
-                <div className="max-w-2xl mx-auto space-y-8">
-                  {activePreview.previews.map((src, index) => (
-                    <img 
-                      key={index}
-                      className="w-full shadow-md border border-[#e8cdc1]/20 bg-white" 
-                      alt={`Page ${index + 1} of ${activePreview.title}`}
-                      src={src}
-                    />
-                  ))}
-                </div>
-                {/* Watermark overlay */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
-                  <span className="font-display-lg text-6xl md:text-8xl text-primary -rotate-12">PREVIEW ONLY</span>
+            {/* Modal Content - Equal height stretch */}
+            <div className="flex-grow flex flex-col md:flex-row items-stretch gap-4 p-5 pt-6 overflow-y-auto bg-[#fffcfb]">
+              {/* Main Left: Sheet Music Portrait Paper - Height matched with right panel */}
+              <div className="flex justify-center items-center shrink-0 mx-auto md:mx-0">
+                <div className="relative flex items-center justify-center rounded-md shadow-md border border-[#e8cdc1]/40 bg-white overflow-hidden p-1 max-h-[58vh] aspect-[1/1.414] shrink-0">
+                  <img
+                    className="w-full h-full object-contain select-none transition-all duration-300 rounded-xs"
+                    alt={`Page 1 Preview of ${cleanTitle(activePreview.title)}`}
+                    src={activePreview.previews?.[0] || activePreview.image}
+                  />
+                  {/* Watermark overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.05] select-none">
+                    <span className="font-display-lg text-3xl md:text-5xl text-primary -rotate-12">PREVIEW ONLY</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Sidebar Actions */}
-              <div className="w-full md:w-64 shrink-0 flex flex-col justify-between gap-6 overflow-y-auto pr-1">
-                <div className="bg-white p-5 rounded-[6px] border border-[#e8cdc1]/20 space-y-4">
-                  <h4 className="font-sans text-xs font-bold text-[#4a372e] uppercase tracking-wider">Transcribed Package</h4>
-                  <ul className="space-y-3 list-none p-0 m-0">
-                    <li className="flex items-center gap-2.5 text-xs text-[#7c6a60] font-medium">
-                      <span className="material-symbols-outlined text-[#856758] text-base select-none" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                      PDF Transcribed Sheets
-                    </li>
-                    <li className="flex items-center gap-2.5 text-xs text-[#7c6a60] font-medium">
-                      <span className="material-symbols-outlined text-[#856758] text-base select-none" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                      MIDI Playback File
-                    </li>
-                    <li className="flex items-center gap-2.5 text-xs text-[#7c6a60] font-medium">
-                      <span className="material-symbols-outlined text-[#856758] text-base select-none" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                      Lush Chord Chart
-                    </li>
-                  </ul>
+              {/* Main Right: Product Information & Purchase CTAs - Matched height */}
+              <div className="flex-1 w-full min-w-[240px] flex flex-col justify-between gap-3 overflow-y-auto pr-0.5">
+                <div className="space-y-4">
+                  <div>
+                    <h3 
+                      style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
+                      className="text-base md:text-[18px] font-bold text-[#4a241b] leading-snug tracking-tight"
+                    >
+                      {cleanTitle(activePreview.title)}
+                    </h3>
+                    <div className="text-2xl font-black text-[#5e2b1e] mt-1.5">{activePreview.price}</div>
+                  </div>
+
+                  {/* Metadata Specs Grid - 6 Items */}
+                  <div className="grid grid-cols-2 gap-2.5 bg-[#fdf9f7] p-3.5 rounded-xl border-2 border-[#dfa38f] text-xs">
+                    <div>
+                      <span className="text-[#8c7467] font-semibold block text-[10px] uppercase tracking-wider">Key</span>
+                      <span className="font-bold text-[#6e5448]">{activePreview.keySignature || 'C Major'}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8c7467] font-semibold block text-[10px] uppercase tracking-wider">Difficulty</span>
+                      <span className="font-bold text-[#6e5448]">{activePreview.difficulty || 'Intermediate'}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8c7467] font-semibold block text-[10px] uppercase tracking-wider">Pages</span>
+                      <span className="font-bold text-[#6e5448]">{activePreview.pageCount ? `${activePreview.pageCount} Pages` : '4 Pages'}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8c7467] font-semibold block text-[10px] uppercase tracking-wider">Format</span>
+                      <span className="font-bold text-[#6e5448]">Digital PDF</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8c7467] font-semibold block text-[10px] uppercase tracking-wider">Genre / Style</span>
+                      <span className="font-bold text-[#6e5448] truncate block">{activePreview.genres?.join(', ') || 'Gospel / Jazz'}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8c7467] font-semibold block text-[10px] uppercase tracking-wider">Arranged By</span>
+                      <span className="font-bold text-[#6e5448] truncate block">{activePreview.arranger || 'Stephanie Halim'}</span>
+                    </div>
+                  </div>
+
+                  {/* Description & Purchase Note */}
+                  <div className="space-y-2">
+                    <p className="text-xs text-[#6e5a51] leading-relaxed font-medium">
+                      Complete solo piano score in high-resolution PDF. Instant download with lifetime access to your file.
+                    </p>
+                    <p className="text-xs text-[#6e5a51] leading-relaxed font-medium italic">
+                      The download link will be sent automatically to your email immediately after purchase.
+                    </p>
+                  </div>
                 </div>
-                             <div className="space-y-3">
+
+                {/* CTAs */}
+                <div className="space-y-2.5 pt-1">
                   {(() => {
                     const isOwned = purchasedSheets.includes(activePreview.title);
-                    const isInCart = cartItems.includes(activePreview.title);
                     if (isOwned) {
                       return (
-                        <button 
-                          disabled
-                          className="w-full bg-[#e3dbd8] text-[#8b7a72] py-3.5 rounded-[4px] font-bold text-sm border-none cursor-default opacity-85 text-center flex items-center justify-center gap-1.5"
+                        <button
+                          onClick={() => handleDownloadSheet(activePreview.title)}
+                          style={{
+                            background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 3px 10px rgba(181, 116, 98, 0.3)",
+                          }}
+                          className="w-full py-2.5 rounded-[4px] text-white font-bold text-xs cursor-pointer text-center flex items-center justify-center gap-1.5 border border-[#dfa38f] transition-all duration-300 ease-out hover:brightness-110 active:scale-[0.98]"
+                          title="Download PDF Sheet Music"
                         >
-                          <span className="material-symbols-outlined text-base select-none">check</span>
-                          Owned / In Library
+                          <OrnateDownloadIcon className="w-4 h-4 text-white" />
+                          Download Sheet Music (PDF)
                         </button>
                       );
                     }
                     return (
                       <div className="flex flex-col gap-2">
-                        {isInCart ? (
-                          <button 
-                            onClick={() => {
-                              setActivePreview(null);
-                              window.dispatchEvent(new Event('open-slide-cart'));
-                            }}
-                            className="w-full bg-[#f5e2dc] hover:bg-[#eed5cb] text-[#c28472] py-3 rounded-[4px] font-bold text-xs border-none cursor-pointer text-center flex items-center justify-center gap-1.5"
-                          >
-                            <span className="material-symbols-outlined text-base select-none">shopping_cart</span>
-                            View In Cart
-                          </button>
-                        ) : (
-                          <button 
-                            onClick={() => {
-                              handleAddToCart(activePreview);
-                              setActivePreview(null);
-                            }}
-                            className="w-full bg-white border border-[#dfa38f]/60 hover:bg-[#fbf3ef] text-[#856758] py-3 rounded-[4px] font-bold text-xs cursor-pointer text-center flex items-center justify-center gap-1.5 transition-colors"
-                          >
-                            <span className="material-symbols-outlined text-base select-none">add_shopping_cart</span>
-                            Add to Cart
-                          </button>
-                        )}
-                        <button 
+                        <button
                           onClick={() => {
                             const sheetToBuy = activePreview;
                             setActivePreview(null);
                             handleDirectBuy(sheetToBuy);
                           }}
-                          className="w-full bg-gradient-to-br from-[#d29070] via-[#ab7e66] to-[#856758] text-white py-3 rounded-[4px] font-bold text-xs shadow-md hover:shadow-lg transition-all border-none cursor-pointer flex items-center justify-center gap-1.5 active:scale-[0.97]"
+                          style={{
+                            background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 3px 10px rgba(181, 116, 98, 0.3)",
+                          }}
+                          className="w-full py-2.5 rounded-[4px] text-white font-bold text-xs cursor-pointer text-center flex items-center justify-center border border-[#dfa38f] transition-all duration-300 ease-out hover:brightness-110 active:scale-[0.98]"
                         >
-                          <span className="material-symbols-outlined text-base select-none">bolt</span>
                           Buy Now
                         </button>
                       </div>
                     );
                   })()}
-                  <button 
-                    onClick={() => setActivePreview(null)}
-                    className="w-full py-3 rounded-[4px] border border-[#856758]/30 hover:bg-[#f3ecea] text-[#856758] font-bold text-xs transition-colors cursor-pointer bg-transparent"
-                  >
-                    Close Preview
-                  </button>
                 </div>
               </div>
             </div>

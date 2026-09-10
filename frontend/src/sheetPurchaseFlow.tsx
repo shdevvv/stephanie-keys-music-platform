@@ -55,6 +55,8 @@ export default function SheetPurchaseFlow({
   selectedSheetForBuyNow,
   clearBuyNowSheet
 }: SheetPurchaseFlowProps) {
+  const isDirectBuy = Boolean(selectedSheetForBuyNow);
+
   // --- Core States ---
   const [step, setStep] = useState<number>(() => {
     const loggedIn = localStorage.getItem("isLoggedIn") !== "false";
@@ -77,8 +79,7 @@ export default function SheetPurchaseFlow({
 
   const [purchasedSheetTitles, setPurchasedSheetTitles] = useState<string[]>(() => {
     const saved = localStorage.getItem('purchased_sheets');
-    // Pre-seed with one sheet so library is not empty by default
-    return saved ? JSON.parse(saved) : ['Mercy in the Keys'];
+    return saved ? JSON.parse(saved) : [];
   });
 
   // Keep track of current step if redirecting through signin
@@ -128,10 +129,6 @@ export default function SheetPurchaseFlow({
   }, [purchasedSheetTitles]);
 
   // --- Step 2: Cart States ---
-  const [couponCode, setCouponCode] = useState('');
-  const [appliedDiscount, setAppliedDiscount] = useState(0); // in percent
-  const [couponError, setCouponError] = useState('');
-  const [couponSuccess, setCouponSuccess] = useState('');
 
   // --- Step 3: Auth States ---
   const [authEmail, setAuthEmail] = useState('');
@@ -153,7 +150,7 @@ export default function SheetPurchaseFlow({
     };
   });
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
-  const [checkoutPromo, setCheckoutPromo] = useState('');
+
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
 
@@ -193,28 +190,22 @@ export default function SheetPurchaseFlow({
 
 
   // --- Step 9: Download Detail Page State ---
-  const [selectedDownloadSheet, setSelectedDownloadSheet] = useState<Sheet | null>(null);
+  const [selectedDownloadSheet] = useState<Sheet | null>(null);
   const [downloadCounts, setDownloadCounts] = useState<Record<string, number>>(() => {
     const saved = localStorage.getItem('download_counts');
-    return saved ? JSON.parse(saved) : { 'Mercy in the Keys': 12 };
+    return saved ? JSON.parse(saved) : {};
   });
 
   // --- Step 10: Active Invoice State ---
   const [invoiceOrder, setInvoiceOrder] = useState<OrderDetails | null>(null);
 
   // --- Calculations ---
-  const currencyObj = CURRENCIES.find(c => c.code === selectedCurrency) || CURRENCIES[0];
-
-  const parsePrice = (priceStr: string): number => {
-    return parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+  const parsePrice = (_priceStr?: string): number => {
+    return 5.00;
   };
 
   const formatPrice = (usdAmount: number) => {
-    const converted = usdAmount * currencyObj.rate;
-    if (currencyObj.code === 'IDR') {
-      return `${currencyObj.symbol}${Math.round(converted).toLocaleString('id-ID')}`;
-    }
-    return `${currencyObj.symbol}${converted.toFixed(2)}`;
+    return `$${usdAmount.toFixed(2)}`;
   };
 
   const getSubtotal = () => {
@@ -224,15 +215,9 @@ export default function SheetPurchaseFlow({
     return cart.reduce((acc, item) => acc + parsePrice(item.sheet.price) * item.quantity, 0);
   };
 
-  const getDiscountAmount = () => {
-    return getSubtotal() * (appliedDiscount / 100);
-  };
+  const getDiscountAmount = () => 0;
 
-
-
-  const getTotal = () => {
-    return getSubtotal() - getDiscountAmount();
-  };
+  const getTotal = () => getSubtotal();
 
   // Timer Effect for Step 6 (Payment)
   useEffect(() => {
@@ -264,23 +249,7 @@ export default function SheetPurchaseFlow({
     setCart(prev => prev.filter(item => item.sheet.title !== title));
   };
 
-  const handleApplyCoupon = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCouponError('');
-    setCouponSuccess('');
-    const code = couponCode.trim().toUpperCase();
 
-    if (code === 'PHANILIE20') {
-      setAppliedDiscount(20);
-      setCouponSuccess('20% Discount applied successfully!');
-    } else if (code === 'GOSPEL10') {
-      setAppliedDiscount(10);
-      setCouponSuccess('10% Discount applied successfully!');
-    } else {
-      setCouponError('Invalid coupon code. Try "PHANILIE20" (20% off) or "GOSPEL10" (10% off)');
-      setAppliedDiscount(0);
-    }
-  };
 
   // Step 3 Auth Actions
   const handleAuthSubmit = (e: React.FormEvent) => {
@@ -558,10 +527,13 @@ export default function SheetPurchaseFlow({
       return updated;
     });
 
-
-
-    // Simulate standard browser download complete
-    alert(`Starting download: ${title} (${fileType} Format)...`);
+    // Trigger browser file download of public/Over the Rainbow.pdf as temporary dummy sheet music
+    const link = document.createElement('a');
+    link.href = '/Over the Rainbow.pdf';
+    link.download = `${title.replace(/[^a-zA-Z0-9\s]/g, '')} - ${fileType}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   // Filter sheets for Step 8: Library
@@ -570,32 +542,53 @@ export default function SheetPurchaseFlow({
   };
 
   return (
-    <div className="w-full flex-grow relative overflow-hidden bg-transparent py-12 px-4 md:px-8">
+    <div 
+      className="w-full flex-grow relative overflow-hidden py-12 px-4 md:px-8 min-h-[calc(100vh-80px)]"
+      style={{
+        backgroundImage: "linear-gradient(to bottom, rgba(255, 248, 243, 0.25), rgba(248, 233, 224, 0.38)), url('/vintage-desk-bg.jpg')",
+        backgroundSize: '135%',
+        backgroundPosition: '65% 45%',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       {/* Visual background marble/glow overlays */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#dfa38f]/10 rounded-full blur-[100px] pointer-events-none z-0" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#ffd0ab]/10 rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#dfa38f]/15 rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#ffd0ab]/15 rounded-full blur-[100px] pointer-events-none z-0" />
 
       <div className="max-w-5xl mx-auto relative z-10">
         
         {/* Progress Bar (Visible steps 2-7) */}
         {step >= 2 && step <= 7 && (
           <div className="mb-10 max-w-xl mx-auto">
-            <div className="flex items-center justify-between text-[9px] md:text-[10px] text-[#8b7368] font-bold uppercase tracking-wider mb-2">
-              <span className={step >= 2 ? 'text-[#805c51]' : 'opacity-40'}>1. Shopping Cart</span>
-              <span className={step >= 4 ? 'text-[#805c51]' : 'opacity-40'}>2. Checkout Details</span>
-              <span className={step >= 5 ? 'text-[#805c51]' : 'opacity-40'}>3. Payment Method</span>
-              <span className={step >= 7 ? 'text-[#805c51]' : 'opacity-40'}>4. Order Successful</span>
+            <div className="flex items-center justify-between text-[9px] md:text-[10px] text-[#6e463b] font-bold uppercase tracking-wider mb-2">
+              {!isDirectBuy ? (
+                <>
+                  <span className={step >= 2 ? 'text-[#6e463b] font-extrabold' : 'text-[#8b7368]/60'}>1. Shopping Cart</span>
+                  <span className={step >= 3 ? 'text-[#6e463b] font-extrabold' : 'text-[#8b7368]/60'}>2. Checkout Details</span>
+                  <span className={step >= 5 ? 'text-[#6e463b] font-extrabold' : 'text-[#8b7368]/60'}>3. Payment Method</span>
+                  <span className={step >= 7 ? 'text-[#6e463b] font-extrabold' : 'text-[#8b7368]/60'}>4. Order Successful</span>
+                </>
+              ) : (
+                <>
+                  <span className={step >= 3 ? 'text-[#6e463b] font-extrabold' : 'text-[#8b7368]/60'}>1. Checkout Details</span>
+                  <span className={step >= 5 ? 'text-[#6e463b] font-extrabold' : 'text-[#8b7368]/60'}>2. Payment Method</span>
+                  <span className={step >= 7 ? 'text-[#6e463b] font-extrabold' : 'text-[#8b7368]/60'}>3. Order Successful</span>
+                </>
+              )}
             </div>
             <div className="h-1 bg-[#dfa38f]/20 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-gradient-to-r from-[#dfa38f] to-[#ab7e66] transition-all duration-500 rounded-full"
                 style={{
                   width: `${
-                    step === 2 ? 15 :
-                    step === 3 ? 35 :
-                    step === 4 ? 50 :
-                    step === 5 ? 70 :
-                    step === 6 ? 85 : 100
+                    !isDirectBuy ? (
+                      step === 2 ? 25 :
+                      step === 3 || step === 4 ? 50 :
+                      step === 5 || step === 6 ? 75 : 100
+                    ) : (
+                      step === 3 || step === 4 ? 33 :
+                      step === 5 || step === 6 ? 66 : 100
+                    )
                   }%`
                 }}
               />
@@ -605,155 +598,121 @@ export default function SheetPurchaseFlow({
 
         {/* -------------------- STEP 2: SHOPPING CART -------------------- */}
         {step === 2 && (
-          <div className="bg-white/80 backdrop-blur-md border border-[#dfa38f]/25 shadow-xl rounded-2xl p-6 md:p-10 flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <div>
-              <h1 className="font-display-lg text-2xl md:text-3xl text-[#4a372e] font-bold tracking-tight mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
-                Shopping Cart
-              </h1>
-              <p className="text-[#8b7368] text-xs">Review your selected arrangements before completing your order.</p>
-            </div>
-
-            {cart.length === 0 ? (
-              <div className="text-center py-16 bg-white/50 border border-dashed border-[#e8cdc1]/40 rounded-xl">
-                <span className="material-symbols-outlined text-5xl text-[#ab7e66]/40 select-none">shopping_cart</span>
-                <p className="font-sans text-sm text-[#4a372e] mt-3 font-bold">Your cart is empty</p>
-                <p className="font-sans text-xs text-[#8b7368] mt-1 max-w-xs mx-auto leading-relaxed">
-                  Browse our selection of beautiful gospel, jazz, and classical crossover sheets to add them to your cart.
-                </p>
-                <button 
-                  onClick={() => onNavigate('library')}
-                  className="mt-6 py-2.5 px-6 bg-[#856758] text-white font-bold text-xs rounded-lg hover:bg-[#785b4c] transition-colors border-none cursor-pointer"
-                >
-                  Go to Covers & Sheets
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
-                {/* Cart Items List */}
-                <div className="space-y-4">
-                  {cart.map((item, idx) => (
-                    <div 
-                      key={idx}
-                      className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white/60 border border-[#e8cdc1]/20 rounded-xl shadow-[0_2px_8px_rgba(223,163,143,0.05)] hover:border-[#dfa38f]/30 transition-all"
-                    >
-                      <div className="flex items-center gap-4">
-                        <img 
-                          src={item.sheet.image} 
-                          alt={item.sheet.title} 
-                          className="w-16 h-16 object-cover rounded-lg border border-[#e8cdc1]/20 bg-[#faf6f4] flex-shrink-0"
-                        />
-                        <div>
-                          <h3 className="font-sans text-sm font-bold text-[#4a372e]">{item.sheet.title}</h3>
-                          <p className="text-[10px] text-[#8b7368] mt-0.5 line-clamp-1">{item.sheet.description}</p>
-                          <div className="flex flex-wrap gap-1 mt-1.5">
-                            {item.sheet.genres.map((g, i) => (
-                              <span key={i} className="bg-[#fcf8f6] text-[#856758] px-1.5 py-0.5 rounded text-[8px] font-bold border border-[#e8cdc1]/15">
-                                {g}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto border-t sm:border-t-0 border-dashed border-[#e8cdc1]/30 pt-3 sm:pt-0">
-                        {/* Pricing and Action */}
+          <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-300">
+            {/* Main Outer Cart Card Container with Rose Gold Border */}
+            <div className="bg-white/90 backdrop-blur-md border-2 border-[#dfa38f] shadow-[0_12px_40px_rgba(223,163,143,0.18)] rounded-2xl p-6 md:p-10 flex flex-col gap-6 relative">
+              {cart.length === 0 ? (
+                <div className="text-center py-16 bg-white/50 border-2 border-dashed border-[#dfa38f]/60 rounded-xl">
+                  <span className="material-symbols-outlined text-5xl text-[#ab7e66]/40 select-none">shopping_cart</span>
+                  <p className="font-sans text-sm text-[#4a372e] mt-3 font-bold">Your cart is empty</p>
+                  <p className="font-sans text-xs text-[#8b7368] mt-1 max-w-xs mx-auto leading-relaxed">
+                    Browse our selection of beautiful gospel, jazz, and classical crossover sheets to add them to your cart.
+                  </p>
+                  <button 
+                    onClick={() => onNavigate('sheets')}
+                    className="mt-6 py-2.5 px-6 bg-[#856758] text-white font-bold text-xs rounded-xl hover:bg-[#785b4c] transition-colors border-2 border-[#dfa38f] cursor-pointer shadow-md"
+                  >
+                    Go to Sheet Music Shop
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
+                  {/* Cart Items List */}
+                  <div className="space-y-4">
+                    {cart.map((item, idx) => (
+                      <div 
+                        key={idx}
+                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4.5 bg-[#fffcfb] border-2 border-[#dfa38f] hover:border-[#c58270] rounded-xl shadow-[0_3px_12px_rgba(223,163,143,0.1)] transition-all duration-300 group"
+                      >
                         <div className="flex items-center gap-4">
-                          <div className="text-right">
-                            <div className="text-sm font-bold text-[#4a372e]">
-                              {formatPrice(parsePrice(item.sheet.price))}
+                          <img 
+                            src={item.sheet.image} 
+                            alt={item.sheet.title} 
+                            className="w-16 h-16 object-cover rounded-lg border-2 border-[#dfa38f] bg-[#faf6f4] flex-shrink-0 shadow-2xs"
+                          />
+                          <div>
+                            <h3 style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }} className="text-sm font-bold text-[#4a2c20] tracking-tight">{item.sheet.title}</h3>
+                            <p className="text-[10px] text-[#8b7368] mt-0.5 line-clamp-1">{item.sheet.description}</p>
+                            <div className="flex flex-wrap gap-1 mt-1.5">
+                              {item.sheet.genres.map((g, i) => (
+                                <span key={i} className="bg-[#fff8f5] text-[#7a4e40] px-2 py-0.5 rounded-md text-[9px] font-bold border-2 border-[#dfa38f] shadow-2xs">
+                                  {g}
+                                </span>
+                              ))}
                             </div>
                           </div>
+                        </div>
 
-                          <button 
-                            onClick={() => removeFromCart(item.sheet.title)}
-                            className="w-7 h-7 rounded-full bg-[#f3ecea] hover:bg-[#e8cdc1]/40 text-[#ab7e66] hover:text-[#5a3d31] flex items-center justify-center transition-all border border-[#e8cdc1]/30 cursor-pointer shadow-2xs"
-                            title="Remove item"
-                          >
-                            <span className="material-symbols-outlined text-xs font-bold">close</span>
-                          </button>
+                        <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto border-t sm:border-t-0 border-dashed border-[#dfa38f]/40 pt-3 sm:pt-0">
+                          {/* Pricing and Action */}
+                          <div className="flex items-center gap-4">
+                            <div className="text-right">
+                              <div className="text-sm font-bold text-[#4a372e]">
+                                {formatPrice(parsePrice(item.sheet.price))}
+                              </div>
+                            </div>
+
+                            <button 
+                              onClick={() => removeFromCart(item.sheet.title)}
+                              className="w-7.5 h-7.5 rounded-full bg-[#faf0eb] hover:bg-[#f2dbd2] text-[#ab7e66] hover:text-[#5a3d31] flex items-center justify-center transition-all border-2 border-[#dfa38f] cursor-pointer shadow-xs"
+                              title="Remove item"
+                            >
+                              <span className="material-symbols-outlined text-xs font-bold">close</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-
-                  {/* Actions under cart */}
-                  <div className="flex items-center justify-between pt-4">
-                    <button 
-                      onClick={() => onNavigate('library')}
-                      className="py-2.5 px-4.5 bg-transparent hover:bg-[#e8cdc1]/10 text-[#856758] border border-[#856758]/35 font-bold text-xs rounded-lg transition-colors cursor-pointer"
-                    >
-                      Continue Shopping
-                    </button>
+                    ))}
                   </div>
-                </div>
 
-                {/* Summary & Coupon */}
-                <div className="space-y-6">
-                  {/* Coupon Card */}
-                  <div className="bg-white/50 border border-[#dfa38f]/20 rounded-xl p-5 shadow-sm">
-                    <h4 className="text-xs font-bold text-[#4a372e] uppercase tracking-wider mb-3">Apply Coupon</h4>
-                    <form onSubmit={handleApplyCoupon} className="flex gap-2">
-                      <input 
-                        type="text" 
-                        placeholder="e.g. PHANILIE20"
-                        value={couponCode}
-                        onChange={(e) => setCouponCode(e.target.value)}
-                        className="flex-grow bg-white border border-[#dfa38f]/30 rounded-lg px-3 py-2 text-xs text-[#5a4740] focus:outline-none focus:ring-1 focus:ring-[#dfa38f]"
-                      />
+                  {/* Summary Card with Rose Gold Border */}
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-br from-[#fffdfc] via-[#fcf6f3] to-[#f9ece6] border-2 border-[#dfa38f] rounded-xl p-6 shadow-[0_4px_20px_rgba(223,163,143,0.15)] space-y-5">
+                      <h4 className="text-xs font-bold text-[#4a372e] uppercase tracking-wider border-b-2 border-[#dfa38f]/60 pb-2">Order Summary</h4>
+                      <div className="space-y-2 text-xs text-[#8b7368]">
+                        <div className="flex justify-between">
+                          <span>Subtotal</span>
+                          <span className="font-bold text-[#4a372e]">{formatPrice(getSubtotal())}</span>
+                        </div>
+                        <div className="h-px bg-[#dfa38f]/40 my-2" />
+                        <div className="flex justify-between text-sm font-bold text-[#4a372e]">
+                          <span>Total</span>
+                          <span className="text-[#856758] text-base">{formatPrice(getTotal())}</span>
+                        </div>
+                      </div>
+
                       <button 
-                        type="submit"
-                        className="py-2 px-4 bg-[#856758] hover:bg-[#785b4c] text-white font-bold text-xs rounded-lg transition-colors border-none cursor-pointer"
+                        onClick={() => {
+                          const loggedIn = localStorage.getItem("isLoggedIn") !== "false";
+                          if (loggedIn) {
+                            setStep(4);
+                          } else {
+                            setStep(3);
+                          }
+                        }}
+                        style={{
+                          backgroundImage: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
+                        }}
+                        className="w-full text-white text-xs font-bold uppercase tracking-widest py-3.5 px-6 rounded-xl border-2 border-[#f5d5cb] cursor-pointer shadow-[0_4px_12px_rgba(223,163,143,0.35)] transition-all hover:scale-[1.01] active:scale-[0.98]"
                       >
-                        Apply
+                        Proceed to Checkout
                       </button>
-                    </form>
-                    {couponError && <p className="text-[10px] text-red-500 font-bold mt-2">{couponError}</p>}
-                    {couponSuccess && <p className="text-[10px] text-green-600 font-bold mt-2">{couponSuccess}</p>}
-                    <p className="text-[9px] text-[#8b7368] mt-2 italic">Use "PHANILIE20" for 20% off or "GOSPEL10" for 10% off.</p>
-                  </div>
-
-                  {/* Pricing Details */}
-                  <div className="bg-gradient-to-br from-[#fcfaf9] to-[#faf5f2] border border-[#dfa38f]/25 rounded-xl p-5 shadow-md space-y-4">
-                    <h4 className="text-xs font-bold text-[#4a372e] uppercase tracking-wider border-b border-dashed border-[#e8cdc1]/40 pb-2">Order Summary</h4>
-                    <div className="space-y-2 text-xs text-[#8b7368]">
-                      <div className="flex justify-between">
-                        <span>Subtotal</span>
-                        <span className="font-bold text-[#4a372e]">{formatPrice(getSubtotal())}</span>
-                      </div>
-                      {appliedDiscount > 0 && (
-                        <div className="flex justify-between text-green-600 font-semibold">
-                          <span>Discount ({appliedDiscount}%)</span>
-                          <span>-{formatPrice(getDiscountAmount())}</span>
-                        </div>
-                      )}
-                      <div className="h-px bg-[#e8cdc1]/20 my-2" />
-                      <div className="flex justify-between text-sm font-bold text-[#4a372e]">
-                        <span>Total</span>
-                        <span className="text-[#856758] text-base">{formatPrice(getTotal())}</span>
-                      </div>
                     </div>
-
-                    <button 
-                      onClick={() => {
-                        // If logged in, go directly to checkout form (step 4), otherwise go to auth wall (step 3)
-                        const loggedIn = localStorage.getItem("isLoggedIn") !== "false";
-                        if (loggedIn) {
-                          setStep(4);
-                        } else {
-                          setStep(3);
-                        }
-                      }}
-                      style={{
-                        backgroundImage: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
-                      }}
-                      className="w-full text-white text-xs font-bold uppercase tracking-widest py-3.5 px-6 rounded-lg border border-white/20 cursor-pointer shadow-[0_4px_12px_rgba(223,163,143,0.3)] transition-all hover:scale-[1.01]"
-                    >
-                      Proceed to Checkout
-                    </button>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
+
+            {/* Find More Sheet Music Button - Positioned OUTSIDE of the Main Card Box with Rose Gold Outline Border */}
+            <div className="flex items-center justify-start">
+              <button 
+                onClick={() => onNavigate('sheets')}
+                className="py-3 px-6 bg-white/90 hover:bg-[#fff9f6] text-[#6e463b] hover:text-[#522f25] border-2 border-[#dfa38f] hover:border-[#c58270] font-bold text-xs rounded-xl transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md flex items-center gap-2 group shrink-0 outline-none"
+              >
+                <span className="material-symbols-outlined text-base text-[#dfa38f] group-hover:text-[#c58270] transition-colors">west</span>
+                Find More Sheet Music
+              </button>
+            </div>
           </div>
         )}
 
@@ -963,40 +922,6 @@ export default function SheetPurchaseFlow({
                       </select>
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 gap-4 mt-4">
-                    <div className="space-y-1">
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[#8b7368] ml-1">Promo Code (Optional)</label>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          placeholder="e.g. PHANILIE20"
-                          value={checkoutPromo}
-                          onChange={(e) => setCheckoutPromo(e.target.value)}
-                          className="flex-grow bg-white border border-[#dfa38f]/30 rounded-lg px-4 py-3 text-xs text-[#5a4740] focus:outline-none focus:ring-1 focus:ring-[#dfa38f]"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setCouponCode(checkoutPromo);
-                            const code = checkoutPromo.trim().toUpperCase();
-                            if (code === 'PHANILIE20') {
-                              setAppliedDiscount(20);
-                              alert('Promo code applied: 20% discount!');
-                            } else if (code === 'GOSPEL10') {
-                              setAppliedDiscount(10);
-                              alert('Promo code applied: 10% discount!');
-                            } else if (code) {
-                              alert('Invalid promo code. Try "PHANILIE20" or "GOSPEL10".');
-                            }
-                          }}
-                          className="py-3 px-5 bg-[#856758] hover:bg-[#785b4c] text-white font-bold text-xs rounded-lg transition-colors border-none cursor-pointer"
-                        >
-                          Apply
-                        </button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Terms and Conditions */}
@@ -1016,10 +941,17 @@ export default function SheetPurchaseFlow({
                 <div className="flex gap-4">
                   <button 
                     type="button"
-                    onClick={() => setStep(2)}
+                    onClick={() => {
+                      if (clearBuyNowSheet) clearBuyNowSheet();
+                      if (isDirectBuy) {
+                        onNavigate('sheets');
+                      } else {
+                        setStep(2);
+                      }
+                    }}
                     className="py-3 px-5 bg-white border border-[#856758]/30 hover:bg-[#e8cdc1]/10 text-[#856758] font-bold text-xs rounded-lg transition-colors cursor-pointer"
                   >
-                    Back to Cart
+                    {isDirectBuy ? "Back to Shop" : "Back to Cart"}
                   </button>
                   <button 
                     type="submit"
@@ -1051,7 +983,7 @@ export default function SheetPurchaseFlow({
                     cart.map((item, idx) => (
                       <div key={idx} className="flex justify-between items-center gap-2 text-xs">
                         <div>
-                          <span className="font-bold text-[#4a372e] block truncate max-w-[150px]">{item.sheet.title}</span>
+                          <span style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }} className="font-bold text-[#4a2c20] block truncate max-w-[150px] tracking-tight">{item.sheet.title}</span>
                         </div>
                         <span className="font-bold text-[#4a372e]">{formatPrice(parsePrice(item.sheet.price))}</span>
                       </div>
@@ -1066,12 +998,6 @@ export default function SheetPurchaseFlow({
                     <span>Subtotal</span>
                     <span>{formatPrice(getSubtotal())}</span>
                   </div>
-                  {appliedDiscount > 0 && (
-                    <div className="flex justify-between text-green-600 font-semibold">
-                      <span>Discount ({appliedDiscount}%)</span>
-                      <span>-{formatPrice(getDiscountAmount())}</span>
-                    </div>
-                  )}
                   <div className="h-px bg-[#e8cdc1]/20 my-2" />
                   <div className="flex justify-between text-sm font-bold text-[#4a372e]">
                     <span>Total Paid</span>
@@ -1431,22 +1357,46 @@ export default function SheetPurchaseFlow({
 
         {/* -------------------- STEP 7: PAYMENT SUCCESSFUL -------------------- */}
         {step === 7 && orderInfo && (
-          <div className="bg-white/85 backdrop-blur-md border border-[#dfa38f]/25 shadow-xl rounded-2xl p-6 md:p-10 max-w-xl mx-auto text-center animate-in scale-in duration-300">
+          <div className="bg-white border border-[#dfa38f]/25 shadow-xl rounded-2xl p-6 md:p-10 max-w-xl mx-auto text-center animate-in scale-in duration-300">
             {/* Custom Checkmark Animation */}
-            <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_8px_24px_rgba(34,197,94,0.3)] animate-bounce">
-              <span className="material-symbols-outlined text-4xl select-none" style={{ fontVariationSettings: "'wght' 700" }}>
-                done
+            <div className="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
+              <span className="material-symbols-outlined text-3xl select-none" style={{ fontVariationSettings: "'wght' 700" }}>
+                check
               </span>
             </div>
 
-            <div className="space-y-2 mb-6">
-              <h2 className="font-display-lg text-2xl text-[#4a372e] font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>
-                Payment Successful!
+            <div className="space-y-1.5 mb-6">
+              <span className="text-[10px] font-extrabold tracking-widest text-emerald-600 uppercase">✓ PURCHASE COMPLETE</span>
+              <h2 className="font-display-lg text-2xl text-[#4a372e] font-extrabold" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Thank you for your purchase!
               </h2>
-              <p className="text-[#8b7368] text-xs">Thank you for your purchase! A confirmation has been sent to your email.</p>
+              <p className="text-[#8b7368] text-xs font-medium">Your sheet music is ready to download.</p>
             </div>
 
-            <div className="bg-[#fcfaf9] border border-[#e8cdc1]/20 rounded-xl p-5 mb-8 text-xs text-left space-y-2 text-[#5a4740]">
+            {/* Purchased Items Download Cards */}
+            <div className="space-y-3.5 mb-8 text-left">
+              {orderInfo.items.map((item, idx) => (
+                <div key={idx} className="bg-[#fcfaf9] border border-[#e8cdc1]/40 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+                  <div>
+                    <h3 style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }} className="font-bold text-sm md:text-base text-[#4a2c20] tracking-tight">{item.sheet.title}</h3>
+                    <p className="text-[11px] text-[#856758] font-semibold mt-0.5">Advanced Gospel Arrangement • PDF Format</p>
+                  </div>
+                  <button
+                    onClick={() => handleDownloadFile(item.sheet.title, 'PDF')}
+                    style={{
+                      backgroundImage: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
+                    }}
+                    className="w-full sm:w-auto text-white text-xs font-extrabold py-2.5 px-4 rounded-lg border border-white/20 cursor-pointer shadow-sm hover:scale-[1.02] flex items-center justify-center gap-1.5 shrink-0"
+                  >
+                    <span className="material-symbols-outlined text-base select-none">download</span>
+                    Download PDF
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {/* Receipt Summary Metadata */}
+            <div className="bg-[#fcfaf9] border border-[#e8cdc1]/30 rounded-xl p-4 mb-6 text-xs text-left space-y-2 text-[#5a4740]">
               <div className="flex justify-between">
                 <span className="text-[#8b7368]">Order Number</span>
                 <span className="font-mono font-bold text-[#4a372e]">{orderInfo.orderId}</span>
@@ -1461,36 +1411,24 @@ export default function SheetPurchaseFlow({
               </div>
               <div className="flex justify-between">
                 <span className="text-[#8b7368]">Total Paid</span>
-                <span className="font-bold text-[#856758]">{formatPrice(orderInfo.total)}</span>
-              </div>
-              <div className="h-px bg-[#e8cdc1]/10 my-2" />
-              <div className="space-y-1.5">
-                <span className="text-[10px] font-bold uppercase text-[#8b7368] block">Purchased Arrangement(s):</span>
-                {orderInfo.items.map((item, idx) => (
-                  <div key={idx} className="flex justify-between items-center bg-white py-1.5 px-3 rounded border border-[#e8cdc1]/15">
-                    <span className="font-bold text-xs">{item.sheet.title}</span>
-                  </div>
-                ))}
+                <span className="font-extrabold text-[#856758]">{formatPrice(orderInfo.total)}</span>
               </div>
             </div>
 
-            {/* Quick Navigation actions */}
+            {/* Navigation actions */}
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => {
-                  setSelectedDownloadSheet(orderInfo.items[0].sheet);
-                  setStep(9);
+                  if (clearBuyNowSheet) clearBuyNowSheet();
+                  onNavigate('sheets');
                 }}
-                style={{
-                  backgroundImage: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
-                }}
-                className="flex-grow text-white text-xs font-bold uppercase tracking-widest py-3.5 px-6 rounded-lg border border-white/20 cursor-pointer shadow-md hover:scale-[1.01]"
+                className="flex-grow py-3 px-6 bg-white hover:bg-[#fbf3ef] text-[#856758] border-2 border-[#dfa38f]/60 font-bold text-xs rounded-xl transition-all cursor-pointer shadow-xs"
               >
-                Download Now
+                Continue Shopping
               </button>
               <button
                 onClick={() => setStep(8)}
-                className="py-3.5 px-6 bg-white hover:bg-[#e8cdc1]/10 text-[#856758] border border-[#856758]/35 font-bold text-xs rounded-lg transition-colors cursor-pointer"
+                className="py-3 px-5 bg-transparent hover:bg-[#e8cdc1]/10 text-[#856758] font-bold text-xs rounded-xl transition-colors cursor-pointer border border-[#856758]/30"
               >
                 Go to My Library
               </button>
@@ -1499,7 +1437,7 @@ export default function SheetPurchaseFlow({
                   setInvoiceOrder(orderInfo);
                   setStep(10);
                 }}
-                className="py-3.5 px-4 bg-transparent hover:underline text-[#8b7368] font-bold text-xs border-none cursor-pointer"
+                className="py-3 px-4 bg-transparent hover:underline text-[#8b7368] font-bold text-xs border-none cursor-pointer"
               >
                 View Invoice
               </button>

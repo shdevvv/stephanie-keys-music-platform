@@ -52,27 +52,33 @@ export const SheetMusicViewerModal: React.FC<SheetMusicViewerModalProps> = ({
 
         {/* Toolbar Controls */}
         <div className="flex items-center justify-between gap-4 bg-white/70 backdrop-blur-md px-4 py-2 rounded-xl border border-[#dfa38f]/30 shrink-0 text-xs font-semibold text-[#4a372e]">
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={handlePrevPage}
-              disabled={currentPage === 1}
-              className="p-1.5 rounded-lg bg-white border border-[#dfa38f]/30 disabled:opacity-40 hover:bg-[#dfa38f]/10 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-base">navigate_before</span>
-            </button>
-            <span>
-              Page {currentPage} of {sheet.pageCount}
-            </span>
-            <button
-              type="button"
-              onClick={handleNextPage}
-              disabled={currentPage === sheet.pageCount}
-              className="p-1.5 rounded-lg bg-white border border-[#dfa38f]/30 disabled:opacity-40 hover:bg-[#dfa38f]/10 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-base">navigate_next</span>
-            </button>
-          </div>
+          {!isPreviewMode ? (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+                className="p-1.5 rounded-lg bg-white border border-[#dfa38f]/30 disabled:opacity-40 hover:bg-[#dfa38f]/10 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-base">navigate_before</span>
+              </button>
+              <span>
+                Page {currentPage} of {sheet.pageCount}
+              </span>
+              <button
+                type="button"
+                onClick={handleNextPage}
+                disabled={currentPage === sheet.pageCount}
+                className="p-1.5 rounded-lg bg-[#dfa38f]/10 text-[#4a372e] border border-[#dfa38f]/30 disabled:opacity-40 hover:bg-[#dfa38f]/20 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-base">navigate_next</span>
+              </button>
+            </div>
+          ) : (
+            <div className="text-xs font-bold text-amber-900 bg-amber-50 border border-amber-200 px-3 py-1 rounded-lg">
+              Page 1 of 1 (Sample Preview)
+            </div>
+          )}
 
           <div className="flex items-center gap-2">
             <button
@@ -95,7 +101,14 @@ export const SheetMusicViewerModal: React.FC<SheetMusicViewerModalProps> = ({
           {!isPreviewMode && (
             <button
               type="button"
-              onClick={() => alert(`Downloading high-res PDF for ${sheet.title}`)}
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/Over the Rainbow.pdf';
+                link.download = `${sheet.title.replace(/[^a-zA-Z0-9\s]/g, '')} - Sheet Music.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
               className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors shadow-sm"
             >
               <span className="material-symbols-outlined text-sm">download</span>
@@ -120,11 +133,11 @@ export const SheetMusicViewerModal: React.FC<SheetMusicViewerModalProps> = ({
             )}
 
             <img
-              src={sheet.thumbnailUrl}
+              src={`/over-the-rainbow-page${currentPage <= 6 ? currentPage : 1}.png`}
               alt={`Score Page ${currentPage}`}
               className="w-full max-w-lg h-auto rounded shadow-sm mx-auto"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = '/coversheets/sheet1.png';
+                (e.target as HTMLImageElement).src = '/over-the-rainbow-cover.png';
               }}
             />
 

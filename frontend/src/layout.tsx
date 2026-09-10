@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import type { ReactNode } from "react";
-import { sheets } from './sheetsData';
 import { GlobalSearchInput } from './components/GlobalSearchInput';
 
 function CustomCursor() {
@@ -421,7 +420,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     () => localStorage.getItem("isLoggedIn") !== "false",
   );
   const [userName, setUserName] = useState<string>(() => {
-    return localStorage.getItem("guest_name") || localStorage.getItem("user_name") || "Student";
+    return localStorage.getItem("guest_name") || localStorage.getItem("user_name") || "StephanieHalim06";
   });
   const [cartCount, setCartCount] = useState(0);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -460,41 +459,43 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     return () => window.removeEventListener('storage', updateCartCount);
   }, []);
 
-  const [isSlideCartOpen, setIsSlideCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
-  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [isToastPulsing, setIsToastPulsing] = useState(false);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [view]);
 
-  const refreshCart = () => {
-    try {
-      const saved = localStorage.getItem('phanilie_cart');
-      setCartItems(saved ? JSON.parse(saved) : []);
-    } catch {
-      setCartItems([]);
-    }
-  };
 
-  useEffect(() => {
-    refreshCart();
-    window.addEventListener('storage', refreshCart);
-    return () => window.removeEventListener('storage', refreshCart);
-  }, []);
+
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pulseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleOpenSlideCart = () => {
-      refreshCart();
-      setIsSlideCartOpen(true);
+      onNavigate('cart');
     };
 
     const handleShowToast = (e: Event) => {
       const customEvent = e as CustomEvent;
-      setToastMessage(customEvent.detail?.message || 'Item added to cart');
+      const message = customEvent.detail?.message || 'Item updated';
+
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+      if (pulseTimerRef.current) clearTimeout(pulseTimerRef.current);
+
+      setToastMessage(message);
       setShowToast(true);
+
+      setIsToastPulsing(true);
+      pulseTimerRef.current = setTimeout(() => {
+        setIsToastPulsing(false);
+      }, 250);
+
+      toastTimerRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     };
 
     window.addEventListener('open-slide-cart', handleOpenSlideCart);
@@ -503,17 +504,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     return () => {
       window.removeEventListener('open-slide-cart', handleOpenSlideCart);
       window.removeEventListener('show-toast', handleShowToast);
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+      if (pulseTimerRef.current) clearTimeout(pulseTimerRef.current);
     };
-  }, []);
-
-  useEffect(() => {
-    if (showToast) {
-      const timer = setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [showToast]);
+  }, [onNavigate]);
 
   // Modals for Footer links
   const [showContactModal, setShowContactModal] = useState(false);
@@ -622,8 +616,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         {/* Top Navigation Bar */}
         <nav
           className={`sticky top-0 w-full z-50 transition-all duration-300 ${isScrolled
-            ? "bg-white/85 backdrop-blur-xl border-b border-[#e8cdc1]/30 shadow-[0px_40px_80px_rgba(45,41,38,0.05)]"
-            : "bg-white/60 backdrop-blur-md border-b border-[#e8cdc1]/10"
+            ? "bg-white/25 border-b border-[#e8cdc1]/20 shadow-none"
+            : "bg-white/15 border-b border-[#e8cdc1]/10"
             }`}
         >
           <div className="flex justify-between items-center h-20 md:h-24 px-3 sm:px-6 md:px-12 w-full">
@@ -649,102 +643,122 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
             </div>
 
             {/* Right side: Nav Links + Shopping Cart & Account Dropdown */}
-            <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5 xl:gap-4.5 2xl:gap-5">
-              <div className="hidden lg:flex items-center gap-1 lg:gap-1.5 xl:gap-2 2xl:gap-2.5">
+            <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5 lg:gap-4 xl:gap-4.5 2xl:gap-5">
+              <div className="hidden lg:flex items-center gap-2 lg:gap-2.5 xl:gap-3.5 2xl:gap-4">
                 {/* 1. HOME */}
                 <button
                   onClick={() => onNavigate("home")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-0.5 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
                 >
                   <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
                     <NavHomeIcon className="w-3 h-3 shrink-0" />
                   </span>
-                  <span
-                    className={`${view === "home" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
-                  >
-                    Home
+                  <span className="relative py-0.5">
+                    <span
+                      className={`${view === "home" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
+                    >
+                      Home
+                    </span>
+                    <span
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "home" ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      }`}
+                    />
                   </span>
-                  {view === "home" && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
-                  )}
                 </button>
 
                 {/* 2. VIDEOS */}
                 <button
                   onClick={() => onNavigate("videos")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-0.5 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
                 >
                   <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
                     <NavVideosIcon className="w-3 h-3 shrink-0" />
                   </span>
-                  <span
-                    className={`${(view === "videos" || view === "library") ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
-                  >
-                    Videos
+                  <span className="relative py-0.5">
+                    <span
+                      className={`${(view === "videos" || view === "library") ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
+                    >
+                      Videos
+                    </span>
+                    <span
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        (view === "videos" || view === "library") ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      }`}
+                    />
                   </span>
-                  {(view === "videos" || view === "library") && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
-                  )}
                 </button>
 
                 {/* 3. LEARN */}
                 <button
                   onClick={() => onNavigate("courses")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-0.5 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
                 >
                   <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
                     <NavLearnIcon className="w-3 h-3 shrink-0" />
                   </span>
-                  <span
-                    className={`${view === "courses" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
-                  >
-                    Learn
+                  <span className="relative py-0.5">
+                    <span
+                      className={`${view === "courses" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
+                    >
+                      Learn
+                    </span>
+                    <span
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "courses" ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      }`}
+                    />
                   </span>
-                  {view === "courses" && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
-                  )}
                 </button>
 
                 {/* 4. PROGRESS */}
                 <button
                   onClick={() => onNavigate("dashboard")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-0.5 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
                 >
                   <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
                     <NavProgressIcon className="w-3 h-3 shrink-0" />
                   </span>
-                  <span
-                    className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
-                  >
-                    Progress
+                  <span className="relative py-0.5">
+                    <span
+                      className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
+                    >
+                      Progress
+                    </span>
+                    <span
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "dashboard" ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      }`}
+                    />
                   </span>
-                  {view === "dashboard" && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
-                  )}
                 </button>
 
                 {/* 5. SHEETS */}
                 <button
                   onClick={() => onNavigate("sheets")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-0.5 rounded-[4px] border border-transparent hover:border-[#dfa38f] hover:bg-white/50 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
                 >
                   <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
                     <NavSheetsIcon className="w-3 h-3 shrink-0" />
                   </span>
-                  <span
-                    className={`${view === "sheets" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`}
-                  >
-                    Sheets
+                  <span className="relative py-0.5">
+                    <span
+                      className={`${view === "sheets" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
+                    >
+                      Sheets
+                    </span>
+                    <span
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "sheets" ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      }`}
+                    />
                   </span>
-                  {view === "sheets" && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-gradient-to-tr from-[#996252] via-[#dfa38f] to-[#fce2db]"></span>
-                  )}
                 </button>
               </div>
 
               {/* Shopping Cart Pill Button (Ornate White Treble Clef, Readable Calligraphy 'Cart' font, Luxury Italic Serif Number 1) */}
               <button
-                onClick={() => setIsSlideCartOpen(true)}
+                onClick={() => onNavigate("cart")}
                 style={{
                   background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
                   boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
@@ -784,15 +798,13 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     onClick={() => setIsProfileMenuOpen((prev) => !prev)}
                     style={{
                       background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
-                      backdropFilter: "blur(12px)",
-                      WebkitBackdropFilter: "blur(12px)",
                       border: "1.5px solid transparent",
-                      boxShadow: "0 4px 14px rgba(140, 85, 70, 0.15)",
+                      boxShadow: "none",
                     }}
                     className="relative h-8.5 sm:h-9.5 px-2.5 sm:px-3 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center gap-1 sm:gap-1.5 shadow-none"
                   >
                     {/* Glossy Specular Rose-Gold Semiquaver Icon */}
-                    <svg className="w-3.5 h-4 shrink-0 drop-shadow-2xs block" viewBox="0 0 100 130">
+                    <svg className="w-3.5 h-4 shrink-0 block" viewBox="0 0 100 130">
                       <defs>
                         <linearGradient id="note-glossy-gold-user" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" stopColor="#FFFFFF" />
@@ -809,8 +821,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     </svg>
 
                     <span
-                      style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                      className="text-xs sm:text-[13px] font-bold text-[#3d2319] tracking-wider truncate max-w-[95px] sm:max-w-[125px] xl:max-w-[145px]"
+                      style={{ fontFamily: "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive", letterSpacing: "0.01em" }}
+                      className="text-sm sm:text-[15px] font-bold text-[#6e4337] truncate max-w-[125px] sm:max-w-[155px] xl:max-w-[175px]"
                     >
                       {userName}
                     </span>
@@ -1504,128 +1516,52 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
           </div>
         )}
 
-        {/* Toast Notification */}
-        {showToast && (
-          <div className="fixed top-28 right-6 z-[120] bg-white border border-[#dfa38f]/40 shadow-2xl rounded-2xl px-5 py-4 flex items-center gap-3 animate-in slide-in-from-top-6 duration-300">
-            <div className="w-6 h-6 rounded-full bg-green-50 text-green-600 flex items-center justify-center">
-              <span className="material-symbols-outlined text-base font-bold">check</span>
-            </div>
-            <div className="text-left">
-              <p className="text-[11px] font-bold text-[#4a372e] uppercase tracking-wider">Success</p>
-              <p className="text-xs text-[#8b7368] mt-0.5">{toastMessage}</p>
-            </div>
-          </div>
-        )}
-
-        {/* Slide Cart / Mini Cart (Samping) */}
-        {isSlideCartOpen && (
-          <div
-            className="fixed inset-0 z-[110] bg-black/40 backdrop-blur-sm flex justify-end"
-            onClick={() => setIsSlideCartOpen(false)}
+        {/* Luxury Royal Toast Notification */}
+        <div 
+          style={{
+            background: "linear-gradient(135deg, #FFFFFF 0%, #FFFDFB 50%, #FDF4F0 100%)",
+            boxShadow: "0 12px 36px rgba(181, 114, 98, 0.28), 0 4px 16px rgba(220, 166, 152, 0.2), inset 0 1.5px 1.5px #FFFFFF",
+            border: "1.5px solid #EAC4B1",
+            borderRight: "none",
+          }}
+          className={`fixed top-24 right-0 z-[120] rounded-l-2xl rounded-r-none px-5 py-3.5 flex items-center gap-3.5 transition-all duration-500 ease-out transform ${
+            showToast 
+              ? "translate-x-0 opacity-100 shadow-2xl" 
+              : "translate-x-[115%] opacity-0 pointer-events-none"
+          } ${isToastPulsing ? "scale-105" : "scale-100"}`}
+        >
+          {/* Ultra Luxury Sculpted Rose-Gold & Gold Metallic Checkmark Badge */}
+          <div 
+            style={{
+              background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 25%, #D9A998 55%, #B58474 80%, #7A493B 100%)",
+              boxShadow: "inset 0 1.5px 1.5px #FFFFFF, inset 0 -1.5px 2px #5C2D22, 0 4px 14px rgba(181, 116, 98, 0.45)",
+              border: "1.5px solid #FFF0E8",
+            }}
+            className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 relative shadow-md"
           >
-            <div
-              className="w-full max-w-md bg-white border-l border-[#dfa38f]/20 shadow-2xl h-full flex flex-col animate-in slide-in-from-right duration-300 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Header */}
-              <div className="flex justify-between items-center px-6 py-5 border-b border-[#e8cdc1]/20">
-                <h3 className="font-display-lg text-lg text-[#4a372e] font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Shopping Cart
-                </h3>
-                <button
-                  onClick={() => setIsSlideCartOpen(false)}
-                  className="w-8 h-8 rounded-full bg-[#f3ecea] hover:bg-[#e8cdc1] text-[#6e5a51] flex items-center justify-center cursor-pointer border-none transition-colors"
-                >
-                  <span className="material-symbols-outlined text-sm select-none">close</span>
-                </button>
-              </div>
-
-              {/* Item list */}
-              <div className="flex-grow overflow-y-auto p-6 space-y-4 custom-scrollbar">
-                {cartItems.length > 0 ? (
-                  cartItems.map((item) => (
-                    <div key={item.sheet.title} className="flex gap-4 items-center bg-[#fbf5f1]/60 p-3.5 rounded-xl border border-[#e8cdc1]/10 text-left">
-                      <img
-                        src={item.sheet.image}
-                        alt={item.sheet.title}
-                        className="w-16 h-16 object-cover rounded-lg border border-[#e8cdc1]/25"
-                      />
-                      <div className="flex-grow min-w-0">
-                        <h4 className="text-xs font-bold text-[#4a372e] truncate">{item.sheet.title}</h4>
-                        <p className="text-[10px] text-[#8b7368] mt-0.5">{item.sheet.genres.join(', ')}</p>
-                        <div className="flex justify-between items-center mt-2">
-                          <span className="text-xs font-bold text-[#856758]">{item.sheet.price}</span>
-                          <span className="text-[10px] bg-[#e8cdc1]/20 text-[#856758] font-bold px-1.5 py-0.5 rounded">Qty: 1</span>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => {
-                          const updated = cartItems.filter(i => i.sheet.title !== item.sheet.title);
-                          localStorage.setItem('phanilie_cart', JSON.stringify(updated));
-                          window.dispatchEvent(new Event('storage'));
-                          refreshCart();
-                        }}
-                        className="w-7 h-7 rounded-full bg-[#f3ecea] hover:bg-[#e8cdc1]/40 text-[#ab7e66] hover:text-[#5a3d31] flex items-center justify-center transition-all border border-[#e8cdc1]/30 cursor-pointer shadow-2xs shrink-0"
-                        title="Remove from Cart"
-                      >
-                        <span className="material-symbols-outlined text-xs font-bold">close</span>
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <div className="flex flex-col items-center justify-center py-20 text-[#8b7368]/60 space-y-3">
-                    <span className="material-symbols-outlined text-4xl font-light">shopping_basket</span>
-                    <span className="text-xs font-semibold">Your cart is empty.</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Bottom Panel */}
-              {cartItems.length > 0 && (
-                <div className="p-6 border-t border-[#e8cdc1]/20 bg-[#fcfaf9] space-y-4">
-                  <div className="flex justify-between text-xs text-[#5a4740] font-semibold">
-                    <span>Items: <strong className="text-[#4a372e]">{cartItems.reduce((acc, item) => acc + item.quantity, 0)}</strong></span>
-                    <span>Subtotal: <strong className="text-[#856758]">{
-                      (() => {
-                        const subtotal = cartItems.reduce((acc, item) => {
-                          const freshSheet = sheets.find(s => s.title === item.sheet.title);
-                          const priceStr = freshSheet ? freshSheet.price : item.sheet.price;
-                          const price = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
-                          return acc + price * item.quantity;
-                        }, 0);
-                        return `$${subtotal.toFixed(2)}`;
-                      })()
-                    }</strong></span>
-                  </div>
-
-                  <div className="flex flex-col gap-2.5">
-                    <button
-                      onClick={() => {
-                        setIsSlideCartOpen(false);
-                        onNavigate('cart');
-                      }}
-                      className="w-full py-3 bg-[#856758] hover:bg-[#785b4c] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer border-none shadow-md hover:shadow-lg"
-                    >
-                      View Shopping Cart
-                    </button>
-                    <button
-                      onClick={() => {
-                        setIsSlideCartOpen(false);
-                        onNavigate('checkout');
-                      }}
-                      style={{
-                        backgroundImage: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
-                      }}
-                      className="w-full text-white text-xs font-bold uppercase tracking-widest py-3 px-6 rounded-xl border border-white/20 cursor-pointer shadow-md hover:scale-[1.01] transition-all"
-                    >
-                      Proceed to Checkout
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
+            <div className="absolute inset-[1.5px] rounded-full border border-white/40 pointer-events-none" />
+            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 drop-shadow-[0_1.5px_2px_rgba(60,20,10,0.6)] relative z-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="luxToastCheckGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FFFFFF" />
+                  <stop offset="50%" stopColor="#FFF4F0" />
+                  <stop offset="100%" stopColor="#F8DACE" />
+                </linearGradient>
+              </defs>
+              <path 
+                d="M4.5 12.8L9.2 17.5L19.5 6.8" 
+                stroke="url(#luxToastCheckGrad)" 
+                strokeWidth="3.2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+              />
+            </svg>
           </div>
-        )}
+          <div className="text-left pr-1">
+            <p className="text-[10px] font-extrabold text-[#7A493B] uppercase tracking-[0.15em]">SUCCESS</p>
+            <p style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="text-xs font-bold text-[#4a2c20] mt-0.5 tracking-tight">{toastMessage}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

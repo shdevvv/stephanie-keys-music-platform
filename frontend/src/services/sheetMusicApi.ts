@@ -83,9 +83,9 @@ function getFallbackCatalog(): SheetMusicDto[] {
       genre: 'Gospel',
       keySignature: 'Ab Major',
       pageCount: 4,
-      priceIDR: 49000,
-      priceUSD: 3.99,
-      thumbnailUrl: '/coversheets/sheet1.png',
+      priceIDR: 75000,
+      priceUSD: 5.00,
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       isOwned: false
     },
     {
@@ -97,9 +97,9 @@ function getFallbackCatalog(): SheetMusicDto[] {
       genre: 'Jazz',
       keySignature: 'C Major',
       pageCount: 3,
-      priceIDR: 39000,
-      priceUSD: 2.99,
-      thumbnailUrl: '/coversheets/sheet2.png',
+      priceIDR: 75000,
+      priceUSD: 5.00,
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       isOwned: false
     },
     {
@@ -111,9 +111,9 @@ function getFallbackCatalog(): SheetMusicDto[] {
       genre: 'Classical',
       keySignature: 'Db Major',
       pageCount: 6,
-      priceIDR: 59000,
-      priceUSD: 4.99,
-      thumbnailUrl: '/coversheets/sheet3.png',
+      priceIDR: 75000,
+      priceUSD: 5.00,
+      thumbnailUrl: '/over-the-rainbow-cover.png',
       isOwned: true
     }
   ];
@@ -136,9 +136,9 @@ function getFallbackLibrary(): UserLibraryDto[] {
         genre: 'Classical',
         keySignature: 'Db Major',
         pageCount: 6,
-        priceIDR: 59000,
-        priceUSD: 4.99,
-        thumbnailUrl: '/coversheets/sheet3.png',
+        priceIDR: 75000,
+        priceUSD: 5.00,
+        thumbnailUrl: '/over-the-rainbow-cover.png',
         isOwned: true
       }
     }
