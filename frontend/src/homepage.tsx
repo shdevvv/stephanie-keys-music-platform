@@ -1252,24 +1252,14 @@ function Homepage() {
                   backgroundSize: "cover",
                   backgroundPosition: "center center",
                   backgroundRepeat: "no-repeat",
-                  filter: "brightness(1.02) contrast(1.05)",
                 }}
               />
-              {/* Soft Rose Gold Luxury Gradient Overlay */}
+              {/* Subtle top/bottom gradient overlay for pristine text readability */}
               <div
                 className="absolute inset-0 z-0 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(255, 248, 245, 0.35) 0%, rgba(245, 215, 205, 0.25) 50%, rgba(223, 163, 143, 0.32) 100%)",
-                }}
-              />
-              {/* Metallic Rose Gold Gloss Reflection Sheen */}
-              <div
-                className="absolute inset-0 z-0 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at 50% 30%, rgba(255, 238, 232, 0.35) 0%, rgba(223, 163, 143, 0.15) 50%, transparent 80%)",
-                  mixBlendMode: "soft-light",
+                    "linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.25) 100%)",
                 }}
               />
               {/* Smooth Soft Gradient Transition from Top */}
