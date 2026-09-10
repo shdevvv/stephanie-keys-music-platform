@@ -1244,23 +1244,23 @@ function Homepage() {
                 ))}
               </div>
 
-              {/* Glossy Rose Gold Piano Keys Background Image */}
+              {/* Glossy Rose Gold Metallic Piano Keys Background Image */}
               <div
                 className="absolute inset-0 z-0 pointer-events-none select-none"
                 style={{
                   backgroundImage: "url('/piano%20tuts.png')",
-                  backgroundSize: "205%",
-                  backgroundPosition: "45% 58%",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center center",
                   backgroundRepeat: "no-repeat",
-                  filter: "sepia(0.48) saturate(1.45) hue-rotate(-22deg) brightness(1.06) contrast(1.12)",
+                  filter: "brightness(1.02) contrast(1.05)",
                 }}
               />
-              {/* Glossy Rose Gold Tint Overlay */}
+              {/* Soft Rose Gold Luxury Gradient Overlay */}
               <div
                 className="absolute inset-0 z-0 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(223, 163, 143, 0.46) 0%, rgba(206, 137, 118, 0.40) 35%, rgba(154, 88, 74, 0.50) 70%, rgba(223, 163, 143, 0.44) 100%)",
+                    "linear-gradient(180deg, rgba(255, 248, 245, 0.35) 0%, rgba(245, 215, 205, 0.25) 50%, rgba(223, 163, 143, 0.32) 100%)",
                 }}
               />
               {/* Metallic Rose Gold Gloss Reflection Sheen */}
