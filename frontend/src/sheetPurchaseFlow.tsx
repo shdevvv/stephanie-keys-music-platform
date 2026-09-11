@@ -669,25 +669,25 @@ export default function SheetPurchaseFlow({
             {step === 2 && (
               <div className="animate-in fade-in duration-300">
                 {cart.length === 0 ? (
-                  /* Container with Solid Luxury Rose Gold Gradient Border & Bright Clear Hotel Glass (No Inside Gradient) */
-                  <div className="rounded-2xl p-[3.5px] bg-[linear-gradient(135deg,#FBEAE3_0%,#EAAD9D_35%,#C97B63_70%,#8A4E3F_100%)] shadow-none">
+                  /* Container with Solid Soft Bright Rose Gold Gradient Border & Bright Clear Hotel Glass */
+                  <div className="rounded-2xl p-[3.5px] bg-[linear-gradient(135deg,#FFF5F0_0%,#FBEAE3_25%,#F5C4B4_55%,#E09B89_80%,#C97B63_100%)] shadow-none">
                     <div className="text-center py-14 bg-white/85 backdrop-blur-2xl rounded-[13px] relative shadow-[inset_0_3px_8px_#ffffff,_inset_0_1px_4px_rgba(255,255,255,0.95)] p-8 md:p-12 border-0">
-                      {/* Hotel Glass Circle with Soft Harmonious Champagne-Peach-RoseGold Gradient Outline */}
-                      <div className="w-16 h-16 rounded-full p-[3px] bg-[linear-gradient(135deg,#FBEAE3_0%,#EAAD9D_35%,#C97B63_70%,#8A4E3F_100%)] mx-auto mb-4 group transition-all duration-500 hover:scale-105 shadow-none">
+                      {/* Hotel Glass Circle with Soft Light Rose Gold Gradient Outline */}
+                      <div className="w-16 h-16 rounded-full p-[3px] bg-[linear-gradient(135deg,#FFF5F0_0%,#FBEAE3_25%,#F5C4B4_55%,#E09B89_80%,#C97B63_100%)] mx-auto mb-4 group transition-all duration-500 hover:scale-105 shadow-none">
                         <div className="w-full h-full bg-white/95 backdrop-blur-md rounded-full flex items-center justify-center shadow-[inset_0_2.5px_5px_#ffffff]">
-                          {/* Multi-Tonal Rose Gold SVG Shopping Cart Icon (No longer boring single color) */}
+                          {/* Multi-Tonal Soft Rose Gold SVG Shopping Cart Icon */}
                           <svg className="w-7 h-7 transition-transform duration-500 group-hover:scale-110 select-none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                               <linearGradient id="luxEmptyCartMultiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#FFF2ED" />
-                                <stop offset="25%" stopColor="#F5C4B4" />
-                                <stop offset="55%" stopColor="#D98A72" />
-                                <stop offset="85%" stopColor="#AA5844" />
-                                <stop offset="100%" stopColor="#7A3D2E" />
+                                <stop offset="0%" stopColor="#FFF5F0" />
+                                <stop offset="30%" stopColor="#F7D5C8" />
+                                <stop offset="60%" stopColor="#E8B1A1" />
+                                <stop offset="85%" stopColor="#D98A72" />
+                                <stop offset="100%" stopColor="#C97B63" />
                               </linearGradient>
                               <linearGradient id="luxEmptyCartWheelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="#FFFFFF" />
-                                <stop offset="100%" stopColor="#B56A54" />
+                                <stop offset="100%" stopColor="#D98A72" />
                               </linearGradient>
                             </defs>
                             <path
@@ -704,18 +704,18 @@ export default function SheetPurchaseFlow({
                         Explore our exclusive collection of arrangement sheet music for piano, solos, and ensembles.
                       </p>
 
-                      {/* Go to Sheet Music Shop Button with Soft Harmonious Champagne-Peach-RoseGold Gradient Outline */}
-                      <div className="mt-6 inline-block rounded-full p-[3px] bg-[linear-gradient(135deg,#FBEAE3_0%,#EAAD9D_35%,#C97B63_70%,#8A4E3F_100%)] transition-all duration-500 ease-out hover:brightness-115 hover:scale-[1.035] active:scale-[0.98] group cursor-pointer shadow-none">
+                      {/* Go to Sheet Music Shop Button with Lightened Soft Rose Gold Gradient */}
+                      <div className="mt-6 inline-block rounded-full p-[3px] bg-[linear-gradient(135deg,#FFF5F0_0%,#FBEAE3_25%,#F5C4B4_55%,#E09B89_80%,#C97B63_100%)] transition-all duration-500 ease-out hover:brightness-115 hover:scale-[1.035] active:scale-[0.98] group cursor-pointer shadow-none">
                         <button
                           onClick={() => onNavigate('sheets')}
                           style={{
-                            background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 18%, #D9A998 38%, #C49280 58%, #B57F6D 78%, #7D493B 100%)",
-                            boxShadow: "inset 0 2px 3.5px #FFFFFF, inset 0 -2.5px 4px rgba(60, 20, 10, 0.45)",
+                            background: "linear-gradient(135deg, #FFF7F3 0%, #F8E4DA 22%, #EAC4B1 45%, #DF9B89 72%, #C97B63 100%)",
+                            boxShadow: "inset 0 2px 3.5px #FFFFFF, inset 0 -2px 3px rgba(180, 100, 80, 0.25)",
                           }}
                           className="py-3.5 px-8 text-white font-extrabold text-xs uppercase tracking-widest rounded-full cursor-pointer inline-flex items-center justify-center gap-2 border-0 shadow-none transition-all duration-500 ease-out w-full"
                         >
                           <span className="material-symbols-outlined text-base text-white transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">storefront</span>
-                          <span>Go to Sheet Music Shop</span>
+                          <span className="drop-shadow-[0_1px_2px_rgba(100,50,40,0.3)]">Go to Sheet Music Shop</span>
                         </button>
                       </div>
                     </div>
