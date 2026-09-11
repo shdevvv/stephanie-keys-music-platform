@@ -543,7 +543,7 @@ export default function SheetPurchaseFlow({
     <div
       className="w-full flex-grow relative overflow-hidden py-12 px-4 md:px-8 min-h-[calc(100vh-80px)]"
       style={{
-        backgroundImage: "linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.15)), url('/cart-page-bg.jpg')",
+        backgroundImage: "linear-gradient(to bottom, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.22)), url('/cart-page-bg.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
