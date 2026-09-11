@@ -564,7 +564,7 @@ export default function SheetPurchaseFlow({
 
         {/* Stepper Timeline 1234 Standalone Outline Box (Outline border only, attached directly to bottom card) */}
         {step >= 2 && step <= 7 && (
-          <div className="bg-white/40 backdrop-blur-lg border-[3.5px] border-[#c46a55] border-b-0 rounded-t-2xl p-5 md:p-6 max-w-5xl mx-auto relative overflow-hidden shadow-[inset_0_2.5px_4px_rgba(255,255,255,0.95)]">
+          <div className="bg-white/40 backdrop-blur-lg border-[3.5px] border-[#b84e38] border-b-0 rounded-t-2xl p-5 md:p-6 max-w-5xl mx-auto relative overflow-hidden shadow-[inset_0_2.5px_4px_rgba(255,255,255,0.95)]">
             <div className="relative flex items-center justify-between max-w-3xl mx-auto px-2">
 
               {/* Background Connecting Line */}
@@ -663,34 +663,33 @@ export default function SheetPurchaseFlow({
 
         {/* Step Content Container Box (Bening / Transparent glass attached directly to top 1234 box) */}
         {step >= 2 && step <= 7 && (
-          <div className="bg-white/50 backdrop-blur-xl border-[3.5px] border-[#c46a55] border-t border-t-[#c46a55]/60 shadow-[inset_0_2.5px_5px_rgba(255,255,255,0.95)] rounded-b-2xl rounded-t-none p-5 md:p-8 relative overflow-hidden transition-all duration-300">
+          <div className="bg-white/50 backdrop-blur-xl border-[3.5px] border-[#b84e38] border-t border-t-[#b84e38]/60 shadow-[inset_0_2.5px_5px_rgba(255,255,255,0.95)] rounded-b-2xl rounded-t-none p-5 md:p-8 relative overflow-hidden transition-all duration-300">
 
             {/* -------------------- STEP 2: SHOPPING CART -------------------- */}
             {step === 2 && (
               <div className="animate-in fade-in duration-300">
                 {cart.length === 0 ? (
-                  /* Container with Balanced Rich Rose Gold Gradient Border (Visible Warm Left Side) & Bright Clear Hotel Glass */
-                  <div className="rounded-2xl p-[3.5px] bg-[linear-gradient(135deg,#E09886_0%,#D47A64_35%,#C46A55_70%,#B85B40_100%)] shadow-none">
+                  /* Container with High-Contrast Specular Metallic Rose Gold Multi-Stop Gradient Border */
+                  <div className="rounded-2xl p-[3.5px] bg-[linear-gradient(135deg,#FFFFFF_0%,#F8D7CC_18%,#DF8B76_40%,#B84E38_65%,#FCEBE4_82%,#993D2A_100%)] shadow-none">
                     <div className="text-center py-14 bg-white/85 backdrop-blur-2xl rounded-[13px] relative shadow-[inset_0_3px_8px_#ffffff,_inset_0_1px_4px_rgba(255,255,255,0.95)] p-8 md:p-12 border-0">
-                      {/* Hotel Glass Circle with Balanced Rose Gold Gradient Outline */}
-                      <div className="w-16 h-16 rounded-full p-[3px] bg-[linear-gradient(135deg,#E09886_0%,#D47A64_35%,#C46A55_70%,#B85B40_100%)] mx-auto mb-4 group transition-all duration-500 hover:scale-105 shadow-none">
+                      {/* Hotel Glass Circle with High-Contrast Specular Metallic Outline */}
+                      <div className="w-16 h-16 rounded-full p-[3px] bg-[linear-gradient(135deg,#FFFFFF_0%,#F8D7CC_18%,#DF8B76_40%,#B84E38_65%,#FCEBE4_82%,#993D2A_100%)] mx-auto mb-4 group transition-all duration-500 hover:scale-105 shadow-none">
                         <div className="w-full h-full bg-white/95 backdrop-blur-md rounded-full flex items-center justify-center shadow-[inset_0_2.5px_5px_#ffffff]">
-                          {/* Multi-Tonal Soft Rose Gold SVG Shopping Cart Icon */}
+                          {/* Multi-Tonal Soft Specular Rose Gold SVG Shopping Cart Icon */}
                           <svg className="w-7 h-7 transition-transform duration-500 group-hover:scale-110 select-none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                               <linearGradient id="luxEmptyCartMultiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#E09886" />
-                                <stop offset="35%" stopColor="#D47A64" />
-                                <stop offset="70%" stopColor="#C46A55" />
-                                <stop offset="100%" stopColor="#B85B40" />
+                                <stop offset="0%" stopColor="#DF8B76" />
+                                <stop offset="50%" stopColor="#B84E38" />
+                                <stop offset="100%" stopColor="#8A301E" />
                               </linearGradient>
                               <linearGradient id="luxEmptyCartWheelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="#FFFFFF" />
-                                <stop offset="100%" stopColor="#C46A55" />
+                                <stop offset="100%" stopColor="#B84E38" />
                               </linearGradient>
                             </defs>
                             <path
-                              d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z"
+                              d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 19 21.1 19 20C19 18.9 18.1 18 17 18Z"
                               fill="url(#luxEmptyCartMultiGrad)"
                             />
                             <circle cx="7" cy="20" r="1.3" fill="url(#luxEmptyCartWheelGrad)" />
@@ -703,18 +702,18 @@ export default function SheetPurchaseFlow({
                         Explore our exclusive collection of arrangement sheet music for piano, solos, and ensembles.
                       </p>
 
-                      {/* Go to Sheet Music Shop Button with Balanced High-Contrast Rose Gold Outline */}
-                      <div className="mt-6 inline-block rounded-full p-[3px] bg-[linear-gradient(135deg,#E09886_0%,#D47A64_35%,#C46A55_70%,#B85B40_100%)] transition-all duration-500 ease-out hover:brightness-115 hover:scale-[1.035] active:scale-[0.98] group cursor-pointer shadow-none">
+                      {/* Go to Sheet Music Shop Button with High-Contrast Specular Metallic Outline */}
+                      <div className="mt-6 inline-block rounded-full p-[3px] bg-[linear-gradient(135deg,#FFFFFF_0%,#F8D7CC_18%,#DF8B76_40%,#B84E38_65%,#FCEBE4_82%,#993D2A_100%)] transition-all duration-500 ease-out hover:brightness-115 hover:scale-[1.035] active:scale-[0.98] group cursor-pointer shadow-none">
                         <button
                           onClick={() => onNavigate('sheets')}
                           style={{
-                            background: "linear-gradient(135deg, #F8E4DA 0%, #E8B9AA 25%, #D69382 55%, #C27260 80%, #B85B40 100%)",
-                            boxShadow: "inset 0 2px 3.5px #FFFFFF, inset 0 -2px 3px rgba(180, 100, 80, 0.25)",
+                            background: "linear-gradient(135deg, #FFF0EB 0%, #F5C6B8 20%, #E29380 45%, #B84E38 75%, #8A301E 100%)",
+                            boxShadow: "inset 0 2.5px 4px #FFFFFF, inset 0 -2.5px 4px rgba(80, 20, 10, 0.45)",
                           }}
                           className="py-3.5 px-8 text-white font-extrabold text-xs uppercase tracking-widest rounded-full cursor-pointer inline-flex items-center justify-center gap-2 border-0 shadow-none transition-all duration-500 ease-out w-full"
                         >
                           <span className="material-symbols-outlined text-base text-white transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">storefront</span>
-                          <span className="drop-shadow-[0_1px_2px_rgba(100,50,40,0.3)]">Go to Sheet Music Shop</span>
+                          <span className="drop-shadow-[0_1.5px_3px_rgba(60,20,10,0.4)]">Go to Sheet Music Shop</span>
                         </button>
                       </div>
                     </div>
