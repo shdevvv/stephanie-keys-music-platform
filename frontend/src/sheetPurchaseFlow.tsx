@@ -674,20 +674,20 @@ export default function SheetPurchaseFlow({
             {step === 2 && (
               <div className="animate-in fade-in duration-300">
                 {cart.length === 0 ? (
-                  <div className="text-center py-14 bg-white/80 border-2 border-dashed border-[#e5c0b5] rounded-xl relative">
-                    <div className="w-14 h-14 bg-[#fceee8] border-2 border-[#e5b3a3] rounded-full flex items-center justify-center mx-auto mb-3 shadow-2xs">
-                      <span className="material-symbols-outlined text-2xl text-[#d68c78] select-none">shopping_cart</span>
+                  <div className="text-center py-14 bg-white/60 backdrop-blur-md border-[2.5px] border-dashed border-[#e8a493]/70 rounded-xl relative shadow-xs">
+                    <div className="w-16 h-16 bg-[#fff8f5]/90 backdrop-blur-xs border-[3.5px] border-[#e8a493] rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_18px_rgba(232,164,147,0.5),_inset_0_1.5px_2px_rgba(255,255,255,0.9)]">
+                      <span className="material-symbols-outlined text-2xl text-[#a66858] select-none">shopping_cart</span>
                     </div>
-                    <p className="font-serif text-lg text-[#3d231b] font-extrabold">Your Luxury Cart is Empty</p>
-                    <p className="font-sans text-xs text-[#5a372c] mt-1.5 max-w-sm mx-auto leading-relaxed font-medium">
+                    <p className="font-serif text-lg text-[#5e4539] font-extrabold">Your Cart is Empty</p>
+                    <p className="font-serif italic text-xs text-[#7c6356] mt-1.5 max-w-sm mx-auto leading-relaxed font-normal">
                       Explore our exclusive collection of arrangement sheet music for piano, solos, and ensembles.
                     </p>
                     <button
                       onClick={() => onNavigate('sheets')}
                       style={{
-                        backgroundImage: "linear-gradient(135deg, #d68c78 0%, #c97b63 50%, #9c5443 100%)",
+                        backgroundImage: "linear-gradient(135deg, #9e7f72 0%, #85675a 50%, #684d41 100%)",
                       }}
-                      className="mt-5 py-3 px-7 text-white font-extrabold text-xs uppercase tracking-widest rounded-xl transition-all border-2 border-[#ffeedd] cursor-pointer shadow-xs hover:scale-102 inline-flex items-center justify-center"
+                      className="mt-5 py-3.5 px-7 text-white font-extrabold text-xs uppercase tracking-widest rounded-xl transition-all duration-300 border-[3.5px] border-[#e8a493] cursor-pointer shadow-[0_0_20px_rgba(232,164,147,0.55),_0_4px_16px_rgba(181,114,98,0.3),_inset_0_1.5px_2px_rgba(255,255,255,0.8)] hover:border-[#f4c2b5] hover:shadow-[0_0_28px_rgba(232,164,147,0.75),_0_6px_20px_rgba(181,114,98,0.4)] hover:scale-[1.02] active:scale-[0.98] inline-flex items-center justify-center"
                     >
                       Go to Sheet Music Shop
                     </button>

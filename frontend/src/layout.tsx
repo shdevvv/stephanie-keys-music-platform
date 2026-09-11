@@ -764,7 +764,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
                   border: "1px solid #D9A998",
                 }}
-                className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-full cursor-pointer transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 text-white flex items-center gap-1.5 shadow-none group shrink-0"
+                className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-full cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.03] active:scale-95 text-white flex items-center gap-1.5 shadow-none group shrink-0"
                 aria-label="View Shopping Cart"
               >
                 {/* Classic Treble Clef (Kunci G) Icon */}
