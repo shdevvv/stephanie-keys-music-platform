@@ -764,18 +764,18 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
                   border: "1px solid #D9A998",
                 }}
-                className="relative h-9 sm:h-10 px-3 sm:px-4 rounded-full cursor-pointer transition-all duration-300 ease-out hover:brightness-120 hover:scale-[1.03] active:scale-95 text-[#FFFFFF] flex items-center gap-1.5 sm:gap-2 shadow-none group shrink-0"
+                className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-full cursor-pointer transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 text-white flex items-center gap-1.5 shadow-none group shrink-0"
                 aria-label="View Shopping Cart"
               >
                 {/* Classic Treble Clef (Kunci G) Icon */}
-                <svg className="w-[14px] sm:w-[16px] h-[18px] sm:h-[22px] fill-current text-white shrink-0 drop-shadow-xs transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 140">
+                <svg className="w-[13px] sm:w-[15px] h-[17px] sm:h-[20px] fill-current text-white shrink-0 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 140">
                   <path d="M 54.7 115.5 C 50.5 119.3 45.3 121.2 39.7 120.7 C 33.2 120.1 27.7 116.5 24.9 110.6 C 22.2 104.9 22.8 98.3 26.4 93 C 30.5 87 37.3 83.2 44.6 82.8 L 44.6 45.8 C 41.5 47 38.6 48.9 36.1 51.3 C 30.2 57.1 27.1 64.8 27.5 73 C 27.9 81.5 32.2 89 39.3 93.4 C 41.4 94.7 42 97.5 40.7 99.6 C 39.4 101.7 36.6 102.3 34.5 101 C 25.2 95.2 19.5 85.3 19 74.2 C 18.5 63.5 22.5 53.5 30.2 45.9 C 34.2 41.9 39 39 44.3 37.4 L 44.3 25 C 44.3 20.4 46.3 16.1 49.7 13.2 C 53.5 10 58.4 8.5 63.4 9.1 C 68.4 9.7 72.8 12.5 75.5 16.7 C 78.2 20.9 78.9 26.1 77.4 30.9 C 76.1 35.1 73.2 38.6 69.3 40.6 C 67.1 41.7 64.5 41 63.4 38.8 C 62.3 36.6 63 34 65.2 32.9 C 67.7 31.6 69.6 29.4 70.4 26.7 C 71.3 23.6 70.9 20.2 69.2 17.5 C 67.5 14.8 64.6 13 61.4 12.6 C 58.1 12.2 54.9 13.2 52.4 15.3 C 50.3 17.1 49 19.8 49 22.7 L 49 36.2 C 53.7 37.3 58.1 39.6 61.8 42.9 C 67.7 48.2 71 55.5 71 63.3 C 71 71.4 67.4 78.9 61.1 83.9 C 55.3 88.5 48 90.7 40.7 90 C 42.7 87.4 46.1 85.6 49.8 84.8 L 49.8 110.7 C 53.7 110.5 57.4 108.9 60.1 106.2 C 63.8 102.6 65.9 97.6 65.9 92.4 C 65.9 88 63.6 83.8 59.7 81 C 57.5 79.4 57 76.6 58.6 74.4 C 60.2 72.2 63 71.7 65.2 73.3 C 70.7 77.3 73.9 83.5 73.9 90.1 C 73.9 99 69.9 107.5 63 113.5 C 60.6 115.6 57.7 116.5 54.7 115.5 Z M 39.7 112.5 C 43.5 112.5 46.5 109.5 46.5 105.7 C 46.5 101.9 43.5 98.9 39.7 98.9 C 35.9 98.9 32.9 101.9 32.9 105.7 C 32.9 109.5 35.9 112.5 39.7 112.5 Z" />
                 </svg>
 
-                {/* Readable Calligraphy 'Shop' Font */}
+                {/* Clean Calligraphy 'Shop' Font */}
                 <span
                   style={{ fontFamily: "'Great Vibes', 'Alex Brush', 'Playfair Display', cursive, serif" }}
-                  className="text-sm sm:text-[18px] font-bold text-[#FFFFFF] tracking-wide drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] leading-none pt-0.5"
+                  className="text-sm sm:text-[16.5px] font-semibold text-white tracking-wide leading-none pt-0.5"
                 >
                   Shop
                 </span>
