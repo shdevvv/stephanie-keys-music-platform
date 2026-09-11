@@ -674,9 +674,9 @@ export default function SheetPurchaseFlow({
             {step === 2 && (
               <div className="animate-in fade-in duration-300">
                 {cart.length === 0 ? (
-                  <div className="text-center py-14 bg-white/60 backdrop-blur-md border-[2.5px] border-dashed border-[#c97b63]/60 rounded-xl relative">
-                    <div className="w-14 h-14 bg-transparent border-[3.5px] border-[#c97b63] rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="material-symbols-outlined text-2xl text-[#c97b63] select-none">shopping_cart</span>
+                  <div className="text-center py-14 bg-white/60 backdrop-blur-md border-[2.5px] border-dashed border-[#b85b40]/60 rounded-xl relative">
+                    <div className="w-14 h-14 bg-transparent border-[3.5px] border-[#b85b40] rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="material-symbols-outlined text-2xl text-[#b85b40] select-none">shopping_cart</span>
                     </div>
                     <p className="font-serif text-lg text-[#5e4539] font-extrabold">Your Cart is Empty</p>
                     <p className="font-serif italic text-xs text-[#7c6356] mt-1.5 max-w-sm mx-auto leading-relaxed font-normal">
@@ -687,7 +687,7 @@ export default function SheetPurchaseFlow({
                       style={{
                         backgroundImage: "linear-gradient(135deg, #9e7f72 0%, #85675a 50%, #684d41 100%)",
                       }}
-                      className="mt-5 py-3.5 px-7 text-white font-extrabold text-xs uppercase tracking-widest rounded-xl transition-all border-[3.5px] border-[#c97b63] hover:border-[#b85b40] cursor-pointer shadow-none inline-flex items-center justify-center"
+                      className="mt-5 py-3.5 px-7 text-white font-extrabold text-xs uppercase tracking-widest rounded-xl transition-all border-[3.5px] border-[#b85b40] hover:border-[#9c4630] cursor-pointer shadow-none inline-flex items-center justify-center"
                     >
                       Go to Sheet Music Shop
                     </button>
