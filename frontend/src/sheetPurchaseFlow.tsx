@@ -669,7 +669,9 @@ export default function SheetPurchaseFlow({
             {step === 2 && (
               <div className="animate-in fade-in duration-300">
                 {cart.length === 0 ? (
-                  <div className="text-center py-14 bg-white/70 backdrop-blur-md border-[3px] border-dashed border-[#c97b63]/80 rounded-2xl relative shadow-[inset_0_2px_6px_rgba(255,255,255,0.95)] p-8 md:p-12">
+                  /* Container with Solid Luxury Rose Gold Gradient Border & Ultra-Glossy Glass */
+                  <div className="rounded-2xl p-[3.5px] bg-[linear-gradient(135deg,#FBEAE3_0%,#EAAD9D_35%,#C97B63_70%,#8A4E3F_100%)] shadow-none">
+                    <div className="text-center py-14 bg-gradient-to-b from-white/95 via-white/85 to-[#fbeae3]/50 backdrop-blur-2xl rounded-[13px] relative shadow-[inset_0_3.5px_8px_#ffffff,_inset_0_-3px_6px_rgba(184,91,64,0.18)] p-8 md:p-12 border-0">
                     {/* Hotel Glass Circle with Soft Harmonious Champagne-Peach-RoseGold Gradient Outline */}
                     <div className="w-16 h-16 rounded-full p-[3px] bg-[linear-gradient(135deg,#FBEAE3_0%,#EAAD9D_35%,#C97B63_70%,#8A4E3F_100%)] mx-auto mb-4 group transition-all duration-500 hover:scale-105 shadow-none">
                       <div className="w-full h-full bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-[inset_0_2.5px_4px_#ffffff,_inset_0_-2px_4px_rgba(184,91,64,0.15)]">
@@ -716,6 +718,7 @@ export default function SheetPurchaseFlow({
                         <span>Go to Sheet Music Shop</span>
                       </button>
                     </div>
+                    </div>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5 items-stretch">
@@ -761,7 +764,7 @@ export default function SheetPurchaseFlow({
                                 </div>
                               </div>
 
-                              <div className="flex items-center justify-between sm:justify-end gap-5 w-full sm:w-auto border-t sm:border-t-0 border-dashed border-[#b85b40]/40 pt-3 sm:pt-0">
+                              <div className="flex items-center justify-between sm:justify-end gap-5 w-full sm:w-auto border-t sm:border-t-0 border-solid border-[#d48b77]/60 pt-3 sm:pt-0">
                                 <div className="flex items-center gap-3">
                                   <div className="text-right">
                                     <div className="text-sm font-serif font-black text-[#8c3b26]">
@@ -959,7 +962,7 @@ export default function SheetPurchaseFlow({
 
                   <button
                     onClick={handleGuestCheckout}
-                    className="w-full py-3 bg-white/20 hover:bg-white/40 backdrop-blur-xs border-2 border-dashed border-[#b85b40] text-[#5a372c] font-black text-xs rounded-xl transition-all cursor-pointer"
+                    className="w-full py-3 bg-white/20 hover:bg-white/40 backdrop-blur-xs border-2 border-solid border-[#d48b77] hover:border-[#b85b40] text-[#5a372c] font-black text-xs rounded-xl transition-all cursor-pointer"
                   >
                     Continue as Guest (No Password Required)
                   </button>
@@ -1368,7 +1371,7 @@ export default function SheetPurchaseFlow({
 
                   <div className="h-px bg-[#b85b40]/40 my-3" />
 
-                  <div className="flex justify-between items-center text-xs border-b border-dashed border-[#b85b40]/40 pb-2">
+                  <div className="flex justify-between items-center text-xs border-b border-solid border-[#d48b77]/60 pb-2">
                     <span className="text-[#5a372c] font-bold">Billing Order ID</span>
                     <span className="font-black font-mono text-[#3d231b]">{orderInfo.orderId}</span>
                   </div>
@@ -1540,7 +1543,7 @@ export default function SheetPurchaseFlow({
 
             {/* Library Grid */}
             {getLibrarySheets().length === 0 ? (
-              <div className="text-center py-20 bg-white/50 border border-dashed border-[#e8cdc1]/30 rounded-xl">
+              <div className="text-center py-20 bg-white/50 border border-solid border-[#d48b77]/40 rounded-xl">
                 <span className="material-symbols-outlined text-4xl text-[#ab7e66]/40">library_books</span>
                 <p className="font-sans text-sm text-[#4a372e] mt-3 font-bold">No sheet music found</p>
                 <p className="font-sans text-xs text-[#8b7368] mt-1 max-w-xs mx-auto leading-relaxed">
@@ -1593,7 +1596,7 @@ export default function SheetPurchaseFlow({
                       </div>
 
                       {/* Download PDF button */}
-                      <div className="border-t border-dashed border-[#e8cdc1]/30 pt-3.5 mt-auto">
+                      <div className="border-t border-solid border-[#d48b77]/40 pt-3.5 mt-auto">
                         <button
                           onClick={() => handleDownloadFile(sheet.title, 'PDF')}
                           style={{

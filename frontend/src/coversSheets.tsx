@@ -555,7 +555,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
             </div>
 
             {filteredCovers.length === 0 && (
-              <div className="text-center py-16 bg-white/40 rounded-[6px] border border-dashed border-[#e8cdc1]/30">
+              <div className="text-center py-16 bg-white/40 rounded-[6px] border border-solid border-[#e8cdc1]/30">
                 <span className="material-symbols-outlined text-4xl text-[#ab7e66]/40 select-none">video_library</span>
                 <p className="font-sans text-sm text-[#7c6a60] mt-2 font-medium">No covers found matching these categories.</p>
               </div>
@@ -765,7 +765,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                           })()}
                         </div>
 
-                        <div className="flex gap-2 pt-2.5 border-t border-dashed border-[#e8cdc1]/40 mt-auto">
+                        <div className="flex gap-2 pt-2.5 border-t border-solid border-[#e8cdc1]/40 mt-auto">
                           <button
                             onClick={() => {
                               setActivePreview(sheet);
