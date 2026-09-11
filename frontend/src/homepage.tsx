@@ -167,7 +167,7 @@ function Homepage() {
           <SheetPurchaseFlow
             initialStep={2}
             onNavigate={handleNavigate}
-            selectedSheetForBuyNow={buyNowSheet}
+            selectedSheetForBuyNow={null}
             clearBuyNowSheet={() => setBuyNowSheet(null)}
           />
         );
