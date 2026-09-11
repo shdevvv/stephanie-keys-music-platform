@@ -574,16 +574,15 @@ export default function SheetPurchaseFlow({
               <div
                 className="absolute top-1/2 left-0 -translate-y-1/2 h-1.5 bg-gradient-to-r from-[#e0a897] via-[#c97b63] to-[#9c5443] transition-all duration-500 rounded-full z-0"
                 style={{
-                  width: `${
-                    !isDirectBuy ? (
+                  width: `${!isDirectBuy ? (
                       step === 2 ? 0 :
-                      step === 3 || step === 4 ? 33.33 :
-                      step === 5 || step === 6 ? 66.66 : 100
+                        step === 3 || step === 4 ? 33.33 :
+                          step === 5 || step === 6 ? 66.66 : 100
                     ) : (
                       step === 3 || step === 4 ? 0 :
-                      step === 5 || step === 6 ? 50 : 100
+                        step === 5 || step === 6 ? 50 : 100
                     )
-                  }%`
+                    }%`
                 }}
               />
 
@@ -597,13 +596,12 @@ export default function SheetPurchaseFlow({
                 ].map((s) => (
                   <div key={s.num} className="relative z-10 flex flex-col items-center group">
                     <div
-                      className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center font-extrabold text-xs md:text-sm transition-all duration-300 border-2 ${
-                        s.isCurrent
+                      className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center font-extrabold text-xs md:text-sm transition-all duration-300 border-2 ${s.isCurrent
                           ? 'bg-gradient-to-br from-[#d68c78] via-[#c97b63] to-[#9c5443] text-white border-white ring-2 ring-[#d68c78]/60 scale-110'
                           : s.active
-                          ? 'bg-[#9c5443] text-white border-[#e5b3a3]'
-                          : 'bg-[#fff8f6] text-[#7a554a] border-[#e0b4a4]'
-                      }`}
+                            ? 'bg-[#9c5443] text-white border-[#e5b3a3]'
+                            : 'bg-[#fff8f6] text-[#7a554a] border-[#e0b4a4]'
+                        }`}
                     >
                       {s.active && !s.isCurrent && s.num < (step >= 7 ? 5 : step >= 5 ? 4 : step >= 3 ? 3 : 2) ? (
                         <span className="material-symbols-outlined text-sm font-black">check</span>
@@ -612,13 +610,12 @@ export default function SheetPurchaseFlow({
                       )}
                     </div>
                     <span
-                      className={`mt-2 text-[10px] md:text-xs tracking-wider uppercase transition-all ${
-                        s.isCurrent
+                      className={`mt-2 text-[10px] md:text-xs tracking-wider uppercase transition-all ${s.isCurrent
                           ? 'text-[#3d231b] font-black'
                           : s.active
-                          ? 'text-[#5a372c] font-black'
-                          : 'text-[#7a554a] font-semibold'
-                      }`}
+                            ? 'text-[#5a372c] font-black'
+                            : 'text-[#7a554a] font-semibold'
+                        }`}
                     >
                       {s.label}
                     </span>
@@ -633,13 +630,12 @@ export default function SheetPurchaseFlow({
                 ].map((s) => (
                   <div key={s.num} className="relative z-10 flex flex-col items-center group">
                     <div
-                      className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center font-extrabold text-xs md:text-sm transition-all duration-300 border-2 ${
-                        s.isCurrent
+                      className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center font-extrabold text-xs md:text-sm transition-all duration-300 border-2 ${s.isCurrent
                           ? 'bg-gradient-to-br from-[#d68c78] via-[#c97b63] to-[#9c5443] text-white border-white ring-2 ring-[#d68c78]/60 scale-110'
                           : s.active
-                          ? 'bg-[#9c5443] text-white border-[#e5b3a3]'
-                          : 'bg-[#fff8f6] text-[#7a554a] border-[#e0b4a4]'
-                      }`}
+                            ? 'bg-[#9c5443] text-white border-[#e5b3a3]'
+                            : 'bg-[#fff8f6] text-[#7a554a] border-[#e0b4a4]'
+                        }`}
                     >
                       {s.active && !s.isCurrent ? (
                         <span className="material-symbols-outlined text-sm font-black">check</span>
@@ -648,13 +644,12 @@ export default function SheetPurchaseFlow({
                       )}
                     </div>
                     <span
-                      className={`mt-2 text-[10px] md:text-xs tracking-wider uppercase transition-all ${
-                        s.isCurrent
+                      className={`mt-2 text-[10px] md:text-xs tracking-wider uppercase transition-all ${s.isCurrent
                           ? 'text-[#3d231b] font-black'
                           : s.active
-                          ? 'text-[#5a372c] font-black'
-                          : 'text-[#7a554a] font-semibold'
-                      }`}
+                            ? 'text-[#5a372c] font-black'
+                            : 'text-[#7a554a] font-semibold'
+                        }`}
                     >
                       {s.label}
                     </span>
@@ -738,11 +733,10 @@ export default function SheetPurchaseFlow({
                           return (
                             <div
                               key={item.sheet.title || idx}
-                              className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white/35 backdrop-blur-md border-2 border-[#b85b40]/80 hover:border-[#b85b40] rounded-xl shadow-xs transition-all duration-350 ease-in-out group ${
-                                isRemoving
+                              className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white/35 backdrop-blur-md border-2 border-[#b85b40]/80 hover:border-[#b85b40] rounded-xl shadow-xs transition-all duration-350 ease-in-out group ${isRemoving
                                   ? 'opacity-0 scale-95 -translate-x-6 max-h-0 py-0 overflow-hidden border-transparent'
                                   : 'opacity-100 scale-100 translate-x-0'
-                              }`}
+                                }`}
                             >
                               <div className="flex items-center gap-3.5">
                                 <div className="p-0.5 bg-gradient-to-br from-[#e5b3a3] to-[#c97b63] rounded-xl shadow-xs shrink-0">
@@ -1177,8 +1171,8 @@ export default function SheetPurchaseFlow({
                               setPaymentApiError('');
                             }}
                             className={`p-3.5 rounded-xl text-left flex flex-col justify-between h-24 cursor-pointer transition-all duration-200 ${isSelected
-                                ? 'border-2 border-[#b85b40] bg-gradient-to-br from-[#fceee8] to-[#f8ded6] shadow-2xs scale-[1.02]'
-                                : 'border-2 border-[#b85b40]/70 bg-white/35 hover:bg-white/55 backdrop-blur-xs hover:border-[#b85b40]'
+                              ? 'border-2 border-[#b85b40] bg-gradient-to-br from-[#fceee8] to-[#f8ded6] shadow-2xs scale-[1.02]'
+                              : 'border-2 border-[#b85b40]/70 bg-white/35 hover:bg-white/55 backdrop-blur-xs hover:border-[#b85b40]'
                               }`}
                           >
                             <span className={`material-symbols-outlined text-xl ${isSelected ? 'text-[#8c3b26]' : 'text-[#5a372c]'}`}>
