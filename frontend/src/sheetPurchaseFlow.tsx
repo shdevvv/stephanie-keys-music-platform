@@ -243,8 +243,19 @@ export default function SheetPurchaseFlow({
 
 
 
+  const [removingTitles, setRemovingTitles] = useState<string[]>([]);
+
   const removeFromCart = (title: string) => {
     setCart(prev => prev.filter(item => item.sheet.title !== title));
+  };
+
+  const handleAnimateRemoveFromCart = (title: string) => {
+    if (removingTitles.includes(title)) return;
+    setRemovingTitles(prev => [...prev, title]);
+    setTimeout(() => {
+      removeFromCart(title);
+      setRemovingTitles(prev => prev.filter(t => t !== title));
+    }, 350);
   };
 
 
@@ -543,7 +554,7 @@ export default function SheetPurchaseFlow({
     <div
       className="w-full flex-grow relative overflow-hidden py-12 px-4 md:px-8 min-h-[calc(100vh-80px)]"
       style={{
-        backgroundImage: "linear-gradient(to bottom, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.22)), url('/cart-page-bg.jpg')",
+        backgroundImage: "linear-gradient(to bottom, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.42)), url('/cart-page-bg.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -692,53 +703,60 @@ export default function SheetPurchaseFlow({
                           </h3>
                         </div>
 
-                        {cart.map((item, idx) => (
-                          <div
-                            key={idx}
-                            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white/35 backdrop-blur-md border-2 border-[#b85b40]/80 hover:border-[#b85b40] rounded-xl shadow-xs transition-all duration-300 group"
-                          >
-                            <div className="flex items-center gap-3.5">
-                              <div className="p-0.5 bg-gradient-to-br from-[#e5b3a3] to-[#c97b63] rounded-xl shadow-xs shrink-0">
-                                <img
-                                  src={item.sheet.image}
-                                  alt={item.sheet.title}
-                                  className="w-16 h-16 object-cover rounded-[10px] border border-white bg-[#faf6f4] flex-shrink-0"
-                                />
-                              </div>
-                              <div>
-                                <h3 style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }} className="text-sm font-black text-[#3d231b] tracking-tight">
-                                  {item.sheet.title}
-                                </h3>
-                                <p className="text-xs text-[#5a372c] mt-0.5 font-bold line-clamp-1">{item.sheet.description}</p>
-                                <div className="flex flex-wrap gap-1.5 mt-2">
-                                  {item.sheet.genres.map((g, i) => (
-                                    <span key={i} className="bg-white/50 backdrop-blur-xs text-[#8c3b26] px-2 py-0.5 rounded-md text-[10px] font-black border border-[#b85b40]/60">
-                                      {g}
-                                    </span>
-                                  ))}
+                        {cart.map((item, idx) => {
+                          const isRemoving = removingTitles.includes(item.sheet.title);
+                          return (
+                            <div
+                              key={item.sheet.title || idx}
+                              className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white/35 backdrop-blur-md border-2 border-[#b85b40]/80 hover:border-[#b85b40] rounded-xl shadow-xs transition-all duration-350 ease-in-out group ${
+                                isRemoving
+                                  ? 'opacity-0 scale-95 -translate-x-6 max-h-0 py-0 overflow-hidden border-transparent'
+                                  : 'opacity-100 scale-100 translate-x-0'
+                              }`}
+                            >
+                              <div className="flex items-center gap-3.5">
+                                <div className="p-0.5 bg-gradient-to-br from-[#e5b3a3] to-[#c97b63] rounded-xl shadow-xs shrink-0">
+                                  <img
+                                    src={item.sheet.image}
+                                    alt={item.sheet.title}
+                                    className="w-16 h-16 object-cover rounded-[10px] border border-white bg-[#faf6f4] flex-shrink-0"
+                                  />
                                 </div>
-                              </div>
-                            </div>
-
-                            <div className="flex items-center justify-between sm:justify-end gap-5 w-full sm:w-auto border-t sm:border-t-0 border-dashed border-[#b85b40]/40 pt-3 sm:pt-0">
-                              <div className="flex items-center gap-4">
-                                <div className="text-right">
-                                  <div className="text-sm font-serif font-black text-[#8c3b26]">
-                                    {formatPrice(parsePrice(item.sheet.price))}
+                                <div>
+                                  <h3 style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }} className="text-sm font-black text-[#3d231b] tracking-tight">
+                                    {item.sheet.title}
+                                  </h3>
+                                  <p className="text-xs text-[#5a372c] mt-0.5 font-bold line-clamp-1">{item.sheet.description}</p>
+                                  <div className="flex flex-wrap gap-1.5 mt-2">
+                                    {item.sheet.genres.map((g, i) => (
+                                      <span key={i} className="bg-white/50 backdrop-blur-xs text-[#8c3b26] px-2 py-0.5 rounded-md text-[10px] font-black border border-[#b85b40]/60">
+                                        {g}
+                                      </span>
+                                    ))}
                                   </div>
                                 </div>
+                              </div>
 
-                                <button
-                                  onClick={() => removeFromCart(item.sheet.title)}
-                                  className="w-7 h-7 rounded-full bg-white/40 hover:bg-[#f8ded6] text-[#8c3b26] flex items-center justify-center transition-all border border-[#b85b40] cursor-pointer"
-                                  title="Remove item"
-                                >
-                                  <span className="material-symbols-outlined text-xs font-black">close</span>
-                                </button>
+                              <div className="flex items-center justify-between sm:justify-end gap-5 w-full sm:w-auto border-t sm:border-t-0 border-dashed border-[#b85b40]/40 pt-3 sm:pt-0">
+                                <div className="flex items-center gap-3">
+                                  <div className="text-right">
+                                    <div className="text-sm font-serif font-black text-[#8c3b26]">
+                                      {formatPrice(parsePrice(item.sheet.price))}
+                                    </div>
+                                  </div>
+
+                                  <button
+                                    onClick={() => handleAnimateRemoveFromCart(item.sheet.title)}
+                                    className="px-2.5 py-1.5 rounded-md bg-white/40 hover:bg-[#fceee8] text-[#8c3b26] border border-[#b85b40]/70 hover:border-[#b85b40] text-[10px] font-black tracking-widest uppercase transition-all duration-200 cursor-pointer shadow-2xs hover:scale-105 active:scale-95 flex items-center justify-center shrink-0"
+                                    title="Remove item"
+                                  >
+                                    REMOVE
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
 
                       {/* Find More Sheet Music Box inside Left Column */}

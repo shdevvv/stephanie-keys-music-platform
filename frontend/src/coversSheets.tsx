@@ -574,8 +574,8 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
               alt="Sheet Music Shop Background"
               className="w-full h-full object-cover object-center scale-135 sm:scale-140 md:scale-145 lg:scale-150 transition-transform duration-500"
             />
-            {/* White overlay 0.62 */}
-            <div className="absolute inset-0 bg-white/62" />
+            {/* White overlay 0.72 */}
+            <div className="absolute inset-0 bg-white/72" />
           </div>
 
           <div className="max-w-[1200px] mx-auto px-6 space-y-12 relative z-10">
