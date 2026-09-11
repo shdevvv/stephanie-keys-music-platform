@@ -675,10 +675,31 @@ export default function SheetPurchaseFlow({
               <div className="animate-in fade-in duration-300">
                 {cart.length === 0 ? (
                   <div className="text-center py-14 bg-white/70 backdrop-blur-md border-[3px] border-dashed border-[#c97b63]/80 rounded-2xl relative shadow-[inset_0_2px_6px_rgba(255,255,255,0.95)] p-8 md:p-12">
-                    {/* Hotel Glass Circle with Multi-Stop Gradient Outline (White-Peach-RoseGold) */}
-                    <div className="w-16 h-16 rounded-full p-[3.5px] bg-gradient-to-tr from-white via-[#f7d6ca] via-[#c97b63] to-[#7d493b] mx-auto mb-4 group transition-all duration-500 hover:scale-105 shadow-none">
-                      <div className="w-full h-full bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-[inset_0_2.5px_4px_#ffffff,_inset_0_-2px_4px_rgba(184,91,64,0.18)]">
-                        <span className="material-symbols-outlined text-2.5xl text-[#b85b40] font-black select-none transition-transform duration-500 group-hover:scale-110">shopping_cart</span>
+                    {/* Hotel Glass Circle with Soft Harmonious Champagne-Peach-RoseGold Gradient Outline */}
+                    <div className="w-16 h-16 rounded-full p-[3px] bg-[linear-gradient(135deg,#FBEAE3_0%,#EAAD9D_35%,#C97B63_70%,#8A4E3F_100%)] mx-auto mb-4 group transition-all duration-500 hover:scale-105 shadow-none">
+                      <div className="w-full h-full bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-[inset_0_2.5px_4px_#ffffff,_inset_0_-2px_4px_rgba(184,91,64,0.15)]">
+                        {/* Multi-Tonal Rose Gold SVG Shopping Cart Icon (No longer boring single color) */}
+                        <svg className="w-7 h-7 transition-transform duration-500 group-hover:scale-110 select-none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <defs>
+                            <linearGradient id="luxEmptyCartMultiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#FFF2ED" />
+                              <stop offset="25%" stopColor="#F5C4B4" />
+                              <stop offset="55%" stopColor="#D98A72" />
+                              <stop offset="85%" stopColor="#AA5844" />
+                              <stop offset="100%" stopColor="#7A3D2E" />
+                            </linearGradient>
+                            <linearGradient id="luxEmptyCartWheelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#FFFFFF" />
+                              <stop offset="100%" stopColor="#B56A54" />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z"
+                            fill="url(#luxEmptyCartMultiGrad)"
+                          />
+                          <circle cx="7" cy="20" r="1.3" fill="url(#luxEmptyCartWheelGrad)" />
+                          <circle cx="17" cy="20" r="1.3" fill="url(#luxEmptyCartWheelGrad)" />
+                        </svg>
                       </div>
                     </div>
                     <p className="font-serif text-xl text-[#4a2e25] font-extrabold tracking-wide">Your Cart is Empty</p>
@@ -686,8 +707,8 @@ export default function SheetPurchaseFlow({
                       Explore our exclusive collection of arrangement sheet music for piano, solos, and ensembles.
                     </p>
 
-                    {/* Go to Sheet Music Shop Button with Multi-Color Gradient Outline Border (White-Peach-LightBrown-RoseGold Glossy) */}
-                    <div className="mt-6 inline-block rounded-full p-[3.5px] bg-gradient-to-r from-white via-[#f7d6ca] via-[#d9a998] via-[#b85b40] to-[#7d493b] transition-all duration-500 ease-out hover:brightness-120 hover:scale-[1.035] active:scale-[0.98] group cursor-pointer shadow-none">
+                    {/* Go to Sheet Music Shop Button with Soft Harmonious Champagne-Peach-RoseGold Gradient Outline */}
+                    <div className="mt-6 inline-block rounded-full p-[3px] bg-[linear-gradient(135deg,#FBEAE3_0%,#EAAD9D_35%,#C97B63_70%,#8A4E3F_100%)] transition-all duration-500 ease-out hover:brightness-115 hover:scale-[1.035] active:scale-[0.98] group cursor-pointer shadow-none">
                       <button
                         onClick={() => onNavigate('sheets')}
                         style={{
