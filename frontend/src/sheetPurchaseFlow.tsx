@@ -564,7 +564,7 @@ export default function SheetPurchaseFlow({
 
         {/* Stepper Timeline 1234 Standalone Outline Box (Outline border only, attached directly to bottom card) */}
         {step >= 2 && step <= 7 && (
-          <div className="bg-white/40 backdrop-blur-lg border-[3.5px] border-[#d48b77] border-b-0 rounded-t-2xl p-5 md:p-6 max-w-5xl mx-auto relative overflow-hidden shadow-[inset_0_2.5px_4px_rgba(255,255,255,0.95),_0_8px_25px_rgba(184,91,64,0.2)]">
+          <div className="bg-white/40 backdrop-blur-lg border-[3.5px] border-[#d48b77] border-b-0 rounded-t-2xl p-5 md:p-6 max-w-5xl mx-auto relative overflow-hidden shadow-[inset_0_2.5px_4px_rgba(255,255,255,0.95)]">
             <div className="relative flex items-center justify-between max-w-3xl mx-auto px-2">
 
               {/* Background Connecting Line */}
@@ -572,7 +572,7 @@ export default function SheetPurchaseFlow({
 
               {/* Active Progress Line (Glossy Rose Gold) */}
               <div
-                className="absolute top-1/2 left-0 -translate-y-1/2 h-1.5 bg-gradient-to-r from-[#e0a897] via-[#c97b63] to-[#9c5443] shadow-[0_1px_6px_rgba(201,123,99,0.45)] transition-all duration-500 rounded-full z-0"
+                className="absolute top-1/2 left-0 -translate-y-1/2 h-1.5 bg-gradient-to-r from-[#e0a897] via-[#c97b63] to-[#9c5443] transition-all duration-500 rounded-full z-0"
                 style={{
                   width: `${
                     !isDirectBuy ? (
@@ -599,9 +599,9 @@ export default function SheetPurchaseFlow({
                     <div
                       className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center font-extrabold text-xs md:text-sm transition-all duration-300 border-2 ${
                         s.isCurrent
-                          ? 'bg-gradient-to-br from-[#d68c78] via-[#c97b63] to-[#9c5443] text-white border-white ring-2 ring-[#d68c78]/60 scale-110 shadow-md'
+                          ? 'bg-gradient-to-br from-[#d68c78] via-[#c97b63] to-[#9c5443] text-white border-white ring-2 ring-[#d68c78]/60 scale-110'
                           : s.active
-                          ? 'bg-[#9c5443] text-white border-[#e5b3a3] shadow-xs'
+                          ? 'bg-[#9c5443] text-white border-[#e5b3a3]'
                           : 'bg-[#fff8f6] text-[#7a554a] border-[#e0b4a4]'
                       }`}
                     >
@@ -635,9 +635,9 @@ export default function SheetPurchaseFlow({
                     <div
                       className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center font-extrabold text-xs md:text-sm transition-all duration-300 border-2 ${
                         s.isCurrent
-                          ? 'bg-gradient-to-br from-[#d68c78] via-[#c97b63] to-[#9c5443] text-white border-white ring-2 ring-[#d68c78]/60 scale-110 shadow-md'
+                          ? 'bg-gradient-to-br from-[#d68c78] via-[#c97b63] to-[#9c5443] text-white border-white ring-2 ring-[#d68c78]/60 scale-110'
                           : s.active
-                          ? 'bg-[#9c5443] text-white border-[#e5b3a3] shadow-xs'
+                          ? 'bg-[#9c5443] text-white border-[#e5b3a3]'
                           : 'bg-[#fff8f6] text-[#7a554a] border-[#e0b4a4]'
                       }`}
                     >
@@ -668,32 +668,38 @@ export default function SheetPurchaseFlow({
 
         {/* Step Content Container Box (Bening / Transparent glass attached directly to top 1234 box) */}
         {step >= 2 && step <= 7 && (
-          <div className="bg-white/50 backdrop-blur-xl border-[3.5px] border-[#d48b77] border-t border-t-[#d48b77]/60 shadow-[inset_0_2.5px_5px_rgba(255,255,255,0.95),_0_14px_40px_rgba(184,91,64,0.22)] rounded-b-2xl rounded-t-none p-5 md:p-8 relative overflow-hidden transition-all duration-300">
+          <div className="bg-white/50 backdrop-blur-xl border-[3.5px] border-[#d48b77] border-t border-t-[#d48b77]/60 shadow-[inset_0_2.5px_5px_rgba(255,255,255,0.95)] rounded-b-2xl rounded-t-none p-5 md:p-8 relative overflow-hidden transition-all duration-300">
 
             {/* -------------------- STEP 2: SHOPPING CART -------------------- */}
             {step === 2 && (
               <div className="animate-in fade-in duration-300">
                 {cart.length === 0 ? (
-                  <div className="text-center py-14 bg-white/70 backdrop-blur-md border-[3px] border-dashed border-[#c97b63]/80 rounded-2xl relative shadow-[inset_0_2px_6px_rgba(255,255,255,0.95),_0_6px_20px_rgba(184,91,64,0.12)] p-8 md:p-12">
-                    {/* Hotel Glass Circle Outline with High-Contrast Pink-Brown Icon */}
-                    <div className="w-16 h-16 bg-white/85 backdrop-blur-md border-[3.5px] border-[#b85b40] rounded-full flex items-center justify-center mx-auto mb-4 shadow-[inset_0_2.5px_4px_#ffffff,_inset_0_-2px_4px_rgba(184,91,64,0.2),_0_10px_28px_rgba(184,91,64,0.28)] group transition-all duration-500 hover:scale-105">
-                      <span className="material-symbols-outlined text-2.5xl text-[#b85b40] font-black select-none transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_1px_2px_rgba(184,91,64,0.25)]">shopping_cart</span>
+                  <div className="text-center py-14 bg-white/70 backdrop-blur-md border-[3px] border-dashed border-[#c97b63]/80 rounded-2xl relative shadow-[inset_0_2px_6px_rgba(255,255,255,0.95)] p-8 md:p-12">
+                    {/* Hotel Glass Circle with Multi-Stop Gradient Outline (White-Peach-RoseGold) */}
+                    <div className="w-16 h-16 rounded-full p-[3.5px] bg-gradient-to-tr from-white via-[#f7d6ca] via-[#c97b63] to-[#7d493b] mx-auto mb-4 group transition-all duration-500 hover:scale-105 shadow-none">
+                      <div className="w-full h-full bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-[inset_0_2.5px_4px_#ffffff,_inset_0_-2px_4px_rgba(184,91,64,0.18)]">
+                        <span className="material-symbols-outlined text-2.5xl text-[#b85b40] font-black select-none transition-transform duration-500 group-hover:scale-110">shopping_cart</span>
+                      </div>
                     </div>
                     <p className="font-serif text-xl text-[#4a2e25] font-extrabold tracking-wide">Your Cart is Empty</p>
                     <p className="font-serif italic text-xs md:text-sm text-[#7c6356] mt-2 max-w-md mx-auto leading-relaxed font-normal">
                       Explore our exclusive collection of arrangement sheet music for piano, solos, and ensembles.
                     </p>
-                    <button
-                      onClick={() => onNavigate('sheets')}
-                      style={{
-                        background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 18%, #D9A998 38%, #C49280 58%, #B57F6D 78%, #7D493B 100%)",
-                        boxShadow: "inset 0 2px 3px #FFFFFF, inset 0 -2.5px 4px rgba(80, 30, 20, 0.45), 0 10px 30px rgba(184, 91, 64, 0.32)",
-                      }}
-                      className="mt-6 py-3.5 px-8 text-white font-extrabold text-xs uppercase tracking-widest rounded-full border-[3px] border-[#b85b40] cursor-pointer inline-flex items-center justify-center gap-2 group transition-all duration-500 ease-out hover:brightness-115 hover:scale-[1.035] hover:border-[#f3beaf] hover:shadow-[inset_0_2.5px_4px_#ffffff,_inset_0_-2.5px_4px_rgba(80,30,20,0.5),_0_16px_36px_rgba(184,91,64,0.42)] active:scale-[0.98]"
-                    >
-                      <span className="material-symbols-outlined text-base text-white transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">storefront</span>
-                      <span className="drop-shadow-[0_1.5px_3px_rgba(60,20,10,0.4)]">Go to Sheet Music Shop</span>
-                    </button>
+
+                    {/* Go to Sheet Music Shop Button with Multi-Color Gradient Outline Border (White-Peach-LightBrown-RoseGold Glossy) */}
+                    <div className="mt-6 inline-block rounded-full p-[3.5px] bg-gradient-to-r from-white via-[#f7d6ca] via-[#d9a998] via-[#b85b40] to-[#7d493b] transition-all duration-500 ease-out hover:brightness-120 hover:scale-[1.035] active:scale-[0.98] group cursor-pointer shadow-none">
+                      <button
+                        onClick={() => onNavigate('sheets')}
+                        style={{
+                          background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 18%, #D9A998 38%, #C49280 58%, #B57F6D 78%, #7D493B 100%)",
+                          boxShadow: "inset 0 2px 3.5px #FFFFFF, inset 0 -2.5px 4px rgba(60, 20, 10, 0.45)",
+                        }}
+                        className="py-3.5 px-8 text-white font-extrabold text-xs uppercase tracking-widest rounded-full cursor-pointer inline-flex items-center justify-center gap-2 border-0 shadow-none transition-all duration-500 ease-out w-full"
+                      >
+                        <span className="material-symbols-outlined text-base text-white transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">storefront</span>
+                        <span>Go to Sheet Music Shop</span>
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5 items-stretch">
