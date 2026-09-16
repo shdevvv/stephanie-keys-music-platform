@@ -109,9 +109,14 @@ export const SheetMusicViewerModal: React.FC<SheetMusicViewerModalProps> = ({
                 link.click();
                 document.body.removeChild(link);
               }}
-              className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors shadow-sm"
+              style={{
+                background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                border: "1px solid #D9A998",
+              }}
+              className="px-3 py-1.5 rounded-md text-white text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.03] active:scale-95 shadow-none outline-none focus:outline-none ring-0 focus:ring-0"
             >
-              <span className="material-symbols-outlined text-sm">download</span>
+              <span className="material-symbols-outlined text-sm select-none">download</span>
               Download PDF
             </button>
           )}

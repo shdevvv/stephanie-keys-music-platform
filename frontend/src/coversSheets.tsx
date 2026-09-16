@@ -566,7 +566,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
       {/* SECTION 2: SHEET MUSIC SHOP */}
       {(activeTab === "all" || activeTab === "sheets") && (
-        <section className="py-20 relative overflow-hidden flex-grow flex flex-col">
+        <section className="pt-8 md:pt-10 pb-6 md:pb-8 relative overflow-hidden flex flex-col h-auto">
           {/* Zoomed Background Image Layer (Cropping plants/leaves on left & right) */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
             <img
@@ -574,19 +574,14 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
               alt="Sheet Music Shop Background"
               className="w-full h-full object-cover object-center scale-135 sm:scale-140 md:scale-145 lg:scale-150 transition-transform duration-500"
             />
-            {/* White overlay 0.72 */}
-            <div className="absolute inset-0 bg-white/72" />
+            {/* Bright white overlay covering background image */}
+            <div className="absolute inset-0 bg-white/75" />
           </div>
 
-          <div className="max-w-[1200px] mx-auto px-6 space-y-12 relative z-10">
-            {/* LUXURY 1-LINE HORIZONTAL BAR IN GLOSSY ROSE GOLD */}
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-6 md:space-y-8 relative z-10">
+            {/* 1-LINE HORIZONTAL BAR - COMPLETELY TRANSPARENT (NO COLOR) */}
             <div 
-              style={{
-                background: "linear-gradient(135deg, #FAF0EB 0%, #F5DACE 30%, #E8BCAC 60%, #D49C8B 85%, #C28675 100%)",
-                boxShadow: "inset 0 1.5px 2px #FFFFFF, inset 0 -2px 4px #996252, 0 8px 30px rgba(181, 114, 98, 0.22)",
-                border: "2px solid #EAC4B1",
-              }}
-              className="relative rounded-2xl p-3.5 md:p-4 overflow-hidden"
+              className="relative rounded-2xl p-3.5 md:p-4 overflow-hidden bg-transparent border-2 border-[#dfa38f] shadow-sm"
             >
               {/* Single Horizontal Flex Row */}
               <div className="flex flex-wrap lg:flex-nowrap items-center gap-4 lg:gap-6 relative z-10">
@@ -704,17 +699,17 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                 </div>
               </div>
 
-            {/* Sheets Grid Wrapper with Fixed Minimum Height so box doesn't shrink when empty or low items */}
-            <div className="min-h-[440px] flex flex-col justify-start">
+            {/* Sheets Grid Wrapper */}
+            <div className="min-h-0 flex flex-col justify-start">
               {filteredSheets.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                   {paginatedSheets.map((sheet, index) => (
                     <div
                       key={index}
-                      className="group bg-white border-[2.5px] border-[#dfa38f] hover:border-[#c58270] rounded-xl shadow-[0_4px_16px_rgba(223,163,143,0.2)] hover:shadow-[0_8px_24px_rgba(197,130,112,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden"
+                      className="group bg-white/55 hover:bg-white/75 backdrop-blur-md border-[2.5px] border-[#dfa38f] hover:border-[#c58270] rounded-xl shadow-[0_4px_16px_rgba(223,163,143,0.2)] hover:shadow-[0_8px_24px_rgba(197,130,112,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden"
                     >
                       {/* Image Preview Container - Taller Portrait Sheet View */}
-                      <div className="relative aspect-[4/5] overflow-hidden bg-white border-b border-[#e8cdc1]/40 rounded-t-lg">
+                      <div className="relative aspect-[4/5] overflow-hidden bg-white/40 border-b border-[#e8cdc1]/40 rounded-t-lg">
                         <img
                           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-102 select-none"
                           src={sheet.image}
@@ -770,7 +765,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                             onClick={() => {
                               setActivePreview(sheet);
                             }}
-                            className="flex-1 py-2 px-2 bg-[#faf5f2] hover:bg-[#f3ece8] text-[#644137] font-semibold text-xs rounded-[4px] transition-all duration-300 ease-out cursor-pointer flex items-center justify-center border-[1.5px] border-[#dfa38f] hover:border-[#c58270] shadow-[0_2px_6px_rgba(223,163,143,0.15)] active:scale-[0.98]"
+                            className="flex-1 py-2 px-2 bg-white/60 hover:bg-white/85 text-[#644137] font-bold text-xs rounded-full transition-all duration-300 ease-out cursor-pointer flex items-center justify-center border-[1.5px] border-[#D9A998] hover:border-[#c58270] shadow-[0_2px_6px_rgba(223,163,143,0.15)] hover:scale-[1.03] active:scale-95"
                           >
                             View
                           </button>
@@ -782,9 +777,10 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                                   onClick={() => handleDownloadSheet(sheet.title)}
                                   style={{
                                     background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                                    boxShadow: "inset 0 1px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 3px 8px rgba(181, 116, 98, 0.28)",
+                                    boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                                    border: "1px solid #D9A998",
                                   }}
-                                  className="flex-1 py-2 px-2 text-white font-bold text-xs rounded-[4px] border border-[#dfa38f] hover:brightness-110 transition-all duration-300 ease-out cursor-pointer flex items-center justify-center gap-1 active:scale-[0.98]"
+                                  className="flex-1 py-2 px-2 text-white font-bold text-xs rounded-md hover:brightness-115 hover:scale-[1.03] active:scale-95 transition-all duration-300 ease-out cursor-pointer flex items-center justify-center gap-1 shadow-none outline-none focus:outline-none ring-0 focus:ring-0"
                                   title="Download PDF"
                                 >
                                   <OrnateDownloadIcon className="w-3.5 h-3.5 text-white" />
@@ -797,12 +793,13 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                                 onClick={() => handleDirectBuy(sheet)}
                                 style={{
                                   background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                                  boxShadow: "inset 0 1px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 3px 8px rgba(181, 116, 98, 0.28)",
+                                  boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                                  border: "1px solid #D9A998",
                                 }}
-                                className="flex-1 py-2 px-2 text-white font-bold text-xs rounded-[4px] border border-[#dfa38f] hover:brightness-110 transition-all duration-300 ease-out cursor-pointer flex items-center justify-center gap-1 active:scale-[0.98]"
+                                className="flex-1 py-2 px-2 text-white font-bold text-xs rounded-md hover:brightness-115 hover:scale-[1.03] active:scale-95 transition-all duration-300 ease-out cursor-pointer flex items-center justify-center gap-1 shadow-none outline-none focus:outline-none ring-0 focus:ring-0"
                                 title="Buy Sheet Music"
                               >
-                                <TrebleClefCartIcon className="w-3 h-3 text-white" />
+                                <TrebleClefCartIcon className="w-3.5 h-3.5 text-white" />
                                 Buy
                               </button>
                             );
@@ -977,9 +974,10 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                           onClick={() => handleDownloadSheet(activePreview.title)}
                           style={{
                             background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 3px 10px rgba(181, 116, 98, 0.3)",
+                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                            border: "1px solid #D9A998",
                           }}
-                          className="w-full py-2.5 rounded-[4px] text-white font-bold text-xs cursor-pointer text-center flex items-center justify-center gap-1.5 border border-[#dfa38f] transition-all duration-300 ease-out hover:brightness-110 active:scale-[0.98]"
+                          className="w-full py-2.5 rounded-md text-white font-bold text-xs cursor-pointer text-center flex items-center justify-center gap-1.5 transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.03] active:scale-95 shadow-none outline-none focus:outline-none ring-0 focus:ring-0"
                           title="Download PDF Sheet Music"
                         >
                           <OrnateDownloadIcon className="w-4 h-4 text-white" />
@@ -997,10 +995,12 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                           }}
                           style={{
                             background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #854a3c, 0 3px 10px rgba(181, 116, 98, 0.3)",
+                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                            border: "1px solid #D9A998",
                           }}
-                          className="w-full py-2.5 rounded-[4px] text-white font-bold text-xs cursor-pointer text-center flex items-center justify-center border border-[#dfa38f] transition-all duration-300 ease-out hover:brightness-110 active:scale-[0.98]"
+                          className="w-full py-2.5 rounded-md text-white font-bold text-xs cursor-pointer text-center flex items-center justify-center gap-1.5 transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.03] active:scale-95 shadow-none outline-none focus:outline-none ring-0 focus:ring-0"
                         >
+                          <TrebleClefCartIcon className="w-4 h-4 text-white" />
                           Buy Now
                         </button>
                       </div>
