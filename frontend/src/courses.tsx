@@ -233,7 +233,7 @@ function Courses() {
                 <div
                   key={level.number}
                   onClick={() => handleSelectLevel(level.number)}
-                  className="group relative flex flex-col justify-between p-6 rounded-[24px] cursor-pointer bg-white hover:bg-[#fdeee8] transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.3)] overflow-hidden"
+                  className="group relative flex flex-col justify-between p-6 rounded-2xl cursor-pointer bg-white hover:bg-[#fdeee8] transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.3)] overflow-hidden"
                   style={{
                     border: '2px solid #e8cdc1',
                     boxShadow: '0 20px 38px -6px rgba(184, 124, 109, 0.22), 0 10px 18px -4px rgba(166, 95, 80, 0.14)'
@@ -313,7 +313,7 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="bg-white/80 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-[32px] p-6 md:p-8 mb-8 relative overflow-hidden transition-all duration-300"
+            className="bg-white/80 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden transition-all duration-300"
             style={{
               boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
             }}
@@ -356,15 +356,15 @@ function Courses() {
 
             {/* Level Quick Info Pills */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs relative z-10">
-              <div className="bg-white/70 backdrop-blur-md p-4 rounded-2xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
+              <div className="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
                 <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Total Modules</span>
                 <span className="text-sm font-bold text-[#341f18]">{activeLevel.topics.length} Modules</span>
               </div>
-              <div className="bg-white/70 backdrop-blur-md p-4 rounded-2xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
+              <div className="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
                 <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Total Video</span>
                 <span className="text-sm font-bold text-[#341f18]">{getTotalLessons(activeLevel)} Videos</span>
               </div>
-              <div className="bg-white/70 backdrop-blur-md p-4 rounded-2xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
+              <div className="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
                 <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Level Badge Reward</span>
                 <span className="text-sm font-bold text-[#8a6858] truncate block">🏆 {activeLevel.badge.name}</span>
               </div>
@@ -372,7 +372,7 @@ function Courses() {
           </div>
 
           {/* Topics Accordion List */}
-          <div className="space-y-4 max-w-[1000px] mx-auto">
+          <div className="space-y-4 w-full">
             {activeLevel.topics.map((topic, topicIdx) => {
               const topicKey = `${activeLevel.number}-${topicIdx}`;
               const isExpanded = expandedTopic === topicKey;
@@ -380,7 +380,7 @@ function Courses() {
               return (
                 <div
                   key={topicKey}
-                  className="bg-white/85 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-[24px] overflow-hidden transition-all duration-300"
+                  className="bg-white/85 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-2xl overflow-hidden transition-all duration-300"
                   style={{
                     boxShadow: "0 12px 35px rgba(184, 124, 109, 0.14), 0 0 20px rgba(255, 255, 255, 0.95), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
                   }}
@@ -429,7 +429,7 @@ function Courses() {
                         return (
                           <div
                             key={lessonIdx}
-                            className="bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-[#e8cdc1]/60 flex items-center justify-between hover:bg-white hover:border-[#c89482] hover:shadow-md transition-all duration-300"
+                            className="bg-white/90 backdrop-blur-md p-4 rounded-xl border border-[#e8cdc1]/60 flex items-center justify-between hover:bg-white hover:border-[#c89482] hover:shadow-md transition-all duration-300"
                           >
                             <div className="flex items-center gap-3.5 min-w-0 pr-2">
                               {/* Completion Checkmark */}
@@ -522,7 +522,7 @@ function Courses() {
       {/* ── VIDEO PLAYER MODAL ── */}
       {activeVideo && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-[#fffcf9] rounded-[28px] border border-[#e8cdc1]/40 overflow-hidden w-full max-w-[800px] shadow-2xl relative z-50">
+          <div className="bg-[#fffcf9] rounded-2xl border border-[#e8cdc1]/40 overflow-hidden w-full max-w-[800px] shadow-2xl relative z-50">
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#e8cdc1]/20">
               <div>
                 <span className="text-[11px] uppercase tracking-wider font-bold text-[#8a6858]">
@@ -595,7 +595,7 @@ function Courses() {
       {/* ── PLACEMENT TEST MODAL ── */}
       {showPlacementTest && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-[#fffcf9] rounded-[28px] border border-[#e8cdc1]/40 overflow-hidden w-full max-w-[600px] p-6 shadow-2xl relative z-50 space-y-4">
+          <div className="bg-[#fffcf9] rounded-2xl border border-[#e8cdc1]/40 overflow-hidden w-full max-w-[600px] p-6 shadow-2xl relative z-50 space-y-4">
             <div className="flex items-center justify-between border-b border-[#e8cdc1]/20 pb-3">
               <h3 className="text-lg font-bold text-[#3d251c]" style={{ fontFamily: "'Playfair Display', serif" }}>
                 🎹 Tes Penempatan Level (Placement Test)
