@@ -3,25 +3,9 @@ import { levels as localLevels } from "./courseData";
 import type { Level } from "./courseData";
 import { fetchCourseTree } from "./services/courseApi";
 
-const LESSON_VIDEOS = [
-  "/dummy-piano-lesson.mp4",
-  "/videos/pricing.mp4",
-  "/videos/cathedral1.mp4",
-  "/videos/sheets.mp4",
-  "/videos/fountain.mp4",
-  "/videos/cave.mp4",
-  "/videos/bible.mp4",
-];
+const ELEGANT_PIANO_VIDEO = "/dummy-piano-lesson.mp4";
+const ELEGANT_PIANO_POSTER = "/glowing-3d-piano-keys.png";
 
-const LESSON_POSTERS = [
-  "/glowing-3d-piano-keys.png",
-  "/hero-piano-cozy.png",
-  "/cozy-piano-bg.png",
-  "/piano-warm-room.jpg",
-  "/hero-palace-piano.jpg",
-  "/grand-marble-hall.jpg",
-  "/pink-piano-hero.jpg",
-];
 
 
 function Courses() {
@@ -447,10 +431,9 @@ function Courses() {
                   {isExpanded && (() => {
                     const activeLessonIdx = selectedLessonMap[topicKey] ?? 0;
                     const currentLesson = topic.lessons[activeLessonIdx] || topic.lessons[0];
-                    const lessonKeyIndex = (activeLessonIdx + topicIdx) % LESSON_VIDEOS.length;
-                    const videoSrc = (currentLesson as any).video || LESSON_VIDEOS[lessonKeyIndex];
-                    const posterSrc = (currentLesson as any).poster || LESSON_POSTERS[lessonKeyIndex];
-                    const currentLessonKey = `${activeLevel.number}-${topic.title}-${currentLesson.code || currentLesson.title}-${videoSrc}`;
+                    const videoSrc = (currentLesson as any).video || ELEGANT_PIANO_VIDEO;
+                    const posterSrc = (currentLesson as any).poster || ELEGANT_PIANO_POSTER;
+                    const currentLessonKey = `${activeLevel.number}-${topic.title}-${currentLesson.code || currentLesson.title}`;
 
                     return (
                       <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 p-4 md:p-6">
