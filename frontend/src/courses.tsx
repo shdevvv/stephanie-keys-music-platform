@@ -239,7 +239,7 @@ function Courses() {
                 <div
                   key={level.number}
                   onClick={() => handleSelectLevel(level.number)}
-                  className="group relative flex flex-col justify-between p-6 rounded-2xl cursor-pointer bg-white/85 hover:bg-white/95 transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.3)] overflow-hidden"
+                  className="group relative flex flex-col justify-between p-6 rounded-lg cursor-pointer bg-white/85 hover:bg-white/95 transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.3)] overflow-hidden"
                   style={{
                     border: '1.5px solid #e8cdc1',
                     boxShadow: '0 20px 38px -6px rgba(184, 124, 109, 0.22), 0 10px 18px -4px rgba(166, 95, 80, 0.14)'
@@ -249,7 +249,7 @@ function Courses() {
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
                       <span 
-                        className="px-3.5 py-1 rounded-full text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white/90 border border-[#e8cdc1] shadow-xs"
+                        className="px-3.5 py-1 rounded-md text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white/90 border border-[#e8cdc1] shadow-xs"
                         style={{
                           fontFamily: "'Cinzel', serif"
                         }}
@@ -319,7 +319,7 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="bg-white/85 border-[1.5px] border-[#e8cdc1] rounded-2xl p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
+            className="bg-white/85 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
             style={{
               boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
             }}
@@ -332,7 +332,7 @@ function Courses() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span 
-                      className="px-3.5 py-0.5 rounded-full text-xs font-bold text-[#6e4336] bg-white/90 border border-[#e8cdc1] shadow-xs"
+                      className="px-3 py-0.5 rounded-md text-xs font-bold text-[#6e4336] bg-white/90 border border-[#e8cdc1] shadow-xs"
                       style={{ fontFamily: "'Cinzel', serif" }}
                     >
                       Level {activeLevel.number}
@@ -352,15 +352,15 @@ function Courses() {
 
                 {/* Quick Info Metrics (Inline beside Level title!) */}
                 <div className="flex items-center flex-wrap gap-2.5 sm:gap-3 text-xs text-[#6e564c] font-medium">
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Modules:</span>
                     <span className="font-bold text-[#341f18]">{activeLevel.topics.length}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Video:</span>
                     <span className="font-bold text-[#341f18]">{getTotalLessons(activeLevel)}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Badge Reward:</span>
                     <span className="font-bold text-[#6e4336]">🏆 {activeLevel.badge.name}</span>
                   </span>
@@ -372,7 +372,7 @@ function Courses() {
                   setSelectedLevel(null);
                   setExpandedTopic(null);
                 }}
-                className="px-6 py-2 rounded-xl text-xs font-bold text-[#5e382b] bg-white/95 border-[1.5px] border-[#c89482] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] hover:shadow-md transition-all duration-300 cursor-pointer shadow-xs w-fit shrink-0 self-start lg:self-center"
+                className="px-6 py-2 rounded-md text-xs font-bold text-[#5e382b] bg-white/95 border-[1.5px] border-[#c89482] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] hover:shadow-md transition-all duration-300 cursor-pointer shadow-xs w-fit shrink-0 self-start lg:self-center"
               >
                 Back
               </button>
@@ -388,7 +388,7 @@ function Courses() {
               return (
                 <div
                   key={topicKey}
-                  className="bg-white/85 border-[1.5px] border-[#e8cdc1] rounded-2xl overflow-hidden transition-all duration-300"
+                  className="bg-white/85 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300"
                   style={{
                     boxShadow: "0 12px 35px rgba(184, 124, 109, 0.14), 0 0 20px rgba(255, 255, 255, 0.95), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
                   }}
@@ -400,7 +400,7 @@ function Courses() {
                   >
                     <div className="flex items-center gap-4 min-w-0 pr-4">
                       <span 
-                        className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#f8e3db] via-white to-[#e8cdc1] border border-[#d9a998] shadow-xs flex items-center justify-center font-mono text-xs font-bold text-[#6e4336] shrink-0"
+                        className="w-9 h-9 rounded-md bg-gradient-to-br from-[#f8e3db] via-white to-[#e8cdc1] border border-[#d9a998] shadow-xs flex items-center justify-center font-mono text-xs font-bold text-[#6e4336] shrink-0"
                       >
                         {String(topicIdx + 1).padStart(2, "0")}
                       </span>
@@ -419,7 +419,7 @@ function Courses() {
 
                     <div className="flex items-center gap-2 shrink-0">
                       <span
-                        className="w-8 h-8 rounded-full bg-white/90 border border-[#e8cdc1] shadow-xs flex items-center justify-center text-[#5e382b] group-hover:bg-[#fdeee8] transition-all duration-300"
+                        className="w-8 h-8 rounded-md bg-white/90 border border-[#e8cdc1] shadow-xs flex items-center justify-center text-[#5e382b] group-hover:bg-[#fdeee8] transition-all duration-300"
                         style={{ transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
                       >
                         <span className="material-symbols-outlined text-lg">expand_more</span>
@@ -437,11 +437,11 @@ function Courses() {
 
                     return (
                       <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 p-4 md:p-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
                           
-                          {/* LEFT COLUMN: Video Player Screen (Strict 16:9 Ratio) */}
+                          {/* LEFT COLUMN: Video Player Screen (Flush & Seamless with Right List) */}
                           <div className="lg:col-span-6 flex flex-col gap-3">
-                            <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group w-full max-w-[480px]">
+                            <div className="bg-[#1f1512] rounded-md border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group w-full">
                               <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
                                 <video
                                   key={currentLessonKey}
@@ -480,7 +480,7 @@ function Courses() {
                                     onClick={() => {
                                       setSelectedLessonMap(prev => ({ ...prev, [topicKey]: lessonIdx }));
                                     }}
-                                    className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
+                                    className={`p-3.5 rounded-md border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
                                       isSelected
                                         ? "bg-white border-[#c89482] shadow-[0_0_22px_rgba(255,255,255,0.95),0_4px_16px_rgba(184,124,109,0.22)] ring-1 ring-[#c89482]/50"
                                         : "bg-white/85 border-[#e8cdc1]/80 hover:bg-white hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
@@ -537,7 +537,7 @@ function Courses() {
                                           e.stopPropagation();
                                           alert(`Downloading PDF: ${lesson.pdf}`);
                                         }}
-                                        className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-lg flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
+                                        className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-md flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
                                         title={`Download PDF: ${lesson.pdf}`}
                                       >
                                         <span className="material-symbols-outlined text-[13px]">download</span>
