@@ -1014,15 +1014,22 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Inline CSS Keyframe for Showing Right Reveal Animation */}
+                          {/* Inline CSS Keyframe for Showing Right Reveal Animation Starting from Brown Line */}
                           <style dangerouslySetInnerHTML={{
                             __html: `
-                              @keyframes showRight {
+                              @keyframes showRightFromBrownLine {
                                 0% {
+                                  -webkit-clip-path: inset(0 100% 0 0);
                                   clip-path: inset(0 100% 0 0);
+                                  opacity: 0.1;
+                                }
+                                5% {
+                                  opacity: 1;
                                 }
                                 100% {
-                                  clip-path: inset(0 0 0 0);
+                                  -webkit-clip-path: inset(0 0% 0 0);
+                                  clip-path: inset(0 0% 0 0);
+                                  opacity: 1;
                                 }
                               }
                             `
@@ -1087,13 +1094,14 @@ function Homepage() {
                             {/* Answer Section with Static Vertical Brown Line + White Background Box Expanding Right from Brown Line */}
                             <div className="mt-3 flex items-stretch">
                               {/* Static Vertical Brown Line (Anchor point always visible on left) */}
-                              <div className="w-[3.5px] bg-[#a06354] rounded-full shrink-0" />
+                              <div className="w-[3.5px] bg-[#a06354] rounded-full shrink-0 z-10" />
 
                               {/* White Background Box (Unrolls to the right starting directly from the brown line) */}
                               <div
                                 key={activeFaq}
                                 style={{
-                                  animation: "showRight 1.1s cubic-bezier(0.25, 1, 0.5, 1) forwards",
+                                  animation: "showRightFromBrownLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                                  WebkitAnimation: "showRightFromBrownLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards",
                                 }}
                                 className="flex-1 bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs overflow-hidden"
                               >
