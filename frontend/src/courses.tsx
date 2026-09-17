@@ -477,15 +477,14 @@ function Courses() {
                           {/* RIGHT COLUMN: Scrollable Lesson List (Click to switch video) */}
                           <div className="lg:col-span-5 flex flex-col gap-2.5">
                             <div className="flex items-center justify-between mb-1 px-1">
-                              <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider flex items-center gap-1.5">
-                                <span className="material-symbols-outlined text-sm text-[#8a6858]">playlist_play</span>
+                              <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider">
                                 Lessons ({topic.lessons.length})
                               </span>
                               <span className="text-[11px] text-[#7a645b] italic font-medium">Click lesson to play</span>
                             </div>
 
-                            {/* Scrollable Container with Custom Scrollbar & Compact Height */}
-                            <div className="space-y-2 max-h-[380px] overflow-y-auto pr-2 custom-scrollbar">
+                            {/* Scrollable Container (Height fits 4 items, scrolls on 5+ items) */}
+                            <div className="space-y-2 max-h-[275px] overflow-y-auto pr-2 custom-scrollbar">
 
                               {topic.lessons.map((lesson, lessonIdx) => {
                                 const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
