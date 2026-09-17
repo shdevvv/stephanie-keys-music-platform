@@ -312,18 +312,29 @@ function Courses() {
       {selectedLevel !== null && activeLevel && (
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
-          <div className="bg-white/90 backdrop-blur-md border border-[#e8cdc1]/60 rounded-[28px] p-6 md:p-8 mb-8 shadow-md">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div 
+            className="bg-white/80 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-[32px] p-6 md:p-8 mb-8 relative overflow-hidden transition-all duration-300"
+            style={{
+              boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
+            }}
+          >
+            {/* Top Gloss Sheen Overlay */}
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/35 to-transparent z-0" />
+
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold text-[#8a6858] bg-[#8a6858]/15">
+                  <span 
+                    className="px-3.5 py-1 rounded-full text-xs font-bold text-[#6e4336] bg-white/90 border border-[#e8cdc1] shadow-xs"
+                    style={{ fontFamily: "'Cinzel', serif" }}
+                  >
                     Level {activeLevel.number}
                   </span>
-                  <span className="text-xs text-[#81756f]">{activeLevel.targetStudent}</span>
+                  <span className="text-xs font-medium text-[#7a645b]">{activeLevel.targetStudent}</span>
                 </div>
                 <h2
-                  className="text-2xl md:text-3xl font-bold text-[#3d251c]"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  className="text-2xl md:text-3xl font-bold text-[#341f18]"
+                  style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif" }}
                 >
                   {activeLevel.subtitle}
                 </h2>
@@ -334,49 +345,30 @@ function Courses() {
                   setSelectedLevel(null);
                   setExpandedTopic(null);
                 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#3d251c] bg-white border border-[#8a6858]/40 hover:bg-[#fcf8f6] transition-all cursor-pointer shadow-sm w-fit"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#5e382b] bg-white/95 border-[1.5px] border-[#c89482] hover:bg-[#fdeee8] transition-all cursor-pointer shadow-xs w-fit"
               >
                 <span className="material-symbols-outlined text-base">arrow_back</span>
                 Kembali ke All Levels
               </button>
             </div>
 
-            <div className="h-[1px] bg-[#8a6858]/20 my-5 w-full"></div>
+            <div className="h-[1.5px] bg-gradient-to-r from-transparent via-[#c89482]/60 to-transparent my-6 w-full" />
 
             {/* Level Quick Info Pills */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-              <div className="bg-[#faf3f0] p-3 rounded-xl border border-[#e8cdc1]/30">
-                <span className="text-[10px] text-[#81756f] uppercase block font-semibold">Total Modules</span>
-                <span className="text-sm font-bold text-[#3d251c]">{activeLevel.topics.length} Modules</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs relative z-10">
+              <div className="bg-white/70 backdrop-blur-md p-4 rounded-2xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
+                <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Total Modules</span>
+                <span className="text-sm font-bold text-[#341f18]">{activeLevel.topics.length} Modules</span>
               </div>
-              <div className="bg-[#faf3f0] p-3 rounded-xl border border-[#e8cdc1]/30">
-                <span className="text-[10px] text-[#81756f] uppercase block font-semibold">Total Video</span>
-                <span className="text-sm font-bold text-[#3d251c]">{getTotalLessons(activeLevel)} Videos</span>
+              <div className="bg-white/70 backdrop-blur-md p-4 rounded-2xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
+                <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Total Video</span>
+                <span className="text-sm font-bold text-[#341f18]">{getTotalLessons(activeLevel)} Videos</span>
               </div>
-              <div className="bg-[#faf3f0] p-3 rounded-xl border border-[#e8cdc1]/30">
-                <span className="text-[10px] text-[#81756f] uppercase block font-semibold">Level Badge Reward</span>
+              <div className="bg-white/70 backdrop-blur-md p-4 rounded-2xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
+                <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Level Badge Reward</span>
                 <span className="text-sm font-bold text-[#8a6858] truncate block">🏆 {activeLevel.badge.name}</span>
               </div>
             </div>
-
-            {/* Capstone Banner */}
-            {activeLevel.capstoneDescription && (
-              <div className="mt-5 p-4 rounded-xl bg-gradient-to-r from-[#8a6858]/10 to-[#e8cdc1]/20 border border-[#8a6858]/20 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[#8a6858] text-2xl">emoji_events</span>
-                  <div>
-                    <span className="font-bold text-[#3d251c] block">Capstone Piece Level {activeLevel.number}:</span>
-                    <span className="text-[#6e5a51]">{activeLevel.capstoneDescription}</span>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => setShowQuizModal(`capstone-${activeLevel.number}`)}
-                  className="px-3.5 py-1.5 bg-[#8a6858] text-white rounded-lg text-xs font-bold hover:bg-[#5d453b] transition-all border-none cursor-pointer shrink-0"
-                >
-                  Submit Capstone
-                </button>
-              </div>
-            )}
           </div>
 
           {/* Topics Accordion List */}
@@ -388,50 +380,48 @@ function Courses() {
               return (
                 <div
                   key={topicKey}
-                  className="bg-white/90 backdrop-blur-md border border-[#e8cdc1]/40 rounded-[20px] overflow-hidden shadow-sm transition-all duration-300"
+                  className="bg-white/85 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-[24px] overflow-hidden transition-all duration-300"
+                  style={{
+                    boxShadow: "0 12px 35px rgba(184, 124, 109, 0.14), 0 0 20px rgba(255, 255, 255, 0.95), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
+                  }}
                 >
                   {/* Topic Header Button */}
                   <button
                     onClick={() => setExpandedTopic(isExpanded ? null : topicKey)}
-                    className="w-full flex items-center justify-between p-5 text-left bg-transparent border-none cursor-pointer hover:bg-[#faf4f2] transition-colors"
+                    className="w-full flex items-center justify-between p-5 md:p-6 text-left bg-transparent border-none cursor-pointer hover:bg-white/60 transition-colors group"
                   >
                     <div className="flex items-center gap-4 min-w-0 pr-4">
-                      <span className="text-lg font-bold text-[#8a6858] shrink-0 font-mono">
+                      <span 
+                        className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#f8e3db] via-white to-[#e8cdc1] border border-[#d9a998] shadow-xs flex items-center justify-center font-mono text-xs font-bold text-[#6e4336] shrink-0"
+                      >
                         {String(topicIdx + 1).padStart(2, "0")}
                       </span>
                       <div>
-                        <h3 className="text-base font-bold text-[#3d251c]" style={{ fontFamily: "'Playfair Display', serif" }}>
+                        <h3 
+                          className="text-base md:text-lg font-bold text-[#341f18] group-hover:text-[#8a6858] transition-colors" 
+                          style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif" }}
+                        >
                           {topic.title}
                         </h3>
-                        <span className="text-xs text-[#81756f]">
+                        <span className="text-xs font-medium text-[#7a645b]">
                           {topic.lessons.length} Video Lessons {topic.pdfSummary && `• PDF: ${topic.pdfSummary}`}
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 shrink-0">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowQuizModal(`quiz-${topicKey}`);
-                        }}
-                        className="px-3 py-1 bg-[#f5e9e3] hover:bg-[#e8cdc1] text-[#8a6858] text-xs font-bold rounded-lg border-none cursor-pointer transition-colors"
-                      >
-                        Quiz Gate (70%)
-                      </button>
-
+                    <div className="flex items-center gap-2 shrink-0">
                       <span
-                        className="material-symbols-outlined text-[#4e3629] transition-transform duration-300"
+                        className="w-8 h-8 rounded-full bg-white/90 border border-[#e8cdc1] shadow-xs flex items-center justify-center text-[#5e382b] group-hover:bg-[#fdeee8] transition-all duration-300"
                         style={{ transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
                       >
-                        expand_more
+                        <span className="material-symbols-outlined text-lg">expand_more</span>
                       </span>
                     </div>
                   </button>
 
                   {/* Expanded Lessons Content */}
                   {isExpanded && (
-                    <div className="border-t border-[#e8cdc1]/20 bg-[#faf6f4]/60 p-5 space-y-2">
+                    <div className="border-t border-[#e8cdc1]/40 bg-white/40 backdrop-blur-md p-5 space-y-3">
                       {topic.lessons.map((lesson, lessonIdx) => {
                         const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
                         const isCompleted = isLessonCompleted(lessonKey);
@@ -439,7 +429,7 @@ function Courses() {
                         return (
                           <div
                             key={lessonIdx}
-                            className="bg-white/80 p-3.5 rounded-xl border border-[#e8cdc1]/20 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all"
+                            className="bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-[#e8cdc1]/60 flex items-center justify-between hover:bg-white hover:border-[#c89482] hover:shadow-md transition-all duration-300"
                           >
                             <div className="flex items-center gap-3.5 min-w-0 pr-2">
                               {/* Completion Checkmark */}
@@ -473,11 +463,11 @@ function Courses() {
                               >
                                 <div className="flex items-center gap-2">
                                   {lesson.code && (
-                                    <span className="text-[11px] font-mono font-bold text-[#8a6858] bg-[#8a6858]/10 px-1.5 py-0.5 rounded">
+                                    <span className="text-[11px] font-mono font-bold text-[#6e4336] bg-[#f8e3db] border border-[#e8cdc1] px-1.5 py-0.5 rounded-md">
                                       {lesson.code}
                                     </span>
                                   )}
-                                  <h4 className="text-xs font-bold text-[#3d251c] truncate hover:text-[#8a6858] transition-colors">
+                                  <h4 className="text-xs font-bold text-[#341f18] truncate hover:text-[#8a6858] transition-colors">
                                     {lesson.title}
                                   </h4>
                                 </div>
@@ -487,7 +477,7 @@ function Courses() {
                             {/* Actions Right */}
                             <div className="flex items-center gap-2 shrink-0">
                               {lesson.pdf && (
-                                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#e8cdc1]/30 text-[#6e5a51] flex items-center gap-1">
+                                <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-[#f8e3db]/80 text-[#6e4336] border border-[#e8cdc1] flex items-center gap-1">
                                   <span className="material-symbols-outlined text-[12px]">picture_as_pdf</span>
                                   {lesson.pdf}
                                 </span>
@@ -511,7 +501,7 @@ function Courses() {
                                   levelNumber: activeLevel.number,
                                   pdf: lesson.pdf
                                 })}
-                                className="flex items-center gap-1 px-3 py-1 bg-[#8a6858] text-white text-xs font-bold rounded-lg hover:bg-[#5d453b] transition-all border-none cursor-pointer"
+                                className="flex items-center gap-1 px-3.5 py-1.5 bg-gradient-to-r from-[#b86d5c] via-[#e8b4a2] to-[#a06e5e] text-white text-xs font-bold rounded-xl hover:scale-105 transition-transform border-none cursor-pointer shadow-xs"
                               >
                                 <span className="material-symbols-outlined text-xs">play_arrow</span>
                                 Tonton
@@ -664,62 +654,7 @@ function Courses() {
         </div>
       )}
 
-      {/* ── QUIZ / CAPSTONE MODAL ── */}
-      {showQuizModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-[#fffcf9] rounded-[28px] border border-[#e8cdc1]/40 overflow-hidden w-full max-w-[550px] p-6 shadow-2xl relative z-50 space-y-4">
-            <div className="flex items-center justify-between border-b border-[#e8cdc1]/20 pb-3">
-              <h3 className="text-base font-bold text-[#3d251c]" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {showQuizModal.startsWith('capstone') ? '🏆 Unggah Rekaman Capstone Project' : '✏️ Quiz Gate Modul (Nilai Min. 70%)'}
-              </h3>
-              <button 
-                onClick={() => setShowQuizModal(null)}
-                className="w-8 h-8 rounded-full bg-[#f3ecea] text-[#6e5a51] border-none cursor-pointer flex items-center justify-center"
-              >
-                <span className="material-symbols-outlined text-xl">close</span>
-              </button>
-            </div>
-
-            {showQuizModal.startsWith('capstone') ? (
-              <div className="space-y-3 text-xs text-[#6e5a51]">
-                <p>Unggah video penampilan piano Anda untuk dievaluasi oleh instruktur Phanilie Music.</p>
-                <div className="p-6 border-2 border-dashed border-[#8a6858]/30 rounded-2xl bg-white text-center">
-                  <span className="material-symbols-outlined text-3xl text-[#8a6858] mb-1">upload_file</span>
-                  <span className="block font-bold text-[#3d251c]">Drag & Drop berkas MP4/MOV video di sini</span>
-                  <span className="text-[11px] text-[#81756f]">Maksimal 500MB</span>
-                </div>
-                <button 
-                  onClick={() => {
-                    alert('Capstone berhasil diunggah! Feedback mentor akan dikirim dalam 5 hari kerja.');
-                    setShowQuizModal(null);
-                  }}
-                  className="w-full py-2.5 bg-[#8a6858] text-white rounded-xl font-bold border-none cursor-pointer hover:bg-[#5d453b]"
-                >
-                  Kirim Video Capstone
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-3 text-xs text-[#6e5a51]">
-                <p>Jawab pertanyaan berikut untuk membuktikan penguasaan materi modul sebelum melanjut ke modul berikutnya.</p>
-                <div className="p-3 bg-white rounded-xl border border-[#e8cdc1]/30 space-y-2">
-                  <span className="font-bold text-[#3d251c] block">Apa fungsi utama dari pedal Sustain (kanan) pada piano?</span>
-                  <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="qz" /> Memperpanjang getaran nada saat tuts dilepas</label>
-                  <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="qz" /> Meredam suara agar lebih pelan</label>
-                </div>
-                <button 
-                  onClick={() => {
-                    alert('Lulus! Anda mendapatkan nilai 100% dan modul berikutnya telah terbuka.');
-                    setShowQuizModal(null);
-                  }}
-                  className="w-full py-2.5 bg-[#8a6858] text-white rounded-xl font-bold border-none cursor-pointer hover:bg-[#5d453b]"
-                >
-                  Submit Jawaban Quiz
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {/* End of main container */}
     </main>
   );
 }
