@@ -4,7 +4,7 @@ import type { Level } from "./courseData";
 import { fetchCourseTree } from "./services/courseApi";
 
 const ELEGANT_PIANO_VIDEO = "/dummy-piano-lesson.mp4";
-const ELEGANT_PIANO_POSTER = "/glowing-3d-piano-keys.png";
+const ELEGANT_PIANO_POSTER = "/white-grand-piano-hero.jpg";
 
 
 
