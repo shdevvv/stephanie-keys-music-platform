@@ -955,10 +955,10 @@ function Homepage() {
                           {/* Soft Lightened Peach-Chocolate Horizontal Timeline Track */}
                           <div
                             style={{
-                              backgroundColor: "rgba(248, 222, 212, 0.35)",
-                              boxShadow: "0 8px 25px rgba(129, 89, 79, 0.06), inset 0 1.5px 2px rgba(255, 255, 255, 0.75)",
+                              backgroundColor: "rgba(255, 246, 242, 0.75)",
+                              boxShadow: "0 8px 25px rgba(129, 89, 79, 0.08), inset 0 1.5px 2px rgba(255, 255, 255, 0.9)",
                             }}
-                            className="relative py-3 px-3 md:px-5 rounded-xl border border-[#D9A998]/50"
+                            className="relative py-3 px-3 md:px-5 rounded-xl border border-[#D9A998]/70 backdrop-blur-md"
                           >
                             {/* Background Track Line */}
                             <div className="absolute top-1/2 left-5 right-5 -translate-y-1/2 h-[2.5px] bg-[#d6b4a6]/80 rounded-full hidden sm:block" />
@@ -1008,13 +1008,13 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Active Question & Answer Single Transparent Milk Brown Card (Brightened, Medium Chocolate Font, Top Arrow Nav) */}
+                          {/* Active Question & Answer Single Card (Increased Opacity & Blur for Perfect Contrast) */}
                           <div
                             style={{
-                              backgroundColor: "rgba(217, 169, 152, 0.24)",
-                              boxShadow: "0 10px 30px rgba(129, 89, 79, 0.06), inset 0 1.5px 2px rgba(255, 255, 255, 0.8)",
+                              backgroundColor: "rgba(255, 248, 244, 0.75)",
+                              boxShadow: "0 10px 30px rgba(129, 89, 79, 0.08), inset 0 1.5px 2px rgba(255, 255, 255, 0.9)",
                             }}
-                            className="border border-[#B58474]/50 rounded-xl p-4 md:p-5 transition-all duration-300"
+                            className="border border-[#B58474]/60 rounded-xl p-4 md:p-5 backdrop-blur-md transition-all duration-300"
                           >
                             {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
                             <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
@@ -1063,8 +1063,8 @@ function Homepage() {
                               {currentItem.question}
                             </h3>
 
-                            {/* Answer Box (Brighter Soft Transparent Layer, Calm Medium Chocolate Text) */}
-                            <div className="mt-3 pl-3.5 border-l-3 border-[#B58474] bg-[#fffaf7]/65 py-2.5 px-3.5 rounded-r-lg shadow-2xs">
+                            {/* Answer Box (Brighter Soft Translucent Layer, Calm Medium Chocolate Text) */}
+                            <div className="mt-3 pl-3.5 border-l-3 border-[#B58474] bg-[#fffaf7]/88 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-2xs">
                               <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-normal">
                                 {currentItem.answer}
                               </p>
@@ -1122,11 +1122,11 @@ function Homepage() {
                 {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
                 <div
                   style={{
-                    background: "rgba(251, 248, 245, 0.1)",
+                    background: "rgba(255, 246, 242, 0.55)",
                     border: "2px solid #bd8174",
-                    boxShadow: "0 0 14px rgba(189, 129, 116, 0.35), 0 10px 30px rgba(160,110,95,0.1)",
+                    boxShadow: "0 0 16px rgba(189, 129, 116, 0.35), 0 10px 30px rgba(160,110,95,0.12)",
                   }}
-                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-md space-y-7 relative z-10"
+                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-lg space-y-7 relative z-10"
                 >
                   {/* Header */}
                   <div className="text-center space-y-2 max-w-xl mx-auto">
@@ -1175,10 +1175,11 @@ function Homepage() {
                       <div
                         key={idx}
                         style={{
+                          background: "rgba(255, 248, 244, 0.68)",
                           border: "1.5px solid #bd8174",
-                          boxShadow: "0 0 8px rgba(189, 129, 116, 0.2)",
+                          boxShadow: "0 0 10px rgba(189, 129, 116, 0.22)",
                         }}
-                        className="relative overflow-hidden p-4.5 rounded-md bg-transparent backdrop-blur-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#c48b7c] hover:bg-white/10 flex flex-col justify-between gap-4 group cursor-pointer"
+                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#c48b7c] hover:bg-white/90 flex flex-col justify-between gap-4 group cursor-pointer"
                       >
                         <div className="space-y-2.5 relative z-10">
                           {/* Comment */}
