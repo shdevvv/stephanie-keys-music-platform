@@ -1014,17 +1014,20 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Inline CSS Keyframe for Short & Subtle Toast Entrance from Left */}
+                          {/* Inline CSS Keyframe for White Wrapper Unroll / Reveal from Left to Right */}
                           <style dangerouslySetInnerHTML={{
                             __html: `
-                              @keyframes faqAnswerToastFromLeft {
+                              @keyframes faqWhiteWrapperUnroll {
                                 0% {
-                                  opacity: 0;
-                                  transform: translateX(-14px);
+                                  clip-path: inset(0 100% 0 0);
+                                  opacity: 0.1;
+                                }
+                                8% {
+                                  opacity: 1;
                                 }
                                 100% {
+                                  clip-path: inset(0 0% 0 0);
                                   opacity: 1;
-                                  transform: translateX(0);
                                 }
                               }
                             `
@@ -1086,11 +1089,11 @@ function Homepage() {
                               {currentItem.question}
                             </h3>
 
-                            {/* White-wrapped Answer Toast Box (Short 14px entrance from left) */}
+                            {/* White-wrapped Answer Box (White wrapper unrolls from left to right, revealing static text) */}
                             <div
                               key={activeFaq}
                               style={{
-                                animation: "faqAnswerToastFromLeft 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                                animation: "faqWhiteWrapperUnroll 1.1s cubic-bezier(0.25, 1, 0.4, 1) forwards",
                               }}
                               className="mt-3 pl-3.5 border-l-[3.5px] border-[#a06354] bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs"
                             >
