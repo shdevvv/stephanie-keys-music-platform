@@ -955,9 +955,10 @@ function Homepage() {
                           {/* Soft Lightened Peach-Chocolate Horizontal Timeline Track */}
                           <div
                             style={{
-                              backgroundColor: "rgba(255, 246, 242, 0.85)",
+                              background: "linear-gradient(rgba(255, 246, 242, 0.88), rgba(255, 246, 242, 0.88)) padding-box, linear-gradient(45deg, #c48b7c 0%, #f5d3ca 12.5%, #d49a8b 25%, #e8beae 37.5%, #b87c6d 50%, #f5d3ca 62.5%, #d49a8b 75%, #e8beae 87.5%, #c48b7c 100%) border-box",
+                              border: "2.5px solid transparent",
                             }}
-                            className="relative py-3 px-3 md:px-5 rounded-xl border-[2px] border-[#a06354] backdrop-blur-md shadow-xs"
+                            className="relative py-3 px-3 md:px-5 rounded-xl backdrop-blur-md"
                           >
                             {/* Background Track Line */}
                             <div className="absolute top-1/2 left-5 right-5 -translate-y-1/2 h-[2.5px] bg-[#d6b4a6]/80 rounded-full hidden sm:block" />
@@ -1007,12 +1008,13 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Active Question & Answer Single Card (Clean Border, No Glow) */}
+                          {/* Active Question & Answer Single Card (Multi-Tone Soft Rose Gold Repeating Gradient Border) */}
                           <div
                             style={{
-                              backgroundColor: "rgba(255, 248, 244, 0.88)",
+                              background: "linear-gradient(rgba(255, 248, 244, 0.90), rgba(255, 248, 244, 0.90)) padding-box, linear-gradient(45deg, #c48b7c 0%, #f5d3ca 12.5%, #d49a8b 25%, #e8beae 37.5%, #b87c6d 50%, #f5d3ca 62.5%, #d49a8b 75%, #e8beae 87.5%, #c48b7c 100%) border-box",
+                              border: "2.5px solid transparent",
                             }}
-                            className="border-[2px] border-[#a06354] rounded-xl p-4 md:p-5 backdrop-blur-md transition-all duration-300 shadow-xs"
+                            className="rounded-xl p-4 md:p-5 backdrop-blur-md transition-all duration-300"
                           >
                             {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
                             <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
@@ -1120,10 +1122,10 @@ function Homepage() {
                 {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
                 <div
                   style={{
-                    background: "rgba(255, 246, 242, 0.75)",
-                    border: "2px solid #a06354",
+                    background: "linear-gradient(rgba(255, 246, 242, 0.80), rgba(255, 246, 242, 0.80)) padding-box, linear-gradient(45deg, #c48b7c 0%, #f5d3ca 12.5%, #d49a8b 25%, #e8beae 37.5%, #b87c6d 50%, #f5d3ca 62.5%, #d49a8b 75%, #e8beae 87.5%, #c48b7c 100%) border-box",
+                    border: "3px solid transparent",
                   }}
-                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-lg space-y-7 relative z-10 shadow-xs"
+                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-lg space-y-7 relative z-10"
                 >
                   {/* Header */}
                   <div className="text-center space-y-2 max-w-xl mx-auto">
@@ -1172,10 +1174,10 @@ function Homepage() {
                       <div
                         key={idx}
                         style={{
-                          background: "rgba(255, 248, 244, 0.85)",
-                          border: "1.5px solid #a06354",
+                          background: "linear-gradient(rgba(255, 248, 244, 0.88), rgba(255, 248, 244, 0.88)) padding-box, linear-gradient(45deg, #c48b7c 0%, #f5d3ca 12.5%, #d49a8b 25%, #e8beae 37.5%, #b87c6d 50%, #f5d3ca 62.5%, #d49a8b 75%, #e8beae 87.5%, #c48b7c 100%) border-box",
+                          border: "2px solid transparent",
                         }}
-                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#a06354] hover:bg-white/95 flex flex-col justify-between gap-4 group cursor-pointer shadow-xs"
+                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between gap-4 group cursor-pointer"
                       >
                         <div className="space-y-2.5 relative z-10">
                           {/* Comment */}
