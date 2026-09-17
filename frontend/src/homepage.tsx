@@ -1067,12 +1067,12 @@ function Homepage() {
                             `
                           }} />
 
-                          {/* Active Question & Answer Single Card (Soft Rose Gold Shop Gradient with Lightened Chocolate Right Side) */}
+                          {/* Active Question & Answer Single Card (Ultra-Soft Low Contrast Cream to Soft Rose Gold Gradient, No Dark Chocolate) */}
                           <div
                             style={{
-                              background: "linear-gradient(135deg, #FAF0EB 0%, #F5DCD0 22%, #E8BCAC 48%, #DC9F8F 75%, #C8897A 100%)",
-                              boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #b87a6b, 0 0 14px rgba(196, 139, 124, 0.25)",
-                              border: "2px solid #E5B8A8",
+                              background: "linear-gradient(135deg, #FAF0EB 0%, #F5DCD0 35%, #E8BCAC 70%, #E2B0A4 100%)",
+                              boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #d49f90, 0 0 12px rgba(196, 139, 124, 0.2)",
+                              border: "2px solid #E2B0A4",
                             }}
                             className="rounded-xl p-4 md:p-5 backdrop-blur-md overflow-hidden"
                           >
@@ -1117,7 +1117,7 @@ function Homepage() {
 
                             {/* Question Title (Soft, Calm Warm Chocolate Typography) */}
                             <h3
-                              className="mt-3 text-sm md:text-base text-[#4a2c20] font-bold leading-relaxed tracking-normal"
+                              className="mt-3 text-sm md:text-base text-[#5E3A2E] font-bold leading-relaxed tracking-normal"
                               style={{ fontFamily: "'Playfair Display', serif" }}
                             >
                               {currentItem.question}
