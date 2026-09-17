@@ -835,7 +835,7 @@ function Homepage() {
               </div>
 
               {/* Section 4: FAQ Section */}
-              <section className="py-16 px-6 relative z-10">
+              <section className="pt-16 pb-6 px-6 relative z-10">
                 <style dangerouslySetInnerHTML={{
                   __html: `
                   @keyframes faqSparkle1 {
@@ -952,8 +952,8 @@ function Homepage() {
                         {
                           idx: 5,
                           num: "06",
-                          question: "Do you provide a lifetime access option?",
-                          answer: "We currently focus on monthly, 3 months, and annual membership plans to ensure we can continually support our community, host live events, and release fresh course content for our active members.",
+                          question: "Is this suitable for absolute beginners who cannot read sheet music?",
+                          answer: "Absolutely! The course starts right from the ground up. You don't need any prior experience or sheet music reading ability. Stephanie guides you step-by-step with clear visual key diagrams and simple explanations.",
                         },
                         {
                           idx: 6,
@@ -1147,7 +1147,7 @@ function Homepage() {
               </section>
 
               {/* Section 5: Feedbacks / Testimonials Section */}
-              <section className="py-16 px-6 relative z-10">
+              <section className="pt-4 pb-16 px-6 relative z-10">
                 {/* CSS Keyframes for falling glitters */}
                 <style dangerouslySetInnerHTML={{
                   __html: `
@@ -1205,10 +1205,10 @@ function Homepage() {
                     }}
                     className="text-center space-y-2 max-w-xl mx-auto p-4 md:p-5 rounded-xl"
                   >
-                    <h2 className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#4a1f16] font-extrabold leading-tight tracking-wider uppercase drop-shadow-[0_1.5px_2px_rgba(255,255,255,0.95)]">
-                      STUDENTS FEEDBACKS
+                    <h2 className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#4a1f16] font-bold leading-tight tracking-tight drop-shadow-[0_1.5px_2px_rgba(255,255,255,0.95)]">
+                      Student Feedbacks
                     </h2>
-                    <p className="font-sans text-[10.5px] md:text-xs text-[#5e291d] font-extrabold leading-relaxed uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
+                    <p className="font-sans text-[10.5px] md:text-xs text-[#5e291d] font-normal leading-relaxed uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
                       DISCOVER HOW PIANISTS OF ALL BACKGROUNDS FOUND THEIR SOLID FOUNDATIONS WITH STEPHANIE KEYS.
                     </p>
                   </div>
