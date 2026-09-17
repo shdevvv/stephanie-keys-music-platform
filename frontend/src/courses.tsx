@@ -456,16 +456,16 @@ function Courses() {
                       <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 p-4 md:p-6">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                           
-                          {/* LEFT COLUMN: Video Player Screen (Compact Height) */}
+                          {/* LEFT COLUMN: Video Player Screen (Strict 16:9 Ratio) */}
                           <div className="lg:col-span-6 flex flex-col gap-3">
-                            <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group max-w-xl">
-                              <div className="relative aspect-video w-full max-h-[250px] bg-black flex items-center justify-center overflow-hidden">
+                            <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group w-full max-w-[480px]">
+                              <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
                                 <video
                                   key={currentLessonKey}
                                   controls
                                   playsInline
                                   poster={posterSrc}
-                                  className="w-full h-full object-cover max-h-[250px]"
+                                  className="w-full h-full object-cover"
                                 >
                                   <source src={videoSrc} type="video/mp4" />
                                   Your browser does not support the video tag.
