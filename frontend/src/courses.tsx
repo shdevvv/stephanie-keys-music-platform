@@ -565,11 +565,21 @@ function Courses() {
                                             e.stopPropagation();
                                             alert(`Downloading PDF: ${lesson.pdf || lesson.title + ' Sheet Music'}`);
                                           }}
-                                          className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-md flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
+                                          className="px-3 py-1.5 text-[11px] font-bold text-[#5e382b] hover:text-[#3e2219] rounded-md flex items-center gap-1.5 transition-all duration-300 shrink-0 cursor-pointer shadow-xs hover:shadow-[0_4px_16px_rgba(184,124,109,0.35)] hover:scale-[1.05] group/pdf relative overflow-hidden"
+                                          style={{
+                                            background: 'linear-gradient(135deg, #ffffff 0%, #fdeee8 50%, #f9dad0 100%) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 30%, #ffffff 50%, #e8b4a2 75%, #8e5849 100%) border-box',
+                                            border: '1.5px solid transparent',
+                                            boxShadow: '0 3px 12px rgba(184, 124, 109, 0.22), 0 0 10px rgba(255, 255, 255, 0.9), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)'
+                                          }}
                                           title={`Download PDF: ${lesson.pdf || lesson.title}`}
                                         >
-                                          <span className="material-symbols-outlined text-[13px]">download</span>
-                                          PDF
+                                          {/* Glossy Sheen Overlay */}
+                                          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover/pdf:translate-x-full transition-transform duration-700 z-0" />
+                                          
+                                          <span className="material-symbols-outlined text-[15px] text-[#a05240] group-hover/pdf:scale-110 transition-transform relative z-10">workspace_premium</span>
+                                          <span className="tracking-widest uppercase text-[10px] font-black text-[#5e382b] relative z-10" style={{ fontFamily: "'Cinzel', serif" }}>
+                                            PDF
+                                          </span>
                                         </button>
                                       </div>
                                     );
