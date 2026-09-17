@@ -869,7 +869,7 @@ function Homepage() {
                   </svg>
                 </div>
 
-                <div className="relative z-10 max-w-[1000px] mx-auto space-y-10">
+                <div className="relative z-10 max-w-[980px] mx-auto space-y-10">
                   <div className="text-center space-y-2">
                     <h2
                       className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#5c3328] font-bold leading-tight tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]"
@@ -882,8 +882,8 @@ function Homepage() {
                     </p>
                   </div>
 
-                  {/* Rose Gold Interactive Timeline FAQ Container */}
-                  <div className="max-w-[720px] mx-auto space-y-4">
+                  {/* Rose Gold Interactive Timeline FAQ Container (Width matched to Students Feedbacks) */}
+                  <div className="max-w-[980px] mx-auto space-y-4">
                     {/* Timeline Array Data */}
                     {(() => {
                       const faqItems = [
