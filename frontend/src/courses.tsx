@@ -460,7 +460,7 @@ function Courses() {
                               {/* Footer Meta under Video Screen */}
                               <div className="p-4 bg-white border-t border-[#e8cdc1]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <div>
-                                  <div className="flex items-center gap-2 mb-0.5">
+                                  <div className="flex items-center gap-2">
                                     {currentLesson.code && (
                                       <span className="text-[11px] font-mono font-bold text-[#6e4336] bg-[#f8e3db] border border-[#e8cdc1] px-1.5 py-0.5 rounded-md">
                                         {currentLesson.code}
@@ -470,9 +470,6 @@ function Courses() {
                                       {currentLesson.title}
                                     </h4>
                                   </div>
-                                  <p className="text-[11px] text-[#7a645b]">
-                                    {topic.title} • Video {activeLessonIdx + 1} of {topic.lessons.length}
-                                  </p>
                                 </div>
 
                                 {currentLesson.pdf && (
