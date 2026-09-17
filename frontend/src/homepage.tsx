@@ -398,8 +398,8 @@ function Homepage() {
                   src="/royal-grand-hall-bg.jpg"
                 />
               </div>
-              {/* Soft 18% White Overlay Layer */}
-              <div className="absolute inset-0 bg-white/18 z-0 pointer-events-none" />
+              {/* Soft 30% White Overlay Layer */}
+              <div className="absolute inset-0 bg-white/30 z-0 pointer-events-none" />
 
               {/* CSS Keyframes for falling glitters */}
               <style dangerouslySetInnerHTML={{
