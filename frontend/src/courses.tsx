@@ -466,8 +466,12 @@ function Courses() {
                               <span className="text-[11px] text-[#7a645b] italic font-medium">Click lesson to play</span>
                             </div>
 
-                            {/* Scrollable Container (Height fits 4 items, scrolls on 5+ items) */}
-                            <div className="space-y-2 max-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
+                            {/* Scrollable Container (Only scrolls if > 4 lessons) */}
+                            <div className={`space-y-2 ${
+                              topic.lessons.length > 4 
+                                ? "max-h-[285px] overflow-y-auto pr-2 custom-scrollbar" 
+                                : ""
+                            }`}>
 
                               {topic.lessons.map((lesson, lessonIdx) => {
                                 const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
