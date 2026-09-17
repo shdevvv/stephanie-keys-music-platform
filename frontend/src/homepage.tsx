@@ -1191,19 +1191,26 @@ function Homepage() {
                 {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
                 <div
                   style={{
-                    backgroundColor: "rgba(245, 226, 215, 0.70)",
+                    backgroundColor: "rgba(245, 226, 215, 0.45)",
                     border: "2.5px solid #c48b7c",
                     boxShadow: "0 0 14px rgba(196, 139, 124, 0.3)",
                   }}
-                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-lg space-y-7 relative z-10"
+                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-xl backdrop-blur-sm space-y-7 relative z-10"
                 >
-                  {/* Header */}
-                  <div className="text-center space-y-2 max-w-xl mx-auto">
-                    <h2 className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#5c3328] font-bold leading-tight drop-shadow-[0_1px_3px_rgba(255,255,255,0.7)]">
-                      Students Feedbacks
+                  {/* Header wrapped in a small transparent inner card (no solid background color so bg image shows through) */}
+                  <div
+                    style={{
+                      backgroundColor: "rgba(255, 255, 255, 0.18)",
+                      border: "1.5px solid #c48b7c",
+                      boxShadow: "0 0 10px rgba(196, 139, 124, 0.2)",
+                    }}
+                    className="text-center space-y-2 max-w-xl mx-auto p-4 md:p-5 rounded-xl backdrop-blur-xs"
+                  >
+                    <h2 className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#5c3328] font-extrabold leading-tight tracking-wider uppercase drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
+                      STUDENTS FEEDBACKS
                     </h2>
-                    <p className="font-sans text-[11px] md:text-xs text-[#7a4b3d] font-semibold leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
-                      Discover How Pianists of All Backgrounds Found Their Solid Foundations with Stephanie Keys.
+                    <p className="font-sans text-[10.5px] md:text-xs text-[#7a4b3d] font-extrabold leading-relaxed uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
+                      DISCOVER HOW PIANISTS OF ALL BACKGROUNDS FOUND THEIR SOLID FOUNDATIONS WITH STEPHANIE KEYS.
                     </p>
                   </div>
 
