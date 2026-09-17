@@ -142,7 +142,7 @@ export const levels: Level[] = [
     videosCount: 28,
     capstoneDescription: 'Full Sheet Music Capstone Piece',
     badge: {
-      name: "Beginner's Grace",
+      name: "Beginner's Touch",
       icon: 'music_note',
       requirement: 'Complete Lv.2 + upload capstone',
       reward: '10% discount on merchandise'
