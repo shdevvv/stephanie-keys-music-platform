@@ -275,7 +275,7 @@ function Homepage() {
                       from Zero to Mastery
                     </span>
                   </h1>
-                  <p 
+                  <p
                     className="text-xs sm:text-sm md:text-base font-bold text-[#7c4d3e] tracking-[0.16em] uppercase max-w-xl flex items-center gap-3 flex-wrap"
                     style={{ fontFamily: "'Cinzel', 'Cormorant Garamond', serif" }}
                   >
