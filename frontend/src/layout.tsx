@@ -427,6 +427,15 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
         setIsProfileMenuOpen(false);
@@ -612,12 +621,12 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         }
       `}</style>
       <CustomCursor />
-      <div className={`max-w-[1440px] mx-auto w-full overflow-x-hidden ${view === "dashboard" ? "h-auto bg-[#fff8f6]" : (view === "my-library" || view === "download-page" || view === "invoice" ? "h-auto bg-transparent" : "h-auto bg-[#fff8f6]")} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}>
+      <div className={`max-w-[1440px] mx-auto w-full ${view === "dashboard" ? "h-auto bg-[#fff8f6]" : (view === "my-library" || view === "download-page" || view === "invoice" ? "h-auto bg-transparent" : "h-auto bg-[#fff8f6]")} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}>
         {/* Top Navigation Bar */}
         <nav
           className={`sticky top-0 w-full z-50 transition-all duration-300 ${isScrolled
-            ? "bg-white/25 border-b border-[#e8cdc1]/20 shadow-none"
-            : "bg-white/15 border-b border-[#e8cdc1]/10"
+            ? "bg-white/92 backdrop-blur-md border-b border-[#e2b0a4]/40 shadow-[0_4px_25px_rgba(184,124,109,0.15)]"
+            : "bg-white/40 backdrop-blur-md border-b border-[#e8cdc1]/20"
             }`}
         >
           <div className="flex justify-between items-center h-20 md:h-24 px-3 sm:px-6 md:px-12 w-full">
