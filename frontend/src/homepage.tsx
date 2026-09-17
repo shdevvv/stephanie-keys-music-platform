@@ -245,26 +245,51 @@ function Homepage() {
               </div>
 
               <div className="relative z-20 px-6 max-w-[1200px] mx-auto w-full">
-                <div className="max-w-md sm:max-w-lg md:max-w-xl space-y-5">
-                  <h1 className="font-curvy-vibes text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#5c3328] font-normal leading-tight py-1">
-                    Learn Gospel and Jazz Piano Step by Step
+                <div className="max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl space-y-5">
+                  <h1 className="drop-shadow-xs py-1 flex flex-col items-start gap-1">
+                    <span
+                      style={{
+                        fontFamily: "'Cormorant Garamond', 'Cinzel', serif",
+                        fontSize: 'clamp(1.15rem, 2.3vw, 1.75rem)',
+                        fontWeight: 400,
+                        letterSpacing: '0.12em',
+                        textTransform: 'uppercase',
+                        color: '#4e3328',
+                        textShadow: '0 2px 10px rgba(255, 255, 255, 0.9)'
+                      }}
+                    >
+                      Transforming Your Music Skills
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Pinyon Script', 'Alex Brush', 'Great Vibes', cursive",
+                        fontSize: 'clamp(2.4rem, 5.2vw, 4.2rem)',
+                        fontWeight: 400,
+                        letterSpacing: '0.02em',
+                        background: 'linear-gradient(135deg, #2c1a14 0%, #5e3b2e 35%, #965c49 70%, #4a281e 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        textShadow: '0 2px 14px rgba(255, 255, 255, 0.9)'
+                      }}
+                    >
+                      from Zero to Mastery
+                    </span>
                   </h1>
-                  <p className="text-xs md:text-sm lg:text-base font-semibold text-[#6e4236] leading-relaxed max-w-lg">
-                    Transform your playing with a step-by-step method that takes
-                    you from beginner to advanced.
+                  <p className="text-sm md:text-base lg:text-lg font-bold text-[#6e4236] tracking-wide max-w-lg">
+                    Piano, Violin, Classic Theory
                   </p>
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                     <button
                       onClick={() => setView("dashboard")}
-                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
+                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none uppercase tracking-wider"
                     >
-                      Start Learning
+                      START LEARNING
                     </button>
                     <button
                       onClick={() => setView("videos")}
-                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
+                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none uppercase tracking-wider"
                     >
-                      Watch S Keys Videos
+                      WATCH S. KEYS COVERS
                     </button>
                   </div>
                 </div>
