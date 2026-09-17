@@ -61,6 +61,41 @@ const PRICING_WHITE_SPARKLES = [
   { left: "83%", size: 7, duration: "11.5s", delay: "2.7s", type: "dot" }
 ];
 
+const WordByWordRevealText = ({ text, speedMs = 40 }: { text: string; speedMs?: number }) => {
+  const [wordCount, setWordCount] = useState(0);
+  const words = text ? text.split(" ") : [];
+
+  useEffect(() => {
+    setWordCount(0);
+    if (!text) return;
+
+    let current = 0;
+    const total = words.length;
+    const timer = setInterval(() => {
+      current++;
+      setWordCount(current);
+      if (current >= total) {
+        clearInterval(timer);
+      }
+    }, speedMs);
+
+    return () => clearInterval(timer);
+  }, [text, speedMs]);
+
+  return (
+    <span>
+      {words.slice(0, wordCount).map((word, idx) => (
+        <span
+          key={idx}
+          className="inline-block mr-1 text-[#523328]"
+        >
+          {word}
+        </span>
+      ))}
+    </span>
+  );
+};
+
 function Homepage() {
   const [view, setView] = useState<ViewType>("home");
 
@@ -1091,22 +1126,18 @@ function Homepage() {
                               {currentItem.question}
                             </h3>
 
-                            {/* Answer Section with Static Vertical Brown Line + White Background Box Expanding Right from Brown Line */}
+                            {/* Answer Section with Static Vertical Brown Line + White Background Box */}
                             <div className="mt-3 flex items-stretch">
                               {/* Static Vertical Brown Line (Anchor point always visible on left) */}
                               <div className="w-[3.5px] bg-[#a06354] rounded-full shrink-0 z-10" />
 
-                              {/* White Background Box (Unrolls to the right starting directly from the brown line) */}
+                              {/* White Background Box (Contains progressive word-by-word reveal text) */}
                               <div
                                 key={activeFaq}
-                                style={{
-                                  animation: "showRightFromBrownLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-                                  WebkitAnimation: "showRightFromBrownLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-                                }}
-                                className="flex-1 bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs overflow-hidden"
+                                className="flex-1 bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs"
                               >
                                 <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-normal">
-                                  {currentItem.answer}
+                                  <WordByWordRevealText text={currentItem.answer} speedMs={35} />
                                 </p>
                               </div>
                             </div>
