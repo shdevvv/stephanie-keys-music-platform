@@ -7,6 +7,7 @@ function Courses() {
   const [dbLevels, setDbLevels] = useState<Level[]>(localLevels);
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
   const [expandedTopic, setExpandedTopic] = useState<string | null>(null);
+  const [selectedLessonMap, setSelectedLessonMap] = useState<Record<string, number>>({});
   
   // Modals
   const [activeVideo, setActiveVideo] = useState<{ 
@@ -313,7 +314,7 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="bg-white/80 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden transition-all duration-300"
+            className="bg-white/80 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-2xl p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
             style={{
               boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
             }}
@@ -321,35 +322,40 @@ function Courses() {
             {/* Top Gloss Sheen Overlay */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/35 to-transparent z-0" />
 
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span 
-                    className="px-3.5 py-1 rounded-full text-xs font-bold text-[#6e4336] bg-white/90 border border-[#e8cdc1] shadow-xs"
-                    style={{ fontFamily: "'Cinzel', serif" }}
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6 flex-wrap">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span 
+                      className="px-3.5 py-0.5 rounded-full text-xs font-bold text-[#6e4336] bg-white/90 border border-[#e8cdc1] shadow-xs"
+                      style={{ fontFamily: "'Cinzel', serif" }}
+                    >
+                      Level {activeLevel.number}
+                    </span>
+                    <span className="text-xs font-medium text-[#7a645b]">{activeLevel.targetStudent}</span>
+                  </div>
+                  <h2
+                    className="text-2xl md:text-3xl font-bold text-[#341f18]"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif" }}
                   >
-                    Level {activeLevel.number}
-                  </span>
-                  <span className="text-xs font-medium text-[#7a645b]">{activeLevel.targetStudent}</span>
+                    {activeLevel.subtitle}
+                  </h2>
                 </div>
-                <h2
-                  className="text-2xl md:text-3xl font-bold text-[#341f18]"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif" }}
-                >
-                  {activeLevel.subtitle}
-                </h2>
 
-                {/* Inline Quick Info Metrics (Compact on top bar) */}
-                <div className="flex items-center flex-wrap gap-2.5 sm:gap-3.5 text-xs text-[#6e564c] font-medium mt-3">
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1 rounded-lg shadow-2xs">
+                {/* Vertical Divider on Desktop */}
+                <div className="hidden lg:block w-[1.5px] h-10 bg-gradient-to-b from-transparent via-[#c89482]/60 to-transparent shrink-0" />
+
+                {/* Quick Info Metrics (Inline beside Level title!) */}
+                <div className="flex items-center flex-wrap gap-2.5 sm:gap-3 text-xs text-[#6e564c] font-medium">
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Modules:</span>
                     <span className="font-bold text-[#341f18]">{activeLevel.topics.length}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1 rounded-lg shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Video:</span>
                     <span className="font-bold text-[#341f18]">{getTotalLessons(activeLevel)}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1 rounded-lg shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Badge Reward:</span>
                     <span className="font-bold text-[#6e4336]">🏆 {activeLevel.badge.name}</span>
                   </span>
@@ -361,7 +367,7 @@ function Courses() {
                   setSelectedLevel(null);
                   setExpandedTopic(null);
                 }}
-                className="px-6 py-2 rounded-xl text-xs font-bold text-[#5e382b] bg-white/95 border-[1.5px] border-[#c89482] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] hover:shadow-md transition-all duration-300 cursor-pointer shadow-xs w-fit shrink-0 self-start md:self-center"
+                className="px-6 py-2 rounded-xl text-xs font-bold text-[#5e382b] bg-white/95 border-[1.5px] border-[#c89482] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] hover:shadow-md transition-all duration-300 cursor-pointer shadow-xs w-fit shrink-0 self-start lg:self-center"
               >
                 Back
               </button>
@@ -369,7 +375,7 @@ function Courses() {
           </div>
 
           {/* Topics Accordion List */}
-          <div className="space-y-4 w-full">
+          <div className="space-y-5 w-full">
             {activeLevel.topics.map((topic, topicIdx) => {
               const topicKey = `${activeLevel.number}-${topicIdx}`;
               const isExpanded = expandedTopic === topicKey;
@@ -416,89 +422,231 @@ function Courses() {
                     </div>
                   </button>
 
-                  {/* Expanded Lessons Content */}
-                  {isExpanded && (
-                    <div className="border-t border-[#e8cdc1]/40 bg-white/40 backdrop-blur-md p-5 space-y-3">
-                      {topic.lessons.map((lesson, lessonIdx) => {
-                        const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
-                        const isCompleted = isLessonCompleted(lessonKey);
+                  {/* Expanded Lessons Content: 2-Column Split View (Left: Video Player, Right: Lesson List) */}
+                  {isExpanded && (() => {
+                    const activeLessonIdx = selectedLessonMap[topicKey] ?? 0;
+                    const currentLesson = topic.lessons[activeLessonIdx] || topic.lessons[0];
+                    const currentLessonKey = `${activeLevel.number}-${topic.title}-${currentLesson.code || currentLesson.title}`;
+                    const isCurrentCompleted = isLessonCompleted(currentLessonKey);
 
-                        return (
-                          <div
-                            key={lessonIdx}
-                            className="bg-white/90 backdrop-blur-md p-4 rounded-xl border border-[#e8cdc1]/60 flex items-center justify-between hover:bg-white hover:border-[#c89482] hover:shadow-md transition-all duration-300"
-                          >
-                            <div className="flex items-center gap-3.5 min-w-0 pr-2">
-                              {/* Completion Checkmark */}
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  toggleLessonCompleted(lessonKey);
-                                }}
-                                className="w-6 h-6 rounded-full border border-[#8a6858]/40 hover:border-[#8a6858] flex items-center justify-center transition-colors cursor-pointer bg-transparent shrink-0"
-                                title="Toggle Complete"
-                              >
-                                {isCompleted ? (
-                                  <div className="w-5 h-5 rounded-full bg-[#8a6858] text-white flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-xs font-bold">check</span>
-                                  </div>
-                                ) : (
-                                  <div className="w-4 h-4 rounded-full border border-[#ab7e66]/40 bg-white/50"></div>
-                                )}
-                              </button>
+                    return (
+                      <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 backdrop-blur-md p-4 md:p-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                          
+                          {/* LEFT COLUMN: Video Player Screen */}
+                          <div className="lg:col-span-7 flex flex-col gap-3">
+                            <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group">
+                              <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
+                                <img
+                                  src="/glowing-3d-piano-keys.png"
+                                  alt={currentLesson.title}
+                                  className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/40" />
 
-                              {/* Lesson Code & Title */}
-                              <div 
-                                className="min-w-0 cursor-pointer"
-                                onClick={() => setActiveVideo({
-                                  code: lesson.code,
-                                  title: lesson.title,
-                                  topicTitle: topic.title,
-                                  levelNumber: activeLevel.number,
-                                  pdf: lesson.pdf
-                                })}
-                              >
-                                <div className="flex items-center gap-2">
-                                  {lesson.code && (
-                                    <span className="text-[11px] font-mono font-bold text-[#6e4336] bg-[#f8e3db] border border-[#e8cdc1] px-1.5 py-0.5 rounded-md">
-                                      {lesson.code}
+                                {/* Top Badge Bar */}
+                                <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-white text-xs z-10">
+                                  {currentLesson.code && (
+                                    <span className="px-2.5 py-0.5 rounded-md bg-white/20 backdrop-blur-md font-mono font-bold border border-white/30 text-[#f8e3db]">
+                                      {currentLesson.code}
                                     </span>
                                   )}
-                                  <h4 className="text-xs font-bold text-[#341f18] truncate hover:text-[#8a6858] transition-colors">
-                                    {lesson.title}
-                                  </h4>
+                                  <span className="text-[11px] text-white/80 font-medium bg-black/40 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 ml-auto">
+                                    Level {activeLevel.number} • {topic.title}
+                                  </span>
+                                </div>
+
+                                {/* Center Play Button */}
+                                <button 
+                                  onClick={() => setActiveVideo({
+                                    code: currentLesson.code,
+                                    title: currentLesson.title,
+                                    topicTitle: topic.title,
+                                    levelNumber: activeLevel.number,
+                                    pdf: currentLesson.pdf
+                                  })}
+                                  className="relative z-10 w-16 h-16 rounded-full bg-white/30 backdrop-blur-md border border-white/60 flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#b86d5c] transition-all duration-300 cursor-pointer"
+                                  title="Play Fullscreen Video"
+                                >
+                                  <span className="material-symbols-outlined text-white text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                                    play_arrow
+                                  </span>
+                                </button>
+
+                                {/* Controls Bar */}
+                                <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-col gap-1.5 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white text-xs z-10">
+                                  <div className="w-full h-1 bg-white/30 rounded-full cursor-pointer overflow-hidden">
+                                    <div className="w-1/3 h-full bg-[#e8b4a2] rounded-full" />
+                                  </div>
+                                  <div className="flex items-center justify-between text-[11px]">
+                                    <div className="flex items-center gap-2.5">
+                                      <span className="material-symbols-outlined text-sm cursor-pointer hover:text-[#e8b4a2]" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                                      <span className="material-symbols-outlined text-sm cursor-pointer hover:text-[#e8b4a2]">volume_up</span>
+                                      <span className="font-mono text-[10px] text-white/80">04:20 / 14:10</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                      <span className="material-symbols-outlined text-sm cursor-pointer hover:text-[#e8b4a2]">settings</span>
+                                      <span 
+                                        onClick={() => setActiveVideo({
+                                          code: currentLesson.code,
+                                          title: currentLesson.title,
+                                          topicTitle: topic.title,
+                                          levelNumber: activeLevel.number,
+                                          pdf: currentLesson.pdf
+                                        })}
+                                        className="material-symbols-outlined text-sm cursor-pointer hover:text-[#e8b4a2]"
+                                        title="Fullscreen"
+                                      >
+                                        fullscreen
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Footer Meta under Video */}
+                              <div className="p-4 bg-white border-t border-[#e8cdc1]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div>
+                                  <div className="flex items-center gap-2 mb-0.5">
+                                    {currentLesson.code && (
+                                      <span className="text-[11px] font-mono font-bold text-[#6e4336] bg-[#f8e3db] border border-[#e8cdc1] px-1.5 py-0.5 rounded-md">
+                                        {currentLesson.code}
+                                      </span>
+                                    )}
+                                    <h4 className="text-sm font-bold text-[#341f18]" style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif" }}>
+                                      {currentLesson.title}
+                                    </h4>
+                                  </div>
+                                  <p className="text-[11px] text-[#7a645b]">
+                                    {topic.title} • Video {activeLessonIdx + 1} dari {topic.lessons.length}
+                                  </p>
+                                </div>
+
+                                <div className="flex items-center gap-2 shrink-0">
+                                  {currentLesson.pdf && (
+                                    <span className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] flex items-center gap-1.5 shadow-2xs">
+                                      <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
+                                      {currentLesson.pdf}
+                                    </span>
+                                  )}
+                                  
+                                  <button
+                                    onClick={() => toggleLessonCompleted(currentLessonKey)}
+                                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs ${
+                                      isCurrentCompleted
+                                        ? "bg-[#8a6858] text-white border-[#8a6858]"
+                                        : "bg-white text-[#6e4336] border-[#d9a998] hover:bg-[#fdeee8]"
+                                    }`}
+                                  >
+                                    <span className="material-symbols-outlined text-sm">
+                                      {isCurrentCompleted ? "check_circle" : "radio_button_unchecked"}
+                                    </span>
+                                    {isCurrentCompleted ? "Selesai" : "Tandai Selesai"}
+                                  </button>
                                 </div>
                               </div>
                             </div>
+                          </div>
 
-                            {/* Actions Right */}
-                            <div className="flex items-center gap-2 shrink-0">
-                              {lesson.pdf && (
-                                <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-[#f8e3db]/80 text-[#6e4336] border border-[#e8cdc1] flex items-center gap-1">
-                                  <span className="material-symbols-outlined text-[12px]">picture_as_pdf</span>
-                                  {lesson.pdf}
-                                </span>
-                              )}
+                          {/* RIGHT COLUMN: Lesson List (Per klik ganti video di kiri) */}
+                          <div className="lg:col-span-5 flex flex-col gap-2.5">
+                            <div className="flex items-center justify-between mb-1 px-1">
+                              <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider flex items-center gap-1.5">
+                                <span className="material-symbols-outlined text-sm text-[#8a6858]">playlist_play</span>
+                                Lessons ({topic.lessons.length})
+                              </span>
+                              <span className="text-[11px] text-[#7a645b] italic">Klik lesson untuk memutar</span>
+                            </div>
 
-                              <button
-                                onClick={() => setActiveVideo({
-                                  code: lesson.code,
-                                  title: lesson.title,
-                                  topicTitle: topic.title,
-                                  levelNumber: activeLevel.number,
-                                  pdf: lesson.pdf
-                                })}
-                                className="flex items-center gap-1 px-3.5 py-1.5 bg-gradient-to-r from-[#b86d5c] via-[#e8b4a2] to-[#a06e5e] text-white text-xs font-bold rounded-xl hover:scale-105 transition-transform border-none cursor-pointer shadow-xs"
-                              >
-                                <span className="material-symbols-outlined text-xs">play_arrow</span>
-                                Tonton
-                              </button>
+                            <div className="space-y-2 max-h-[440px] overflow-y-auto pr-1">
+                              {topic.lessons.map((lesson, lessonIdx) => {
+                                const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
+                                const isCompleted = isLessonCompleted(lessonKey);
+                                const isSelected = activeLessonIdx === lessonIdx;
+
+                                return (
+                                  <div
+                                    key={lessonIdx}
+                                    onClick={() => {
+                                      setSelectedLessonMap(prev => ({ ...prev, [topicKey]: lessonIdx }));
+                                    }}
+                                    className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
+                                      isSelected
+                                        ? "bg-[#fdeee8] border-[#c89482] shadow-md translate-x-1"
+                                        : "bg-white/90 border-[#e8cdc1]/70 hover:bg-white hover:border-[#c89482] shadow-2xs"
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-3 min-w-0">
+                                      {/* Completion Status Checkmark */}
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          toggleLessonCompleted(lessonKey);
+                                        }}
+                                        className="w-5 h-5 rounded-full border border-[#8a6858]/40 hover:border-[#8a6858] flex items-center justify-center transition-colors cursor-pointer bg-transparent shrink-0"
+                                        title="Toggle Complete"
+                                      >
+                                        {isCompleted ? (
+                                          <div className="w-4 h-4 rounded-full bg-[#8a6858] text-white flex items-center justify-center">
+                                            <span className="material-symbols-outlined text-[10px] font-bold">check</span>
+                                          </div>
+                                        ) : (
+                                          <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/50" />
+                                        )}
+                                      </button>
+
+                                      {/* Lesson Code & Title */}
+                                      <div className="min-w-0">
+                                        <div className="flex items-center gap-1.5 mb-0.5">
+                                          {lesson.code && (
+                                            <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md border ${
+                                              isSelected 
+                                                ? "bg-[#8a6858] text-white border-[#8a6858]" 
+                                                : "bg-[#f8e3db] text-[#6e4336] border-[#e8cdc1]"
+                                            }`}>
+                                              {lesson.code}
+                                            </span>
+                                          )}
+                                          {isSelected && (
+                                            <span className="text-[10px] font-bold text-[#8a6858] animate-pulse flex items-center gap-0.5">
+                                              <span className="material-symbols-outlined text-xs">play_arrow</span>
+                                              PLAYING
+                                            </span>
+                                          )}
+                                        </div>
+                                        <h4 className={`text-xs font-bold truncate ${isSelected ? "text-[#5e382b]" : "text-[#341f18]"}`}>
+                                          {lesson.title}
+                                        </h4>
+                                      </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-1.5 shrink-0">
+                                      {lesson.pdf && (
+                                        <span className="p-1 rounded-md bg-[#f8e3db]/80 text-[#6e4336] border border-[#e8cdc1]" title={`PDF: ${lesson.pdf}`}>
+                                          <span className="material-symbols-outlined text-[13px]">picture_as_pdf</span>
+                                        </span>
+                                      )}
+
+                                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs transition-all ${
+                                        isSelected 
+                                          ? "bg-[#8a6858] text-white shadow-xs" 
+                                          : "bg-[#f8e3db]/50 text-[#6e4336]"
+                                      }`}>
+                                        <span className="material-symbols-outlined text-sm">
+                                          {isSelected ? "graphic_eq" : "play_arrow"}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
                             </div>
                           </div>
-                        );
-                      })}
-                    </div>
-                  )}
+
+                        </div>
+                      </div>
+                    );
+                  })()}
                 </div>
               );
             })}
