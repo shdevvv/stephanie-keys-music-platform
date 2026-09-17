@@ -413,7 +413,7 @@ function Courses() {
           <div 
             className="rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
             style={{
-              background: 'linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 25%, #ffffff 45%, #e8b4a2 70%, #8e5849 100%) border-box',
+              background: 'linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 25%, #ffffff 45%, #e8b4a2 70%, #8e5849 100%) border-box',
               border: '1.5px solid transparent',
               boxShadow: "0 15px 40px rgba(184, 124, 109, 0.18), 0 0 25px rgba(232, 180, 162, 0.3), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
             }}
@@ -427,11 +427,11 @@ function Courses() {
                   {/* Topic Header Button */}
                   <button
                     onClick={() => setExpandedTopic(isExpanded ? null : topicKey)}
-                    className="w-full flex items-center justify-between p-5 md:p-6 text-left bg-transparent border-none cursor-pointer hover:bg-white/50 transition-colors group"
+                    className="w-full flex items-center justify-between p-5 md:p-6 text-left bg-transparent border-none cursor-pointer hover:bg-white/35 transition-colors group"
                   >
                     <div className="flex items-center gap-4 min-w-0 pr-4">
                       <span 
-                        className="w-9 h-9 rounded-md bg-gradient-to-br from-[#f8e3db] via-white to-[#e8cdc1] border border-[#d9a998] shadow-xs flex items-center justify-center font-mono text-xs font-bold text-[#6e4336] shrink-0"
+                        className="w-9 h-9 rounded-md bg-gradient-to-br from-[#f8e3db]/90 via-white/80 to-[#e8cdc1]/90 border border-[#d9a998] shadow-xs flex items-center justify-center font-mono text-xs font-bold text-[#6e4336] shrink-0"
                       >
                         {String(topicIdx + 1).padStart(2, "0")}
                       </span>
@@ -450,7 +450,7 @@ function Courses() {
 
                     <div className="flex items-center gap-2 shrink-0">
                       <span
-                        className="w-8 h-8 rounded-md bg-white/80 border border-[#e8cdc1] shadow-xs flex items-center justify-center text-[#5e382b] group-hover:bg-[#fdeee8] transition-all duration-300"
+                        className="w-8 h-8 rounded-md bg-white/65 border border-[#e8cdc1] shadow-xs flex items-center justify-center text-[#5e382b] group-hover:bg-[#fdeee8] transition-all duration-300"
                         style={{ transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
                       >
                         <span className="material-symbols-outlined text-lg">expand_more</span>
@@ -475,7 +475,7 @@ function Courses() {
                         }`}
                       >
                         <div className="overflow-hidden">
-                          <div className="bg-[#fdf9f7]/45 p-4 md:p-6">
+                          <div className="bg-[#fdf9f7]/30 p-4 md:p-6">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
                               
                               {/* LEFT COLUMN: Video Player Screen (Flush & Seamless with Right List) */}
@@ -525,8 +525,8 @@ function Courses() {
                                         }}
                                         className={`p-3.5 rounded-md border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
                                           isSelected
-                                            ? "bg-[#fdeee8] border-[#c89482] shadow-[0_0_20px_rgba(253,238,232,0.95),0_4px_16px_rgba(184,124,109,0.2)] ring-1 ring-[#c89482]/60"
-                                            : "bg-white/75 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
+                                            ? "bg-[#fdeee8]/90 border-[#c89482] shadow-[0_0_20px_rgba(253,238,232,0.95),0_4px_16px_rgba(184,124,109,0.2)] ring-1 ring-[#c89482]/60"
+                                            : "bg-white/60 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
                                         }`}
                                       >
                                         <div className="flex items-center gap-3 min-w-0">
@@ -544,7 +544,7 @@ function Courses() {
                                                 <span className="material-symbols-outlined text-[10px] font-bold">check</span>
                                               </div>
                                             ) : (
-                                              <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/35" />
+                                              <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/25" />
                                             )}
                                           </button>
 
