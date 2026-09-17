@@ -1188,14 +1188,16 @@ function Homepage() {
                 ))}
 
 
-                {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
+                {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks (Exact same style as What You Will Get cards) */}
                 <div
                   style={{
-                    backgroundColor: "rgba(245, 226, 215, 0.70)",
-                    border: "2.5px solid #c48b7c",
-                    boxShadow: "0 0 14px rgba(196, 139, 124, 0.3)",
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(252, 246, 243, 0.90) 100%) padding-box, linear-gradient(135deg, #ffffff 0%, #f8e3db 20%, #e2b0a4 45%, #c48b7c 75%, #7a4639 100%) border-box",
+                    backdropFilter: "blur(14px)",
+                    WebkitBackdropFilter: "blur(14px)",
+                    border: "2.5px solid transparent",
+                    boxShadow: "0 10px 30px rgba(160, 110, 95, 0.14), inset 0 1.5px 2px #ffffff",
                   }}
-                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-lg space-y-7 relative z-10"
+                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-[26px] space-y-7 relative z-10"
                 >
                   {/* Header */}
                   <div className="text-center space-y-2 max-w-xl mx-auto">
@@ -1207,7 +1209,7 @@ function Homepage() {
                     </p>
                   </div>
 
-                  {/* Testimonial Cards Grid (3 Small Inner Cards: Medium Translucent Flat White Background) */}
+                  {/* Testimonial Cards Grid (3 Small Inner Cards: Exact style as Shop Button) */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
                     {[
                       {
@@ -1244,22 +1246,22 @@ function Homepage() {
                       <div
                         key={idx}
                         style={{
-                          backgroundColor: "rgba(255, 255, 255, 0.62)",
-                          border: "1.5px solid #c48b7c",
-                          boxShadow: "0 0 8px rgba(196, 139, 124, 0.2)",
+                          background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                          boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 6px 16px rgba(129, 89, 79, 0.15)",
+                          border: "1px solid #D9A998",
                         }}
-                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 flex flex-col justify-between gap-4 group cursor-pointer"
+                        className="relative overflow-hidden p-4.5 rounded-[20px] transition-all duration-300 hover:-translate-y-1 hover:brightness-105 flex flex-col justify-between gap-4 group cursor-pointer"
                       >
                         <div className="space-y-2.5 relative z-10">
                           {/* Comment */}
-                          <p className="font-sans text-[11px] md:text-[11.5px] text-[#5c3328] leading-relaxed italic font-semibold drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
+                          <p className="font-sans text-[11px] md:text-[11.5px] text-[#3d1d15] leading-relaxed italic font-semibold drop-shadow-[0_0.5px_1px_rgba(255,255,255,0.6)]">
                             "{item.comment}"
                           </p>
                         </div>
 
                         {/* Profile Details */}
-                        <div className="flex items-center gap-2.5 pt-3 border-t border-[#e2b0a4]/60 mt-auto relative z-10">
-                          <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#e2b0a4] bg-[#f4ebe6] shrink-0 shadow-xs">
+                        <div className="flex items-center gap-2.5 pt-3 border-t border-[#81594F]/25 mt-auto relative z-10">
+                          <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/80 bg-[#f4ebe6] shrink-0 shadow-xs">
                             <img
                               className="w-full h-full object-cover"
                               src={item.avatar}
@@ -1267,12 +1269,12 @@ function Homepage() {
                             />
                           </div>
                           <div>
-                            <h4 className="font-sans text-[11.5px] font-bold text-[#5c3328] leading-tight drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
+                            <h4 className="font-sans text-[11.5px] font-bold text-[#3d1d15] leading-tight drop-shadow-[0_0.5px_1px_rgba(255,255,255,0.6)]">
                               {item.name}
                             </h4>
-                            <div className="flex flex-wrap items-center gap-x-1 gap-y-0.5 mt-0.5 text-[9.5px] text-[#7a4b3d] font-bold font-sans">
+                            <div className="flex flex-wrap items-center gap-x-1 gap-y-0.5 mt-0.5 text-[9.5px] text-[#592c20] font-bold font-sans">
                               <span>{item.role}</span>
-                              <span className="text-[#d48b78]">•</span>
+                              <span className="text-[#81594F]">•</span>
                               <span>{item.date}</span>
                             </div>
                           </div>
