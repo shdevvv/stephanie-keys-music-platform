@@ -239,19 +239,25 @@ function Courses() {
                 <div
                   key={level.number}
                   onClick={() => handleSelectLevel(level.number)}
-                  className="group relative flex flex-col justify-between p-6 rounded-lg cursor-pointer bg-white/85 hover:bg-white/95 transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.3)] overflow-hidden"
+                  className="group relative flex flex-col justify-between p-6 rounded-lg cursor-pointer transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_35px_rgba(232,180,162,0.5),0_20px_45px_-6px_rgba(184,124,109,0.35)] overflow-hidden"
                   style={{
-                    border: '1.5px solid #e8cdc1',
-                    boxShadow: '0 20px 38px -6px rgba(184, 124, 109, 0.22), 0 10px 18px -4px rgba(166, 95, 80, 0.14)'
+                    background: 'linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 25%, #ffffff 45%, #e8b4a2 70%, #8e5849 100%) border-box',
+                    border: '1.5px solid transparent',
+                    boxShadow: '0 15px 38px -6px rgba(184, 124, 109, 0.22), 0 0 18px rgba(232, 180, 162, 0.3)'
                   }}
                 >
+                  {/* Glossy Sheen Overlay */}
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/35 to-transparent z-0" />
+
                   {/* Top Level Pill */}
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
                       <span 
-                        className="px-3.5 py-1 rounded-md text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white/90 border border-[#e8cdc1] shadow-xs"
+                        className="px-3.5 py-1 rounded-md text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center shadow-xs"
                         style={{
-                          fontFamily: "'Cinzel', serif"
+                          fontFamily: "'Cinzel', serif",
+                          background: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) padding-box, linear-gradient(135deg, #d4a395 0%, #ffffff 50%, #b87c6d 100%) border-box',
+                          border: '1px solid transparent'
                         }}
                       >
                         Level {level.number}
@@ -319,21 +325,27 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="bg-white/75 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
+            className="rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
             style={{
-              boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
+              background: 'linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 25%, #ffffff 45%, #e8b4a2 70%, #8e5849 100%) border-box',
+              border: '2px solid transparent',
+              boxShadow: "0 20px 50px rgba(184, 124, 109, 0.22), 0 0 35px rgba(232, 180, 162, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
             }}
           >
             {/* Top Gloss Sheen Overlay */}
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/35 to-transparent z-0" />
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/40 to-transparent z-0" />
 
             <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6 flex-wrap">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span 
-                      className="px-3 py-0.5 rounded-md text-xs font-bold text-[#6e4336] bg-white/80 border border-[#e8cdc1] shadow-xs"
-                      style={{ fontFamily: "'Cinzel', serif" }}
+                      className="px-3 py-0.5 rounded-md text-xs font-bold text-[#6e4336] shadow-xs"
+                      style={{
+                        fontFamily: "'Cinzel', serif",
+                        background: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) padding-box, linear-gradient(135deg, #d4a395 0%, #ffffff 50%, #b87c6d 100%) border-box',
+                        border: '1px solid transparent'
+                      }}
                     >
                       Level {activeLevel.number}
                     </span>
@@ -352,15 +364,33 @@ function Courses() {
 
                 {/* Quick Info Metrics (Inline beside Level title!) */}
                 <div className="flex items-center flex-wrap gap-2.5 sm:gap-3 text-xs text-[#6e564c] font-medium">
-                  <span className="flex items-center gap-1.5 bg-white/80 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
+                  <span 
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md shadow-2xs"
+                    style={{
+                      background: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) padding-box, linear-gradient(135deg, #e8b4a2 0%, #ffffff 50%, #c89482 100%) border-box',
+                      border: '1px solid transparent'
+                    }}
+                  >
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Modules:</span>
                     <span className="font-bold text-[#341f18]">{activeLevel.topics.length}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/80 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
+                  <span 
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md shadow-2xs"
+                    style={{
+                      background: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) padding-box, linear-gradient(135deg, #e8b4a2 0%, #ffffff 50%, #c89482 100%) border-box',
+                      border: '1px solid transparent'
+                    }}
+                  >
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Videos:</span>
                     <span className="font-bold text-[#341f18]">{getTotalLessons(activeLevel)}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/80 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
+                  <span 
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md shadow-2xs"
+                    style={{
+                      background: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) padding-box, linear-gradient(135deg, #e8b4a2 0%, #ffffff 50%, #c89482 100%) border-box',
+                      border: '1px solid transparent'
+                    }}
+                  >
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Badge Reward:</span>
                     <span className="font-bold text-[#6e4336]">🏆 {activeLevel.badge.name}</span>
                   </span>
@@ -381,9 +411,11 @@ function Courses() {
 
           {/* Topics Accordion List (Unified Attached Container) */}
           <div 
-            className="bg-white/75 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
+            className="rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
             style={{
-              boxShadow: "0 12px 35px rgba(184, 124, 109, 0.14), 0 0 20px rgba(255, 255, 255, 0.95), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
+              background: 'linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 25%, #ffffff 45%, #e8b4a2 70%, #8e5849 100%) border-box',
+              border: '1.5px solid transparent',
+              boxShadow: "0 15px 40px rgba(184, 124, 109, 0.18), 0 0 25px rgba(232, 180, 162, 0.3), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
             }}
           >
             {activeLevel.topics.map((topic, topicIdx) => {
