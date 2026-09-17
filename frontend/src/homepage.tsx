@@ -786,22 +786,20 @@ function Homepage() {
               {/* Smooth Medium White Top Gradient above FAQ */}
               <div className="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-white/90 via-white/50 to-transparent z-10 pointer-events-none" />
 
-              {/* Grand Marble Hall Shared Background Image Layer */}
+              {/* Luxury Pink Bookshelf Shared Background Image Layer */}
               <div className="absolute inset-0 z-0 pointer-events-none select-none">
                 <img
                   className="w-full h-full object-cover object-[50%_30%] transform-gpu"
-                  alt="Grand Marble Hall Background"
-                  src="/grand-marble-hall.jpg?v=2"
+                  alt="Pink Bookshelf Background"
+                  src="/faq-bookshelf-bg.jpg"
                 />
                 {/* 
-                  Vertical Gradient Overlay across FAQ, Students Feedbacks & Start Your Musical Journey:
-                  - Top (FAQ): Subtle, thin soft white top fade (from-white/20 via-transparent)
-                  - Middle (Students Feedbacks / Mid-Palace): Soft warm peach tint glow
-                  - Bottom (Start Your Musical Journey): Gentle white finish
+                  Vertical & Soft White Overlay across FAQ & Students Feedbacks Section:
+                  Provides soft pure white translucent glow for pristine text contrast
                 */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/10 via-[#faf5f0]/10 via-[#fcdcd0]/20 via-[#f7beae]/25 via-white/30 to-white/60" />
-                {/* Subtle Low-Opacity White Overlay across FAQ & Students Feedbacks */}
-                <div className="absolute inset-0 bg-white/15 z-0 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/45 via-white/30 via-white/35 to-white/55" />
+                {/* Subtle Low-Opacity White Overlay */}
+                <div className="absolute inset-0 bg-white/25 z-0 pointer-events-none backdrop-blur-[2px]" />
               </div>
 
               {/* Section 4: FAQ Section */}
