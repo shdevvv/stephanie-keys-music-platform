@@ -85,11 +85,8 @@ const WordByWordRevealText = ({ text, speedMs = 35 }: { text: string; speedMs?: 
   return (
     <span>
       {words.slice(0, wordCount).map((word, idx) => (
-        <span
-          key={idx}
-          className="inline-block mr-1 text-[#523328]"
-        >
-          {word}
+        <span key={idx} className="inline text-[#4d281d]">
+          {word}{" "}
         </span>
       ))}
     </span>
@@ -1070,19 +1067,19 @@ function Homepage() {
                             `
                           }} />
 
-                          {/* Active Question & Answer Single Card (Clean Rose Gold Border) */}
+                          {/* Active Question & Answer Single Card (Exact Shop Button Color & Gradient + Rose Gold Border) */}
                           <div
                             style={{
-                              backgroundColor: "rgba(255, 248, 244, 0.88)",
-                              border: "2px solid #c48b7c",
-                              boxShadow: "0 0 12px rgba(196, 139, 124, 0.25)",
+                              background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                              boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 0 14px rgba(196, 139, 124, 0.3)",
+                              border: "2px solid #D9A998",
                             }}
                             className="rounded-xl p-4 md:p-5 backdrop-blur-md overflow-hidden"
                           >
                             {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
-                            <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
-                              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/85 border border-[#B58474]/50 text-[#6E4234] text-[10px] font-bold tracking-wider uppercase shadow-2xs">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#B58474] animate-pulse" />
+                            <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-white/30">
+                              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/90 border border-white/80 text-[#5E3A2E] text-[10px] font-bold tracking-wider uppercase shadow-2xs">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#81594F] animate-pulse" />
                                 Question {currentItem.num} of 10
                               </div>
 
@@ -1093,8 +1090,8 @@ function Homepage() {
                                   disabled={activeFaq === 0}
                                   title="Previous Question"
                                   className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === 0
-                                    ? "opacity-30 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/40"
-                                    : "bg-white/85 hover:bg-[#b58474] text-[#6E4234] hover:text-white border border-[#B58474]/60 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                    ? "opacity-40 cursor-not-allowed bg-white/30 text-white border border-white/30"
+                                    : "bg-white/90 hover:bg-[#81594F] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                                     }`}
                                 >
                                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1107,8 +1104,8 @@ function Homepage() {
                                   disabled={activeFaq === faqItems.length - 1}
                                   title="Next Question"
                                   className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === faqItems.length - 1
-                                    ? "opacity-30 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/40"
-                                    : "bg-white/85 hover:bg-[#b58474] text-[#6E4234] hover:text-white border border-[#B58474]/60 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                    ? "opacity-40 cursor-not-allowed bg-white/30 text-white border border-white/30"
+                                    : "bg-white/90 hover:bg-[#81594F] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                                     }`}
                                 >
                                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1118,9 +1115,9 @@ function Homepage() {
                               </div>
                             </div>
 
-                            {/* Question Title (Static, Soft & Elegant Typography) */}
+                            {/* Question Title (Crisp White Text on Shop Gradient Background) */}
                             <h3
-                              className="mt-3 text-sm md:text-base text-[#5E3A2E] font-semibold leading-relaxed tracking-normal"
+                              className="mt-3 text-sm md:text-base text-white font-semibold leading-relaxed tracking-normal drop-shadow-xs"
                               style={{ fontFamily: "'Playfair Display', serif" }}
                             >
                               {currentItem.question}
@@ -1129,12 +1126,12 @@ function Homepage() {
                             {/* Answer Section with Static Vertical Brown Line + White Background Box */}
                             <div className="mt-3 flex items-stretch">
                               {/* Static Vertical Brown Line (Anchor point always visible on left) */}
-                              <div className="w-[3.5px] bg-[#a06354] rounded-full shrink-0 z-10" />
+                              <div className="w-[3.5px] bg-[#5E3A2E] rounded-full shrink-0 z-10" />
 
                               {/* White Background Box (Contains progressive word-by-word reveal text) */}
                               <div
                                 key={activeFaq}
-                                className="flex-1 bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs"
+                                className="flex-1 bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-sm"
                               >
                                 <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-normal">
                                   <WordByWordRevealText text={currentItem.answer} speedMs={35} />
