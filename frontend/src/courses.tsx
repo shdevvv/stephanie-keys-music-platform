@@ -338,6 +338,22 @@ function Courses() {
                 >
                   {activeLevel.subtitle}
                 </h2>
+
+                {/* Inline Quick Info Metrics (Compact on top bar) */}
+                <div className="flex items-center flex-wrap gap-2.5 sm:gap-3.5 text-xs text-[#6e564c] font-medium mt-3">
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1 rounded-lg shadow-2xs">
+                    <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Modules:</span>
+                    <span className="font-bold text-[#341f18]">{activeLevel.topics.length}</span>
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1 rounded-lg shadow-2xs">
+                    <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Video:</span>
+                    <span className="font-bold text-[#341f18]">{getTotalLessons(activeLevel)}</span>
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1 rounded-lg shadow-2xs">
+                    <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Badge Reward:</span>
+                    <span className="font-bold text-[#6e4336]">🏆 {activeLevel.badge.name}</span>
+                  </span>
+                </div>
               </div>
 
               <button
@@ -345,29 +361,10 @@ function Courses() {
                   setSelectedLevel(null);
                   setExpandedTopic(null);
                 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#5e382b] bg-white/95 border-[1.5px] border-[#c89482] hover:bg-[#fdeee8] transition-all cursor-pointer shadow-xs w-fit"
+                className="px-6 py-2 rounded-xl text-xs font-bold text-[#5e382b] bg-white/95 border-[1.5px] border-[#c89482] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] hover:shadow-md transition-all duration-300 cursor-pointer shadow-xs w-fit shrink-0 self-start md:self-center"
               >
-                <span className="material-symbols-outlined text-base">arrow_back</span>
-                Kembali ke All Levels
+                Back
               </button>
-            </div>
-
-            <div className="h-[1.5px] bg-gradient-to-r from-transparent via-[#c89482]/60 to-transparent my-6 w-full" />
-
-            {/* Level Quick Info Pills */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs relative z-10">
-              <div className="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
-                <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Total Modules</span>
-                <span className="text-sm font-bold text-[#341f18]">{activeLevel.topics.length} Modules</span>
-              </div>
-              <div className="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
-                <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Total Video</span>
-                <span className="text-sm font-bold text-[#341f18]">{getTotalLessons(activeLevel)} Videos</span>
-              </div>
-              <div className="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-[#e8cdc1]/80 shadow-xs flex flex-col gap-0.5">
-                <span className="text-[10px] text-[#7a645b] uppercase tracking-wider block font-bold">Level Badge Reward</span>
-                <span className="text-sm font-bold text-[#8a6858] truncate block">🏆 {activeLevel.badge.name}</span>
-              </div>
             </div>
           </div>
 
@@ -482,16 +479,6 @@ function Courses() {
                                   {lesson.pdf}
                                 </span>
                               )}
-
-                              <button
-                                onClick={(e) => toggleSaveLater('video', { id: `video-${lesson.title}`, title: lesson.title, meta: `Level ${activeLevel.number} Video` }, e)}
-                                className="p-1.5 rounded-lg bg-transparent text-[#6e5a51] hover:text-[#3d251c] cursor-pointer border-none"
-                                title="Bookmark Video"
-                              >
-                                <span className="material-symbols-outlined text-base" style={isSavedLater(`video-${lesson.title}`) ? { fontVariationSettings: "'FILL' 1" } : undefined}>
-                                  bookmark
-                                </span>
-                              </button>
 
                               <button
                                 onClick={() => setActiveVideo({
