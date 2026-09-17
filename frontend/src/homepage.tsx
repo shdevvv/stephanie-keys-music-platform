@@ -1191,13 +1191,12 @@ function Homepage() {
                 {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
                 <div
                   style={{
-                    backgroundColor: "rgba(245, 226, 215, 0.15)",
                     border: "2.5px solid #c48b7c",
-                    boxShadow: "0 0 14px rgba(196, 139, 124, 0.25)",
+                    boxShadow: "0 0 16px rgba(196, 139, 124, 0.3)",
                   }}
-                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-xl space-y-7 relative z-10"
+                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-2xl space-y-6 relative z-10"
                 >
-                  {/* Header wrapped in a crystal clear glass card (no blur/fill so background bookshelf image shows clearly) */}
+                  {/* Header wrapped in a small transparent inner card ("bolong" cutout showing bg image clearly) */}
                   <div
                     style={{
                       backgroundColor: "rgba(255, 255, 255, 0.08)",
@@ -1214,7 +1213,16 @@ function Homepage() {
                     </p>
                   </div>
 
-                  {/* Testimonial Cards Grid (3 Small Inner Cards: Medium Translucent Flat White Background) */}
+                  {/* Main Large Warm Brown Outer Card wrapping the testimonial grid */}
+                  <div
+                    style={{
+                      backgroundColor: "rgba(245, 226, 215, 0.72)",
+                      border: "1.5px solid #c48b7c",
+                      boxShadow: "0 0 12px rgba(196, 139, 124, 0.25)",
+                    }}
+                    className="p-4 md:p-5 rounded-xl backdrop-blur-md"
+                  >
+                    {/* Testimonial Cards Grid (3 Small Inner Cards: Medium Translucent Flat White Background) */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
                     {[
                       {
@@ -1288,7 +1296,8 @@ function Homepage() {
                     ))}
                   </div>
                 </div>
-                {/* Bottom White Soft Fade Gradient Overlay (fading upwards) */}
+              </div>
+              {/* Bottom White Soft Fade Gradient Overlay (fading upwards) */}
                 <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#faf5f0] via-[#faf5f0]/75 to-transparent z-0 pointer-events-none" />
               </section>
             </div>
