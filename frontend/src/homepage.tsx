@@ -1128,10 +1128,10 @@ function Homepage() {
                               {/* Static Vertical Brown Line (Anchor point always visible on left) */}
                               <div className="w-[3.5px] bg-[#5E3A2E] rounded-full shrink-0 z-10" />
 
-                              {/* White Background Box (Contains progressive word-by-word reveal text, translucent for bg visibility) */}
+                              {/* White Background Box (Contains progressive word-by-word reveal text, higher white opacity) */}
                               <div
                                 key={activeFaq}
-                                className="flex-1 bg-[#fffaf7]/45 backdrop-blur-xs py-2.5 px-3.5 rounded-r-lg shadow-sm"
+                                className="flex-1 bg-[#fffaf7]/85 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-sm"
                               >
                                 <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-semibold">
                                   <WordByWordRevealText text={currentItem.answer} speedMs={35} />
