@@ -422,126 +422,71 @@ function Courses() {
                     </div>
                   </button>
 
-                  {/* Expanded Lessons Content: 2-Column Split View (Left: Video Player, Right: Lesson List) */}
-                  {isExpanded && (() => {
-                    const activeLessonIdx = selectedLessonMap[topicKey] ?? 0;
-                    const currentLesson = topic.lessons[activeLessonIdx] || topic.lessons[0];
-                    const currentLessonKey = `${activeLevel.number}-${topic.title}-${currentLesson.code || currentLesson.title}`;
+                  {/* Expanded Lessons Content: Full-Width Clean Lesson List */}
+                  {isExpanded && (
+                    <div className="border-t border-[#e8cdc1]/40 bg-white/40 backdrop-blur-md p-4 md:p-5 space-y-2.5">
+                      {topic.lessons.map((lesson, lessonIdx) => {
+                        const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
+                        const isCompleted = isLessonCompleted(lessonKey);
 
-                    return (
-                      <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 backdrop-blur-md p-4 md:p-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                          
-                          {/* LEFT COLUMN: Video Player Screen */}
-                          <div className="lg:col-span-7 flex flex-col gap-3">
-                            <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group">
-                              <div className="relative aspect-video w-full bg-[#190f0c] flex items-center justify-center overflow-hidden">
-                                <img
-                                  src="/glowing-3d-piano-keys.png"
-                                  alt={currentLesson.title}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+                        return (
+                          <div
+                            key={lessonIdx}
+                            className="bg-white/90 backdrop-blur-md p-3.5 md:p-4 rounded-xl border border-[#e8cdc1]/70 flex items-center justify-between gap-4 hover:bg-white hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)] transition-all duration-300"
+                          >
+                            <div className="flex items-center gap-3.5 min-w-0 pr-2">
+                              {/* Completion Status Checkmark */}
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toggleLessonCompleted(lessonKey);
+                                }}
+                                className="w-5 h-5 rounded-full border border-[#8a6858]/40 hover:border-[#8a6858] flex items-center justify-center transition-colors cursor-pointer bg-transparent shrink-0"
+                                title="Toggle Complete"
+                              >
+                                {isCompleted ? (
+                                  <div className="w-4 h-4 rounded-full bg-[#8a6858] text-white flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-[10px] font-bold">check</span>
+                                  </div>
+                                ) : (
+                                  <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/50" />
+                                )}
+                              </button>
+
+                              {/* Lesson Code & Title */}
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-2">
+                                  {lesson.code && (
+                                    <span className="text-[11px] font-mono font-bold text-[#6e4336] bg-[#f8e3db] border border-[#e8cdc1] px-2 py-0.5 rounded-md shrink-0">
+                                      {lesson.code}
+                                    </span>
+                                  )}
+                                  <h4 className="text-xs md:text-sm font-bold text-[#341f18] truncate">
+                                    {lesson.title}
+                                  </h4>
+                                </div>
                               </div>
                             </div>
+
+                            {/* Action Right: Single Download PDF button if PDF exists */}
+                            {lesson.pdf && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  alert(`Downloading PDF: ${lesson.pdf}`);
+                                }}
+                                className="px-3 py-1.5 text-xs font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-xl flex items-center gap-1.5 transition-all shrink-0 cursor-pointer shadow-2xs"
+                                title={`Download PDF: ${lesson.pdf}`}
+                              >
+                                <span className="material-symbols-outlined text-sm">download</span>
+                                Download PDF
+                              </button>
+                            )}
                           </div>
-
-                          {/* RIGHT COLUMN: Lesson List (Click to switch video) */}
-                          <div className="lg:col-span-5 flex flex-col gap-2.5">
-                            <div className="flex items-center justify-between mb-1 px-1">
-                              <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider flex items-center gap-1.5">
-                                <span className="material-symbols-outlined text-sm text-[#8a6858]">playlist_play</span>
-                                Lessons ({topic.lessons.length})
-                              </span>
-                              <span className="text-[11px] text-[#7a645b] italic font-medium">Click lesson to play</span>
-                            </div>
-
-                            <div className="space-y-2 max-h-[440px] overflow-y-auto pr-1">
-                              {topic.lessons.map((lesson, lessonIdx) => {
-                                const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
-                                const isCompleted = isLessonCompleted(lessonKey);
-                                const isSelected = activeLessonIdx === lessonIdx;
-
-                                return (
-                                  <div
-                                    key={lessonIdx}
-                                    onClick={() => {
-                                      setSelectedLessonMap(prev => ({ ...prev, [topicKey]: lessonIdx }));
-                                    }}
-                                    className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
-                                      isSelected
-                                        ? "bg-white border-[#c89482] shadow-[0_0_22px_rgba(255,255,255,0.95),0_4px_16px_rgba(184,124,109,0.22)] ring-1 ring-[#c89482]/50"
-                                        : "bg-white/85 border-[#e8cdc1]/80 hover:bg-white hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
-                                    }`}
-                                  >
-                                    <div className="flex items-center gap-3 min-w-0">
-                                      {/* Completion Status Checkmark on the Left */}
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          toggleLessonCompleted(lessonKey);
-                                        }}
-                                        className="w-5 h-5 rounded-full border border-[#8a6858]/40 hover:border-[#8a6858] flex items-center justify-center transition-colors cursor-pointer bg-transparent shrink-0"
-                                        title="Toggle Complete"
-                                      >
-                                        {isCompleted ? (
-                                          <div className="w-4 h-4 rounded-full bg-[#8a6858] text-white flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-[10px] font-bold">check</span>
-                                          </div>
-                                        ) : (
-                                          <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/50" />
-                                        )}
-                                      </button>
-
-                                      {/* Lesson Code & Title */}
-                                      <div className="min-w-0">
-                                        <div className="flex items-center gap-1.5 mb-0.5">
-                                          {lesson.code && (
-                                            <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md border ${
-                                              isSelected 
-                                                ? "bg-[#8a6858] text-white border-[#8a6858]" 
-                                                : "bg-[#f8e3db] text-[#6e4336] border-[#e8cdc1]"
-                                            }`}>
-                                              {lesson.code}
-                                            </span>
-                                          )}
-                                          {isSelected && (
-                                            <span className="text-[10px] font-bold text-[#8a6858] animate-pulse flex items-center gap-0.5">
-                                              <span className="material-symbols-outlined text-xs">play_arrow</span>
-                                              PLAYING
-                                            </span>
-                                          )}
-                                        </div>
-                                        <h4 className={`text-xs font-bold truncate ${isSelected ? "text-[#5e382b]" : "text-[#341f18]"}`}>
-                                          {lesson.title}
-                                        </h4>
-                                      </div>
-                                    </div>
-
-                                    {/* Action Right: Single Download PDF button if PDF exists */}
-                                    {lesson.pdf && (
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          alert(`Downloading PDF: ${lesson.pdf}`);
-                                        }}
-                                        className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-lg flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
-                                        title={`Download PDF: ${lesson.pdf}`}
-                                      >
-                                        <span className="material-symbols-outlined text-[13px]">download</span>
-                                        PDF
-                                      </button>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-
-                        </div>
-                      </div>
-                    );
-                  })()}
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             })}
