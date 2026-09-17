@@ -952,24 +952,15 @@ function Homepage() {
 
                       return (
                         <>
-                          {/* Soft Lightened Peach-Chocolate Horizontal Timeline Track (Subtle Rose Gold Gradient Border) */}
+                          {/* Soft Lightened Peach-Chocolate Horizontal Timeline Track (Clean Rose Gold Border) */}
                           <div
                             style={{
                               backgroundColor: "rgba(255, 246, 242, 0.85)",
+                              border: "2px solid #c48b7c",
+                              boxShadow: "0 0 10px rgba(196, 139, 124, 0.25)",
                             }}
-                            className="relative py-3 px-3 md:px-5 rounded-xl backdrop-blur-md border border-[#c48b7c]/40"
+                            className="relative py-3 px-3 md:px-5 rounded-xl backdrop-blur-md"
                           >
-                            {/* Subtle Delicate Rose Gold Gradient Border Line */}
-                            <div
-                              className="absolute inset-0 rounded-xl pointer-events-none z-0"
-                              style={{
-                                border: "2px solid transparent",
-                                background: "linear-gradient(135deg, #c48b7c 0%, #f7d5cc 30%, #d49a8b 65%, #e8beae 100%) border-box",
-                                WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                                WebkitMaskComposite: "destination-out",
-                                maskComposite: "exclude",
-                              }}
-                            />
                             {/* Background Track Line */}
                             <div className="absolute top-1/2 left-5 right-5 -translate-y-1/2 h-[2.5px] bg-[#d6b4a6]/80 rounded-full hidden sm:block" />
                             {/* Animated Rose Gold Active Progress Line */}
@@ -1018,24 +1009,15 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Active Question & Answer Single Card (Subtle Rose Gold Gradient Border) */}
+                          {/* Active Question & Answer Single Card (Clean Rose Gold Border) */}
                           <div
                             style={{
                               backgroundColor: "rgba(255, 248, 244, 0.88)",
+                              border: "2px solid #c48b7c",
+                              boxShadow: "0 0 12px rgba(196, 139, 124, 0.25)",
                             }}
-                            className="relative rounded-xl p-4 md:p-5 backdrop-blur-md transition-all duration-300 border border-[#c48b7c]/40 overflow-hidden"
+                            className="rounded-xl p-4 md:p-5 backdrop-blur-md transition-all duration-300"
                           >
-                            {/* Subtle Delicate Rose Gold Gradient Border Line */}
-                            <div
-                              className="absolute inset-0 rounded-xl pointer-events-none z-0"
-                              style={{
-                                border: "2px solid transparent",
-                                background: "linear-gradient(135deg, #c48b7c 0%, #f7d5cc 30%, #d49a8b 65%, #e8beae 100%) border-box",
-                                WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                                WebkitMaskComposite: "destination-out",
-                                maskComposite: "exclude",
-                              }}
-                            />
                             {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
                             <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
                               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/85 border border-[#B58474]/50 text-[#6E4234] text-[10px] font-bold tracking-wider uppercase shadow-2xs">
@@ -1139,24 +1121,15 @@ function Homepage() {
                 ))}
 
 
-                {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks (Subtle Rose Gold Gradient Border Line) */}
+                {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
                 <div
                   style={{
                     backgroundColor: "rgba(245, 226, 215, 0.70)",
+                    border: "2.5px solid #c48b7c",
+                    boxShadow: "0 0 14px rgba(196, 139, 124, 0.3)",
                   }}
-                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-lg space-y-7 relative z-10 border border-[#c48b7c]/40 overflow-hidden"
+                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-lg space-y-7 relative z-10"
                 >
-                  {/* Subtle Delicate Rose Gold Gradient Border Line */}
-                  <div
-                    className="absolute inset-0 rounded-md pointer-events-none z-0"
-                    style={{
-                      border: "2.5px solid transparent",
-                      background: "linear-gradient(135deg, #c48b7c 0%, #f7d5cc 30%, #d49a8b 65%, #e8beae 100%) border-box",
-                      WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                      WebkitMaskComposite: "destination-out",
-                      maskComposite: "exclude",
-                    }}
-                  />
                   {/* Header */}
                   <div className="text-center space-y-2 max-w-xl mx-auto">
                     <h2 className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#5c3328] font-bold leading-tight drop-shadow-[0_1px_3px_rgba(255,255,255,0.7)]">
@@ -1205,20 +1178,11 @@ function Homepage() {
                         key={idx}
                         style={{
                           backgroundColor: "rgba(255, 255, 255, 0.62)",
+                          border: "1.5px solid #c48b7c",
+                          boxShadow: "0 0 8px rgba(196, 139, 124, 0.2)",
                         }}
-                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 flex flex-col justify-between gap-4 group cursor-pointer border border-[#c48b7c]/40"
+                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 flex flex-col justify-between gap-4 group cursor-pointer"
                       >
-                        {/* Subtle Delicate Rose Gold Gradient Border Line */}
-                        <div
-                          className="absolute inset-0 rounded-md pointer-events-none z-0"
-                          style={{
-                            border: "1.5px solid transparent",
-                            background: "linear-gradient(135deg, #c48b7c 0%, #f7d5cc 30%, #d49a8b 65%, #e8beae 100%) border-box",
-                            WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                            WebkitMaskComposite: "destination-out",
-                            maskComposite: "exclude",
-                          }}
-                        />
                         <div className="space-y-2.5 relative z-10">
                           {/* Comment */}
                           <p className="font-sans text-[11px] md:text-[11.5px] text-[#5c3328] leading-relaxed italic font-semibold drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
