@@ -275,8 +275,15 @@ function Homepage() {
                       from Zero to Mastery
                     </span>
                   </h1>
-                  <p className="text-sm md:text-base lg:text-lg font-bold text-[#6e4236] tracking-wide max-w-lg">
-                    Piano, Violin, Classic Theory
+                  <p 
+                    className="text-xs sm:text-sm md:text-base font-bold text-[#7c4d3e] tracking-[0.2em] uppercase max-w-lg flex items-center gap-3 flex-wrap"
+                    style={{ fontFamily: "'Cinzel', 'Cormorant Garamond', serif" }}
+                  >
+                    <span>Piano</span>
+                    <span className="text-[#b87c6d] font-normal text-sm">•</span>
+                    <span>Violin</span>
+                    <span className="text-[#b87c6d] font-normal text-sm">•</span>
+                    <span>Classic Theory</span>
                   </p>
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                     <button
