@@ -435,17 +435,13 @@ function Courses() {
                           {/* LEFT COLUMN: Video Player Screen */}
                           <div className="lg:col-span-7 flex flex-col gap-3">
                             <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group">
-                              <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
-                                <video
-                                  key={currentLessonKey}
-                                  controls
-                                  playsInline
-                                  poster="/glowing-3d-piano-keys.png"
-                                  className="w-full h-full object-cover"
-                                >
-                                  <source src="/dummy-piano-lesson.mp4" type="video/mp4" />
-                                  Your browser does not support the video tag.
-                                </video>
+                              <div className="relative aspect-video w-full bg-[#190f0c] flex items-center justify-center overflow-hidden">
+                                <img
+                                  src="/glowing-3d-piano-keys.png"
+                                  alt={currentLesson.title}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
                               </div>
                             </div>
                           </div>
@@ -574,19 +570,14 @@ function Courses() {
               </button>
             </div>
 
-            {/* HTML5 Video Player Box */}
-            <div className="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
-              <video
-                key={activeVideo.title}
-                controls
-                autoPlay
-                playsInline
-                poster="/glowing-3d-piano-keys.png"
+            {/* Magical Piano Preview Box */}
+            <div className="relative aspect-video bg-[#190f0c] flex items-center justify-center overflow-hidden">
+              <img
+                src="/glowing-3d-piano-keys.png"
+                alt={activeVideo.title}
                 className="w-full h-full object-cover"
-              >
-                <source src="/dummy-piano-lesson.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
             </div>
 
             {/* Modal Bottom Bar */}
