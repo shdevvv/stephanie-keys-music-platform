@@ -400,6 +400,8 @@ function Homepage() {
               </div>
               {/* Soft 30% White Overlay Layer */}
               <div className="absolute inset-0 bg-white/30 z-0 pointer-events-none" />
+              {/* Smooth White Top Gradient Overlay above Welcome Section */}
+              <div className="absolute inset-x-0 top-0 h-48 md:h-64 bg-gradient-to-b from-white via-white/60 to-transparent z-10 pointer-events-none" />
 
               {/* CSS Keyframes for falling glitters */}
               <style dangerouslySetInnerHTML={{
