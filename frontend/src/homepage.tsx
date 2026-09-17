@@ -984,14 +984,19 @@ function Homepage() {
                                     title={`Question ${item.num}: ${item.question}`}
                                   >
                                     <div className="relative w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
-                                      {/* Pure Circular Shiny White Aura Glow */}
+                                      {/* Pure Circular Shiny White Aura Glow for Active Node */}
                                       {isActive && (
-                                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#ffffff] via-[#ffffff] to-[#ffebe6] opacity-95 pointer-events-none" />
+                                        <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-[#ffffff] via-[#ffffff] to-[#ffebe6] opacity-95 pointer-events-none shadow-[0_0_10px_rgba(255,255,255,0.9)]" />
                                       )}
                                       <div
-                                        className={`relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold transition-all duration-300 ${isActive
-                                          ? "bg-gradient-to-br from-[#ffffff] via-[#fff7f5] to-[#f5ded6] text-[#4d281d] border-2 border-[#bd8174] scale-105"
-                                          : "bg-[#f5e3d7]/90 border border-[#bd8174]/50 text-[#6a3d30] group-hover:bg-[#faede4] group-hover:text-[#4d281d]"
+                                        style={{
+                                          background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                                          boxShadow: isActive
+                                            ? "0 0 10px rgba(255, 255, 255, 0.9), inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d"
+                                            : "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                                          border: isActive ? "2px solid #FFFFFF" : "1px solid #D9A998",
+                                        }}
+                                        className={`relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold text-white transition-all duration-300 group-hover:brightness-125 group-hover:scale-110 ${isActive ? "scale-110" : ""
                                           }`}
                                       >
                                         {item.num}
