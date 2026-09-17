@@ -446,44 +446,6 @@ function Courses() {
                                   <source src="/dummy-piano-lesson.mp4" type="video/mp4" />
                                   Your browser does not support the video tag.
                                 </video>
-
-                                {/* Top Badge Bar inside Video Screen (Clean code badge only) */}
-                                {currentLesson.code && (
-                                  <div className="absolute top-3 left-3 pointer-events-none z-10">
-                                    <span className="px-2.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md font-mono text-xs font-bold border border-white/30 text-[#f8e3db]">
-                                      {currentLesson.code}
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* Footer Meta under Video Screen */}
-                              <div className="p-4 bg-white border-t border-[#e8cdc1]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    {currentLesson.code && (
-                                      <span className="text-[11px] font-mono font-bold text-[#6e4336] bg-[#f8e3db] border border-[#e8cdc1] px-1.5 py-0.5 rounded-md">
-                                        {currentLesson.code}
-                                      </span>
-                                    )}
-                                    <h4 className="text-sm font-bold text-[#341f18]" style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif" }}>
-                                      {currentLesson.title}
-                                    </h4>
-                                  </div>
-                                </div>
-
-                                {currentLesson.pdf && (
-                                  <button
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      alert(`Downloading PDF: ${currentLesson.pdf}`);
-                                    }}
-                                    className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer shrink-0"
-                                  >
-                                    <span className="material-symbols-outlined text-sm">download</span>
-                                    Download PDF
-                                  </button>
-                                )}
                               </div>
                             </div>
                           </div>
