@@ -1213,10 +1213,10 @@ function Homepage() {
                     </p>
                   </div>
 
-                  {/* Main Large Warm Brown Outer Card wrapping the testimonial grid (slightly richer brown) */}
+                  {/* Main Large Warm Brown Outer Card wrapping the testimonial grid (80% opacity) */}
                   <div
                     style={{
-                      backgroundColor: "rgba(228, 185, 168, 0.82)",
+                      backgroundColor: "rgba(228, 185, 168, 0.80)",
                       border: "1.5px solid #b87766",
                       boxShadow: "0 0 14px rgba(184, 119, 102, 0.3)",
                     }}
