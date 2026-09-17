@@ -537,12 +537,12 @@ function Homepage() {
                             {/* Layer 4: Inner Hairline Crystal Frame framing zoomed-out photo */}
                             <div className="relative overflow-hidden w-full h-[460px] sm:h-[500px] rounded-[180px] border border-[#e8cdc1]/70 shadow-[inset_0_3px_25px_rgba(255,255,255,0.95),0_12px_30px_rgba(160,105,90,0.18)]">
                               <img
-                                className="w-full h-full object-cover object-[center_28%] scale-[1.14] transform-gpu"
+                                className="w-full h-full object-cover object-[center_30%] scale-[1.05] transform-gpu"
                                 style={{
-                                  filter: "contrast(1.03) saturate(1.02) brightness(1.02)",
+                                  filter: "contrast(1.02) saturate(1.03) brightness(1.01)",
                                   imageRendering: "crisp-edges",
                                 }}
-                                src="/stephanie-mentor-v5.jpg?v=6"
+                                src="/stephanie-mentor-v6.jpg?v=7"
                                 alt="Stephanie Halim - Mentor"
                               />
                             </div>
