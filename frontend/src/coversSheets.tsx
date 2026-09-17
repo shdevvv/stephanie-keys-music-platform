@@ -483,23 +483,65 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
           <div
             className="absolute inset-0 z-0 pointer-events-none"
             style={{
-              backgroundImage: "url('/video-studio-bg.jpg')",
+              backgroundImage: "url('/skeys-studio-hero-new.png')",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           />
-          {/* High white overlay opacity */}
+          {/* Enhanced white overlay opacity layer */}
           <div
-            className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-white/78 via-white/82 to-white/86"
+            className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-white/60 via-white/65 to-white/70"
           />
           {/* Ambient background decoration */}
           <div className="absolute top-12 left-1/4 w-72 h-72 bg-[#ffd89b]/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
           <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/8 rounded-full blur-[90px] pointer-events-none z-0"></div>
 
           <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 space-y-6">
-            {/* Video Covers Grid */}
+            {/* Left-Aligned S.Keys Performance & Covers Badge with Attached Triple Solid Lines */}
+            <div className="flex items-center gap-0 w-full mb-9">
+              {/* Button Badge */}
+              <div 
+                className="inline-flex items-center gap-2.5 px-4 py-2 rounded-[4px] bg-white/95 border-[1.5px] border-[#c89482] shadow-xs shrink-0 relative z-10"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#a06e5e] animate-pulse"></span>
+                <span 
+                  className="text-[12.5px] font-bold tracking-[0.2em] uppercase text-[#5e382b]"
+                  style={{ fontFamily: "'Cinzel', serif" }}
+                >
+                  S.Keys Performance &amp; Covers
+                </span>
+              </div>
+
+              {/* Ultra-Fine Sleek Triple Metallic Rose Gold Hairlines attached to button */}
+              <div className="flex-1 flex flex-col justify-center gap-[2.5px] -ml-[1px] relative z-0">
+                {/* Line 1: Lead Rose Gold Line (1.25px) */}
+                <div 
+                  className="w-full h-[1.25px] rounded-r-full"
+                  style={{
+                    background: 'linear-gradient(90deg, #b86d5c 0%, #e8b4a2 40%, #c88879 80%, #9e5a4b 100%)',
+                    boxShadow: '0 0.5px 1px rgba(184, 109, 92, 0.2)'
+                  }}
+                />
+                {/* Line 2: Delicate Hairline Accent (0.75px) */}
+                <div 
+                  className="w-full h-[0.75px] rounded-r-full"
+                  style={{
+                    background: 'linear-gradient(90deg, #d9a998 0%, #f7e4dc 50%, #e2b0a4 100%)'
+                  }}
+                />
+                {/* Line 3: Soft Support Hairline (1px) */}
+                <div 
+                  className="w-full h-[1px] rounded-r-full"
+                  style={{
+                    background: 'linear-gradient(90deg, #8a5345 0%, #b57262 50%, #6e3e32 100%)'
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Video Covers Grid (2 rows = 10 videos) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
-              {covers.slice(0, 15).map((cover, index) => (
+              {covers.slice(0, 10).map((cover, index) => (
                 <div
                   key={index}
                   onClick={() => setActiveVideo(cover)}
@@ -585,10 +627,10 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
             >
               {/* Single Horizontal Flex Row */}
               <div className="flex flex-wrap lg:flex-nowrap items-center gap-4 lg:gap-6 relative z-10">
-                {/* 1. Refined, Elegant & Compact Title (Sharp Vector Text) */}
+                {/* 1. Refined, Elegant & Compact Calligraphy Title */}
                 <h2 
-                  style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
-                  className="font-display-lg text-lg md:text-xl lg:text-[22px] text-[#5e2b1e] font-extrabold tracking-tight whitespace-nowrap shrink-0 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]"
+                  style={{ fontFamily: "'Dancing Script', 'Cormorant Garamond', 'Playfair Display', cursive, serif" }}
+                  className="text-2xl md:text-3xl lg:text-[32px] text-[#5e2b1e] font-bold tracking-wide whitespace-nowrap shrink-0 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]"
                 >
                   Sheet Music Shop
                 </h2>

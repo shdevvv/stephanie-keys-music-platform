@@ -8,29 +8,28 @@ interface NextRecommendedLessonCardProps {
 
 export const NextRecommendedLessonCard: React.FC<NextRecommendedLessonCardProps> = ({ recommendedLesson, onNavigate }) => {
   return (
-    <div className="bg-gradient-to-br from-white via-white to-[#ffe5db]/50 border border-[#dfa38f]/40 rounded-2xl p-6 shadow-xl space-y-4">
-      <div className="flex items-center justify-between">
-        <span className="px-3 py-1 rounded-full bg-[#dfa38f]/20 text-[#854d38] text-[10px] font-extrabold uppercase tracking-wider border border-[#dfa38f]/30">
-          🎯 Next Recommended Lesson
-        </span>
-        <span className="text-xs text-[#8b7368] font-bold">
-          Level {recommendedLesson.levelNumber} &bull; {recommendedLesson.durationMinutes} Mins
-        </span>
-      </div>
-
+    <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-md p-3 shadow-md space-y-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div className="space-y-1">
-        <h3 className="font-display-sm text-xl font-bold text-[#4a372e]">{recommendedLesson.lessonTitle}</h3>
-        <p className="text-xs text-[#8b7368] font-medium">{recommendedLesson.topicTitle}</p>
+        <div className="flex items-center gap-2">
+          <span className="px-2.5 py-0.5 rounded-md bg-[#dfa38f]/20 text-[#854d38] text-[9.5px] font-extrabold uppercase tracking-wider border border-[#dfa38f]/50">
+            🎯 Next Recommended Lesson
+          </span>
+          <span className="text-[10.5px] text-[#8b7368] font-bold">
+            Level {recommendedLesson.levelNumber} &bull; {recommendedLesson.durationMinutes} Mins
+          </span>
+        </div>
+        <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="text-base font-bold text-[#4a372e] leading-tight">{recommendedLesson.lessonTitle}</h3>
+        <p className="text-[11px] text-[#8b7368] font-medium">{recommendedLesson.topicTitle}</p>
       </div>
 
       <button
         type="button"
         onClick={() => onNavigate('courses')}
         style={{ backgroundImage: 'linear-gradient(135deg, #dfa38f 0%, #ab7e66 100%)' }}
-        className="w-full py-3 rounded-xl text-white text-xs font-bold uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
+        className="py-2 px-4 rounded-md text-white text-[11px] font-bold uppercase tracking-wider shadow-sm hover:scale-[1.02] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0 border border-[#dfa38f]"
       >
-        <span className="material-symbols-outlined text-lg">play_circle</span>
-        Resume Pathway Learning
+        <span className="material-symbols-outlined text-base">play_circle</span>
+        Resume Pathway
       </button>
     </div>
   );

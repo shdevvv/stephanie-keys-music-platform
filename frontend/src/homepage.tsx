@@ -240,7 +240,7 @@ function Homepage() {
                 <img
                   className="w-full h-full object-cover object-[85%_25%] transform transition-all duration-500"
                   alt="Luxury grand piano in palace music hall"
-                  src="/hero-sheet-palace.jpg?v=5"
+                  src="/sheet-hero-new.png?v=hd"
                 />
               </div>
 
@@ -520,24 +520,35 @@ function Homepage() {
                     <div className="absolute w-72 h-72 bg-[#ffd89b]/20 rounded-full blur-[80px] pointer-events-none -z-10" />
                     <div className="absolute w-80 h-80 bg-[#dfa38f]/18 rounded-full blur-[90px] pointer-events-none -z-10" />
 
-                    {/* Rectangular Heavy Glossy Rose Gold Frame Container */}
-                    <div
-                      style={{
-                        background: "linear-gradient(135deg, #FFF0EB 0%, #E2B0A4 35%, #C48B7C 70%, #8C5446 100%) padding-box, linear-gradient(135deg, #ffffff 0%, #f8e3db 20%, #e2b0a4 45%, #c48b7c 75%, #7a4639 100%) border-box",
-                        border: "6px solid transparent",
-                        boxShadow: "0 22px 55px rgba(160, 105, 90, 0.28), 0 0 30px rgba(226, 176, 164, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.95)",
-                      }}
-                      className="relative overflow-hidden w-full max-w-[350px] sm:max-w-[390px] h-[440px] sm:h-[480px] lg:h-[500px] rounded-2xl"
-                    >
-                      <img
-                        className="w-full h-full object-cover object-[45%_16%] scale-[1.22] transform-gpu"
-                        style={{
-                          filter: "contrast(1.05) saturate(1.03) brightness(1.02)",
-                          imageRendering: "crisp-edges",
-                        }}
-                        src="/profile-photo.jpg?v=3"
-                        alt="Stephanie Halim - Mentor"
-                      />
+                    {/* Ultra-Glossy 4-Layered Sparkling Crystal Glass Capsule Frame */}
+                    <div className="relative max-w-[360px] sm:max-w-[390px] w-full flex items-center justify-center">
+                      {/* Floating Sparkling Magic Star Ornaments */}
+                      <span className="absolute -top-3 -left-2 text-2xl text-white drop-shadow-[0_0_12px_rgba(255,255,255,1)] animate-pulse pointer-events-none z-30">✨</span>
+                      <span className="absolute top-1/4 -right-4 text-xl text-[#fdeee8] drop-shadow-[0_0_14px_rgba(255,255,255,1)] animate-pulse pointer-events-none z-30" style={{ animationDelay: '500ms' }}>✦</span>
+                      <span className="absolute bottom-8 -left-4 text-2xl text-[#f5d6cb] drop-shadow-[0_0_15px_rgba(255,255,255,1)] animate-pulse pointer-events-none z-30" style={{ animationDelay: '1000ms' }}>✨</span>
+                      <span className="absolute -bottom-2 right-6 text-xl text-white drop-shadow-[0_0_12px_rgba(255,255,255,1)] animate-pulse pointer-events-none z-30" style={{ animationDelay: '1500ms' }}>✦</span>
+
+                      {/* Layer 1: Outer Ultra-Bright Glass Shell with Glowing White-Peach Halo */}
+                      <div className="relative p-3 rounded-[240px] bg-white/45 backdrop-blur-xl border-2 border-white/95 shadow-[0_25px_70px_rgba(184,124,109,0.2),0_0_50px_rgba(255,255,255,0.95),0_0_25px_rgba(253,238,232,0.9),inset_0_2px_8px_rgba(255,255,255,1)] w-full">
+                        {/* Layer 2: Second Light-Peach Crystal Ring */}
+                        <div className="p-2.5 rounded-[220px] bg-[#fdeee8]/40 backdrop-blur-md border border-[#f5d6cb]/80 shadow-[inset_0_1.5px_5px_rgba(255,255,255,0.95),0_0_20px_rgba(255,255,255,0.8)]">
+                          {/* Layer 3: Third Ultra-Glossy White Glass Ring */}
+                          <div className="p-2 rounded-[200px] bg-white/35 backdrop-blur-sm border-[2.5px] border-white/95 shadow-[0_0_22px_rgba(255,255,255,0.95),inset_0_1px_3px_rgba(255,255,255,1)]">
+                            {/* Layer 4: Inner Hairline Crystal Frame framing zoomed-out photo */}
+                            <div className="relative overflow-hidden w-full h-[460px] sm:h-[500px] rounded-[180px] border border-[#e8cdc1]/70 shadow-[inset_0_3px_25px_rgba(255,255,255,0.95),0_12px_30px_rgba(160,105,90,0.18)]">
+                              <img
+                                className="w-full h-full object-cover object-[center_38%] scale-[0.92] transform-gpu"
+                                style={{
+                                  filter: "contrast(1.03) saturate(1.02) brightness(1.02)",
+                                  imageRendering: "crisp-edges",
+                                }}
+                                src="/stephanie-mentor-new.jpg?v=4"
+                                alt="Stephanie Halim - Mentor"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -993,8 +1004,8 @@ function Homepage() {
                                   disabled={activeFaq === 0}
                                   title="Previous Question"
                                   className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === 0
-                                      ? "opacity-30 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/40"
-                                      : "bg-white/85 hover:bg-[#b58474] text-[#6E4234] hover:text-white border border-[#B58474]/60 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                    ? "opacity-30 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/40"
+                                    : "bg-white/85 hover:bg-[#b58474] text-[#6E4234] hover:text-white border border-[#B58474]/60 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                                     }`}
                                 >
                                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1007,8 +1018,8 @@ function Homepage() {
                                   disabled={activeFaq === faqItems.length - 1}
                                   title="Next Question"
                                   className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === faqItems.length - 1
-                                      ? "opacity-30 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/40"
-                                      : "bg-white/85 hover:bg-[#b58474] text-[#6E4234] hover:text-white border border-[#B58474]/60 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                    ? "opacity-30 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/40"
+                                    : "bg-white/85 hover:bg-[#b58474] text-[#6E4234] hover:text-white border border-[#B58474]/60 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                                     }`}
                                 >
                                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1085,11 +1096,11 @@ function Homepage() {
                 {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
                 <div
                   style={{
-                    background: "linear-gradient(135deg, rgba(251, 248, 245, 0.35) 0%, rgba(251, 248, 245, 0.05) 50%, rgba(251, 248, 245, 0) 100%)",
+                    background: "rgba(251, 248, 245, 0.1)",
                     border: "2px solid #bd8174",
                     boxShadow: "0 0 14px rgba(189, 129, 116, 0.35), 0 10px 30px rgba(160,110,95,0.1)",
                   }}
-                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-[26px] space-y-7 relative z-10"
+                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-md space-y-7 relative z-10"
                 >
                   {/* Header */}
                   <div className="text-center space-y-2 max-w-xl mx-auto">
@@ -1141,7 +1152,7 @@ function Homepage() {
                           border: "1.5px solid #bd8174",
                           boxShadow: "0 0 8px rgba(189, 129, 116, 0.2)",
                         }}
-                        className="relative overflow-hidden p-4.5 rounded-[18px] bg-[#FBF8F5] transition-all duration-300 hover:-translate-y-1 hover:border-[#c48b7c] hover:bg-white flex flex-col justify-between gap-4 group cursor-pointer"
+                        className="relative overflow-hidden p-4.5 rounded-md bg-transparent backdrop-blur-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#c48b7c] hover:bg-white/10 flex flex-col justify-between gap-4 group cursor-pointer"
                       >
                         <div className="space-y-2.5 relative z-10">
                           {/* Comment */}

@@ -249,33 +249,33 @@ function Dashboard({ onNavigate }: DashboardProps) {
   }
 
   return (
-    <main className="pt-4 pb-6 px-6 max-w-[1400px] mx-auto w-full flex flex-col gap-4">
+    <main className="py-2 px-3 md:px-5 max-w-[1400px] mx-auto w-full flex flex-col gap-2 min-h-0">
       
       {/* Connection Settings panel (overlay modal) */}
       {showSettings && (
-        <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white/95 backdrop-blur-md border border-[#e8cdc1]/40 rounded-[28px] p-6 max-w-lg w-full shadow-2xl space-y-4 animate-in zoom-in-95 duration-200 relative">
+        <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white/90 backdrop-blur-lg border-2 border-[#dfa38f] rounded-md p-5 max-w-lg w-full shadow-2xl space-y-4 animate-in zoom-in-95 duration-200 relative">
             <button 
               type="button"
               onClick={() => setShowSettings(false)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-[#f3ecea] hover:bg-[#e8cdc1] transition-colors border-none cursor-pointer text-[#6e5a51] flex items-center justify-center"
+              className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-md bg-[#f3ecea] hover:bg-[#e8cdc1] transition-colors border border-[#dfa38f]/50 cursor-pointer text-[#6e5a51]"
             >
-              <span className="material-symbols-outlined text-lg">close</span>
+              <span className="material-symbols-outlined text-base">close</span>
             </button>
-            <h3 className="text-lg font-semibold flex items-center gap-2 text-[#6e5a51] font-display-lg">
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="text-base font-bold flex items-center gap-2 text-[#6e5a51]">
               <span className="material-symbols-outlined">settings</span>
               API Gateway Database Settings
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#4f4540] mb-2">
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4f4540] mb-1.5">
                   C# Gateway API Endpoint Base URL
                 </label>
                 <input 
                   type="text" 
                   value={apiUrl}
                   onChange={(e) => setApiUrl(e.target.value)}
-                  className="w-full bg-[#f3ecea] border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-[#e8cdc1] focus:outline-none text-sm"
+                  className="w-full bg-transparent border border-[#dfa38f] rounded-md py-2 px-3 focus:ring-1 focus:ring-[#dfa38f] focus:outline-none text-xs text-[#5a3a2e]"
                   placeholder="http://localhost:5000"
                 />
               </div>
@@ -283,29 +283,29 @@ function Dashboard({ onNavigate }: DashboardProps) {
                 <button
                   type="button"
                   onClick={testConnection}
-                  className="bg-white hover:bg-[#f9f2f0] text-[#6e5a51] font-semibold px-4 py-2.5 rounded-xl transition duration-200 text-xs border border-[#d2c3bd] flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="bg-transparent hover:bg-white/30 text-[#6e5a51] font-bold px-3 py-1.5 rounded-md transition duration-200 text-xs border border-[#dfa38f] flex items-center justify-center gap-1 cursor-pointer"
                 >
                   Test Connection
                 </button>
                 <button 
                   type="button"
                   onClick={handleSaveApiUrl}
-                  className="bg-[#6e5a51] text-white px-6 py-2.5 rounded-xl font-semibold hover:opacity-90 active:scale-95 transition-all border-none cursor-pointer text-xs"
+                  className="bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] text-white px-5 py-1.5 rounded-md font-bold hover:opacity-90 active:scale-95 transition-all border border-[#dfa38f] cursor-pointer text-xs"
                 >
                   Save
                 </button>
               </div>
             </div>
             {connectionTest.status !== 'idle' && (
-              <div className={`p-3 rounded-xl border text-sm flex items-start gap-2.5 ${
+              <div className={`p-2.5 rounded-md border text-xs flex items-start gap-2 ${
                 connectionTest.status === 'success' 
-                  ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700' 
-                  : 'bg-red-500/10 border-red-500/30 text-red-700'
+                  ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-800' 
+                  : 'bg-red-500/10 border-red-500/40 text-red-800'
               }`}>
-                <span className="material-symbols-outlined shrink-0 mt-0.5">info</span>
+                <span className="material-symbols-outlined shrink-0 text-base mt-0.5">info</span>
                 <div>
-                  <p className="font-semibold">{connectionTest.status === 'success' ? 'Connected successfully' : 'Connection failed'}</p>
-                  <p className="text-xs mt-0.5 opacity-90">{connectionTest.message}</p>
+                  <p className="font-bold">{connectionTest.status === 'success' ? 'Connected successfully' : 'Connection failed'}</p>
+                  <p className="text-[10.5px] mt-0.5 opacity-90">{connectionTest.message}</p>
                 </div>
               </div>
             )}
@@ -313,343 +313,336 @@ function Dashboard({ onNavigate }: DashboardProps) {
         </div>
       )}
 
-
         
-        {/* 1. Header Welcome Banner */}
-        <section className="backdrop-blur-md glossy-rose-gold-border rounded-[22px] p-4 flex items-center justify-between gap-4 shrink-0">
-          <div className="flex items-center gap-3 animate-in fade-in slide-in-from-top-1 duration-300">
-            <h1 className="font-display-lg text-lg md:text-xl text-[#6e5a51] font-bold">Welcome back, Julian!</h1>
-            <span className="px-3 py-1 rounded-full bg-gradient-to-r from-[#b76e79] via-[#d29e9f] to-[#b76e79] text-white text-[9px] font-bold uppercase tracking-widest shadow-[0_2px_8px_rgba(183,110,121,0.3)] border border-white/20 flex items-center gap-1">
-              <span className="material-symbols-outlined text-[11px] font-bold">star</span>
-              Standard Member
-            </span>
-            <span className="px-3 py-1 rounded-full bg-gradient-to-r from-[#d4af37] via-[#fff3a8] to-[#aa7c11] text-[#3d251c] text-[9px] font-black uppercase tracking-widest shadow-[0_2px_8px_rgba(212,175,55,0.3)] border border-[#d4af37]/30 flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-[12px] font-black">workspace_premium</span>
-              {totalCurrentXP.toLocaleString()} XP
-            </span>
+      {/* 1. Header Welcome Banner */}
+      <section className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-md px-3.5 py-2 flex items-center justify-between gap-3 shrink-0 shadow-md">
+        <div className="flex items-center gap-2.5 animate-in fade-in duration-300">
+          <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="text-base md:text-lg text-[#5a3a2e] font-extrabold tracking-tight">Welcome back, Julian!</h1>
+          <span className="px-2.5 py-0.5 rounded-md bg-transparent text-[#7a4b3d] text-[9px] font-black uppercase tracking-wider border border-[#dfa38f] flex items-center gap-1">
+            <span className="material-symbols-outlined text-[11px] font-black text-[#d4af37]">workspace_premium</span>
+            {totalCurrentXP.toLocaleString()} XP
+          </span>
+        </div>
+      </section>
+
+      {/* Achievement Badges Showcase & Modal */}
+      <BadgeShowcaseWidget badges={userBadges} />
+      <BadgeCelebrationModal badge={celebrationBadge} onClose={() => setCelebrationBadge(null)} />
+
+      {/* Next Recommended Lesson Card */}
+      {dashboardSummary?.nextRecommendedLesson && (
+        <NextRecommendedLessonCard
+          recommendedLesson={dashboardSummary.nextRecommendedLesson}
+          onNavigate={onNavigate}
+        />
+      )}
+
+      {/* Main Grid Layout (3 on top, 3 at the bottom) - Compact fit for 100% viewport */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 min-h-0">
+        
+        {/* Card 1: Overall Progress */}
+        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-md p-3 flex flex-col justify-between h-[185px] shrink-0 gap-1.5 shadow-md">
+          <div className="flex justify-between items-center shrink-0">
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Overall Progress</h3>
           </div>
-        </section>
-
-        {/* Achievement Badges Showcase & Modal */}
-        <BadgeShowcaseWidget badges={userBadges} />
-        <BadgeCelebrationModal badge={celebrationBadge} onClose={() => setCelebrationBadge(null)} />
-
-        {/* Next Recommended Lesson Card */}
-        {dashboardSummary?.nextRecommendedLesson && (
-          <NextRecommendedLessonCard
-            recommendedLesson={dashboardSummary.nextRecommendedLesson}
-            onNavigate={onNavigate}
-          />
-        )}
-
-        {/* Main Grid Layout (3 on top, 3 at the bottom) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 min-h-0">
-          
-          {/* Card 1: Overall Progress */}
-          <div className="backdrop-blur-md glossy-rose-gold-border rounded-[22px] p-4 flex flex-col justify-between h-[235px] shrink-0 gap-2">
-            <div className="flex justify-between items-center shrink-0">
-              <h3 className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Overall Progress</h3>
-            </div>
-            <div className="flex flex-col flex-grow justify-between py-1">
-              <div className="flex items-center justify-around gap-2 mt-2">
-                {/* Circular Meter */}
-                <div className="relative w-20 h-20 shrink-0">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <defs>
-                      <linearGradient id="masteryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ab7e66" />
-                        <stop offset="100%" stopColor="#e8cdc1" />
-                      </linearGradient>
-                    </defs>
-                    <circle cx="40" cy="40" fill="transparent" r="32" stroke="#f2dfd7" strokeWidth="4.5"></circle>
-                    <circle 
-                      className="progress-circle text-[#6e5a51]" 
-                      cx="40" 
-                      cy="40" 
-                      fill="transparent" 
-                      r="32" 
-                      stroke="url(#masteryGrad)" 
-                      strokeLinecap="round" 
-                      strokeWidth="5.5"
-                      style={{
-                        strokeDasharray: '201.1',
-                        strokeDashoffset: `calc(201.1 - (201.1 * ${mastery}) / 100)`
-                      }}
-                    ></circle>
-                  </svg>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                    <span className="font-display-lg text-sm text-[#3d251c] font-black">{mastery}%</span>
-                    <span className="text-[7px] font-bold text-[#81756f] uppercase tracking-widest leading-none mt-0.5">Mastery</span>
-                  </div>
-                </div>
-
-                {/* Progress Text Details */}
-                <div className="flex flex-col min-w-0">
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-[#81756f]">Julian's Progress</p>
-                  <p className="text-xl font-black text-[#3d251c] leading-tight mt-1">{completedCount}</p>
-                  <p className="text-[9px] text-[#6e5a51] font-semibold mt-0.5">Lessons Completed</p>
-                  <p className="text-[8px] text-[#ab7e66] italic mt-1">Keep practicing daily!</p>
+          <div className="flex flex-col flex-grow justify-between py-0.5">
+            <div className="flex items-center justify-around gap-2 my-auto">
+              {/* Circular Meter */}
+              <div className="relative w-16 h-16 shrink-0">
+                <svg className="w-full h-full transform -rotate-90">
+                  <defs>
+                    <linearGradient id="masteryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#ab7e66" />
+                      <stop offset="100%" stopColor="#dfa38f" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="32" cy="32" fill="transparent" r="26" stroke="#f2dfd7" strokeWidth="4"></circle>
+                  <circle 
+                    className="progress-circle text-[#6e5a51]" 
+                    cx="32" 
+                    cy="32" 
+                    fill="transparent" 
+                    r="26" 
+                    stroke="url(#masteryGrad)" 
+                    strokeLinecap="round" 
+                    strokeWidth="4.5"
+                    style={{
+                      strokeDasharray: '163.3',
+                      strokeDashoffset: `calc(163.3 - (163.3 * ${mastery}) / 100)`
+                    }}
+                  ></circle>
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <span className="font-display-lg text-xs text-[#3d251c] font-black">{mastery}%</span>
+                  <span className="text-[6.5px] font-bold text-[#81756f] uppercase tracking-widest leading-none mt-0.5">Mastery</span>
                 </div>
               </div>
 
-              {/* Resume Button */}
-              <button 
-                onClick={() => alert("Resuming your last video masterclass...")}
-                className="w-full bg-gradient-to-r from-[#856758] to-[#ab7e66] hover:from-[#6e5a51] hover:to-[#856758] text-white font-bold text-[10px] uppercase tracking-wider py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border-none cursor-pointer flex items-center justify-center gap-1.5 active:scale-98"
-              >
-                <span className="material-symbols-outlined text-[14px]">play_circle</span>
-                Resume Lesson
-              </button>
+              {/* Progress Text Details */}
+              <div className="flex flex-col min-w-0">
+                <p className="text-[8.5px] font-bold uppercase tracking-widest text-[#81756f]">Julian's Progress</p>
+                <p className="text-lg font-black text-[#3d251c] leading-tight mt-0.5">{completedCount}</p>
+                <p className="text-[8.5px] text-[#6e5a51] font-semibold">Lessons Completed</p>
+                <p className="text-[7.5px] text-[#ab7e66] italic">Keep practicing daily!</p>
+              </div>
             </div>
+
+            {/* Resume Button */}
+            <button 
+              onClick={() => alert("Resuming your last video masterclass...")}
+              className="w-full bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] hover:from-[#856758] hover:to-[#ab7e66] text-white font-bold text-[9.5px] uppercase tracking-wider py-1.5 rounded-md shadow-xs transition-all duration-300 border border-[#dfa38f] cursor-pointer flex items-center justify-center gap-1 active:scale-98 shrink-0"
+            >
+              <span className="material-symbols-outlined text-[13px]">play_circle</span>
+              Resume Lesson
+            </button>
           </div>
+        </div>
 
-          {/* Card 2: Weekly Practice Intensity */}
-          <div className="backdrop-blur-md glossy-rose-gold-border rounded-[22px] p-4 flex flex-col justify-between h-[235px] shrink-0 gap-2">
-            <div className="flex justify-between items-center shrink-0">
-              <h3 className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Weekly Practice Intensity</h3>
-            </div>
-            <div className="flex items-end justify-between gap-3 px-2 h-[120px] mt-2 shrink-0">
-              {(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as const).map((day) => {
-                const dayCompletedCount = completedLessons.filter(c => c.day === day).length
+        {/* Card 2: Weekly Practice Intensity */}
+        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-md p-3 flex flex-col justify-between h-[185px] shrink-0 gap-1.5 shadow-md">
+          <div className="flex justify-between items-center shrink-0">
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Weekly Practice Intensity</h3>
+          </div>
+          <div className="flex items-end justify-between gap-2 px-1 h-[100px] mt-1 shrink-0">
+            {(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as const).map((day) => {
+              const dayCompletedCount = completedLessons.filter(c => c.day === day).length
+              const barHeight = `${Math.min(80, 8 + dayCompletedCount * 14)}px`
 
-                // Baseline is 8px, completed count scales up to 108px.
-                const barHeight = `${Math.min(108, 8 + dayCompletedCount * 16)}px`
-
-                return (
-                  <div key={day} className="flex flex-col items-center gap-2 w-full justify-end animate-in fade-in duration-300">
-                    <div className="w-full flex flex-col justify-end h-[108px]">
-                      <div 
-                        className="bg-gradient-to-t from-[#856758] to-[#ab7e66] hover:to-[#d29070] rounded-lg w-full transition-all duration-300 shadow-sm" 
-                        style={{ height: barHeight }} 
-                        title={`${dayCompletedCount} Lessons Completed`}
-                      ></div>
-                    </div>
-                    <span className="text-[10px] font-bold text-[#4f4540]">{day}</span>
+              return (
+                <div key={day} className="flex flex-col items-center gap-1 w-full justify-end animate-in fade-in duration-300">
+                  <div className="w-full flex flex-col justify-end h-[80px]">
+                    <div 
+                      className="bg-gradient-to-t from-[#ab7e66] to-[#dfa38f] hover:to-[#eec0b2] rounded-xs w-full transition-all duration-300 border border-[#dfa38f]/40" 
+                      style={{ height: barHeight }} 
+                      title={`${dayCompletedCount} Lessons Completed`}
+                    ></div>
                   </div>
-                );
-              })}
-            </div>
+                  <span className="text-[9px] font-bold text-[#4f4540]">{day}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Card 3: Student To Do List */}
+        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-md p-3 flex flex-col h-[185px] shrink-0 gap-2 shadow-md">
+          <div className="flex justify-between items-start shrink-0">
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Student To Do List</h3>
           </div>
 
-          {/* Card 3: Student To Do List */}
-          <div className="backdrop-blur-md glossy-rose-gold-border rounded-[22px] p-4 flex flex-col h-[235px] shrink-0 gap-3">
-            <div className="flex justify-between items-start shrink-0">
-              <h3 className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Student To Do List</h3>
-            </div>
-
-            <div className="flex flex-col gap-2 flex-grow min-h-0">
-              {/* Form */}
-              <div className="flex flex-col gap-1 shrink-0">
-                <div className="flex justify-between items-center">
-                  <h4 className="font-bold text-[9px] uppercase tracking-wider text-[#81756f]">
-                    {editingId ? 'Edit Task' : 'Add Task'}
-                  </h4>
-                  {editingId && (
-                    <button 
-                      onClick={handleCancelEdit} 
-                      className="text-[9px] font-bold text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer"
-                    >
-                      Cancel
-                    </button>
-                  )}
-                </div>
-                <form onSubmit={handleAddOrUpdateTodo} className="flex gap-2">
-                  <input
-                    type="text"
-                    required
-                    placeholder="E.g., Practice Misty chord runs"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="flex-grow bg-[#f3ecea]/60 border-none rounded-lg px-3 py-1.5 text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-1 focus:ring-[#e8cdc1] text-[10px]"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-gradient-to-br from-[#e8cdc1] to-[#f2dfd7] text-[#6a564d] font-semibold px-3 py-1.5 rounded-lg text-[10px] active:scale-[0.98] transition-all border-none cursor-pointer flex items-center justify-center shrink-0"
+          <div className="flex flex-col gap-1.5 flex-grow min-h-0">
+            {/* Form */}
+            <div className="flex flex-col gap-1 shrink-0">
+              <div className="flex justify-between items-center">
+                <h4 className="font-bold text-[8.5px] uppercase tracking-wider text-[#81756f]">
+                  {editingId ? 'Edit Task' : 'Add Task'}
+                </h4>
+                {editingId && (
+                  <button 
+                    onClick={handleCancelEdit} 
+                    className="text-[8.5px] font-bold text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer"
                   >
-                    {editingId ? 'Save' : 'Add'}
+                    Cancel
                   </button>
-                </form>
+                )}
               </div>
+              <form onSubmit={handleAddOrUpdateTodo} className="flex gap-1.5">
+                <input
+                  type="text"
+                  required
+                  placeholder="E.g., Practice Misty chord runs"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="flex-grow bg-transparent border border-[#dfa38f]/50 rounded-md px-2.5 py-1 text-[#5a3a2e] placeholder:text-[#ab7e66]/60 focus:outline-none focus:border-[#dfa38f] text-[9.5px] font-medium"
+                />
+                <button
+                  type="submit"
+                  className="bg-transparent border border-[#dfa38f] text-[#6e5a51] font-bold px-2.5 py-1 rounded-md text-[9.5px] hover:bg-white/20 active:scale-98 transition-all cursor-pointer flex items-center justify-center shrink-0"
+                >
+                  {editingId ? 'Save' : 'Add'}
+                </button>
+              </form>
+            </div>
 
-              {/* Items List */}
-              <div className="flex flex-col min-h-0 flex-grow gap-1">
-                <h4 className="font-bold text-[9px] uppercase tracking-wider text-[#81756f] shrink-0">My Tasks ({todos.length})</h4>
-                <div className="flex-grow min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-1">
-                  {todos.length === 0 ? (
-                    <p className="text-[10px] text-[#4f4540] italic py-1">No tasks added. Add tasks above to track your practice!</p>
-                  ) : (
-                    todos.map((todo) => (
-                      <div key={todo.id} className="p-1.5 bg-white/40 border border-[#e8cdc1]/10 rounded-xl flex items-start justify-between gap-2 group animate-in fade-in duration-200">
+            {/* Items List */}
+            <div className="flex flex-col min-h-0 flex-grow gap-1">
+              <h4 className="font-bold text-[8.5px] uppercase tracking-wider text-[#81756f] shrink-0">My Tasks ({todos.length})</h4>
+              <div className="flex-grow min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-1">
+                {todos.length === 0 ? (
+                  <p className="text-[9.5px] text-[#4f4540] italic py-0.5">No tasks added. Add tasks above to track your practice!</p>
+                ) : (
+                  todos.map((todo) => (
+                    <div key={todo.id} className="p-1.5 bg-transparent border border-[#dfa38f]/40 rounded-md flex items-start justify-between gap-1.5 group animate-in fade-in duration-200 hover:bg-white/10">
+                      <button 
+                        type="button"
+                        onClick={() => handleToggleTodo(todo.id)}
+                        className="mt-0.5 shrink-0 bg-transparent border-none cursor-pointer focus:outline-none flex items-center justify-center p-0"
+                      >
+                        {todo.isCompleted ? (
+                          <div className="w-4 h-4 rounded-md bg-transparent border-1.5 border-[#b76e79] flex items-center justify-center">
+                            <span className="material-symbols-outlined text-[#b76e79] text-[10px] font-black">check</span>
+                          </div>
+                        ) : (
+                          <div className="w-4 h-4 rounded-md bg-transparent border-1.5 border-[#dfa38f]/60 flex items-center justify-center transition-all duration-200"></div>
+                        )}
+                      </button>
+                      <div className="flex-grow min-w-0">
+                        <p className={`text-[9.5px] font-semibold truncate ${todo.isCompleted ? 'line-through text-[#81756f]' : 'text-[#5a3a2e]'}`}>{todo.title}</p>
+                      </div>
+                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all shrink-0 self-center">
                         <button 
                           type="button"
-                          onClick={() => handleToggleTodo(todo.id)}
-                          className="mt-0.5 shrink-0 bg-transparent border-none cursor-pointer focus:outline-none flex items-center justify-center p-0"
+                          onClick={() => handleEditTodo(todo)}
+                          className="text-[8px] font-bold uppercase text-[#81756f] hover:text-[#3d251c] bg-transparent border-none cursor-pointer"
+                          title="Edit"
                         >
-                          {todo.isCompleted ? (
-                            <div className="w-5 h-5 rounded-full bg-white/50 backdrop-blur-sm border-2 border-[#b76e79] flex items-center justify-center shadow-[inset_0_1px_3px_rgba(255,255,255,0.8),0_2px_6px_rgba(183,110,121,0.2)]">
-                              <span className="material-symbols-outlined text-[#b76e79] text-[12px] font-black">check</span>
-                            </div>
-                          ) : (
-                            <div className="w-5 h-5 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-sm border-2 border-[#e8cdc1]/60 flex items-center justify-center transition-all duration-200"></div>
-                          )}
+                          Edit
                         </button>
-                        <div className="flex-grow min-w-0">
-                          <p className={`text-[10px] font-semibold truncate ${todo.isCompleted ? 'line-through text-[#81756f]' : 'text-[#6e5a51]'}`}>{todo.title}</p>
-                        </div>
-                        <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all shrink-0 self-center">
-                          <button 
-                            type="button"
-                            onClick={() => handleEditTodo(todo)}
-                            className="text-[8px] font-bold uppercase tracking-widest text-[#81756f] hover:text-[#3d251c] bg-transparent border-none cursor-pointer transition-all"
-                            title="Edit"
-                          >
-                            Edit
-                          </button>
-                          <span className="text-[#81756f]/40 text-[8px] select-none">•</span>
-                          <button 
-                            type="button"
-                            onClick={() => handleDeleteTodo(todo.id)}
-                            className="text-[8px] font-bold uppercase tracking-widest text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer transition-all"
-                            title="Delete"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 4: Accomplishments */}
-          <div className="backdrop-blur-md glossy-rose-gold-border rounded-[22px] p-4 flex flex-col h-[235px] shrink-0 gap-2.5">
-            <div className="flex justify-between items-center shrink-0">
-              <h3 className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Accomplishments</h3>
-              <div className="flex items-center gap-1 bg-[#e8cdc1]/20 px-1.5 py-0.5 rounded-lg">
-                <button 
-                  onClick={() => handleUpdateStreak(-1)} 
-                  className="w-4 h-4 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
-                  title="Decrease Streak"
-                >
-                  -
-                </button>
-                <span className="text-[10px] font-bold text-[#6e5a51]" title="Practice Streak (Days)">{streak}d Streak</span>
-                <button 
-                  onClick={() => handleUpdateStreak(1)} 
-                  className="w-4 h-4 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
-                  title="Increase Streak"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="space-y-2.5 overflow-y-auto flex-grow pr-1 custom-scrollbar min-h-0">
-              {ACCOMPLISHMENTS.map((ach) => {
-                const isUnlocked = checkAccomplishmentUnlocked(ach.id, completedLessons.map(c => c.title), streak)
-                return (
-                  <div 
-                    key={ach.id} 
-                    className={`flex items-start gap-3 group transition-all duration-300 ${isUnlocked ? 'opacity-100' : 'opacity-50'}`}
-                  >
-                    <div className={`w-9 h-9 rounded-full flex items-center justify-center border-2 border-white shadow-sm shrink-0 ${isUnlocked ? ach.bgColor + ' text-[#6e5a51]' : 'bg-[#f3ecea] text-[#81756f]'}`}>
-                      <span className="material-symbols-outlined text-base">
-                        {isUnlocked ? ach.icon : 'lock'}
-                      </span>
-                    </div>
-                    <div className="min-w-0 flex-grow">
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="text-[11px] font-bold text-[#1d1b1a] truncate">{ach.title}</p>
-                        <span className={`text-[8px] font-bold px-1 py-0.5 rounded shrink-0 ${isUnlocked ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-500'}`}>
-                          +{ach.xp} XP
-                        </span>
-                      </div>
-                      <p className="text-[9px] text-[#4f4540] mt-0.5 leading-snug">
-                        {isUnlocked ? ach.description : ach.requirementText}
-                      </p>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* Card 5: Live Studio */}
-          <div className="backdrop-blur-md glossy-rose-gold-border rounded-[22px] p-4 flex flex-col h-[235px] shrink-0 gap-2 min-h-0">
-            <div className="flex justify-between items-center shrink-0">
-              <h3 className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Live Studio</h3>
-              <a className="text-[#6e5a51] text-[10px] font-bold hover:underline cursor-pointer" onClick={() => onNavigate('sessions')}>View All</a>
-            </div>
-            <div className="flex-grow flex flex-col justify-between min-h-0 py-1">
-              <div className="p-2 rounded-xl bg-white/40 hover:bg-white transition-colors border border-[#e8cdc1]/20 cursor-pointer w-full" onClick={() => onNavigate('sessions')}>
-                <div className="flex justify-between items-start mb-0.5 gap-2">
-                  <span className="bg-[#ffd89b] text-[#524037] px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider">Oct 26 • 2:00 PM</span>
-                </div>
-                <h4 className="font-bold text-[10px] text-[#1d1b1a] truncate">Advanced Jazz Voicings & Transitional Runs</h4>
-                <p className="text-[8px] text-[#4f4540]">with Stephanie Halim</p>
-              </div>
-              <button 
-                onClick={() => {
-                  alert("Redirecting to Live Studio Zoom Session...\nMeeting Link: https://zoom.us/j/8889991111\n\n(Dummy Zoom link generated for simulation)");
-                  window.open("https://zoom.us/j/8889991111", "_blank");
-                }}
-                className="w-full bg-[#f3ecea] hover:bg-[#e8cdc1]/30 text-[#6e5a51] font-bold text-[10px] py-2 rounded-lg transition-all border-none cursor-pointer"
-              >
-                Join Waiting Room
-              </button>
-            </div>
-          </div>
-
-          {/* Card 6: Saved for Later */}
-          <div className="backdrop-blur-md glossy-rose-gold-border rounded-[22px] p-4 flex flex-col h-[235px] shrink-0 gap-2 min-h-0">
-            <h3 className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Saved for Later</h3>
-            <div className="space-y-2.5 overflow-y-auto flex-grow pr-1 custom-scrollbar min-h-0">
-              {savedItems.filter(item => item.type === 'pdf' || item.type === 'video').length === 0 ? (
-                <p className="text-[10px] text-[#81756f] italic">No saved items. Bookmark lessons or PDFs from the Courses page to save them here.</p>
-              ) : (
-                savedItems
-                  .filter(item => item.type === 'pdf' || item.type === 'video')
-                  .map((item, i) => (
-                    <div 
-                      key={i} 
-                      className="flex items-center gap-3 p-1.5 bg-white/40 hover:bg-white border border-[#e8cdc1]/10 rounded-xl cursor-pointer transition-all animate-in fade-in duration-200" 
-                      onClick={() => {
-                        if (item.type === 'pdf') {
-                          localStorage.setItem('redirect_course_pdf', item.title);
-                        } else {
-                          localStorage.setItem('redirect_lesson', item.title);
-                        }
-                        onNavigate('courses');
-                      }}
-                    >
-                      <div className="w-8 h-8 rounded-lg bg-[#f3ecea] overflow-hidden shrink-0 border border-[#e8cdc1]/20 flex items-center justify-center text-[#6e5a51]">
-                        <span className="material-symbols-outlined text-lg">
-                          {item.type === 'pdf' ? 'picture_as_pdf' : 'play_circle'}
-                        </span>
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <p className="text-[10px] font-bold text-[#1d1b1a] truncate">{item.title}</p>
-                        <p className="text-[8px] text-[#4f4540] truncate">{item.meta}</p>
-                      </div>
-                      <div className="flex items-center shrink-0" onClick={(e) => e.stopPropagation()}>
-                        <button
-                          onClick={(e) => handleUnsaveItem(item.id, e)}
-                          className="text-[8px] font-bold uppercase tracking-widest text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer transition-all pr-1"
-                          title="Unsave"
+                        <span className="text-[#81756f]/40 text-[7px] select-none">•</span>
+                        <button 
+                          type="button"
+                          onClick={() => handleDeleteTodo(todo.id)}
+                          className="text-[8px] font-bold uppercase text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer"
+                          title="Delete"
                         >
-                          Unsave
+                          Delete
                         </button>
                       </div>
                     </div>
                   ))
-              )}
+                )}
+              </div>
             </div>
           </div>
-
         </div>
 
-      </main>
+        {/* Card 4: Accomplishments */}
+        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-md p-3 flex flex-col h-[185px] shrink-0 gap-2 shadow-md">
+          <div className="flex justify-between items-center shrink-0">
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Accomplishments</h3>
+            <div className="flex items-center gap-1 bg-transparent border border-[#dfa38f]/50 px-1.5 py-0.5 rounded-md">
+              <button 
+                onClick={() => handleUpdateStreak(-1)} 
+                className="w-3.5 h-3.5 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
+                title="Decrease Streak"
+              >
+                -
+              </button>
+              <span className="text-[9px] font-bold text-[#6e5a51]" title="Practice Streak (Days)">{streak}d Streak</span>
+              <button 
+                onClick={() => handleUpdateStreak(1)} 
+                className="w-3.5 h-3.5 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
+                title="Increase Streak"
+              >
+                +
+              </button>
+            </div>
+          </div>
+          <div className="space-y-1.5 overflow-y-auto flex-grow pr-1 custom-scrollbar min-h-0">
+            {ACCOMPLISHMENTS.map((ach) => {
+              const isUnlocked = checkAccomplishmentUnlocked(ach.id, completedLessons.map(c => c.title), streak)
+              return (
+                <div 
+                  key={ach.id} 
+                  className={`flex items-start gap-2 p-1.5 rounded-md border border-[#dfa38f]/40 bg-transparent transition-all duration-300 ${isUnlocked ? 'opacity-100' : 'opacity-60'}`}
+                >
+                  <div className={`w-7 h-7 rounded-md flex items-center justify-center border border-[#dfa38f]/50 shrink-0 ${isUnlocked ? 'bg-transparent text-[#6e5a51]' : 'bg-transparent text-[#81756f]'}`}>
+                    <span className="material-symbols-outlined text-sm">
+                      {isUnlocked ? ach.icon : 'lock'}
+                    </span>
+                  </div>
+                  <div className="min-w-0 flex-grow">
+                    <div className="flex items-center justify-between gap-1">
+                      <p className="text-[10px] font-bold text-[#3d251c] truncate">{ach.title}</p>
+                      <span className={`text-[7.5px] font-bold px-1 py-0.2 rounded-md shrink-0 border ${isUnlocked ? 'bg-emerald-500/10 text-emerald-800 border-emerald-400/30' : 'bg-gray-500/10 text-gray-600 border-gray-400/30'}`}>
+                        +{ach.xp} XP
+                      </span>
+                    </div>
+                    <p className="text-[8.5px] text-[#4f4540] mt-0.5 leading-tight">
+                      {isUnlocked ? ach.description : ach.requirementText}
+                    </p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Card 5: Live Studio */}
+        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-md p-3 flex flex-col h-[185px] shrink-0 gap-1.5 shadow-md min-h-0">
+          <div className="flex justify-between items-center shrink-0">
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Live Studio</h3>
+            <a className="text-[#6e5a51] text-[9.5px] font-bold hover:underline cursor-pointer" onClick={() => onNavigate('sessions')}>View All</a>
+          </div>
+          <div className="flex-grow flex flex-col justify-between min-h-0 py-0.5 gap-1.5">
+            <div className="p-2 rounded-md bg-transparent hover:bg-white/10 transition-colors border border-[#dfa38f]/40 cursor-pointer w-full" onClick={() => onNavigate('sessions')}>
+              <div className="flex justify-between items-start mb-0.5 gap-1">
+                <span className="bg-transparent border border-[#dfa38f] text-[#524037] px-1.5 py-0.2 rounded-md text-[7.5px] font-bold uppercase tracking-wider">Oct 26 • 2:00 PM</span>
+              </div>
+              <h4 className="font-bold text-[9.5px] text-[#1d1b1a] truncate">Advanced Jazz Voicings &amp; Transitional Runs</h4>
+              <p className="text-[8px] text-[#4f4540]">with Stephanie Halim</p>
+            </div>
+            <button 
+              onClick={() => {
+                alert("Redirecting to Live Studio Zoom Session...\nMeeting Link: https://zoom.us/j/8889991111\n\n(Dummy Zoom link generated for simulation)");
+                window.open("https://zoom.us/j/8889991111", "_blank");
+              }}
+              className="w-full bg-transparent hover:bg-white/20 text-[#6e5a51] font-bold text-[9.5px] py-1.5 rounded-md transition-all border border-[#dfa38f] cursor-pointer shrink-0"
+            >
+              Join Waiting Room
+            </button>
+          </div>
+        </div>
+
+        {/* Card 6: Saved for Later */}
+        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-md p-3 flex flex-col h-[185px] shrink-0 gap-1.5 shadow-md min-h-0">
+          <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs uppercase tracking-wider text-[#6e5a51]">Saved for Later</h3>
+          <div className="space-y-1.5 overflow-y-auto flex-grow pr-1 custom-scrollbar min-h-0">
+            {savedItems.filter(item => item.type === 'pdf' || item.type === 'video').length === 0 ? (
+              <p className="text-[9.5px] text-[#81756f] italic py-1">No saved items. Bookmark lessons or PDFs from the Courses page to save them here.</p>
+            ) : (
+              savedItems
+                .filter(item => item.type === 'pdf' || item.type === 'video')
+                .map((item, i) => (
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-2 p-1.5 bg-transparent hover:bg-white/10 border border-[#dfa38f]/40 rounded-md cursor-pointer transition-all animate-in fade-in duration-200" 
+                    onClick={() => {
+                      if (item.type === 'pdf') {
+                        localStorage.setItem('redirect_course_pdf', item.title);
+                      } else {
+                        localStorage.setItem('redirect_lesson', item.title);
+                      }
+                      onNavigate('courses');
+                    }}
+                  >
+                    <div className="w-7 h-7 rounded-md bg-transparent overflow-hidden shrink-0 border border-[#dfa38f]/50 flex items-center justify-center text-[#6e5a51]">
+                      <span className="material-symbols-outlined text-sm">
+                        {item.type === 'pdf' ? 'picture_as_pdf' : 'play_circle'}
+                      </span>
+                    </div>
+                    <div className="flex-grow min-w-0">
+                      <p className="text-[9.5px] font-bold text-[#1d1b1a] truncate">{item.title}</p>
+                      <p className="text-[8px] text-[#4f4540] truncate">{item.meta}</p>
+                    </div>
+                    <div className="flex items-center shrink-0" onClick={(e) => e.stopPropagation()}>
+                      <button
+                        onClick={(e) => handleUnsaveItem(item.id, e)}
+                        className="text-[7.5px] font-bold uppercase tracking-widest text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer transition-all pr-0.5"
+                        title="Unsave"
+                      >
+                        Unsave
+                      </button>
+                    </div>
+                  </div>
+                ))
+            )}
+          </div>
+        </div>
+
+      </div>
+
+    </main>
   );
 }
 
