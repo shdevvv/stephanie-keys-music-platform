@@ -427,7 +427,6 @@ function Courses() {
                     const activeLessonIdx = selectedLessonMap[topicKey] ?? 0;
                     const currentLesson = topic.lessons[activeLessonIdx] || topic.lessons[0];
                     const currentLessonKey = `${activeLevel.number}-${topic.title}-${currentLesson.code || currentLesson.title}`;
-                    const isCurrentCompleted = isLessonCompleted(currentLessonKey);
 
                     return (
                       <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 backdrop-blur-md p-4 md:p-6">
@@ -444,16 +443,13 @@ function Courses() {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/40" />
 
-                                {/* Top Badge Bar */}
-                                <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-white text-xs z-10">
+                                {/* Top Badge Bar inside Video Screen (Clean code badge only) */}
+                                <div className="absolute top-3 left-3 flex items-center gap-2 text-white text-xs z-10">
                                   {currentLesson.code && (
-                                    <span className="px-2.5 py-0.5 rounded-md bg-white/20 backdrop-blur-md font-mono font-bold border border-white/30 text-[#f8e3db]">
+                                    <span className="px-2.5 py-0.5 rounded-md bg-black/60 backdrop-blur-md font-mono font-bold border border-white/30 text-[#f8e3db]">
                                       {currentLesson.code}
                                     </span>
                                   )}
-                                  <span className="text-[11px] text-white/80 font-medium bg-black/40 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 ml-auto">
-                                    Level {activeLevel.number} • {topic.title}
-                                  </span>
                                 </div>
 
                                 {/* Center Play Button */}
@@ -504,7 +500,7 @@ function Courses() {
                                 </div>
                               </div>
 
-                              {/* Footer Meta under Video */}
+                              {/* Footer Meta under Video Screen */}
                               <div className="p-4 bg-white border-t border-[#e8cdc1]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <div>
                                   <div className="flex items-center gap-2 mb-0.5">
@@ -518,44 +514,34 @@ function Courses() {
                                     </h4>
                                   </div>
                                   <p className="text-[11px] text-[#7a645b]">
-                                    {topic.title} • Video {activeLessonIdx + 1} dari {topic.lessons.length}
+                                    {topic.title} • Video {activeLessonIdx + 1} of {topic.lessons.length}
                                   </p>
                                 </div>
 
-                                <div className="flex items-center gap-2 shrink-0">
-                                  {currentLesson.pdf && (
-                                    <span className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] flex items-center gap-1.5 shadow-2xs">
-                                      <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
-                                      {currentLesson.pdf}
-                                    </span>
-                                  )}
-                                  
+                                {currentLesson.pdf && (
                                   <button
-                                    onClick={() => toggleLessonCompleted(currentLessonKey)}
-                                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs ${
-                                      isCurrentCompleted
-                                        ? "bg-[#8a6858] text-white border-[#8a6858]"
-                                        : "bg-white text-[#6e4336] border-[#d9a998] hover:bg-[#fdeee8]"
-                                    }`}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      alert(`Downloading PDF: ${currentLesson.pdf}`);
+                                    }}
+                                    className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer shrink-0"
                                   >
-                                    <span className="material-symbols-outlined text-sm">
-                                      {isCurrentCompleted ? "check_circle" : "radio_button_unchecked"}
-                                    </span>
-                                    {isCurrentCompleted ? "Selesai" : "Tandai Selesai"}
+                                    <span className="material-symbols-outlined text-sm">download</span>
+                                    Download PDF
                                   </button>
-                                </div>
+                                )}
                               </div>
                             </div>
                           </div>
 
-                          {/* RIGHT COLUMN: Lesson List (Per klik ganti video di kiri) */}
+                          {/* RIGHT COLUMN: Lesson List (Click to switch video) */}
                           <div className="lg:col-span-5 flex flex-col gap-2.5">
                             <div className="flex items-center justify-between mb-1 px-1">
                               <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider flex items-center gap-1.5">
                                 <span className="material-symbols-outlined text-sm text-[#8a6858]">playlist_play</span>
                                 Lessons ({topic.lessons.length})
                               </span>
-                              <span className="text-[11px] text-[#7a645b] italic">Klik lesson untuk memutar</span>
+                              <span className="text-[11px] text-[#7a645b] italic font-medium">Click lesson to play</span>
                             </div>
 
                             <div className="space-y-2 max-h-[440px] overflow-y-auto pr-1">
@@ -572,12 +558,12 @@ function Courses() {
                                     }}
                                     className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
                                       isSelected
-                                        ? "bg-[#fdeee8] border-[#c89482] shadow-md translate-x-1"
-                                        : "bg-white/90 border-[#e8cdc1]/70 hover:bg-white hover:border-[#c89482] shadow-2xs"
+                                        ? "bg-white border-[#c89482] shadow-[0_0_22px_rgba(255,255,255,0.95),0_4px_16px_rgba(184,124,109,0.22)] ring-1 ring-[#c89482]/50"
+                                        : "bg-white/85 border-[#e8cdc1]/80 hover:bg-white hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
                                     }`}
                                   >
                                     <div className="flex items-center gap-3 min-w-0">
-                                      {/* Completion Status Checkmark */}
+                                      {/* Completion Status Checkmark on the Left */}
                                       <button
                                         onClick={(e) => {
                                           e.stopPropagation();
@@ -620,23 +606,20 @@ function Courses() {
                                       </div>
                                     </div>
 
-                                    <div className="flex items-center gap-1.5 shrink-0">
-                                      {lesson.pdf && (
-                                        <span className="p-1 rounded-md bg-[#f8e3db]/80 text-[#6e4336] border border-[#e8cdc1]" title={`PDF: ${lesson.pdf}`}>
-                                          <span className="material-symbols-outlined text-[13px]">picture_as_pdf</span>
-                                        </span>
-                                      )}
-
-                                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs transition-all ${
-                                        isSelected 
-                                          ? "bg-[#8a6858] text-white shadow-xs" 
-                                          : "bg-[#f8e3db]/50 text-[#6e4336]"
-                                      }`}>
-                                        <span className="material-symbols-outlined text-sm">
-                                          {isSelected ? "graphic_eq" : "play_arrow"}
-                                        </span>
-                                      </div>
-                                    </div>
+                                    {/* Action Right: Single Download PDF button if PDF exists */}
+                                    {lesson.pdf && (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          alert(`Downloading PDF: ${lesson.pdf}`);
+                                        }}
+                                        className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-lg flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
+                                        title={`Download PDF: ${lesson.pdf}`}
+                                      >
+                                        <span className="material-symbols-outlined text-[13px]">download</span>
+                                        PDF
+                                      </button>
+                                    )}
                                   </div>
                                 );
                               })}

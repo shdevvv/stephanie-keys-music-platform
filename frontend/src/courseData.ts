@@ -83,47 +83,47 @@ export const levels: Level[] = [
     },
     topics: [
       {
-        title: 'Module 0.1 — Orientation',
+        title: 'Module 1.1 — Orientation',
         pdfSummary: 'Printable Roadmap',
         lessons: [
-          { code: 'V0.1.1', title: 'Welcome & How to Use This Platform (roadmap, how to access PDFs, how to use badges)', pdf: 'Printable Roadmap' },
-          { code: 'V0.1.2', title: 'Getting to Know the Piano: Acoustic vs Digital vs Keyboard vs Synth, which one is right for you' },
-          { code: 'V0.1.3', title: 'Piano Anatomy & Pedal Functions (sustain, sostenuto, soft)' },
-          { code: 'V0.1.4', title: 'Seating Posture, Bench Height, Correct Arm Position (prevent injury)' },
-          { code: 'V0.1.5', title: 'Hand Shape & Ideal Finger Position on the Keys' }
+          { code: 'V1.1.1', title: 'Welcome & How to Use This Platform (roadmap, how to access PDFs, how to use badges)', pdf: 'Printable Roadmap' },
+          { code: 'V1.1.2', title: 'Getting to Know the Piano: Acoustic vs Digital vs Keyboard vs Synth, which one is right for you' },
+          { code: 'V1.1.3', title: 'Piano Anatomy & Pedal Functions (sustain, sostenuto, soft)' },
+          { code: 'V1.1.4', title: 'Seating Posture, Bench Height, Correct Arm Position (prevent injury)' },
+          { code: 'V1.1.5', title: 'Hand Shape & Ideal Finger Position on the Keys' }
         ]
       },
       {
-        title: 'Module 0.2 — Understanding Keys & Notes',
+        title: 'Module 1.2 — Understanding Keys & Notes',
         pdfSummary: 'Keyboard Diagram Labeled with Middle C',
         lessons: [
-          { code: 'V0.2.1', title: 'Black Key Patterns (groups of 2 & 3) as the keyboard "map"' },
-          { code: 'V0.2.2', title: 'The 7 Note Names: C D E F G A B, and how they repeat per octave' },
-          { code: 'V0.2.3', title: 'Quickly Locating Middle C', pdf: 'Keyboard Diagram Labeled with Middle C' },
-          { code: 'V0.2.4', title: 'Octave Concepts & Simple Intervals (close vs far)' }
+          { code: 'V1.2.1', title: 'Black Key Patterns (groups of 2 & 3) as the keyboard "map"' },
+          { code: 'V1.2.2', title: 'The 7 Note Names: C D E F G A B, and how they repeat per octave' },
+          { code: 'V1.2.3', title: 'Quickly Locating Middle C', pdf: 'Keyboard Diagram Labeled with Middle C' },
+          { code: 'V1.2.4', title: 'Octave Concepts & Simple Intervals (close vs far)' }
         ]
       },
       {
-        title: 'Module 0.3 — Reading Sheet Music from Scratch',
+        title: 'Module 1.3 — Reading Sheet Music from Scratch',
         pdfSummary: 'Note Values Cheat Sheet & Blank Staff',
         lessons: [
-          { code: 'V0.3.1', title: 'Staff, Lines, Spaces, and How to Count Note Positions', pdf: 'Blank Staff for Note Writing Practice' },
-          { code: 'V0.3.2', title: 'Treble Clef (G Clef): mnemonics for FACE (spaces) & Every Good Boy Does Fine (lines)' },
-          { code: 'V0.3.3', title: 'Bass Clef (F Clef): mnemonics for All Cows Eat Grass & Good Boys Do Fine Always' },
-          { code: 'V0.3.4', title: 'Grand Staff & Middle C Position in the Center' },
-          { code: 'V0.3.5', title: 'Note Values (whole, 1/2, 1/4, 1/8) & Rest Values', pdf: 'Note Values Cheat Sheet' },
-          { code: 'V0.3.6', title: 'Time Signatures 4/4, 3/4, 2/4 — how to count beats' }
+          { code: 'V1.3.1', title: 'Staff, Lines, Spaces, and How to Count Note Positions', pdf: 'Blank Staff for Note Writing Practice' },
+          { code: 'V1.3.2', title: 'Treble Clef (G Clef): mnemonics for FACE (spaces) & Every Good Boy Does Fine (lines)' },
+          { code: 'V1.3.3', title: 'Bass Clef (F Clef): mnemonics for All Cows Eat Grass & Good Boys Do Fine Always' },
+          { code: 'V1.3.4', title: 'Grand Staff & Middle C Position in the Center' },
+          { code: 'V1.3.5', title: 'Note Values (whole, 1/2, 1/4, 1/8) & Rest Values', pdf: 'Note Values Cheat Sheet' },
+          { code: 'V1.3.6', title: 'Time Signatures 4/4, 3/4, 2/4 — how to count beats' }
         ]
       },
       {
-        title: 'Module 0.4 — Finger Exercises & First Songs',
+        title: 'Module 1.4 — Finger Exercises & First Songs',
         pdfSummary: '10-Minute Daily Warm-Up & Fingering Diagram',
         lessons: [
-          { code: 'V0.4.1', title: 'Piano Finger Numbering (1-5 right & left)', pdf: 'Fingering Diagram' },
-          { code: 'V0.4.2', title: '5-Finger Exercise in C Position (ascending-descending, basic legato)' },
-          { code: 'V0.4.3', title: 'Finger Flexibility & Independence Exercises (without notes, daily drill)', pdf: '10-Minute Daily Warm-Up' },
-          { code: 'V0.4.4', title: 'First Song: "Hot Cross Buns" / "Mary Had a Little Lamb" (1 hand)' },
-          { code: 'V0.4.5', title: 'Level Recap & Capstone: play two 5-finger songs from memory' }
+          { code: 'V1.4.1', title: 'Piano Finger Numbering (1-5 right & left)', pdf: 'Fingering Diagram' },
+          { code: 'V1.4.2', title: '5-Finger Exercise in C Position (ascending-descending, basic legato)' },
+          { code: 'V1.4.3', title: 'Finger Flexibility & Independence Exercises (without notes, daily drill)', pdf: '10-Minute Daily Warm-Up' },
+          { code: 'V1.4.4', title: 'First Song: "Hot Cross Buns" / "Mary Had a Little Lamb" (1 hand)' },
+          { code: 'V1.4.5', title: 'Level Recap & Capstone: play two 5-finger songs from memory' }
         ]
       }
     ]
