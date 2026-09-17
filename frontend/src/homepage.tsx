@@ -391,15 +391,16 @@ function Homepage() {
             {/* Unified Continuous Palace Background Container for Welcome, About Mentor, and What You Will Get */}
             <div className="relative overflow-hidden bg-[#faf5f0]">
               {/* Single Continuous Background Palace Image Layer Across All 3 Sections */}
-              <div className="absolute inset-0 z-0 pointer-events-none select-none opacity-90">
-                <img
-                  className="w-full h-full object-cover object-center transform-gpu"
-                  alt="Royal Grand Palace Hall Background"
-                  src="/royal-grand-hall-bg.jpg"
-                />
-              </div>
-              {/* Soft White 15% Opacity Brightening Overlay Layer */}
-              <div className="absolute inset-0 bg-white/15 z-0 pointer-events-none" />
+              <div
+                className="absolute inset-0 z-0 pointer-events-none select-none opacity-80"
+                style={{
+                  backgroundImage: "url('/palacey.png')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+              {/* White 20% Opacity Brightening Overlay Layer */}
+              <div className="absolute inset-0 bg-white/20 z-0 pointer-events-none" />
 
               {/* CSS Keyframes for falling glitters */}
               <style dangerouslySetInnerHTML={{
@@ -1222,81 +1223,81 @@ function Homepage() {
                     className="p-4 md:p-5 rounded-xl backdrop-blur-[2px]"
                   >
                     {/* Testimonial Cards Grid (3 Small Inner Cards: Medium Translucent Flat White Background) */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
-                    {[
-                      {
-                        name: "Sarah Jenkins",
-                        role: "Worship Keyboardist",
-                        date: "June 14, 2025",
-                        stars: 5,
-                        comment:
-                          "I was stuck relying 100% on sheet music for years. Stephanie Keys taught me how to actually listen to chords and play by ear. Within 3 months, I was playing worship songs at my church without any paper!",
-                        avatar:
-                          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
-                      },
-                      {
-                        name: "David Chen",
-                        role: "Jazz Enthusiast",
-                        date: "August 2, 2025",
-                        stars: 5,
-                        comment:
-                          "The jazz and gospel progressions taught in the genres section are gold. The way chords are broken down step-by-step made complex voicings feel so simple. Incredible course!",
-                        avatar:
-                          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
-                      },
-                      {
-                        name: "Jessica Taylor",
-                        role: "Classical & Gospel Player",
-                        date: "September 28, 2025",
-                        stars: 5,
-                        comment:
-                          "I used to feel so anxious trying to improvise on the spot. Now, the music just flows. It's truly helped me connect my faith with my playing. Highly recommend Stephanie Keys!",
-                        avatar:
-                          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
-                      },
-                    ].map((item, idx) => (
-                      <div
-                        key={idx}
-                        style={{
-                          backgroundColor: "rgba(255, 255, 255, 0.62)",
-                          border: "1.5px solid #c48b7c",
-                          boxShadow: "0 0 8px rgba(196, 139, 124, 0.2)",
-                        }}
-                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 flex flex-col justify-between gap-4 group cursor-pointer"
-                      >
-                        <div className="space-y-2.5 relative z-10">
-                          {/* Comment */}
-                          <p className="font-sans text-[11px] md:text-[11.5px] text-[#5c3328] leading-relaxed italic font-semibold drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
-                            "{item.comment}"
-                          </p>
-                        </div>
-
-                        {/* Profile Details */}
-                        <div className="flex items-center gap-2.5 pt-3 border-t border-[#e2b0a4]/60 mt-auto relative z-10">
-                          <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#e2b0a4] bg-[#f4ebe6] shrink-0 shadow-xs">
-                            <img
-                              className="w-full h-full object-cover"
-                              src={item.avatar}
-                              alt={item.name}
-                            />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
+                      {[
+                        {
+                          name: "Sarah Jenkins",
+                          role: "Worship Keyboardist",
+                          date: "June 14, 2025",
+                          stars: 5,
+                          comment:
+                            "I was stuck relying 100% on sheet music for years. Stephanie Keys taught me how to actually listen to chords and play by ear. Within 3 months, I was playing worship songs at my church without any paper!",
+                          avatar:
+                            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+                        },
+                        {
+                          name: "David Chen",
+                          role: "Jazz Enthusiast",
+                          date: "August 2, 2025",
+                          stars: 5,
+                          comment:
+                            "The jazz and gospel progressions taught in the genres section are gold. The way chords are broken down step-by-step made complex voicings feel so simple. Incredible course!",
+                          avatar:
+                            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                        },
+                        {
+                          name: "Jessica Taylor",
+                          role: "Classical & Gospel Player",
+                          date: "September 28, 2025",
+                          stars: 5,
+                          comment:
+                            "I used to feel so anxious trying to improvise on the spot. Now, the music just flows. It's truly helped me connect my faith with my playing. Highly recommend Stephanie Keys!",
+                          avatar:
+                            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+                        },
+                      ].map((item, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            backgroundColor: "rgba(255, 255, 255, 0.62)",
+                            border: "1.5px solid #c48b7c",
+                            boxShadow: "0 0 8px rgba(196, 139, 124, 0.2)",
+                          }}
+                          className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 flex flex-col justify-between gap-4 group cursor-pointer"
+                        >
+                          <div className="space-y-2.5 relative z-10">
+                            {/* Comment */}
+                            <p className="font-sans text-[11px] md:text-[11.5px] text-[#5c3328] leading-relaxed italic font-semibold drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
+                              "{item.comment}"
+                            </p>
                           </div>
-                          <div>
-                            <h4 className="font-sans text-[11.5px] font-bold text-[#5c3328] leading-tight drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
-                              {item.name}
-                            </h4>
-                            <div className="flex flex-wrap items-center gap-x-1 gap-y-0.5 mt-0.5 text-[9.5px] text-[#7a4b3d] font-bold font-sans">
-                              <span>{item.role}</span>
-                              <span className="text-[#d48b78]">•</span>
-                              <span>{item.date}</span>
+
+                          {/* Profile Details */}
+                          <div className="flex items-center gap-2.5 pt-3 border-t border-[#e2b0a4]/60 mt-auto relative z-10">
+                            <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#e2b0a4] bg-[#f4ebe6] shrink-0 shadow-xs">
+                              <img
+                                className="w-full h-full object-cover"
+                                src={item.avatar}
+                                alt={item.name}
+                              />
+                            </div>
+                            <div>
+                              <h4 className="font-sans text-[11.5px] font-bold text-[#5c3328] leading-tight drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
+                                {item.name}
+                              </h4>
+                              <div className="flex flex-wrap items-center gap-x-1 gap-y-0.5 mt-0.5 text-[9.5px] text-[#7a4b3d] font-bold font-sans">
+                                <span>{item.role}</span>
+                                <span className="text-[#d48b78]">•</span>
+                                <span>{item.date}</span>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {/* Bottom White Soft Fade Gradient Overlay (fading upwards) */}
+                {/* Bottom White Soft Fade Gradient Overlay (fading upwards) */}
                 <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#faf5f0] via-[#faf5f0]/75 to-transparent z-0 pointer-events-none" />
               </section>
             </div>
