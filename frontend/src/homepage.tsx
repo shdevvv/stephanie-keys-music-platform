@@ -1084,17 +1084,23 @@ function Homepage() {
                               {currentItem.question}
                             </h3>
 
-                            {/* White-wrapped Answer Box (Showing Right animation revealing text from left to right) */}
-                            <div
-                              key={activeFaq}
-                              style={{
-                                animation: "showRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards",
-                              }}
-                              className="mt-3 pl-3.5 border-l-[3.5px] border-[#a06354] bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs"
-                            >
-                              <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-normal">
-                                {currentItem.answer}
-                              </p>
+                            {/* Answer Section with Static Vertical Brown Line + White Background Box Expanding Right from Brown Line */}
+                            <div className="mt-3 flex items-stretch">
+                              {/* Static Vertical Brown Line (Anchor point always visible on left) */}
+                              <div className="w-[3.5px] bg-[#a06354] rounded-full shrink-0" />
+
+                              {/* White Background Box (Unrolls to the right starting directly from the brown line) */}
+                              <div
+                                key={activeFaq}
+                                style={{
+                                  animation: "showRight 1.1s cubic-bezier(0.25, 1, 0.5, 1) forwards",
+                                }}
+                                className="flex-1 bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs overflow-hidden"
+                              >
+                                <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-normal">
+                                  {currentItem.answer}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </>
