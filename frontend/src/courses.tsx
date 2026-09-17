@@ -486,8 +486,8 @@ function Courses() {
                                     }}
                                     className={`p-3.5 rounded-md border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
                                       isSelected
-                                        ? "bg-white border-[#c89482] shadow-[0_0_22px_rgba(255,255,255,0.95),0_4px_16px_rgba(184,124,109,0.22)] ring-1 ring-[#c89482]/50"
-                                        : "bg-white/85 border-[#e8cdc1]/80 hover:bg-white hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
+                                        ? "bg-[#fdeee8] border-[#c89482] shadow-[0_0_20px_rgba(253,238,232,0.95),0_4px_16px_rgba(184,124,109,0.2)] ring-1 ring-[#c89482]/60"
+                                        : "bg-white/85 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
                                     }`}
                                   >
                                     <div className="flex items-center gap-3 min-w-0">
@@ -521,12 +521,6 @@ function Courses() {
                                               {lesson.code}
                                             </span>
                                           )}
-                                          {isSelected && (
-                                            <span className="text-[10px] font-bold text-[#8a6858] animate-pulse flex items-center gap-0.5">
-                                              <span className="material-symbols-outlined text-xs">play_arrow</span>
-                                              PLAYING
-                                            </span>
-                                          )}
                                         </div>
                                         <h4 className={`text-xs font-bold truncate ${isSelected ? "text-[#5e382b]" : "text-[#341f18]"}`}>
                                           {lesson.title}
@@ -534,20 +528,18 @@ function Courses() {
                                       </div>
                                     </div>
 
-                                    {/* Action Right: Single Download PDF button if PDF exists */}
-                                    {lesson.pdf && (
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          alert(`Downloading PDF: ${lesson.pdf}`);
-                                        }}
-                                        className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-md flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
-                                        title={`Download PDF: ${lesson.pdf}`}
-                                      >
-                                        <span className="material-symbols-outlined text-[13px]">download</span>
-                                        PDF
-                                      </button>
-                                    )}
+                                    {/* Action Right: Download PDF button on ALL lesson items */}
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        alert(`Downloading PDF: ${lesson.pdf || lesson.title + ' Sheet Music'}`);
+                                      }}
+                                      className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-md flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
+                                      title={`Download PDF: ${lesson.pdf || lesson.title}`}
+                                    >
+                                      <span className="material-symbols-outlined text-[13px]">download</span>
+                                      PDF
+                                    </button>
                                   </div>
                                 );
                               })}
