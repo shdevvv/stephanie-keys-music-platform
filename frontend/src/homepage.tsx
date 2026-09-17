@@ -1014,20 +1014,21 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Inline CSS Keyframe for White Wrapper Unroll / Reveal from Left to Right */}
+                          {/* Inline CSS Keyframe for White Box Physical Walkthrough Slide from Left to Right */}
                           <style dangerouslySetInnerHTML={{
                             __html: `
-                              @keyframes faqWhiteWrapperUnroll {
+                              @keyframes whiteBoxWalkThrough {
                                 0% {
-                                  clip-path: inset(0 100% 0 0);
-                                  opacity: 0.1;
+                                  opacity: 0;
+                                  transform: translateX(-100%);
                                 }
-                                8% {
+                                75% {
                                   opacity: 1;
+                                  transform: translateX(5px);
                                 }
                                 100% {
-                                  clip-path: inset(0 0% 0 0);
                                   opacity: 1;
+                                  transform: translateX(0);
                                 }
                               }
                             `
@@ -1089,11 +1090,11 @@ function Homepage() {
                               {currentItem.question}
                             </h3>
 
-                            {/* White-wrapped Answer Box (White wrapper unrolls from left to right, revealing static text) */}
+                            {/* White-wrapped Answer Box (Physically walks through from left to right across the card) */}
                             <div
                               key={activeFaq}
                               style={{
-                                animation: "faqWhiteWrapperUnroll 1.1s cubic-bezier(0.25, 1, 0.4, 1) forwards",
+                                animation: "whiteBoxWalkThrough 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
                               }}
                               className="mt-3 pl-3.5 border-l-[3.5px] border-[#a06354] bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs"
                             >
