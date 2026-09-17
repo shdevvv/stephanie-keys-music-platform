@@ -1067,19 +1067,19 @@ function Homepage() {
                             `
                           }} />
 
-                          {/* Active Question & Answer Single Card (Exact Shop Button Color & Gradient + Rose Gold Border) */}
+                          {/* Active Question & Answer Single Card (Soft Rose Gold Shop Gradient with Lightened Chocolate Right Side) */}
                           <div
                             style={{
-                              background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                              boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 0 14px rgba(196, 139, 124, 0.3)",
-                              border: "2px solid #D9A998",
+                              background: "linear-gradient(135deg, #FAF0EB 0%, #F5DCD0 22%, #E8BCAC 48%, #DC9F8F 75%, #C8897A 100%)",
+                              boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #b87a6b, 0 0 14px rgba(196, 139, 124, 0.25)",
+                              border: "2px solid #E5B8A8",
                             }}
                             className="rounded-xl p-4 md:p-5 backdrop-blur-md overflow-hidden"
                           >
                             {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
-                            <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-white/30">
+                            <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
                               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/90 border border-white/80 text-[#5E3A2E] text-[10px] font-bold tracking-wider uppercase shadow-2xs">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#81594F] animate-pulse" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#B58474] animate-pulse" />
                                 Question {currentItem.num} of 10
                               </div>
 
@@ -1090,8 +1090,8 @@ function Homepage() {
                                   disabled={activeFaq === 0}
                                   title="Previous Question"
                                   className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === 0
-                                    ? "opacity-40 cursor-not-allowed bg-white/30 text-white border border-white/30"
-                                    : "bg-white/90 hover:bg-[#81594F] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                    ? "opacity-40 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/30"
+                                    : "bg-white/90 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                                     }`}
                                 >
                                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1104,8 +1104,8 @@ function Homepage() {
                                   disabled={activeFaq === faqItems.length - 1}
                                   title="Next Question"
                                   className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === faqItems.length - 1
-                                    ? "opacity-40 cursor-not-allowed bg-white/30 text-white border border-white/30"
-                                    : "bg-white/90 hover:bg-[#81594F] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                    ? "opacity-40 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/30"
+                                    : "bg-white/90 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                                     }`}
                                 >
                                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1115,9 +1115,9 @@ function Homepage() {
                               </div>
                             </div>
 
-                            {/* Question Title (Crisp White Text on Shop Gradient Background) */}
+                            {/* Question Title (Soft, Calm Warm Chocolate Typography) */}
                             <h3
-                              className="mt-3 text-sm md:text-base text-white font-semibold leading-relaxed tracking-normal drop-shadow-xs"
+                              className="mt-3 text-sm md:text-base text-[#4a2c20] font-bold leading-relaxed tracking-normal"
                               style={{ fontFamily: "'Playfair Display', serif" }}
                             >
                               {currentItem.question}
