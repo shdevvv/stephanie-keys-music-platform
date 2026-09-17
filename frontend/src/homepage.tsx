@@ -1203,7 +1203,7 @@ function Homepage() {
                       Students Feedbacks
                     </h2>
                     <p className="font-sans text-[11px] md:text-xs text-[#7a4b3d] font-semibold leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
-                      Discover how pianists of all backgrounds found their creative freedom and built a solid foundation with Stephanie Keys.
+                      Discover How Pianists of All Backgrounds Found Their Solid Foundations with Stephanie Keys.
                     </p>
                   </div>
 
