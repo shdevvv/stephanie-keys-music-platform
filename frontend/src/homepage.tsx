@@ -276,14 +276,12 @@ function Homepage() {
                     </span>
                   </h1>
                   <p 
-                    className="text-xs sm:text-sm md:text-base font-bold text-[#7c4d3e] tracking-[0.2em] uppercase max-w-lg flex items-center gap-3 flex-wrap"
+                    className="text-xs sm:text-sm md:text-base font-bold text-[#7c4d3e] tracking-[0.16em] uppercase max-w-xl flex items-center gap-3 flex-wrap"
                     style={{ fontFamily: "'Cinzel', 'Cormorant Garamond', serif" }}
                   >
-                    <span>Piano</span>
+                    <span>All Genres Piano & Violin</span>
                     <span className="text-[#b87c6d] font-normal text-sm">•</span>
-                    <span>Violin</span>
-                    <span className="text-[#b87c6d] font-normal text-sm">•</span>
-                    <span>Classic Theory</span>
+                    <span>Certified ABRSM Theory</span>
                   </p>
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                     <button
