@@ -1014,24 +1014,17 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Inline CSS Keyframe for Slow Toast Entrance from Left */}
+                          {/* Inline CSS Keyframe for Short & Subtle Toast Entrance from Left */}
                           <style dangerouslySetInnerHTML={{
                             __html: `
                               @keyframes faqAnswerToastFromLeft {
                                 0% {
                                   opacity: 0;
-                                  transform: translateX(-50px) scale(0.97);
-                                  filter: blur(2.5px);
-                                }
-                                70% {
-                                  opacity: 1;
-                                  transform: translateX(3px) scale(1.002);
-                                  filter: blur(0px);
+                                  transform: translateX(-14px);
                                 }
                                 100% {
                                   opacity: 1;
-                                  transform: translateX(0) scale(1);
-                                  filter: blur(0px);
+                                  transform: translateX(0);
                                 }
                               }
                             `
@@ -1093,11 +1086,11 @@ function Homepage() {
                               {currentItem.question}
                             </h3>
 
-                            {/* White-wrapped Answer Toast Box (Slower 0.8s entrance from left as 1 complete element) */}
+                            {/* White-wrapped Answer Toast Box (Short 14px entrance from left) */}
                             <div
                               key={activeFaq}
                               style={{
-                                animation: "faqAnswerToastFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                                animation: "faqAnswerToastFromLeft 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards",
                               }}
                               className="mt-3 pl-3.5 border-l-[3.5px] border-[#a06354] bg-[#fffaf7]/95 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs"
                             >
