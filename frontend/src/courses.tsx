@@ -379,20 +379,19 @@ function Courses() {
             </div>
           </div>
 
-          {/* Topics Accordion List */}
-          <div className="space-y-5 w-full">
+          {/* Topics Accordion List (Unified Attached Container) */}
+          <div 
+            className="bg-white/85 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
+            style={{
+              boxShadow: "0 12px 35px rgba(184, 124, 109, 0.14), 0 0 20px rgba(255, 255, 255, 0.95), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
+            }}
+          >
             {activeLevel.topics.map((topic, topicIdx) => {
               const topicKey = `${activeLevel.number}-${topicIdx}`;
               const isExpanded = expandedTopic === topicKey;
 
               return (
-                <div
-                  key={topicKey}
-                  className="bg-white/85 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300"
-                  style={{
-                    boxShadow: "0 12px 35px rgba(184, 124, 109, 0.14), 0 0 20px rgba(255, 255, 255, 0.95), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
-                  }}
-                >
+                <div key={topicKey} className="transition-all duration-300">
                   {/* Topic Header Button */}
                   <button
                     onClick={() => setExpandedTopic(isExpanded ? null : topicKey)}
