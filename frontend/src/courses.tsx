@@ -239,7 +239,7 @@ function Courses() {
                 <div
                   key={level.number}
                   onClick={() => handleSelectLevel(level.number)}
-                  className="group relative flex flex-col justify-between p-6 rounded-lg cursor-pointer bg-white/45 border-[1.5px] border-[#e8cdc1] transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:bg-white/60 hover:shadow-[0_0_35px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.35)] overflow-hidden"
+                  className="group relative flex flex-col justify-between p-6 rounded-lg cursor-pointer bg-white/55 border-[1.5px] border-[#e8cdc1] transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:bg-white/70 hover:shadow-[0_0_35px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.35)] overflow-hidden"
                   style={{
                     boxShadow: '0 15px 38px -6px rgba(184, 124, 109, 0.22), 0 0 18px rgba(255, 255, 255, 0.8)'
                   }}
@@ -251,7 +251,7 @@ function Courses() {
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
                       <span 
-                        className="px-3.5 py-1 rounded-md text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white/70 border border-[#e8cdc1] shadow-xs"
+                        className="px-3.5 py-1 rounded-md text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white/75 border border-[#e8cdc1] shadow-xs"
                         style={{
                           fontFamily: "'Cinzel', serif"
                         }}
@@ -321,7 +321,7 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="bg-white/45 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
+            className="bg-white/55 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
             style={{
               boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
             }}
@@ -405,7 +405,7 @@ function Courses() {
 
           {/* Topics Accordion List (Unified Attached Container) */}
           <div 
-            className="bg-white/45 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
+            className="bg-white/55 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
             style={{
               boxShadow: "0 15px 40px rgba(184, 124, 109, 0.15), 0 0 25px rgba(255, 255, 255, 0.9), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
             }}
