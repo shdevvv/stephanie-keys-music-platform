@@ -426,8 +426,8 @@ function Courses() {
                     </div>
                   </button>
 
-                  {/* Expanded Lessons Content: 2-Column Split View (Left: Video Player, Right: Lesson List) */}
-                  {isExpanded && (() => {
+                  {/* Expanded Lessons Content: Smooth CSS Grid Transition */}
+                  {(() => {
                     const activeLessonIdx = selectedLessonMap[topicKey] ?? 0;
                     const currentLesson = topic.lessons[activeLessonIdx] || topic.lessons[0];
                     const videoSrc = (currentLesson as any).video || ELEGANT_PIANO_VIDEO;
@@ -435,116 +435,126 @@ function Courses() {
                     const currentLessonKey = `${activeLevel.number}-${topic.title}-${currentLesson.code || currentLesson.title}`;
 
                     return (
-                      <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 p-4 md:p-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
-                          
-                          {/* LEFT COLUMN: Video Player Screen (Flush & Seamless with Right List) */}
-                          <div className="lg:col-span-6 flex flex-col gap-3">
-                            <div className="bg-[#1f1512] rounded-md border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group w-full">
-                              <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
-                                <video
-                                  key={currentLessonKey}
-                                  controls
-                                  playsInline
-                                  poster={posterSrc}
-                                  className="w-full h-full object-cover"
-                                >
-                                  <source src={videoSrc} type="video/mp4" />
-                                  Your browser does not support the video tag.
-                                </video>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* RIGHT COLUMN: Scrollable Lesson List (Click to switch video) */}
-                          <div className="lg:col-span-6 flex flex-col gap-2.5">
-                            <div className="flex items-center justify-between mb-1 px-1">
-                              <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider">
-                                Lessons ({topic.lessons.length})
-                              </span>
-                              <span className="text-[11px] text-[#7a645b] italic font-medium">Click lesson to play</span>
-                            </div>
-
-                            {/* Scrollable Container (Only scrolls if > 4 lessons) */}
-                            <div className={`space-y-2 ${
-                              topic.lessons.length > 4 
-                                ? "max-h-[285px] overflow-y-auto pr-2 custom-scrollbar" 
-                                : ""
-                            }`}>
-
-                              {topic.lessons.map((lesson, lessonIdx) => {
-                                const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
-                                const isCompleted = isLessonCompleted(lessonKey);
-                                const isSelected = activeLessonIdx === lessonIdx;
-
-                                return (
-                                  <div
-                                    key={lessonIdx}
-                                    onClick={() => {
-                                      setSelectedLessonMap(prev => ({ ...prev, [topicKey]: lessonIdx }));
-                                    }}
-                                    className={`p-3.5 rounded-md border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
-                                      isSelected
-                                        ? "bg-[#fdeee8] border-[#c89482] shadow-[0_0_20px_rgba(253,238,232,0.95),0_4px_16px_rgba(184,124,109,0.2)] ring-1 ring-[#c89482]/60"
-                                        : "bg-white/85 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
-                                    }`}
-                                  >
-                                    <div className="flex items-center gap-3 min-w-0">
-                                      {/* Completion Status Checkmark on the Left */}
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          toggleLessonCompleted(lessonKey);
-                                        }}
-                                        className="w-5 h-5 rounded-full border border-[#8a6858]/40 hover:border-[#8a6858] flex items-center justify-center transition-colors cursor-pointer bg-transparent shrink-0"
-                                        title="Toggle Complete"
-                                      >
-                                        {isCompleted ? (
-                                          <div className="w-4 h-4 rounded-full bg-[#8a6858] text-white flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-[10px] font-bold">check</span>
-                                          </div>
-                                        ) : (
-                                          <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/50" />
-                                        )}
-                                      </button>
-
-                                      {/* Lesson Code & Title */}
-                                      <div className="min-w-0">
-                                        <div className="flex items-center gap-1.5 mb-0.5">
-                                          {lesson.code && (
-                                            <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md border ${
-                                              isSelected 
-                                                ? "bg-[#8a6858] text-white border-[#8a6858]" 
-                                                : "bg-[#f8e3db] text-[#6e4336] border-[#e8cdc1]"
-                                            }`}>
-                                              {lesson.code}
-                                            </span>
-                                          )}
-                                        </div>
-                                        <h4 className={`text-xs font-bold truncate ${isSelected ? "text-[#5e382b]" : "text-[#341f18]"}`}>
-                                          {lesson.title}
-                                        </h4>
-                                      </div>
-                                    </div>
-
-                                    {/* Action Right: Download PDF button on ALL lesson items */}
-                                    <button
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        alert(`Downloading PDF: ${lesson.pdf || lesson.title + ' Sheet Music'}`);
-                                      }}
-                                      className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-md flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
-                                      title={`Download PDF: ${lesson.pdf || lesson.title}`}
+                      <div
+                        className={`grid transition-all duration-500 ease-in-out ${
+                          isExpanded
+                            ? "grid-rows-[1fr] opacity-100 border-t border-[#e8cdc1]/40"
+                            : "grid-rows-[0fr] opacity-0"
+                        }`}
+                      >
+                        <div className="overflow-hidden">
+                          <div className="bg-[#fdf9f7]/60 p-4 md:p-6">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
+                              
+                              {/* LEFT COLUMN: Video Player Screen (Flush & Seamless with Right List) */}
+                              <div className="lg:col-span-6 flex flex-col gap-3">
+                                <div className="bg-[#1f1512] rounded-md border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group w-full">
+                                  <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
+                                    <video
+                                      key={currentLessonKey}
+                                      controls
+                                      playsInline
+                                      poster={posterSrc}
+                                      className="w-full h-full object-cover"
                                     >
-                                      <span className="material-symbols-outlined text-[13px]">download</span>
-                                      PDF
-                                    </button>
+                                      <source src={videoSrc} type="video/mp4" />
+                                      Your browser does not support the video tag.
+                                    </video>
                                   </div>
-                                );
-                              })}
+                                </div>
+                              </div>
+
+                              {/* RIGHT COLUMN: Scrollable Lesson List (Click to switch video) */}
+                              <div className="lg:col-span-6 flex flex-col gap-2.5">
+                                <div className="flex items-center justify-between mb-1 px-1">
+                                  <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider">
+                                    Lessons ({topic.lessons.length})
+                                  </span>
+                                  <span className="text-[11px] text-[#7a645b] italic font-medium">Click lesson to play</span>
+                                </div>
+
+                                {/* Scrollable Container (Only scrolls if > 4 lessons) */}
+                                <div className={`space-y-2 ${
+                                  topic.lessons.length > 4 
+                                    ? "max-h-[285px] overflow-y-auto pr-2 custom-scrollbar" 
+                                    : ""
+                                }`}>
+
+                                  {topic.lessons.map((lesson, lessonIdx) => {
+                                    const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
+                                    const isCompleted = isLessonCompleted(lessonKey);
+                                    const isSelected = activeLessonIdx === lessonIdx;
+
+                                    return (
+                                      <div
+                                        key={lessonIdx}
+                                        onClick={() => {
+                                          setSelectedLessonMap(prev => ({ ...prev, [topicKey]: lessonIdx }));
+                                        }}
+                                        className={`p-3.5 rounded-md border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
+                                          isSelected
+                                            ? "bg-[#fdeee8] border-[#c89482] shadow-[0_0_20px_rgba(253,238,232,0.95),0_4px_16px_rgba(184,124,109,0.2)] ring-1 ring-[#c89482]/60"
+                                            : "bg-white/85 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
+                                        }`}
+                                      >
+                                        <div className="flex items-center gap-3 min-w-0">
+                                          {/* Completion Status Checkmark on the Left */}
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              toggleLessonCompleted(lessonKey);
+                                            }}
+                                            className="w-5 h-5 rounded-full border border-[#8a6858]/40 hover:border-[#8a6858] flex items-center justify-center transition-colors cursor-pointer bg-transparent shrink-0"
+                                            title="Toggle Complete"
+                                          >
+                                            {isCompleted ? (
+                                              <div className="w-4 h-4 rounded-full bg-[#8a6858] text-white flex items-center justify-center">
+                                                <span className="material-symbols-outlined text-[10px] font-bold">check</span>
+                                              </div>
+                                            ) : (
+                                              <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/50" />
+                                            )}
+                                          </button>
+
+                                          {/* Lesson Code & Title */}
+                                          <div className="min-w-0">
+                                            <div className="flex items-center gap-1.5 mb-0.5">
+                                              {lesson.code && (
+                                                <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md border ${
+                                                  isSelected 
+                                                    ? "bg-[#8a6858] text-white border-[#8a6858]" 
+                                                    : "bg-[#f8e3db] text-[#6e4336] border-[#e8cdc1]"
+                                                }`}>
+                                                  {lesson.code}
+                                                </span>
+                                              )}
+                                            </div>
+                                            <h4 className={`text-xs font-bold truncate ${isSelected ? "text-[#5e382b]" : "text-[#341f18]"}`}>
+                                              {lesson.title}
+                                            </h4>
+                                          </div>
+                                        </div>
+
+                                        {/* Action Right: Download PDF button on ALL lesson items */}
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            alert(`Downloading PDF: ${lesson.pdf || lesson.title + ' Sheet Music'}`);
+                                          }}
+                                          className="px-2.5 py-1 text-[11px] font-bold bg-[#f8e3db] text-[#6e4336] border border-[#e8cdc1] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] rounded-md flex items-center gap-1 transition-all shrink-0 cursor-pointer shadow-2xs"
+                                          title={`Download PDF: ${lesson.pdf || lesson.title}`}
+                                        >
+                                          <span className="material-symbols-outlined text-[13px]">download</span>
+                                          PDF
+                                        </button>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+
                             </div>
                           </div>
-
                         </div>
                       </div>
                     );
