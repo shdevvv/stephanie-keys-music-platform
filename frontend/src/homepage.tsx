@@ -987,11 +987,11 @@ function Homepage() {
                           {/* Soft Lightened Peach-Chocolate Horizontal Timeline Track (Clean Rose Gold Border) */}
                           <div
                             style={{
-                              backgroundColor: "rgba(255, 246, 242, 0.85)",
+                              backgroundColor: "rgba(255, 246, 242, 0.55)",
                               border: "2px solid #c48b7c",
                               boxShadow: "0 0 10px rgba(196, 139, 124, 0.25)",
                             }}
-                            className="relative py-3 px-3 md:px-5 rounded-xl backdrop-blur-md"
+                            className="relative py-3 px-3 md:px-5 rounded-xl backdrop-blur-sm"
                           >
                             {/* Background Track Line */}
                             <div className="absolute top-1/2 left-5 right-5 -translate-y-1/2 h-[2.5px] bg-[#d6b4a6]/80 rounded-full hidden sm:block" />
@@ -1070,11 +1070,11 @@ function Homepage() {
                           {/* Active Question & Answer Single Card (Translucent Soft Cream to Soft Rose Gold Gradient) */}
                           <div
                             style={{
-                              background: "linear-gradient(135deg, rgba(250, 240, 235, 0.82) 0%, rgba(245, 220, 208, 0.78) 35%, rgba(232, 188, 172, 0.75) 70%, rgba(226, 176, 164, 0.72) 100%)",
+                              background: "linear-gradient(135deg, rgba(250, 240, 235, 0.50) 0%, rgba(245, 220, 208, 0.45) 35%, rgba(232, 188, 172, 0.40) 70%, rgba(226, 176, 164, 0.35) 100%)",
                               boxShadow: "inset 0 1.5px 1px rgba(255, 255, 255, 0.9), inset 0 -1.5px 2px rgba(184, 122, 107, 0.4), 0 0 12px rgba(196, 139, 124, 0.2)",
                               border: "2px solid rgba(226, 176, 164, 0.85)",
                             }}
-                            className="rounded-xl p-4 md:p-5 backdrop-blur-md overflow-hidden"
+                            className="rounded-xl p-4 md:p-5 backdrop-blur-sm overflow-hidden"
                           >
                             {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
                             <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
@@ -1128,12 +1128,12 @@ function Homepage() {
                               {/* Static Vertical Brown Line (Anchor point always visible on left) */}
                               <div className="w-[3.5px] bg-[#5E3A2E] rounded-full shrink-0 z-10" />
 
-                              {/* White Background Box (Contains progressive word-by-word reveal text, opacity 75%) */}
+                              {/* White Background Box (Contains progressive word-by-word reveal text, translucent for bg visibility) */}
                               <div
                                 key={activeFaq}
-                                className="flex-1 bg-[#fffaf7]/75 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-sm"
+                                className="flex-1 bg-[#fffaf7]/45 backdrop-blur-xs py-2.5 px-3.5 rounded-r-lg shadow-sm"
                               >
-                                <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-normal">
+                                <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-semibold">
                                   <WordByWordRevealText text={currentItem.answer} speedMs={35} />
                                 </p>
                               </div>
