@@ -1119,10 +1119,10 @@ function Homepage() {
                 ))}
 
 
-                {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks (Light Milk Chocolate Inner Color) */}
+                {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks (Translucent Light Milk Chocolate Inner Color) */}
                 <div
                   style={{
-                    background: "linear-gradient(rgba(247, 232, 224, 0.88), rgba(247, 232, 224, 0.88)) padding-box, linear-gradient(45deg, #c48b7c 0%, #f5d3ca 12.5%, #d49a8b 25%, #e8beae 37.5%, #b87c6d 50%, #f5d3ca 62.5%, #d49a8b 75%, #e8beae 87.5%, #c48b7c 100%) border-box",
+                    background: "linear-gradient(rgba(245, 226, 215, 0.70), rgba(245, 226, 215, 0.70)) padding-box, linear-gradient(45deg, #c48b7c 0%, #f5d3ca 12.5%, #d49a8b 25%, #e8beae 37.5%, #b87c6d 50%, #f5d3ca 62.5%, #d49a8b 75%, #e8beae 87.5%, #c48b7c 100%) border-box",
                     border: "3px solid transparent",
                   }}
                   className="max-w-[980px] mx-auto p-5 md:p-7 rounded-md backdrop-blur-lg space-y-7 relative z-10"
@@ -1137,7 +1137,7 @@ function Homepage() {
                     </p>
                   </div>
 
-                  {/* Testimonial Cards Grid (3 Small Inner Cards: Translucent Pure White Background) */}
+                  {/* Testimonial Cards Grid (3 Small Inner Cards: Medium Translucent Flat White Background) */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
                     {[
                       {
@@ -1174,10 +1174,10 @@ function Homepage() {
                       <div
                         key={idx}
                         style={{
-                          background: "linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)) padding-box, linear-gradient(45deg, #c48b7c 0%, #f5d3ca 12.5%, #d49a8b 25%, #e8beae 37.5%, #b87c6d 50%, #f5d3ca 62.5%, #d49a8b 75%, #e8beae 87.5%, #c48b7c 100%) border-box",
+                          background: "linear-gradient(rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.62)) padding-box, linear-gradient(45deg, #c48b7c 0%, #f5d3ca 12.5%, #d49a8b 25%, #e8beae 37.5%, #b87c6d 50%, #f5d3ca 62.5%, #d49a8b 75%, #e8beae 87.5%, #c48b7c 100%) border-box",
                           border: "2px solid transparent",
                         }}
-                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/95 flex flex-col justify-between gap-4 group cursor-pointer"
+                        className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/85 flex flex-col justify-between gap-4 group cursor-pointer"
                       >
                         <div className="space-y-2.5 relative z-10">
                           {/* Comment */}
