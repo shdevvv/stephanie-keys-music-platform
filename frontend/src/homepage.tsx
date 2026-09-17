@@ -1213,12 +1213,12 @@ function Homepage() {
                     </p>
                   </div>
 
-                  {/* Main Large Warm Brown Outer Card wrapping the testimonial grid */}
+                  {/* Main Large Warm Brown Outer Card wrapping the testimonial grid (slightly richer brown) */}
                   <div
                     style={{
-                      backgroundColor: "rgba(245, 226, 215, 0.72)",
-                      border: "1.5px solid #c48b7c",
-                      boxShadow: "0 0 12px rgba(196, 139, 124, 0.25)",
+                      backgroundColor: "rgba(228, 185, 168, 0.82)",
+                      border: "1.5px solid #b87766",
+                      boxShadow: "0 0 14px rgba(184, 119, 102, 0.3)",
                     }}
                     className="p-4 md:p-5 rounded-xl backdrop-blur-md"
                   >
