@@ -165,7 +165,7 @@ function Courses() {
 
   return (
     <main
-      className="pt-6 pb-20 flex-grow flex flex-col min-h-screen text-[#3d251c] relative"
+      className="pt-6 pb-8 flex-grow flex flex-col text-[#3d251c] relative"
       style={{
         backgroundImage: `linear-gradient(180deg, rgba(255, 252, 250, 0.45) 0%, rgba(255, 245, 240, 0.35) 100%), url('/skeys-building.png')`,
         backgroundSize: 'cover',
@@ -175,7 +175,7 @@ function Courses() {
     >
       {/* ── Level Grid ── */}
       {!selectedLevel && (
-        <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 pt-4 animate-in fade-in duration-300">
+        <section className="px-6 max-w-[1240px] mx-auto w-full mb-8 pt-4 animate-in fade-in duration-300">
           <div className="relative w-full pt-4 pb-10 text-center max-w-4xl mx-auto flex flex-col items-center justify-center">
             {/* Elegant Header Pill */}
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full mb-4 bg-white border border-[#e8cdc1]/60 shadow-xs">
@@ -318,7 +318,7 @@ function Courses() {
 
       {/* ── SELECTED LEVEL DETAIL VIEW ── */}
       {selectedLevel !== null && activeLevel && (
-        <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
+        <section className="px-6 max-w-[1240px] mx-auto w-full mb-6 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
             className="bg-white/55 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
