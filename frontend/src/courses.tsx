@@ -239,11 +239,9 @@ function Courses() {
                 <div
                   key={level.number}
                   onClick={() => handleSelectLevel(level.number)}
-                  className="group relative flex flex-col justify-between p-6 rounded-lg cursor-pointer transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_35px_rgba(232,180,162,0.5),0_20px_45px_-6px_rgba(184,124,109,0.35)] overflow-hidden"
+                  className="group relative flex flex-col justify-between p-6 rounded-lg cursor-pointer bg-white/45 border-[1.5px] border-[#e8cdc1] transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:bg-white/60 hover:shadow-[0_0_35px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.35)] overflow-hidden"
                   style={{
-                    background: 'linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 25%, #ffffff 45%, #e8b4a2 70%, #8e5849 100%) border-box',
-                    border: '1.5px solid transparent',
-                    boxShadow: '0 15px 38px -6px rgba(184, 124, 109, 0.22), 0 0 18px rgba(232, 180, 162, 0.3)'
+                    boxShadow: '0 15px 38px -6px rgba(184, 124, 109, 0.22), 0 0 18px rgba(255, 255, 255, 0.8)'
                   }}
                 >
                   {/* Glossy Sheen Overlay */}
@@ -253,11 +251,9 @@ function Courses() {
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
                       <span 
-                        className="px-3.5 py-1 rounded-md text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center shadow-xs"
+                        className="px-3.5 py-1 rounded-md text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white/70 border border-[#e8cdc1] shadow-xs"
                         style={{
-                          fontFamily: "'Cinzel', serif",
-                          background: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) padding-box, linear-gradient(135deg, #d4a395 0%, #ffffff 50%, #b87c6d 100%) border-box',
-                          border: '1px solid transparent'
+                          fontFamily: "'Cinzel', serif"
                         }}
                       >
                         Level {level.number}
@@ -325,11 +321,9 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
+            className="bg-white/45 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
             style={{
-              background: 'linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 25%, #ffffff 45%, #e8b4a2 70%, #8e5849 100%) border-box',
-              border: '2px solid transparent',
-              boxShadow: "0 20px 50px rgba(184, 124, 109, 0.22), 0 0 35px rgba(232, 180, 162, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
+              boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
             }}
           >
             {/* Top Gloss Sheen Overlay */}
@@ -411,11 +405,9 @@ function Courses() {
 
           {/* Topics Accordion List (Unified Attached Container) */}
           <div 
-            className="rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
+            className="bg-white/45 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
             style={{
-              background: 'linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 25%, #ffffff 45%, #e8b4a2 70%, #8e5849 100%) border-box',
-              border: '1.5px solid transparent',
-              boxShadow: "0 15px 40px rgba(184, 124, 109, 0.18), 0 0 25px rgba(232, 180, 162, 0.3), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
+              boxShadow: "0 15px 40px rgba(184, 124, 109, 0.15), 0 0 25px rgba(255, 255, 255, 0.9), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
             }}
           >
             {activeLevel.topics.map((topic, topicIdx) => {
