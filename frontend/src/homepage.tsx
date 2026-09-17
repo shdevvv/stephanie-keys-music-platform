@@ -1213,14 +1213,14 @@ function Homepage() {
                     </p>
                   </div>
 
-                  {/* Main Large Warm Brown Outer Card wrapping the testimonial grid (55% translucent opacity so bg image peeks through) */}
+                  {/* Main Large Warm Brown Outer Card wrapping the testimonial grid (22% glass opacity so bg image shows clearly) */}
                   <div
                     style={{
-                      backgroundColor: "rgba(228, 185, 168, 0.55)",
-                      border: "1.5px solid #b87766",
-                      boxShadow: "0 0 14px rgba(184, 119, 102, 0.25)",
+                      backgroundColor: "rgba(196, 139, 124, 0.22)",
+                      border: "1.5px solid #c48b7c",
+                      boxShadow: "0 4px 16px rgba(196, 139, 124, 0.18)",
                     }}
-                    className="p-4 md:p-5 rounded-xl backdrop-blur-sm"
+                    className="p-4 md:p-5 rounded-xl backdrop-blur-[2px]"
                   >
                     {/* Testimonial Cards Grid (3 Small Inner Cards: Medium Translucent Flat White Background) */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
