@@ -343,11 +343,11 @@ function Courses() {
                     >
                       Level {activeLevel.number}
                     </span>
-                    <span className="text-xs font-medium text-[#7a645b]">{activeLevel.targetStudent}</span>
+                    <span className="text-xs font-bold text-[#5e4337]">{activeLevel.targetStudent}</span>
                   </div>
                   <h2
-                    className="text-2xl md:text-3xl font-bold text-[#341f18]"
-                    style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif" }}
+                    className="text-2xl md:text-3xl text-[#44281d]"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif", fontWeight: 700 }}
                   >
                     {activeLevel.subtitle}
                   </h2>
@@ -423,18 +423,18 @@ function Courses() {
                   >
                     <div className="flex items-center gap-4 min-w-0 pr-4">
                       <span 
-                        className="w-9 h-9 rounded-md bg-gradient-to-br from-[#f8e3db]/90 via-white/80 to-[#e8cdc1]/90 border border-[#d9a998] shadow-xs flex items-center justify-center font-mono text-xs font-bold text-[#6e4336] shrink-0"
+                        className="w-9 h-9 rounded-md bg-gradient-to-br from-[#f8e3db]/90 via-white/80 to-[#e8cdc1]/90 border border-[#d9a998] shadow-xs flex items-center justify-center font-mono text-xs font-bold text-[#543327] shrink-0"
                       >
                         {String(topicIdx + 1).padStart(2, "0")}
                       </span>
                       <div>
                         <h3 
-                          className="text-base md:text-lg font-bold text-[#341f18] group-hover:text-[#8a6858] transition-colors" 
-                          style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif" }}
+                          className="text-base md:text-lg text-[#44281d] group-hover:text-[#8a6858] transition-colors" 
+                          style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif", fontWeight: 700 }}
                         >
                           {topic.title}
                         </h3>
-                        <span className="text-xs font-medium text-[#7a645b]">
+                        <span className="text-xs font-bold text-[#5e4337]">
                           {topic.lessons.length} Video Lessons
                         </span>
                       </div>
