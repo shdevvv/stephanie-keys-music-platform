@@ -411,7 +411,7 @@ function Courses() {
                           {topic.title}
                         </h3>
                         <span className="text-xs font-medium text-[#7a645b]">
-                          {topic.lessons.length} Video Lessons {topic.pdfSummary && `• PDF: ${topic.pdfSummary}`}
+                          {topic.lessons.length} Video Lessons
                         </span>
                       </div>
                     </div>
