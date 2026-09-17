@@ -391,16 +391,15 @@ function Homepage() {
             {/* Unified Continuous Palace Background Container for Welcome, About Mentor, and What You Will Get */}
             <div className="relative overflow-hidden bg-[#faf5f0]">
               {/* Single Continuous Background Palace Image Layer Across All 3 Sections */}
-              <div
-                className="absolute inset-0 z-0 pointer-events-none select-none opacity-80"
-                style={{
-                  backgroundImage: "url('/palacey.png')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-              {/* White 20% Opacity Brightening Overlay Layer */}
-              <div className="absolute inset-0 bg-white/20 z-0 pointer-events-none" />
+              <div className="absolute inset-0 z-0 pointer-events-none select-none opacity-90">
+                <img
+                  className="w-full h-full object-cover object-center transform-gpu"
+                  alt="Royal Grand Palace Hall Background"
+                  src="/royal-grand-hall-bg.jpg"
+                />
+              </div>
+              {/* Soft White 15% Opacity Brightening Overlay Layer */}
+              <div className="absolute inset-0 bg-white/15 z-0 pointer-events-none" />
 
               {/* CSS Keyframes for falling glitters */}
               <style dangerouslySetInnerHTML={{
