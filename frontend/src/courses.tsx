@@ -456,16 +456,16 @@ function Courses() {
                       <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 p-4 md:p-6">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                           
-                          {/* LEFT COLUMN: Video Player Screen */}
-                          <div className="lg:col-span-7 flex flex-col gap-3">
-                            <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group">
-                              <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
+                          {/* LEFT COLUMN: Video Player Screen (Compact Height) */}
+                          <div className="lg:col-span-6 flex flex-col gap-3">
+                            <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group max-w-xl">
+                              <div className="relative aspect-video w-full max-h-[250px] bg-black flex items-center justify-center overflow-hidden">
                                 <video
                                   key={currentLessonKey}
                                   controls
                                   playsInline
                                   poster={posterSrc}
-                                  className="w-full h-full object-cover"
+                                  className="w-full h-full object-cover max-h-[250px]"
                                 >
                                   <source src={videoSrc} type="video/mp4" />
                                   Your browser does not support the video tag.
@@ -475,7 +475,7 @@ function Courses() {
                           </div>
 
                           {/* RIGHT COLUMN: Scrollable Lesson List (Click to switch video) */}
-                          <div className="lg:col-span-5 flex flex-col gap-2.5">
+                          <div className="lg:col-span-6 flex flex-col gap-2.5">
                             <div className="flex items-center justify-between mb-1 px-1">
                               <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider">
                                 Lessons ({topic.lessons.length})
@@ -484,7 +484,7 @@ function Courses() {
                             </div>
 
                             {/* Scrollable Container (Height fits 4 items, scrolls on 5+ items) */}
-                            <div className="space-y-2 max-h-[275px] overflow-y-auto pr-2 custom-scrollbar">
+                            <div className="space-y-2 max-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
 
                               {topic.lessons.map((lesson, lessonIdx) => {
                                 const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
