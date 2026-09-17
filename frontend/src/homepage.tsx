@@ -1067,12 +1067,12 @@ function Homepage() {
                             `
                           }} />
 
-                          {/* Active Question & Answer Single Card (Ultra-Soft Low Contrast Cream to Soft Rose Gold Gradient, No Dark Chocolate) */}
+                          {/* Active Question & Answer Single Card (Translucent Soft Cream to Soft Rose Gold Gradient) */}
                           <div
                             style={{
-                              background: "linear-gradient(135deg, #FAF0EB 0%, #F5DCD0 35%, #E8BCAC 70%, #E2B0A4 100%)",
-                              boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #d49f90, 0 0 12px rgba(196, 139, 124, 0.2)",
-                              border: "2px solid #E2B0A4",
+                              background: "linear-gradient(135deg, rgba(250, 240, 235, 0.82) 0%, rgba(245, 220, 208, 0.78) 35%, rgba(232, 188, 172, 0.75) 70%, rgba(226, 176, 164, 0.72) 100%)",
+                              boxShadow: "inset 0 1.5px 1px rgba(255, 255, 255, 0.9), inset 0 -1.5px 2px rgba(184, 122, 107, 0.4), 0 0 12px rgba(196, 139, 124, 0.2)",
+                              border: "2px solid rgba(226, 176, 164, 0.85)",
                             }}
                             className="rounded-xl p-4 md:p-5 backdrop-blur-md overflow-hidden"
                           >
