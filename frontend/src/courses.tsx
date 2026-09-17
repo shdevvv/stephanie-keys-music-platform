@@ -319,7 +319,7 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="bg-white/85 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
+            className="bg-white/75 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
             style={{
               boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
             }}
@@ -332,7 +332,7 @@ function Courses() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span 
-                      className="px-3 py-0.5 rounded-md text-xs font-bold text-[#6e4336] bg-white/90 border border-[#e8cdc1] shadow-xs"
+                      className="px-3 py-0.5 rounded-md text-xs font-bold text-[#6e4336] bg-white/80 border border-[#e8cdc1] shadow-xs"
                       style={{ fontFamily: "'Cinzel', serif" }}
                     >
                       Level {activeLevel.number}
@@ -352,15 +352,15 @@ function Courses() {
 
                 {/* Quick Info Metrics (Inline beside Level title!) */}
                 <div className="flex items-center flex-wrap gap-2.5 sm:gap-3 text-xs text-[#6e564c] font-medium">
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/80 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Modules:</span>
                     <span className="font-bold text-[#341f18]">{activeLevel.topics.length}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
-                    <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Video:</span>
+                  <span className="flex items-center gap-1.5 bg-white/80 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
+                    <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Videos:</span>
                     <span className="font-bold text-[#341f18]">{getTotalLessons(activeLevel)}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/80 border border-[#e8cdc1] px-3 py-1.5 rounded-md shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Badge Reward:</span>
                     <span className="font-bold text-[#6e4336]">🏆 {activeLevel.badge.name}</span>
                   </span>
@@ -372,7 +372,7 @@ function Courses() {
                   setSelectedLevel(null);
                   setExpandedTopic(null);
                 }}
-                className="px-6 py-2 rounded-md text-xs font-bold text-[#5e382b] bg-white/95 border-[1.5px] border-[#c89482] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] hover:shadow-md transition-all duration-300 cursor-pointer shadow-xs w-fit shrink-0 self-start lg:self-center"
+                className="px-6 py-2 rounded-md text-xs font-bold text-[#5e382b] bg-white/85 border-[1.5px] border-[#c89482] hover:bg-[#8a6858] hover:text-white hover:border-[#8a6858] hover:shadow-md transition-all duration-300 cursor-pointer shadow-xs w-fit shrink-0 self-start lg:self-center"
               >
                 Back
               </button>
@@ -381,7 +381,7 @@ function Courses() {
 
           {/* Topics Accordion List (Unified Attached Container) */}
           <div 
-            className="bg-white/85 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
+            className="bg-white/75 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
             style={{
               boxShadow: "0 12px 35px rgba(184, 124, 109, 0.14), 0 0 20px rgba(255, 255, 255, 0.95), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
             }}
@@ -395,7 +395,7 @@ function Courses() {
                   {/* Topic Header Button */}
                   <button
                     onClick={() => setExpandedTopic(isExpanded ? null : topicKey)}
-                    className="w-full flex items-center justify-between p-5 md:p-6 text-left bg-transparent border-none cursor-pointer hover:bg-white/60 transition-colors group"
+                    className="w-full flex items-center justify-between p-5 md:p-6 text-left bg-transparent border-none cursor-pointer hover:bg-white/50 transition-colors group"
                   >
                     <div className="flex items-center gap-4 min-w-0 pr-4">
                       <span 
@@ -418,7 +418,7 @@ function Courses() {
 
                     <div className="flex items-center gap-2 shrink-0">
                       <span
-                        className="w-8 h-8 rounded-md bg-white/90 border border-[#e8cdc1] shadow-xs flex items-center justify-center text-[#5e382b] group-hover:bg-[#fdeee8] transition-all duration-300"
+                        className="w-8 h-8 rounded-md bg-white/80 border border-[#e8cdc1] shadow-xs flex items-center justify-center text-[#5e382b] group-hover:bg-[#fdeee8] transition-all duration-300"
                         style={{ transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
                       >
                         <span className="material-symbols-outlined text-lg">expand_more</span>
@@ -443,7 +443,7 @@ function Courses() {
                         }`}
                       >
                         <div className="overflow-hidden">
-                          <div className="bg-[#fdf9f7]/60 p-4 md:p-6">
+                          <div className="bg-[#fdf9f7]/45 p-4 md:p-6">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
                               
                               {/* LEFT COLUMN: Video Player Screen (Flush & Seamless with Right List) */}
@@ -494,7 +494,7 @@ function Courses() {
                                         className={`p-3.5 rounded-md border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
                                           isSelected
                                             ? "bg-[#fdeee8] border-[#c89482] shadow-[0_0_20px_rgba(253,238,232,0.95),0_4px_16px_rgba(184,124,109,0.2)] ring-1 ring-[#c89482]/60"
-                                            : "bg-white/85 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
+                                            : "bg-white/75 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
                                         }`}
                                       >
                                         <div className="flex items-center gap-3 min-w-0">
@@ -512,7 +512,7 @@ function Courses() {
                                                 <span className="material-symbols-outlined text-[10px] font-bold">check</span>
                                               </div>
                                             ) : (
-                                              <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/50" />
+                                              <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/35" />
                                             )}
                                           </button>
 
