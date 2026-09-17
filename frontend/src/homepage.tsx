@@ -286,15 +286,17 @@ function Homepage() {
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                     <button
                       onClick={() => setView("dashboard")}
-                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none uppercase tracking-wider"
+                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/45 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/70 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
+                      style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif", fontWeight: 700 }}
                     >
-                      START LEARNING
+                      Start Learning
                     </button>
                     <button
                       onClick={() => setView("videos")}
-                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] font-bold text-xs md:text-sm text-[#5c3328] bg-white/40 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/65 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none uppercase tracking-wider"
+                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/45 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/70 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
+                      style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif", fontWeight: 700 }}
                     >
-                      WATCH S. KEYS COVERS
+                      Watch S. Keys Covers
                     </button>
                   </div>
                 </div>
@@ -552,11 +554,7 @@ function Homepage() {
 
                     {/* Ultra-Glossy 4-Layered Sparkling Crystal Glass Capsule Frame */}
                     <div className="relative max-w-[360px] sm:max-w-[390px] w-full flex items-center justify-center">
-                      {/* Floating Sparkling Magic Star Ornaments */}
-                      <span className="absolute -top-3 -left-2 text-2xl text-white drop-shadow-[0_0_12px_rgba(255,255,255,1)] animate-pulse pointer-events-none z-30">✨</span>
-                      <span className="absolute top-1/4 -right-4 text-xl text-[#fdeee8] drop-shadow-[0_0_14px_rgba(255,255,255,1)] animate-pulse pointer-events-none z-30" style={{ animationDelay: '500ms' }}>✦</span>
-                      <span className="absolute bottom-8 -left-4 text-2xl text-[#f5d6cb] drop-shadow-[0_0_15px_rgba(255,255,255,1)] animate-pulse pointer-events-none z-30" style={{ animationDelay: '1000ms' }}>✨</span>
-                      <span className="absolute -bottom-2 right-6 text-xl text-white drop-shadow-[0_0_12px_rgba(255,255,255,1)] animate-pulse pointer-events-none z-30" style={{ animationDelay: '1500ms' }}>✦</span>
+
 
                       {/* Layer 1: Outer Ultra-Bright Glass Shell with Glowing White-Peach Halo */}
                       <div className="relative p-3 rounded-[240px] bg-white/45 backdrop-blur-xl border-2 border-white/95 shadow-[0_25px_70px_rgba(184,124,109,0.2),0_0_50px_rgba(255,255,255,0.95),0_0_25px_rgba(253,238,232,0.9),inset_0_2px_8px_rgba(255,255,255,1)] w-full">
