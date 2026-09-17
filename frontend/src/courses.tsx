@@ -436,68 +436,25 @@ function Courses() {
                           <div className="lg:col-span-7 flex flex-col gap-3">
                             <div className="bg-[#1f1512] rounded-2xl border-2 border-[#e8cdc1] overflow-hidden shadow-xl relative group">
                               <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
-                                <img
-                                  src="/glowing-3d-piano-keys.png"
-                                  alt={currentLesson.title}
-                                  className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/40" />
+                                <video
+                                  key={currentLessonKey}
+                                  controls
+                                  playsInline
+                                  poster="/glowing-3d-piano-keys.png"
+                                  className="w-full h-full object-cover"
+                                >
+                                  <source src="/dummy-piano-lesson.mp4" type="video/mp4" />
+                                  Your browser does not support the video tag.
+                                </video>
 
                                 {/* Top Badge Bar inside Video Screen (Clean code badge only) */}
-                                <div className="absolute top-3 left-3 flex items-center gap-2 text-white text-xs z-10">
-                                  {currentLesson.code && (
-                                    <span className="px-2.5 py-0.5 rounded-md bg-black/60 backdrop-blur-md font-mono font-bold border border-white/30 text-[#f8e3db]">
+                                {currentLesson.code && (
+                                  <div className="absolute top-3 left-3 pointer-events-none z-10">
+                                    <span className="px-2.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md font-mono text-xs font-bold border border-white/30 text-[#f8e3db]">
                                       {currentLesson.code}
                                     </span>
-                                  )}
-                                </div>
-
-                                {/* Center Play Button */}
-                                <button 
-                                  onClick={() => setActiveVideo({
-                                    code: currentLesson.code,
-                                    title: currentLesson.title,
-                                    topicTitle: topic.title,
-                                    levelNumber: activeLevel.number,
-                                    pdf: currentLesson.pdf
-                                  })}
-                                  className="relative z-10 w-16 h-16 rounded-full bg-white/30 backdrop-blur-md border border-white/60 flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#b86d5c] transition-all duration-300 cursor-pointer"
-                                  title="Play Fullscreen Video"
-                                >
-                                  <span className="material-symbols-outlined text-white text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                                    play_arrow
-                                  </span>
-                                </button>
-
-                                {/* Controls Bar */}
-                                <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-col gap-1.5 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white text-xs z-10">
-                                  <div className="w-full h-1 bg-white/30 rounded-full cursor-pointer overflow-hidden">
-                                    <div className="w-1/3 h-full bg-[#e8b4a2] rounded-full" />
                                   </div>
-                                  <div className="flex items-center justify-between text-[11px]">
-                                    <div className="flex items-center gap-2.5">
-                                      <span className="material-symbols-outlined text-sm cursor-pointer hover:text-[#e8b4a2]" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
-                                      <span className="material-symbols-outlined text-sm cursor-pointer hover:text-[#e8b4a2]">volume_up</span>
-                                      <span className="font-mono text-[10px] text-white/80">04:20 / 14:10</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      <span className="material-symbols-outlined text-sm cursor-pointer hover:text-[#e8b4a2]">settings</span>
-                                      <span 
-                                        onClick={() => setActiveVideo({
-                                          code: currentLesson.code,
-                                          title: currentLesson.title,
-                                          topicTitle: topic.title,
-                                          levelNumber: activeLevel.number,
-                                          pdf: currentLesson.pdf
-                                        })}
-                                        className="material-symbols-outlined text-sm cursor-pointer hover:text-[#e8b4a2]"
-                                        title="Fullscreen"
-                                      >
-                                        fullscreen
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
+                                )}
                               </div>
 
                               {/* Footer Meta under Video Screen */}
@@ -658,38 +615,19 @@ function Courses() {
               </button>
             </div>
 
-            {/* Simulated Video Player Box */}
-            <div className="relative aspect-video bg-black flex items-center justify-center group overflow-hidden">
-              <img
-                src="/glowing-3d-piano-keys.png"
-                alt="Video Poster"
-                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
-
-              <div className="relative z-10 w-16 h-16 rounded-full bg-white/30 backdrop-blur-md border border-white/50 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-white/40 transition-all duration-300 cursor-pointer">
-                <span className="material-symbols-outlined text-white text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                  play_arrow
-                </span>
-              </div>
-
-              {/* Player Bottom Control Bar */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-col gap-2 bg-gradient-to-t from-black/90 to-transparent text-white text-xs">
-                <div className="w-full h-1 bg-white/30 rounded-full cursor-pointer">
-                  <div className="w-1/3 h-full bg-[#e8cdc1] rounded-full"></div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="material-symbols-outlined cursor-pointer hover:text-[#e8cdc1]" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
-                    <span className="material-symbols-outlined cursor-pointer hover:text-[#e8cdc1]">volume_up</span>
-                    <span>04:20 / 14:10</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="material-symbols-outlined cursor-pointer hover:text-[#e8cdc1]">settings</span>
-                    <span className="material-symbols-outlined cursor-pointer hover:text-[#e8cdc1]">fullscreen</span>
-                  </div>
-                </div>
-              </div>
+            {/* HTML5 Video Player Box */}
+            <div className="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
+              <video
+                key={activeVideo.title}
+                controls
+                autoPlay
+                playsInline
+                poster="/glowing-3d-piano-keys.png"
+                className="w-full h-full object-cover"
+              >
+                <source src="/dummy-piano-lesson.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Modal Bottom Bar */}
