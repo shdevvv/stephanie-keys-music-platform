@@ -255,9 +255,9 @@ function Courses() {
                 <div
                   key={level.number}
                   onClick={() => handleSelectLevel(level.number)}
-                  className="group relative flex flex-col justify-between p-6 rounded-2xl cursor-pointer bg-white hover:bg-[#fdeee8] transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.3)] overflow-hidden"
+                  className="group relative flex flex-col justify-between p-6 rounded-2xl cursor-pointer bg-white/50 backdrop-blur-md hover:bg-white/75 transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.3)] overflow-hidden"
                   style={{
-                    border: '2px solid #e8cdc1',
+                    border: '1.5px solid #e8cdc1',
                     boxShadow: '0 20px 38px -6px rgba(184, 124, 109, 0.22), 0 10px 18px -4px rgba(166, 95, 80, 0.14)'
                   }}
                 >
@@ -265,7 +265,7 @@ function Courses() {
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
                       <span 
-                        className="px-3.5 py-1 rounded-full text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white border border-[#e8cdc1] shadow-xs"
+                        className="px-3.5 py-1 rounded-full text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white/75 backdrop-blur-xs border border-[#e8cdc1] shadow-xs"
                         style={{
                           fontFamily: "'Cinzel', serif"
                         }}
@@ -335,7 +335,7 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-16 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="bg-white/80 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-2xl p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
+            className="bg-white/50 backdrop-blur-md border-[1.5px] border-[#e8cdc1] rounded-2xl p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
             style={{
               boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
             }}
@@ -348,7 +348,7 @@ function Courses() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span 
-                      className="px-3.5 py-0.5 rounded-full text-xs font-bold text-[#6e4336] bg-white/90 border border-[#e8cdc1] shadow-xs"
+                      className="px-3.5 py-0.5 rounded-full text-xs font-bold text-[#6e4336] bg-white/75 backdrop-blur-xs border border-[#e8cdc1] shadow-xs"
                       style={{ fontFamily: "'Cinzel', serif" }}
                     >
                       Level {activeLevel.number}
@@ -368,15 +368,15 @@ function Courses() {
 
                 {/* Quick Info Metrics (Inline beside Level title!) */}
                 <div className="flex items-center flex-wrap gap-2.5 sm:gap-3 text-xs text-[#6e564c] font-medium">
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/75 backdrop-blur-xs border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Modules:</span>
                     <span className="font-bold text-[#341f18]">{activeLevel.topics.length}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/75 backdrop-blur-xs border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Video:</span>
                     <span className="font-bold text-[#341f18]">{getTotalLessons(activeLevel)}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
+                  <span className="flex items-center gap-1.5 bg-white/75 backdrop-blur-xs border border-[#e8cdc1] px-3 py-1.5 rounded-xl shadow-2xs">
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Badge Reward:</span>
                     <span className="font-bold text-[#6e4336]">🏆 {activeLevel.badge.name}</span>
                   </span>
@@ -404,7 +404,7 @@ function Courses() {
               return (
                 <div
                   key={topicKey}
-                  className="bg-white/85 backdrop-blur-xl border-[1.5px] border-[#e8cdc1] rounded-2xl overflow-hidden transition-all duration-300"
+                  className="bg-white/50 backdrop-blur-md border-[1.5px] border-[#e8cdc1] rounded-2xl overflow-hidden transition-all duration-300"
                   style={{
                     boxShadow: "0 12px 35px rgba(184, 124, 109, 0.14), 0 0 20px rgba(255, 255, 255, 0.95), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
                   }}
