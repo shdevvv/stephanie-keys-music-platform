@@ -61,6 +61,45 @@ const PRICING_WHITE_SPARKLES = [
   { left: "83%", size: 7, duration: "11.5s", delay: "2.7s", type: "dot" }
 ];
 
+const SmoothTypewriterText = ({ text, duration = 400 }: { text: string; duration?: number }) => {
+  const [displayText, setDisplayText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    setDisplayText("");
+    setIsTyping(true);
+    if (!text) return;
+
+    let current = 0;
+    const total = text.length;
+    const intervalTime = 10;
+    const totalSteps = Math.max(8, Math.floor(duration / intervalTime));
+    const charsPerStep = Math.max(1, Math.ceil(total / totalSteps));
+
+    const timer = setInterval(() => {
+      current += charsPerStep;
+      if (current >= total) {
+        setDisplayText(text);
+        setIsTyping(false);
+        clearInterval(timer);
+      } else {
+        setDisplayText(text.slice(0, current));
+      }
+    }, intervalTime);
+
+    return () => clearInterval(timer);
+  }, [text, duration]);
+
+  return (
+    <span>
+      {displayText}
+      {isTyping && (
+        <span className="inline-block w-[2px] h-[0.9em] bg-[#a06354] ml-0.5 align-baseline animate-pulse rounded-full opacity-80" />
+      )}
+    </span>
+  );
+};
+
 function Homepage() {
   const [view, setView] = useState<ViewType>("home");
 
@@ -1014,14 +1053,39 @@ function Homepage() {
                             </div>
                           </div>
 
-                          {/* Active Question & Answer Single Card (Clean Rose Gold Border) */}
+                          {/* Inline CSS Keyframe for Toast Notification Entrance from Left */}
+                          <style dangerouslySetInnerHTML={{
+                            __html: `
+                              @keyframes faqToastFromLeft {
+                                0% {
+                                  opacity: 0;
+                                  transform: translateX(-40px) scale(0.97);
+                                  filter: blur(3px);
+                                }
+                                65% {
+                                  opacity: 1;
+                                  transform: translateX(4px) scale(1.003);
+                                  filter: blur(0px);
+                                }
+                                100% {
+                                  opacity: 1;
+                                  transform: translateX(0) scale(1);
+                                  filter: blur(0px);
+                                }
+                              }
+                            `
+                          }} />
+
+                          {/* Active Question & Answer Single Card (Toast Notification Slide from Left + Clean Rose Gold Border) */}
                           <div
+                            key={activeFaq}
                             style={{
                               backgroundColor: "rgba(255, 248, 244, 0.88)",
                               border: "2px solid #c48b7c",
                               boxShadow: "0 0 12px rgba(196, 139, 124, 0.25)",
+                              animation: "faqToastFromLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards",
                             }}
-                            className="rounded-xl p-4 md:p-5 backdrop-blur-md transition-all duration-300"
+                            className="rounded-xl p-4 md:p-5 backdrop-blur-md"
                           >
                             {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
                             <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
@@ -1062,18 +1126,18 @@ function Homepage() {
                               </div>
                             </div>
 
-                            {/* Question Title (Soft, Calm & Elegant 'Kalem' Typography) */}
+                            {/* Question Title (Soft, Calm & Elegant 'Kalem' Typography with Smooth Letter-by-Letter Reveal) */}
                             <h3
                               className="mt-3 text-sm md:text-base text-[#5E3A2E] font-semibold leading-relaxed tracking-normal"
                               style={{ fontFamily: "'Playfair Display', serif" }}
                             >
-                              {currentItem.question}
+                              <SmoothTypewriterText text={currentItem.question} duration={350} />
                             </h3>
 
-                            {/* Answer Box (Brighter Soft Translucent Layer, Calm Medium Chocolate Text) */}
+                            {/* Answer Box (Brighter Soft Translucent Layer, Smooth Letter-by-Letter Text Reveal) */}
                             <div className="mt-3 pl-3.5 border-l-[3.5px] border-[#a06354] bg-[#fffaf7]/92 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-xs">
                               <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-normal">
-                                {currentItem.answer}
+                                <SmoothTypewriterText text={currentItem.answer} duration={650} />
                               </p>
                             </div>
                           </div>
