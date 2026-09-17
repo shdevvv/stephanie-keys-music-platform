@@ -3,6 +3,27 @@ import { levels as localLevels } from "./courseData";
 import type { Level } from "./courseData";
 import { fetchCourseTree } from "./services/courseApi";
 
+const LESSON_VIDEOS = [
+  "/dummy-piano-lesson.mp4",
+  "/videos/pricing.mp4",
+  "/videos/cathedral1.mp4",
+  "/videos/sheets.mp4",
+  "/videos/fountain.mp4",
+  "/videos/cave.mp4",
+  "/videos/bible.mp4",
+];
+
+const LESSON_POSTERS = [
+  "/glowing-3d-piano-keys.png",
+  "/hero-piano-cozy.png",
+  "/cozy-piano-bg.png",
+  "/piano-warm-room.jpg",
+  "/hero-palace-piano.jpg",
+  "/grand-marble-hall.jpg",
+  "/pink-piano-hero.jpg",
+];
+
+
 function Courses() {
   const [dbLevels, setDbLevels] = useState<Level[]>(localLevels);
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
@@ -426,7 +447,10 @@ function Courses() {
                   {isExpanded && (() => {
                     const activeLessonIdx = selectedLessonMap[topicKey] ?? 0;
                     const currentLesson = topic.lessons[activeLessonIdx] || topic.lessons[0];
-                    const currentLessonKey = `${activeLevel.number}-${topic.title}-${currentLesson.code || currentLesson.title}`;
+                    const lessonKeyIndex = (activeLessonIdx + topicIdx) % LESSON_VIDEOS.length;
+                    const videoSrc = (currentLesson as any).video || LESSON_VIDEOS[lessonKeyIndex];
+                    const posterSrc = (currentLesson as any).poster || LESSON_POSTERS[lessonKeyIndex];
+                    const currentLessonKey = `${activeLevel.number}-${topic.title}-${currentLesson.code || currentLesson.title}-${videoSrc}`;
 
                     return (
                       <div className="border-t border-[#e8cdc1]/40 bg-[#fdf9f7]/60 backdrop-blur-md p-4 md:p-6">
@@ -440,17 +464,17 @@ function Courses() {
                                   key={currentLessonKey}
                                   controls
                                   playsInline
-                                  poster="/glowing-3d-piano-keys.png"
+                                  poster={posterSrc}
                                   className="w-full h-full object-cover"
                                 >
-                                  <source src="/dummy-piano-lesson.mp4" type="video/mp4" />
+                                  <source src={videoSrc} type="video/mp4" />
                                   Your browser does not support the video tag.
                                 </video>
                               </div>
                             </div>
                           </div>
 
-                          {/* RIGHT COLUMN: Lesson List (Click to switch video) */}
+                          {/* RIGHT COLUMN: Scrollable Lesson List (Click to switch video) */}
                           <div className="lg:col-span-5 flex flex-col gap-2.5">
                             <div className="flex items-center justify-between mb-1 px-1">
                               <span className="text-xs font-bold text-[#6e4336] uppercase tracking-wider flex items-center gap-1.5">
@@ -460,7 +484,9 @@ function Courses() {
                               <span className="text-[11px] text-[#7a645b] italic font-medium">Click lesson to play</span>
                             </div>
 
-                            <div className="space-y-2 max-h-[440px] overflow-y-auto pr-1">
+                            {/* Scrollable Container with Custom Scrollbar & Compact Height */}
+                            <div className="space-y-2 max-h-[380px] overflow-y-auto pr-2 custom-scrollbar">
+
                               {topic.lessons.map((lesson, lessonIdx) => {
                                 const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
                                 const isCompleted = isLessonCompleted(lessonKey);

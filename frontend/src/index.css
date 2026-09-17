@@ -332,3 +332,20 @@ footer *::-moz-selection {
 .animate-modal-card {
   animation: modalCardSmoothIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Custom Rose-Gold Scrollbar for Lesson Lists */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(248, 227, 219, 0.4);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(200, 148, 130, 0.7);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(138, 104, 88, 0.9);
+}
+
