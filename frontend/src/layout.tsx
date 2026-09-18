@@ -748,8 +748,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         <nav
           className={`sticky top-0 w-full z-50 transition-all duration-300 ${
             isScrolled
-              ? "bg-white/65 backdrop-blur-lg border-b border-[#e2b0a4]/40 shadow-[0_4px_25px_rgba(184,124,109,0.12)]"
-              : "bg-white/35 backdrop-blur-md border-b border-[#e8cdc1]/20"
+              ? "bg-[#fff8f6]/45 backdrop-blur-lg border-b border-[#e2b0a4]/30 shadow-[0_4px_25px_rgba(184,124,109,0.08)]"
+              : "bg-[#fff8f6]/15 backdrop-blur-md border-b border-[#e8cdc1]/15"
           }`}
         >
           <div className="flex justify-between items-center h-20 md:h-24 px-3 sm:px-6 md:px-12 w-full">
