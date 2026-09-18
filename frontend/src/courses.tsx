@@ -35,7 +35,6 @@ function Courses() {
     pdf?: string;
   } | null>(null);
   const [showPlacementTest, setShowPlacementTest] = useState(false);
-  const [showQuizModal, setShowQuizModal] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCourseTree().then(courses => {

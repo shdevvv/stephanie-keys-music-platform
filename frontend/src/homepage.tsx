@@ -3,7 +3,6 @@ import Layout, { type ViewType } from "./layout";
 import CoversSheets from "./coversSheets";
 import Dashboard from "./dashboard";
 import Courses from "./courses";
-import FAQ from "./faq";
 import PrivacyPolicy from "./privacyPolicy";
 import TermsOfService from "./termsOfService";
 import SignUp from "./signUp";
@@ -244,8 +243,6 @@ function Homepage() {
         return <UserProfile onNavigate={handleNavigate} initialTab="profile" />;
       case "subscription":
         return <UserProfile onNavigate={handleNavigate} initialTab="subscription" />;
-      case "faq":
-        return <FAQ />;
       case "privacy":
         return <PrivacyPolicy />;
       case "terms":
@@ -837,7 +834,7 @@ function Homepage() {
               </div>
 
               {/* Section 4: FAQ Section */}
-              <section className="pt-16 pb-6 px-6 relative z-10">
+              <section id="faq-section" className="pt-16 pb-6 px-6 relative z-10">
                 <style dangerouslySetInnerHTML={{
                   __html: `
                   @keyframes faqSparkle1 {

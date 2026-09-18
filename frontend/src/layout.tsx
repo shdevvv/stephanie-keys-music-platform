@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import type { ReactNode } from "react";
-import { GlobalSearchInput } from './components/GlobalSearchInput';
+import { GlobalSearchInput } from "./components/GlobalSearchInput";
 
 function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
@@ -9,7 +9,17 @@ function CustomCursor() {
   const mousePos = useRef({ x: -100, y: -100 });
   const ringPos = useRef({ x: -100, y: -100 });
   const isHovering = useRef(false);
-  const particles = useRef<Array<{ x: number; y: number; vx: number; vy: number; life: number; maxLife: number; size: number }>>([]);
+  const particles = useRef<
+    Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      life: number;
+      maxLife: number;
+      size: number;
+    }>
+  >([]);
   const lastSpawn = useRef(0);
   const animFrameRef = useRef<number>(0);
 
@@ -27,18 +37,18 @@ function CustomCursor() {
       ring.style.width = `${ringSize}px`;
       ring.style.height = `${ringSize}px`;
       ring.style.transform = `translate(${ringPos.current.x}px, ${ringPos.current.y}px) translate(-50%, -50%)`;
-      ring.style.opacity = isHovering.current ? '0.85' : '0.45';
+      ring.style.opacity = isHovering.current ? "0.85" : "0.45";
     }
 
     if (glow) {
       glow.style.transform = `translate(${ringPos.current.x}px, ${ringPos.current.y}px) translate(-50%, -50%)`;
-      glow.style.opacity = isHovering.current ? '0.45' : '0.2';
+      glow.style.opacity = isHovering.current ? "0.45" : "0.2";
     }
 
     // Trail particles on canvas
     const canvas = trailCanvasRef.current;
     if (canvas) {
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       if (ctx) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -67,7 +77,7 @@ function CustomCursor() {
         }
 
         // Update and draw particles (white/shining)
-        particles.current = particles.current.filter(p => {
+        particles.current = particles.current.filter((p) => {
           p.x += p.vx;
           p.y += p.vy;
           p.vy -= 0.01;
@@ -105,14 +115,22 @@ function CustomCursor() {
 
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest('a, button, [role="button"], .cursor-pointer, .hover-move, input, select, textarea, [onclick]')) {
+      if (
+        target.closest(
+          'a, button, [role="button"], .cursor-pointer, .hover-move, input, select, textarea, [onclick]',
+        )
+      ) {
         isHovering.current = true;
       }
     };
 
     const onMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest('a, button, [role="button"], .cursor-pointer, .hover-move, input, select, textarea, [onclick]')) {
+      if (
+        target.closest(
+          'a, button, [role="button"], .cursor-pointer, .hover-move, input, select, textarea, [onclick]',
+        )
+      ) {
         isHovering.current = false;
       }
     };
@@ -121,26 +139,27 @@ function CustomCursor() {
       mousePos.current = { x: -100, y: -100 };
     };
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseover', onMouseOver);
-    document.addEventListener('mouseout', onMouseOut);
-    document.documentElement.addEventListener('mouseleave', onMouseLeave);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseover", onMouseOver);
+    document.addEventListener("mouseout", onMouseOut);
+    document.documentElement.addEventListener("mouseleave", onMouseLeave);
 
     animFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseover', onMouseOver);
-      document.removeEventListener('mouseout', onMouseOut);
-      document.documentElement.removeEventListener('mouseleave', onMouseLeave);
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseover", onMouseOver);
+      document.removeEventListener("mouseout", onMouseOut);
+      document.documentElement.removeEventListener("mouseleave", onMouseLeave);
       cancelAnimationFrame(animFrameRef.current);
     };
   }, [animate]);
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         /* Text selection highlight */
         ::selection {
           background-color: #ffffff !important;
@@ -156,18 +175,20 @@ function CustomCursor() {
           0%, 100% { opacity: 0.35; border-color: rgba(255,255,255,0.35); }
           50% { opacity: 0.7; border-color: rgba(255,255,255,0.6); }
         }
-      `}} />
+      `,
+        }}
+      />
 
       {/* Sparkle trail canvas */}
       <canvas
         ref={trailCanvasRef}
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
-          width: '100vw',
-          height: '100vh',
-          pointerEvents: 'none',
+          width: "100vw",
+          height: "100vh",
+          pointerEvents: "none",
           zIndex: 99997,
         }}
       />
@@ -176,17 +197,18 @@ function CustomCursor() {
       <div
         ref={glowRef}
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 40%, transparent 70%)',
-          pointerEvents: 'none',
+          width: "60px",
+          height: "60px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 40%, transparent 70%)",
+          pointerEvents: "none",
           zIndex: 99997,
-          transition: 'opacity 0.3s ease',
-          willChange: 'transform',
+          transition: "opacity 0.3s ease",
+          willChange: "transform",
         }}
       />
 
@@ -194,18 +216,19 @@ function CustomCursor() {
       <div
         ref={ringRef}
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
-          width: '32px',
-          height: '32px',
-          borderRadius: '50%',
-          border: '1.5px solid rgba(255, 255, 255, 0.4)',
-          pointerEvents: 'none',
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: "1.5px solid rgba(255, 255, 255, 0.4)",
+          pointerEvents: "none",
           zIndex: 99998,
-          transition: 'width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease',
-          animation: 'ringShimmer 2.5s ease-in-out infinite',
-          willChange: 'transform',
+          transition:
+            "width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease",
+          animation: "ringShimmer 2.5s ease-in-out infinite",
+          willChange: "transform",
         }}
       />
     </>
@@ -221,7 +244,6 @@ export type ViewType =
   | "courses"
   | "sessions"
   | "forums"
-  | "faq"
   | "privacy"
   | "terms"
   | "signup"
@@ -246,7 +268,12 @@ export interface LayoutProps {
 /* -------------------------------------------------------------------------- */
 
 const NavHomeIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <defs>
       <linearGradient id="luxHomeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#FFFFFF" />
@@ -276,8 +303,17 @@ const NavHomeIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
   </svg>
 );
 
-const NavVideosIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+const NavVideosIcon = ({
+  className = "w-3.5 h-3.5",
+}: {
+  className?: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <defs>
       <linearGradient id="luxVidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#FFFFFF" />
@@ -317,8 +353,17 @@ const NavVideosIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) =>
   </svg>
 );
 
-const NavLearnIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+const NavLearnIcon = ({
+  className = "w-3.5 h-3.5",
+}: {
+  className?: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <defs>
       <linearGradient id="luxLearnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#FFFFFF" />
@@ -339,13 +384,28 @@ const NavLearnIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => 
       strokeWidth="1.2"
       strokeLinecap="round"
     />
-    <path d="M7 9L7.8 11.2L10 12L7.8 12.8L7 15L6.2 12.8L4 12L6.2 11.2L7 9Z" fill="#FFF5F0" />
-    <path d="M17 9L17.8 11.2L20 12L17.8 12.8L17 15L16.2 12.8L14 12L16.2 11.2L17 9Z" fill="#FFF5F0" />
+    <path
+      d="M7 9L7.8 11.2L10 12L7.8 12.8L7 15L6.2 12.8L4 12L6.2 11.2L7 9Z"
+      fill="#FFF5F0"
+    />
+    <path
+      d="M17 9L17.8 11.2L20 12L17.8 12.8L17 15L16.2 12.8L14 12L16.2 11.2L17 9Z"
+      fill="#FFF5F0"
+    />
   </svg>
 );
 
-const NavProgressIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+const NavProgressIcon = ({
+  className = "w-3.5 h-3.5",
+}: {
+  className?: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <defs>
       <linearGradient id="luxProgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#FFFFFF" />
@@ -366,18 +426,51 @@ const NavProgressIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) 
       strokeWidth="0.6"
     />
     {/* Inner Specular Facet Lines */}
-    <path d="M12 2V14M3.5 7L12 14M20.5 7L12 14" stroke="#FFFFFF" strokeWidth="0.5" strokeOpacity="0.7" />
+    <path
+      d="M12 2V14M3.5 7L12 14M20.5 7L12 14"
+      stroke="#FFFFFF"
+      strokeWidth="0.5"
+      strokeOpacity="0.7"
+    />
     {/* Center Glossy Diamond Sparkle */}
-    <circle cx="12" cy="9.5" r="2" fill="url(#luxProgGold)" stroke="#7A3D2E" strokeWidth="0.4" />
+    <circle
+      cx="12"
+      cy="9.5"
+      r="2"
+      fill="url(#luxProgGold)"
+      stroke="#7A3D2E"
+      strokeWidth="0.4"
+    />
     <circle cx="11.4" cy="8.9" r="0.6" fill="#FFFFFF" />
     {/* Ascending Royal Base Pedestal */}
-    <path d="M7 19.5H17L18 22H6L7 19.5Z" fill="#673124" stroke="#7A3D2E" strokeWidth="0.4" />
-    <line x1="8" y1="20.8" x2="16" y2="20.8" stroke="#FFEAE3" strokeWidth="0.6" />
+    <path
+      d="M7 19.5H17L18 22H6L7 19.5Z"
+      fill="#673124"
+      stroke="#7A3D2E"
+      strokeWidth="0.4"
+    />
+    <line
+      x1="8"
+      y1="20.8"
+      x2="16"
+      y2="20.8"
+      stroke="#FFEAE3"
+      strokeWidth="0.6"
+    />
   </svg>
 );
 
-const NavSheetsIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+const NavSheetsIcon = ({
+  className = "w-3.5 h-3.5",
+}: {
+  className?: string;
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <defs>
       <linearGradient id="luxSheetGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#FFFFFF" />
@@ -405,12 +498,49 @@ const NavSheetsIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) =>
       strokeWidth="0.6"
     />
     {/* Musical Staff Lines on Sheet */}
-    <line x1="7" y1="10" x2="12" y2="10" stroke="#FFFFFF" strokeWidth="0.7" strokeOpacity="0.9" />
-    <line x1="7" y1="12.5" x2="16" y2="12.5" stroke="#FFFFFF" strokeWidth="0.7" strokeOpacity="0.9" />
-    <line x1="7" y1="15" x2="16" y2="15" stroke="#FFFFFF" strokeWidth="0.7" strokeOpacity="0.9" />
-    <line x1="7" y1="17.5" x2="14" y2="17.5" stroke="#FFFFFF" strokeWidth="0.7" strokeOpacity="0.9" />
+    <line
+      x1="7"
+      y1="10"
+      x2="12"
+      y2="10"
+      stroke="#FFFFFF"
+      strokeWidth="0.7"
+      strokeOpacity="0.9"
+    />
+    <line
+      x1="7"
+      y1="12.5"
+      x2="16"
+      y2="12.5"
+      stroke="#FFFFFF"
+      strokeWidth="0.7"
+      strokeOpacity="0.9"
+    />
+    <line
+      x1="7"
+      y1="15"
+      x2="16"
+      y2="15"
+      stroke="#FFFFFF"
+      strokeWidth="0.7"
+      strokeOpacity="0.9"
+    />
+    <line
+      x1="7"
+      y1="17.5"
+      x2="14"
+      y2="17.5"
+      stroke="#FFFFFF"
+      strokeWidth="0.7"
+      strokeOpacity="0.9"
+    />
     {/* Glossy Musical Note Inset (Eighth Note) */}
-    <path d="M16 9.5V14.5C15.6 14.2 15.1 14 14.5 14C13.1 14 12 14.9 12 16C12 17.1 13.1 18 14.5 18C15.9 18 17 17.1 17 16V11.2L19 10.5V9L16 9.5Z" fill="#FFF2EE" stroke="#632F23" strokeWidth="0.4" />
+    <path
+      d="M16 9.5V14.5C15.6 14.2 15.1 14 14.5 14C13.1 14 12 14.9 12 16C12 17.1 13.1 18 14.5 18C15.9 18 17 17.1 17 16V11.2L19 10.5V9L16 9.5Z"
+      fill="#FFF2EE"
+      stroke="#632F23"
+      strokeWidth="0.4"
+    />
   </svg>
 );
 
@@ -420,7 +550,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     () => localStorage.getItem("isLoggedIn") !== "false",
   );
   const [userName, setUserName] = useState<string>(() => {
-    return localStorage.getItem("guest_name") || localStorage.getItem("user_name") || "StephanieHalim06";
+    return (
+      localStorage.getItem("guest_name") ||
+      localStorage.getItem("user_name") ||
+      "StephanieHalim06"
+    );
   });
   const [cartCount, setCartCount] = useState(0);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -437,7 +571,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(event.target as Node)
+      ) {
         setIsProfileMenuOpen(false);
       }
     };
@@ -449,10 +586,13 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
   const updateCartCount = () => {
     try {
-      const saved = localStorage.getItem('phanilie_cart');
+      const saved = localStorage.getItem("phanilie_cart");
       if (saved) {
         const cartArr = JSON.parse(saved);
-        const count = cartArr.reduce((acc: number, item: any) => acc + item.quantity, 0);
+        const count = cartArr.reduce(
+          (acc: number, item: any) => acc + item.quantity,
+          0,
+        );
         setCartCount(count);
       } else {
         setCartCount(0);
@@ -464,12 +604,12 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
   useEffect(() => {
     updateCartCount();
-    window.addEventListener('storage', updateCartCount);
-    return () => window.removeEventListener('storage', updateCartCount);
+    window.addEventListener("storage", updateCartCount);
+    return () => window.removeEventListener("storage", updateCartCount);
   }, []);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
+  const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [isToastPulsing, setIsToastPulsing] = useState(false);
 
@@ -477,19 +617,17 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     setIsMobileMenuOpen(false);
   }, [view]);
 
-
-
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pulseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleOpenSlideCart = () => {
-      onNavigate('cart');
+      onNavigate("cart");
     };
 
     const handleShowToast = (e: Event) => {
       const customEvent = e as CustomEvent;
-      const message = customEvent.detail?.message || 'Item updated';
+      const message = customEvent.detail?.message || "Item updated";
 
       if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
       if (pulseTimerRef.current) clearTimeout(pulseTimerRef.current);
@@ -507,25 +645,17 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
       }, 3000);
     };
 
-    window.addEventListener('open-slide-cart', handleOpenSlideCart);
-    window.addEventListener('show-toast', handleShowToast);
+    window.addEventListener("open-slide-cart", handleOpenSlideCart);
+    window.addEventListener("show-toast", handleShowToast);
 
     return () => {
-      window.removeEventListener('open-slide-cart', handleOpenSlideCart);
-      window.removeEventListener('show-toast', handleShowToast);
+      window.removeEventListener("open-slide-cart", handleOpenSlideCart);
+      window.removeEventListener("show-toast", handleShowToast);
       if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
       if (pulseTimerRef.current) clearTimeout(pulseTimerRef.current);
     };
   }, [onNavigate]);
 
-  // Modals for Footer links
-  const [showContactModal, setShowContactModal] = useState(false);
-  const [contactForm, setContactForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [contactSubmitted, setContactSubmitted] = useState(false);
   const [isNewsletterSent, setIsNewsletterSent] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState("");
 
@@ -537,19 +667,14 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Listen to cross-component contact triggers
-  useEffect(() => {
-    const handleOpenContact = () => setShowContactModal(true);
-    window.addEventListener("open-contact-modal", handleOpenContact);
-    return () =>
-      window.removeEventListener("open-contact-modal", handleOpenContact);
-  }, []);
-
   // Listen to storage events to sync login state across tabs/actions
   useEffect(() => {
     const syncLoginState = () => {
       setIsLoggedIn(localStorage.getItem("isLoggedIn") !== "false");
-      const currentName = localStorage.getItem("guest_name") || localStorage.getItem("user_name") || "Student";
+      const currentName =
+        localStorage.getItem("guest_name") ||
+        localStorage.getItem("user_name") ||
+        "Student";
       setUserName(currentName);
     };
     syncLoginState();
@@ -559,13 +684,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
   // Dynamically set HTML/Body background colors to prevent gaps when zoomed out
   useEffect(() => {
-    if (view === "dashboard") {
-      document.body.style.backgroundColor = "#eae3e0";
-      document.documentElement.style.backgroundColor = "#eae3e0";
-    } else {
-      document.body.style.backgroundColor = "#fff8f6";
-      document.documentElement.style.backgroundColor = "#fff8f6";
-    }
+    document.body.style.backgroundColor = "#fff8f6";
+    document.documentElement.style.backgroundColor = "#fff8f6";
     return () => {
       document.body.style.backgroundColor = "";
       document.documentElement.style.backgroundColor = "";
@@ -589,7 +709,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   };
 
   return (
-    <div className={`w-full ${view === "dashboard" ? "h-auto bg-[#eae3e0]" : "h-auto bg-[#fff8f6]"} text-[#1d1b1a] font-body-md antialiased flex flex-col`}>
+    <div className="w-full h-auto bg-[#fff8f6] text-[#1d1b1a] font-body-md antialiased flex flex-col">
       <style>{`
         ::selection,
         ::-moz-selection,
@@ -621,12 +741,14 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         }
       `}</style>
       <CustomCursor />
-      <div className={`max-w-[1440px] mx-auto w-full ${view === "dashboard" ? "h-auto bg-[#fff8f6]" : (view === "my-library" || view === "download-page" || view === "invoice" ? "h-auto bg-transparent" : "h-auto bg-[#fff8f6]")} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}>
+      <div
+        className={`max-w-[1440px] mx-auto w-full ${view === "dashboard" ? "h-auto bg-transparent" : view === "my-library" || view === "download-page" || view === "invoice" ? "h-auto bg-transparent" : "h-auto bg-[#fff8f6]"} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}
+      >
         {/* Top Navigation Bar */}
         <nav
-          className={`sticky top-0 w-full z-50 transition-all duration-300 ${isScrolled
-            ? "bg-white/92 backdrop-blur-md border-b border-[#e2b0a4]/40 shadow-[0_4px_25px_rgba(184,124,109,0.15)]"
-            : "bg-white/40 backdrop-blur-md border-b border-[#e8cdc1]/20"
+          className={`sticky top-0 w-full z-50 transition-all duration-300 bg-cover bg-center ${isScrolled
+              ? "bg-white/92 backdrop-blur-md border-b border-[#e2b0a4]/40 shadow-[0_4px_25px_rgba(184,124,109,0.15)]"
+              : "bg-white/60 backdrop-blur-md border-b border-[#e8cdc1]/20"
             }`}
         >
           <div className="flex justify-between items-center h-20 md:h-24 px-3 sm:px-6 md:px-12 w-full">
@@ -645,10 +767,12 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   className="h-8 sm:h-10 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </button>
-              <GlobalSearchInput onNavigate={(v) => {
-                onNavigate(v);
-                setIsMobileMenuOpen(false);
-              }} />
+              <GlobalSearchInput
+                onNavigate={(v) => {
+                  onNavigate(v);
+                  setIsMobileMenuOpen(false);
+                }}
+              />
             </div>
 
             {/* Right side: Nav Links + Shopping Cart & Account Dropdown */}
@@ -669,9 +793,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       Home
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
-                        view === "home" ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                      }`}
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "home"
+                          ? "scale-x-100 opacity-100"
+                          : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                        }`}
                     />
                   </span>
                 </button>
@@ -691,9 +816,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       DASHBOARD
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
-                        view === "dashboard" ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                      }`}
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "dashboard"
+                          ? "scale-x-100 opacity-100"
+                          : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                        }`}
                     />
                   </span>
                 </button>
@@ -713,9 +839,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       TUTORIALS
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
-                        view === "courses" ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                      }`}
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "courses"
+                          ? "scale-x-100 opacity-100"
+                          : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                        }`}
                     />
                   </span>
                 </button>
@@ -730,14 +857,15 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   </span>
                   <span className="relative py-0.5">
                     <span
-                      className={`${(view === "videos" || view === "library") ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
+                      className={`${view === "videos" || view === "library" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
                     >
                       S.KEYS
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
-                        (view === "videos" || view === "library") ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                      }`}
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "videos" || view === "library"
+                          ? "scale-x-100 opacity-100"
+                          : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                        }`}
                     />
                   </span>
                 </button>
@@ -757,9 +885,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       SHEETS
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
-                        view === "sheets" ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                      }`}
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "sheets"
+                          ? "scale-x-100 opacity-100"
+                          : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                        }`}
                     />
                   </span>
                 </button>
@@ -769,21 +898,29 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
               <button
                 onClick={() => onNavigate("cart")}
                 style={{
-                  background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                  boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                  background:
+                    "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                  boxShadow:
+                    "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
                   border: "1px solid #D9A998",
                 }}
                 className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-full cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.03] active:scale-95 text-white flex items-center gap-1.5 shadow-none group shrink-0"
                 aria-label="View Shopping Cart"
               >
                 {/* Classic Treble Clef (Kunci G) Icon */}
-                <svg className="w-[13px] sm:w-[15px] h-[17px] sm:h-[20px] fill-current text-white shrink-0 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 140">
+                <svg
+                  className="w-[13px] sm:w-[15px] h-[17px] sm:h-[20px] fill-current text-white shrink-0 transition-transform duration-300 group-hover:scale-105"
+                  viewBox="0 0 100 140"
+                >
                   <path d="M 54.7 115.5 C 50.5 119.3 45.3 121.2 39.7 120.7 C 33.2 120.1 27.7 116.5 24.9 110.6 C 22.2 104.9 22.8 98.3 26.4 93 C 30.5 87 37.3 83.2 44.6 82.8 L 44.6 45.8 C 41.5 47 38.6 48.9 36.1 51.3 C 30.2 57.1 27.1 64.8 27.5 73 C 27.9 81.5 32.2 89 39.3 93.4 C 41.4 94.7 42 97.5 40.7 99.6 C 39.4 101.7 36.6 102.3 34.5 101 C 25.2 95.2 19.5 85.3 19 74.2 C 18.5 63.5 22.5 53.5 30.2 45.9 C 34.2 41.9 39 39 44.3 37.4 L 44.3 25 C 44.3 20.4 46.3 16.1 49.7 13.2 C 53.5 10 58.4 8.5 63.4 9.1 C 68.4 9.7 72.8 12.5 75.5 16.7 C 78.2 20.9 78.9 26.1 77.4 30.9 C 76.1 35.1 73.2 38.6 69.3 40.6 C 67.1 41.7 64.5 41 63.4 38.8 C 62.3 36.6 63 34 65.2 32.9 C 67.7 31.6 69.6 29.4 70.4 26.7 C 71.3 23.6 70.9 20.2 69.2 17.5 C 67.5 14.8 64.6 13 61.4 12.6 C 58.1 12.2 54.9 13.2 52.4 15.3 C 50.3 17.1 49 19.8 49 22.7 L 49 36.2 C 53.7 37.3 58.1 39.6 61.8 42.9 C 67.7 48.2 71 55.5 71 63.3 C 71 71.4 67.4 78.9 61.1 83.9 C 55.3 88.5 48 90.7 40.7 90 C 42.7 87.4 46.1 85.6 49.8 84.8 L 49.8 110.7 C 53.7 110.5 57.4 108.9 60.1 106.2 C 63.8 102.6 65.9 97.6 65.9 92.4 C 65.9 88 63.6 83.8 59.7 81 C 57.5 79.4 57 76.6 58.6 74.4 C 60.2 72.2 63 71.7 65.2 73.3 C 70.7 77.3 73.9 83.5 73.9 90.1 C 73.9 99 69.9 107.5 63 113.5 C 60.6 115.6 57.7 116.5 54.7 115.5 Z M 39.7 112.5 C 43.5 112.5 46.5 109.5 46.5 105.7 C 46.5 101.9 43.5 98.9 39.7 98.9 C 35.9 98.9 32.9 101.9 32.9 105.7 C 32.9 109.5 35.9 112.5 39.7 112.5 Z" />
                 </svg>
 
                 {/* Clean Calligraphy 'Shop' Font */}
                 <span
-                  style={{ fontFamily: "'Great Vibes', 'Alex Brush', 'Playfair Display', cursive, serif" }}
+                  style={{
+                    fontFamily:
+                      "'Great Vibes', 'Alex Brush', 'Playfair Display', cursive, serif",
+                  }}
                   className="text-sm sm:text-[16.5px] font-semibold text-white tracking-wide leading-none pt-0.5"
                 >
                   Shop
@@ -791,9 +928,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
                 {/* Transparent Count Badge with Thin White Border */}
                 {cartCount > 0 && (
-                  <span
-                    className="bg-transparent text-white border border-white/85 font-sans font-bold text-[10px] sm:text-[11px] px-1.5 min-w-[18px] sm:min-w-[20px] h-4.5 sm:h-5 rounded-[4px] flex items-center justify-center text-center ml-0.5 shadow-2xs leading-none select-none shrink-0 transition-transform duration-300 group-hover:scale-105"
-                  >
+                  <span className="bg-transparent text-white border border-white/85 font-sans font-bold text-[10px] sm:text-[11px] px-1.5 min-w-[18px] sm:min-w-[20px] h-4.5 sm:h-5 rounded-[4px] flex items-center justify-center text-center ml-0.5 shadow-2xs leading-none select-none shrink-0 transition-transform duration-300 group-hover:scale-105">
                     {cartCount}
                   </span>
                 )}
@@ -806,16 +941,26 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   <button
                     onClick={() => setIsProfileMenuOpen((prev) => !prev)}
                     style={{
-                      background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
+                      background:
+                        "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
                       border: "1.5px solid transparent",
                       boxShadow: "none",
                     }}
                     className="relative h-8.5 sm:h-9.5 px-2.5 sm:px-3 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center gap-1 sm:gap-1.5 shadow-none"
                   >
                     {/* Glossy Specular Rose-Gold Semiquaver Icon */}
-                    <svg className="w-3.5 h-4 shrink-0 block" viewBox="0 0 100 130">
+                    <svg
+                      className="w-3.5 h-4 shrink-0 block"
+                      viewBox="0 0 100 130"
+                    >
                       <defs>
-                        <linearGradient id="note-glossy-gold-user" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <linearGradient
+                          id="note-glossy-gold-user"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
                           <stop offset="0%" stopColor="#FFFFFF" />
                           <stop offset="25%" stopColor="#FFF0EB" />
                           <stop offset="55%" stopColor="#E2B0A4" />
@@ -823,14 +968,38 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                           <stop offset="100%" stopColor="#8C5446" />
                         </linearGradient>
                       </defs>
-                      <ellipse cx="28" cy="98" rx="18" ry="12" transform="rotate(-25 28 98)" fill="url(#note-glossy-gold-user)" />
-                      <rect x="42" y="10" width="9" height="88" rx="2" fill="url(#note-glossy-gold-user)" />
-                      <path d="M 50 10 C 68 22, 82 42, 75 66 C 72 72, 68 76, 65 80 C 72 65, 75 48, 50 32 Z" fill="url(#note-glossy-gold-user)" />
-                      <path d="M 50 35 C 68 47, 82 67, 75 91 C 72 96, 68 100, 65 104 C 72 90, 75 73, 50 57 Z" fill="url(#note-glossy-gold-user)" />
+                      <ellipse
+                        cx="28"
+                        cy="98"
+                        rx="18"
+                        ry="12"
+                        transform="rotate(-25 28 98)"
+                        fill="url(#note-glossy-gold-user)"
+                      />
+                      <rect
+                        x="42"
+                        y="10"
+                        width="9"
+                        height="88"
+                        rx="2"
+                        fill="url(#note-glossy-gold-user)"
+                      />
+                      <path
+                        d="M 50 10 C 68 22, 82 42, 75 66 C 72 72, 68 76, 65 80 C 72 65, 75 48, 50 32 Z"
+                        fill="url(#note-glossy-gold-user)"
+                      />
+                      <path
+                        d="M 50 35 C 68 47, 82 67, 75 91 C 72 96, 68 100, 65 104 C 72 90, 75 73, 50 57 Z"
+                        fill="url(#note-glossy-gold-user)"
+                      />
                     </svg>
 
                     <span
-                      style={{ fontFamily: "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive", letterSpacing: "0.01em" }}
+                      style={{
+                        fontFamily:
+                          "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive",
+                        letterSpacing: "0.01em",
+                      }}
                       className="text-sm sm:text-[15px] font-bold text-[#6e4337] truncate max-w-[125px] sm:max-w-[155px] xl:max-w-[175px]"
                     >
                       {userName}
@@ -838,7 +1007,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
                     {/* Royal Ruby Red Dropdown Arrow with Smooth Click Rotation */}
                     <svg
-                      className={`w-3.5 h-3.5 shrink-0 ml-0.5 transition-transform duration-300 ease-out ${isProfileMenuOpen ? 'rotate-180' : ''}`}
+                      className={`w-3.5 h-3.5 shrink-0 ml-0.5 transition-transform duration-300 ease-out ${isProfileMenuOpen ? "rotate-180" : ""}`}
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="#800A1D"
@@ -852,15 +1021,15 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
                   {/* Dropdown Menu */}
                   <div
-                    className={`absolute right-0 top-full pt-2 w-44 flex flex-col z-50 transition-all duration-300 ease-out ${
-                      isProfileMenuOpen
+                    className={`absolute right-0 top-full pt-2 w-44 flex flex-col z-50 transition-all duration-300 ease-out ${isProfileMenuOpen
                         ? "pointer-events-auto opacity-100 translate-y-0 scale-100"
                         : "pointer-events-none opacity-0 -translate-y-1 scale-95"
-                    }`}
+                      }`}
                   >
                     <div
                       style={{
-                        background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
+                        background:
+                          "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
                         backdropFilter: "blur(16px)",
                         WebkitBackdropFilter: "blur(16px)",
                         border: "1.5px solid transparent",
@@ -876,12 +1045,22 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                         }}
                         className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#F8E3DB]/60 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#3d2319] hover:text-[#800A1D]"
                       >
-                        <svg className="w-3.5 h-3.5 shrink-0 text-[#8C5446]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                        <svg
+                          className="w-3.5 h-3.5 shrink-0 text-[#8C5446]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
                           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                           <circle cx="12" cy="7" r="4" />
                         </svg>
                         <span
-                          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                          style={{
+                            fontFamily: "'Playfair Display', Georgia, serif",
+                          }}
                           className="text-xs font-bold tracking-wider"
                         >
                           Profile
@@ -896,12 +1075,22 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                         }}
                         className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#F8E3DB]/60 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#3d2319] hover:text-[#800A1D]"
                       >
-                        <svg className="w-3.5 h-3.5 shrink-0 text-[#8C5446]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                        <svg
+                          className="w-3.5 h-3.5 shrink-0 text-[#8C5446]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
                           <rect x="2" y="5" width="20" height="14" rx="2" />
                           <line x1="2" y1="10" x2="22" y2="10" />
                         </svg>
                         <span
-                          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                          style={{
+                            fontFamily: "'Playfair Display', Georgia, serif",
+                          }}
                           className="text-xs font-bold tracking-wider"
                         >
                           Subscription
@@ -918,13 +1107,23 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                         }}
                         className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#800A1D]/10 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#800A1D]"
                       >
-                        <svg className="w-3.5 h-3.5 shrink-0 text-[#800A1D]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                        <svg
+                          className="w-3.5 h-3.5 shrink-0 text-[#800A1D]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
                           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                           <polyline points="16 17 21 12 16 7" />
                           <line x1="21" y1="12" x2="9" y2="12" />
                         </svg>
                         <span
-                          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                          style={{
+                            fontFamily: "'Playfair Display', Georgia, serif",
+                          }}
                           className="text-xs font-bold tracking-wider"
                         >
                           Log Out
@@ -939,33 +1138,22 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   <button
                     onClick={() => onNavigate("signin")}
                     style={{
-                      background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
+                      background:
+                        "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
                       border: "1.5px solid transparent",
                       boxShadow: "none",
                     }}
                     className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center shadow-none shrink-0"
                   >
                     <span
-                      style={{ fontFamily: "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive", letterSpacing: "0.01em" }}
+                      style={{
+                        fontFamily:
+                          "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive",
+                        letterSpacing: "0.01em",
+                      }}
                       className="text-sm sm:text-[15px] font-bold text-[#6e4337]"
                     >
                       Sign In
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => onNavigate("signup")}
-                    style={{
-                      background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
-                      border: "1.5px solid transparent",
-                      boxShadow: "none",
-                    }}
-                    className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center shadow-none shrink-0"
-                  >
-                    <span
-                      style={{ fontFamily: "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive", letterSpacing: "0.01em" }}
-                      className="text-sm sm:text-[15px] font-bold text-[#6e4337]"
-                    >
-                      Sign Up
                     </span>
                   </button>
                 </div>
@@ -988,9 +1176,14 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
           {isMobileMenuOpen && (
             <div className="lg:hidden w-full bg-white/95 backdrop-blur-xl border-b border-[#e8cdc1]/40 shadow-xl p-4 sm:p-5 transition-all duration-300 animate-in slide-in-from-top-3">
               <div className="flex flex-col gap-2.5 max-w-md mx-auto">
-                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#ab7e66] px-2">Navigation</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#ab7e66] px-2">
+                  Navigation
+                </span>
                 <button
-                  onClick={() => { onNavigate("home"); setIsMobileMenuOpen(false); }}
+                  onClick={() => {
+                    onNavigate("home");
+                    setIsMobileMenuOpen(false);
+                  }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "home" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
                   <div className="flex items-center gap-2.5">
@@ -999,10 +1192,15 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     </span>
                     <span>Home</span>
                   </div>
-                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                  <span className="material-symbols-outlined text-sm">
+                    chevron_right
+                  </span>
                 </button>
                 <button
-                  onClick={() => { onNavigate("dashboard"); setIsMobileMenuOpen(false); }}
+                  onClick={() => {
+                    onNavigate("dashboard");
+                    setIsMobileMenuOpen(false);
+                  }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "dashboard" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
                   <div className="flex items-center gap-2.5">
@@ -1011,10 +1209,15 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     </span>
                     <span>DASHBOARD</span>
                   </div>
-                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                  <span className="material-symbols-outlined text-sm">
+                    chevron_right
+                  </span>
                 </button>
                 <button
-                  onClick={() => { onNavigate("courses"); setIsMobileMenuOpen(false); }}
+                  onClick={() => {
+                    onNavigate("courses");
+                    setIsMobileMenuOpen(false);
+                  }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "courses" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
                   <div className="flex items-center gap-2.5">
@@ -1023,11 +1226,16 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     </span>
                     <span>TUTORIALS</span>
                   </div>
-                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                  <span className="material-symbols-outlined text-sm">
+                    chevron_right
+                  </span>
                 </button>
                 <button
-                  onClick={() => { onNavigate("videos"); setIsMobileMenuOpen(false); }}
-                  className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${(view === "videos" || view === "library") ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
+                  onClick={() => {
+                    onNavigate("videos");
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "videos" || view === "library" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
                   <div className="flex items-center gap-2.5">
                     <span className="w-7 h-7 rounded-[6px] bg-white border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0">
@@ -1035,10 +1243,15 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     </span>
                     <span>S.KEYS</span>
                   </div>
-                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                  <span className="material-symbols-outlined text-sm">
+                    chevron_right
+                  </span>
                 </button>
                 <button
-                  onClick={() => { onNavigate("sheets"); setIsMobileMenuOpen(false); }}
+                  onClick={() => {
+                    onNavigate("sheets");
+                    setIsMobileMenuOpen(false);
+                  }}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border-none cursor-pointer ${view === "sheets" ? "bg-[#f8e3db] text-[#8a5d4c]" : "bg-transparent text-[#7a594e] hover:bg-[#faf0ed]"}`}
                 >
                   <div className="flex items-center gap-2.5">
@@ -1047,7 +1260,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     </span>
                     <span>Sheets</span>
                   </div>
-                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                  <span className="material-symbols-outlined text-sm">
+                    chevron_right
+                  </span>
                 </button>
               </div>
             </div>
@@ -1058,27 +1273,37 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         <div
           className="flex flex-col h-auto flex-grow-0"
           style={
-            view === "dashboard" ? {
-              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), url('/dashboard-grand-hall-bg.jpg')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: '#fff8f6'
-            } : (view === "privacy" || view === "terms" ? {
-              backgroundImage: `url('/white-peach-marble.png')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: '#faf0ed'
-            } : (view === "my-library" || view === "download-page" || view === "invoice" ? {
-              backgroundImage: `linear-gradient(rgba(255, 248, 246, 0.50), rgba(255, 248, 246, 0.50)), url('/library-sheet3.png')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: '#fff8f6'
-            } : undefined))
+            view === "dashboard"
+              ? {
+                backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 248, 244, 0.25) 100%), url('/dashboard-grand-hall-bg.jpg')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+                backgroundRepeat: "no-repeat",
+                backgroundColor: "#fff8f6",
+              }
+              : view === "privacy" || view === "terms"
+                ? {
+                  backgroundImage: `url('/white-peach-marble.png')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundColor: "#faf0ed",
+                }
+                : view === "my-library" ||
+                  view === "download-page" ||
+                  view === "invoice"
+                  ? {
+                    backgroundImage: `linear-gradient(rgba(255, 248, 246, 0.50), rgba(255, 248, 246, 0.50)), url('/library-sheet3.png')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundColor: "#fff8f6",
+                  }
+                  : undefined
           }
-        >{children}</div>
+        >
+          {children}
+        </div>
 
         {/* Footer */}
         <footer className="w-full mt-0 bg-[#fffdfb] relative">
@@ -1097,7 +1322,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 </h5>
                 <div
                   style={{
-                    backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
+                    backgroundImage:
+                      "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
                   }}
                   className="h-[1.5px] w-full rounded-full"
                 />
@@ -1106,24 +1332,54 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 className="text-[11.5px] md:text-xs leading-relaxed font-semibold text-[#7a594e] tracking-wide"
               >
-                Premium Gospel and Jazz Piano Lessons. Elevating your full-piano potential.
+                Premium Gospel and Jazz Piano Lessons. Elevating your full-piano
+                potential.
               </p>
             </div>
 
             {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
             <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
-              <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
+              <svg
+                className="w-4 h-28 shrink-0 drop-shadow-2xs"
+                viewBox="0 0 20 160"
+                fill="none"
+              >
                 <defs>
-                  <linearGradient id="clear-metal-line-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient
+                    id="clear-metal-line-1"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
                     <stop offset="0%" stopColor="#F5D6CB" />
                     <stop offset="50%" stopColor="#D9A998" />
                     <stop offset="100%" stopColor="#B58474" />
                   </linearGradient>
                 </defs>
-                <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-1)" />
-                <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-1)" stroke="#FFFFFF" strokeWidth="1" />
+                <rect
+                  x="9"
+                  y="0"
+                  width="2.5"
+                  height="68"
+                  rx="1"
+                  fill="url(#clear-metal-line-1)"
+                />
+                <path
+                  d="M 10 68 L 16 78 L 10 88 L 4 78 Z"
+                  fill="url(#clear-metal-line-1)"
+                  stroke="#FFFFFF"
+                  strokeWidth="1"
+                />
                 <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
-                <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-1)" />
+                <rect
+                  x="9"
+                  y="88"
+                  width="2.5"
+                  height="68"
+                  rx="1"
+                  fill="url(#clear-metal-line-1)"
+                />
               </svg>
             </div>
             <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
@@ -1139,7 +1395,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 </h5>
                 <div
                   style={{
-                    backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
+                    backgroundImage:
+                      "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
                   }}
                   className="h-[1.5px] w-full rounded-full"
                 />
@@ -1212,18 +1469,47 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
             {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
             <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
-              <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
+              <svg
+                className="w-4 h-28 shrink-0 drop-shadow-2xs"
+                viewBox="0 0 20 160"
+                fill="none"
+              >
                 <defs>
-                  <linearGradient id="clear-metal-line-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient
+                    id="clear-metal-line-2"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
                     <stop offset="0%" stopColor="#F5D6CB" />
                     <stop offset="50%" stopColor="#D9A998" />
                     <stop offset="100%" stopColor="#B58474" />
                   </linearGradient>
                 </defs>
-                <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-2)" />
-                <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-2)" stroke="#FFFFFF" strokeWidth="1" />
+                <rect
+                  x="9"
+                  y="0"
+                  width="2.5"
+                  height="68"
+                  rx="1"
+                  fill="url(#clear-metal-line-2)"
+                />
+                <path
+                  d="M 10 68 L 16 78 L 10 88 L 4 78 Z"
+                  fill="url(#clear-metal-line-2)"
+                  stroke="#FFFFFF"
+                  strokeWidth="1"
+                />
                 <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
-                <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-2)" />
+                <rect
+                  x="9"
+                  y="88"
+                  width="2.5"
+                  height="68"
+                  rx="1"
+                  fill="url(#clear-metal-line-2)"
+                />
               </svg>
             </div>
             <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
@@ -1239,43 +1525,83 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 </h5>
                 <div
                   style={{
-                    backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
+                    backgroundImage:
+                      "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
                   }}
                   className="h-[1.5px] w-full rounded-full"
                 />
               </div>
               <div className="flex flex-col gap-2 mt-0.5">
                 <button
-                  onClick={() => onNavigate("faq")}
+                  onClick={() => {
+                    onNavigate("home");
+                    window.setTimeout(() => {
+                      document.getElementById("faq-section")?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }, 0);
+                  }}
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                   className="text-[11.5px] md:text-xs text-left bg-transparent border-none cursor-pointer p-0 font-bold text-[#7a594e] hover:text-[#5a3a2e] hover:underline underline-offset-4 decoration-[#dfa38f]/50 transition-colors tracking-wide"
                 >
                   FAQ
                 </button>
-                <button
-                  onClick={() => setShowContactModal(true)}
+                <div
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                  className="text-[11.5px] md:text-xs text-left bg-transparent border-none cursor-pointer p-0 font-bold text-[#7a594e] hover:text-[#5a3a2e] hover:underline underline-offset-4 decoration-[#dfa38f]/50 transition-colors tracking-wide"
+                  className="text-[11.5px] md:text-xs text-left font-bold text-[#7a594e] tracking-wide flex items-baseline"
                 >
-                  Contact Phanilie
-                </button>
+                  <span>Contact:</span>
+                  <span className="ml-1 text-[10px] font-normal italic tracking-normal">
+                    stephanie.halim06@gmail.com
+                  </span>
+                </div>
               </div>
             </div>
 
             {/* Solid Clear 3D Metallic Rose-Gold Vertical Divider */}
             <div className="hidden lg:flex flex-col items-center justify-center self-stretch px-1">
-              <svg className="w-4 h-28 shrink-0 drop-shadow-2xs" viewBox="0 0 20 160" fill="none">
+              <svg
+                className="w-4 h-28 shrink-0 drop-shadow-2xs"
+                viewBox="0 0 20 160"
+                fill="none"
+              >
                 <defs>
-                  <linearGradient id="clear-metal-line-3" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient
+                    id="clear-metal-line-3"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
                     <stop offset="0%" stopColor="#F5D6CB" />
                     <stop offset="50%" stopColor="#D9A998" />
                     <stop offset="100%" stopColor="#B58474" />
                   </linearGradient>
                 </defs>
-                <rect x="9" y="0" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-3)" />
-                <path d="M 10 68 L 16 78 L 10 88 L 4 78 Z" fill="url(#clear-metal-line-3)" stroke="#FFFFFF" strokeWidth="1" />
+                <rect
+                  x="9"
+                  y="0"
+                  width="2.5"
+                  height="68"
+                  rx="1"
+                  fill="url(#clear-metal-line-3)"
+                />
+                <path
+                  d="M 10 68 L 16 78 L 10 88 L 4 78 Z"
+                  fill="url(#clear-metal-line-3)"
+                  stroke="#FFFFFF"
+                  strokeWidth="1"
+                />
                 <circle cx="10" cy="78" r="2" fill="#FFFFFF" />
-                <rect x="9" y="88" width="2.5" height="68" rx="1" fill="url(#clear-metal-line-3)" />
+                <rect
+                  x="9"
+                  y="88"
+                  width="2.5"
+                  height="68"
+                  rx="1"
+                  fill="url(#clear-metal-line-3)"
+                />
               </svg>
             </div>
             <div className="block lg:hidden h-[2px] w-full bg-[#dfa38f] my-1" />
@@ -1291,14 +1617,17 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 </h5>
                 <div
                   style={{
-                    backgroundImage: "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
+                    backgroundImage:
+                      "linear-gradient(90deg, #dfa38f 0%, #ab7e66 50%, #d9a998 100%)",
                   }}
                   className="h-[1.5px] w-full rounded-full"
                 />
               </div>
               {isNewsletterSent ? (
                 <div className="flex items-center gap-1.5 mt-1 text-xs font-bold text-emerald-700 bg-emerald-100/60 border border-emerald-200/50 py-2 px-4 rounded-xl w-fit animate-in fade-in duration-300">
-                  <span className="material-symbols-outlined text-sm font-bold">check_circle</span>
+                  <span className="material-symbols-outlined text-sm font-bold">
+                    check_circle
+                  </span>
                   Subscribed! Thank you.
                 </div>
               ) : (
@@ -1322,9 +1651,12 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   <button
                     type="submit"
                     style={{
-                      fontFamily: "'Great Vibes', 'Dancing Script', 'Playfair Display', cursive, serif",
-                      background: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
-                      boxShadow: "inset 0 1px 1px rgba(255,255,255,0.6), inset 0 -1.5px 2px rgba(92,58,46,0.3)",
+                      fontFamily:
+                        "'Great Vibes', 'Dancing Script', 'Playfair Display', cursive, serif",
+                      background:
+                        "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #856758 100%)",
+                      boxShadow:
+                        "inset 0 1px 1px rgba(255,255,255,0.6), inset 0 -1.5px 2px rgba(92,58,46,0.3)",
                       border: "1px solid #D9A998",
                     }}
                     className="w-full h-8 rounded-xl flex items-center justify-center cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xs text-base font-medium text-white tracking-wide capitalize"
@@ -1340,7 +1672,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         {/* Bright Rose-Gold Separator Line (No Glow) */}
         <div
           style={{
-            background: "linear-gradient(90deg, #EBC0B2 0%, #DFA898 50%, #EBC0B2 100%)",
+            background:
+              "linear-gradient(90deg, #EBC0B2 0%, #DFA898 50%, #EBC0B2 100%)",
             boxShadow: "none",
           }}
           className="h-[1.5px] w-full relative z-20"
@@ -1371,7 +1704,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   Privacy Policy
                 </button>
 
-                <span className="text-[#7A594E]/40 font-light text-[10px]">|</span>
+                <span className="text-[#7A594E]/40 font-light text-[10px]">
+                  |
+                </span>
 
                 <button
                   onClick={() => onNavigate("terms")}
@@ -1384,176 +1719,71 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
           </div>
         </div>
 
-        {/* Contact Modal */}
-        {showContactModal && (
-          <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="bg-white/95 border border-[#e8cdc1]/40 rounded-3xl p-8 max-w-md w-full shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
-              <button
-                onClick={() => {
-                  setShowContactModal(false);
-                  setContactSubmitted(false);
-                }}
-                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-[#f3ecea] hover:bg-[#e8cdc1] transition-colors border-none cursor-pointer"
-              >
-                <span className="material-symbols-outlined text-lg">close</span>
-              </button>
-
-              {!contactSubmitted ? (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setContactSubmitted(true);
-                    setContactForm({ name: "", email: "", message: "" });
-                  }}
-                  className="space-y-5"
-                >
-                  <div>
-                    <h3 className="text-xl font-bold text-[#6e5a51] font-display-lg">
-                      Secure Contact Form
-                    </h3>
-                    <p className="text-xs text-[#81756f] mt-1">
-                      Get in touch directly with our administration.
-                    </p>
-                  </div>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-[#4f4540] uppercase tracking-wider mb-1.5">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={contactForm.name}
-                        onChange={(e) =>
-                          setContactForm({
-                            ...contactForm,
-                            name: e.target.value,
-                          })
-                        }
-                        className="w-full bg-[#f3ecea] border-none rounded-xl py-3 px-4 text-sm text-[#4f4540] focus:ring-2 focus:ring-[#e8cdc1] outline-none"
-                        placeholder="Your Name"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-[#4f4540] uppercase tracking-wider mb-1.5">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={contactForm.email}
-                        onChange={(e) =>
-                          setContactForm({
-                            ...contactForm,
-                            email: e.target.value,
-                          })
-                        }
-                        className="w-full bg-[#f3ecea] border-none rounded-xl py-3 px-4 text-sm text-[#4f4540] focus:ring-2 focus:ring-[#e8cdc1] outline-none"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-[#4f4540] uppercase tracking-wider mb-1.5">
-                        Message
-                      </label>
-                      <textarea
-                        required
-                        rows={4}
-                        value={contactForm.message}
-                        onChange={(e) =>
-                          setContactForm({
-                            ...contactForm,
-                            message: e.target.value,
-                          })
-                        }
-                        className="w-full bg-[#f3ecea] border-none rounded-xl py-3 px-4 text-sm text-[#4f4540] focus:ring-2 focus:ring-[#e8cdc1] outline-none resize-none"
-                        placeholder="write your questions"
-                      />
-                    </div>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-gradient-to-br from-[#e8cdc1] to-[#f9ddd1] text-[#6a564d] py-3.5 rounded-xl font-bold hover:shadow-lg active:scale-95 transition-all border-none cursor-pointer"
-                  >
-                    Send Message
-                  </button>
-                </form>
-              ) : (
-                <div className="text-center py-6 space-y-4">
-                  <span
-                    className="material-symbols-outlined text-5xl text-emerald-600"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    check_circle
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-bold text-[#6e5a51]">
-                      Message Sent!
-                    </h3>
-                    <p className="text-xs text-[#81756f] mt-1">
-                      Thank you for reaching out. We will get back to you
-                      shortly.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setShowContactModal(false);
-                      setContactSubmitted(false);
-                    }}
-                    className="px-6 py-2.5 bg-[#6e5a51] text-white rounded-xl text-xs font-bold hover:opacity-90 active:scale-95 transition-all border-none cursor-pointer"
-                  >
-                    Done
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
         {/* Luxury Royal Toast Notification */}
-        <div 
+        <div
           style={{
-            background: "linear-gradient(135deg, #FFFFFF 0%, #FFFDFB 50%, #FDF4F0 100%)",
-            boxShadow: "0 12px 36px rgba(181, 114, 98, 0.28), 0 4px 16px rgba(220, 166, 152, 0.2), inset 0 1.5px 1.5px #FFFFFF",
+            background:
+              "linear-gradient(135deg, #FFFFFF 0%, #FFFDFB 50%, #FDF4F0 100%)",
+            boxShadow:
+              "0 12px 36px rgba(181, 114, 98, 0.28), 0 4px 16px rgba(220, 166, 152, 0.2), inset 0 1.5px 1.5px #FFFFFF",
             border: "1.5px solid #EAC4B1",
             borderRight: "none",
           }}
-          className={`fixed top-24 right-0 z-[120] rounded-l-2xl rounded-r-none px-5 py-3.5 flex items-center gap-3.5 transition-all duration-500 ease-out transform ${
-            showToast 
-              ? "translate-x-0 opacity-100 shadow-2xl" 
+          className={`fixed top-24 right-0 z-[120] rounded-l-2xl rounded-r-none px-5 py-3.5 flex items-center gap-3.5 transition-all duration-500 ease-out transform ${showToast
+              ? "translate-x-0 opacity-100 shadow-2xl"
               : "translate-x-[115%] opacity-0 pointer-events-none"
-          } ${isToastPulsing ? "scale-105" : "scale-100"}`}
+            } ${isToastPulsing ? "scale-105" : "scale-100"}`}
         >
           {/* Ultra Luxury Sculpted Rose-Gold & Gold Metallic Checkmark Badge */}
-          <div 
+          <div
             style={{
-              background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 25%, #D9A998 55%, #B58474 80%, #7A493B 100%)",
-              boxShadow: "inset 0 1.5px 1.5px #FFFFFF, inset 0 -1.5px 2px #5C2D22, 0 4px 14px rgba(181, 116, 98, 0.45)",
+              background:
+                "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 25%, #D9A998 55%, #B58474 80%, #7A493B 100%)",
+              boxShadow:
+                "inset 0 1.5px 1.5px #FFFFFF, inset 0 -1.5px 2px #5C2D22, 0 4px 14px rgba(181, 116, 98, 0.45)",
               border: "1.5px solid #FFF0E8",
             }}
             className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 relative shadow-md"
           >
             <div className="absolute inset-[1.5px] rounded-full border border-white/40 pointer-events-none" />
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 drop-shadow-[0_1.5px_2px_rgba(60,20,10,0.6)] relative z-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              viewBox="0 0 24 24"
+              className="w-4.5 h-4.5 drop-shadow-[0_1.5px_2px_rgba(60,20,10,0.6)] relative z-10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <defs>
-                <linearGradient id="luxToastCheckGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient
+                  id="luxToastCheckGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
                   <stop offset="0%" stopColor="#FFFFFF" />
                   <stop offset="50%" stopColor="#FFF4F0" />
                   <stop offset="100%" stopColor="#F8DACE" />
                 </linearGradient>
               </defs>
-              <path 
-                d="M4.5 12.8L9.2 17.5L19.5 6.8" 
-                stroke="url(#luxToastCheckGrad)" 
-                strokeWidth="3.2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
+              <path
+                d="M4.5 12.8L9.2 17.5L19.5 6.8"
+                stroke="url(#luxToastCheckGrad)"
+                strokeWidth="3.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
           <div className="text-left pr-1">
-            <p className="text-[10px] font-extrabold text-[#7A493B] uppercase tracking-[0.15em]">SUCCESS</p>
-            <p style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="text-xs font-bold text-[#4a2c20] mt-0.5 tracking-tight">{toastMessage}</p>
+            <p className="text-[10px] font-extrabold text-[#7A493B] uppercase tracking-[0.15em]">
+              SUCCESS
+            </p>
+            <p
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="text-xs font-bold text-[#4a2c20] mt-0.5 tracking-tight"
+            >
+              {toastMessage}
+            </p>
           </div>
         </div>
       </div>
