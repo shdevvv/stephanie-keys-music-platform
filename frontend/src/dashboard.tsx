@@ -365,30 +365,103 @@ function Dashboard({ onNavigate }: DashboardProps) {
           </div>
         </div>
 
-        {/* Right Column Span (Col 3): Live Studio */}
+        {/* Right Column Span (Col 3): Live Studio (Scrollable Upcoming + Google Drive Past Replays) */}
         <div className="lg:col-span-1">
-          <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between h-full min-h-[235px] shrink-0 gap-3 shadow-md">
-            <div className="flex justify-between items-center shrink-0">
-              <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Live Studio</h3>
-              <a className="text-[#6e5a51] text-xs font-bold hover:underline cursor-pointer" onClick={() => onNavigate('sessions')}>View All</a>
-            </div>
-            <div className="flex-grow flex flex-col justify-between min-h-0 py-1 gap-2">
-              <div className="p-3 rounded-lg bg-transparent hover:bg-white/10 transition-colors border border-[#dfa38f]/40 cursor-pointer w-full space-y-1" onClick={() => onNavigate('sessions')}>
-                <div className="flex justify-between items-start gap-1">
-                  <span className="bg-transparent border border-[#dfa38f] text-[#524037] px-2 py-0.5 rounded-md text-[8.5px] font-bold uppercase tracking-wider">Oct 26 • 2:00 PM</span>
-                </div>
-                <h4 className="font-bold text-xs md:text-sm text-[#1d1b1a] truncate">Advanced Jazz Voicings &amp; Transitional Runs</h4>
-                <p className="text-[9.5px] text-[#4f4540]">with Stephanie Halim</p>
+          <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between h-full min-h-[320px] shrink-0 gap-3 shadow-md">
+            <div className="flex justify-between items-center shrink-0 border-b border-[#dfa38f]/30 pb-2.5">
+              <div>
+                <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Live Studio</h3>
+                <p className="text-[9px] text-[#81756f] font-medium">Scroll down for past video replays</p>
               </div>
-              <button 
-                onClick={() => {
-                  alert("Redirecting to Live Studio Zoom Session...\nMeeting Link: https://zoom.us/j/8889991111\n\n(Dummy Zoom link generated for simulation)");
-                  window.open("https://zoom.us/j/8889991111", "_blank");
-                }}
-                className="w-full bg-transparent hover:bg-white/20 text-[#6e5a51] font-bold text-xs py-2 rounded-lg transition-all border border-[#dfa38f] cursor-pointer shrink-0"
-              >
-                Join Waiting Room
-              </button>
+              <span className="text-[9.5px] font-bold text-[#8a6858] bg-[#dfa38f]/20 px-2 py-0.5 rounded border border-[#dfa38f]/50">
+                Live &amp; Replays
+              </span>
+            </div>
+
+            {/* Scrollable Container for Upcoming & Past Sessions */}
+            <div className="flex-grow min-h-0 overflow-y-auto pr-1 custom-scrollbar space-y-2.5 max-h-[290px]">
+              
+              {/* 1. UPCOMING LIVE SESSION */}
+              <div className="p-3 rounded-lg bg-white/20 border border-[#dfa38f] space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="bg-[#dfa38f]/30 border border-[#dfa38f] text-[#524037] px-2 py-0.5 rounded-md text-[8.5px] font-extrabold uppercase tracking-wider">
+                    🔴 Oct 26 • 2:00 PM
+                  </span>
+                  <span className="text-[9px] font-bold text-emerald-800 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-400/30">
+                    Upcoming
+                  </span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-xs md:text-sm text-[#1d1b1a] leading-tight">Advanced Jazz Voicings &amp; Transitional Runs</h4>
+                  <p className="text-[9.5px] text-[#4f4540] mt-0.5 font-medium">with Stephanie Halim</p>
+                </div>
+                <button 
+                  onClick={() => {
+                    alert("Redirecting to Live Studio Zoom Session...\nMeeting Link: https://zoom.us/j/8889991111\n\n(Simulated Zoom link)");
+                    window.open("https://zoom.us/j/8889991111", "_blank");
+                  }}
+                  className="w-full bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] hover:brightness-110 text-white font-bold text-xs py-1.5 rounded-md transition-all border border-[#dfa38f] cursor-pointer shrink-0 shadow-2xs"
+                >
+                  Join Waiting Room (Zoom)
+                </button>
+              </div>
+
+              {/* SECTION DIVIDER: PAST REPLAYS */}
+              <div className="flex items-center gap-2 pt-1">
+                <div className="h-[1px] flex-1 bg-[#dfa38f]/40"></div>
+                <span className="text-[9px] font-bold text-[#81756f] uppercase tracking-wider">Past Replays (Google Drive)</span>
+                <div className="h-[1px] flex-1 bg-[#dfa38f]/40"></div>
+              </div>
+
+              {/* 2. PAST HISTORY SESSIONS (SCROLL DOWN - CLICK TO OPEN GOOGLE DRIVE LINK) */}
+              {[
+                {
+                  title: "Jazz Improvisation & Scale Mastery",
+                  date: "Oct 12 • 65 Mins • Level 4",
+                  gdriveUrl: "https://drive.google.com/file/d/1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P/view"
+                },
+                {
+                  title: "Hand Coordination & Independent Drills",
+                  date: "Sep 28 • 55 Mins • Level 3",
+                  gdriveUrl: "https://drive.google.com/file/d/2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q/view"
+                },
+                {
+                  title: "Beginner Piano Touch & Tone Production",
+                  date: "Sep 14 • 48 Mins • Level 1",
+                  gdriveUrl: "https://drive.google.com/file/d/3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R/view"
+                },
+                {
+                  title: "Modern Gospel Re-Harmonization",
+                  date: "Aug 30 • 70 Mins • Level 5",
+                  gdriveUrl: "https://drive.google.com/file/d/4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R9S/view"
+                },
+                {
+                  title: "Understanding Key Signatures & Fifths",
+                  date: "Aug 15 • 60 Mins • Level 2",
+                  gdriveUrl: "https://drive.google.com/file/d/5E6F7G8H9I0J1K2L3M4N5O6P7Q8R9S0T/view"
+                }
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => {
+                    alert(`Opening Past Session Video in Google Drive:\n${item.title}\n\nLink: ${item.gdriveUrl}`);
+                    window.open(item.gdriveUrl, '_blank');
+                  }}
+                  className="p-2.5 rounded-lg bg-transparent hover:bg-white/30 border border-[#dfa38f]/50 hover:border-[#dfa38f] cursor-pointer transition-all duration-200 flex items-center justify-between gap-2.5 group"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-7 h-7 rounded-md bg-[#dfa38f]/20 text-[#6e4336] group-hover:bg-[#ab7e66] group-hover:text-white transition-colors flex items-center justify-center shrink-0 border border-[#dfa38f]/40">
+                      <span className="material-symbols-outlined text-base">play_circle</span>
+                    </div>
+                    <div className="min-w-0">
+                      <h5 className="font-bold text-xs text-[#1d1b1a] truncate group-hover:text-[#6e4336] transition-colors">{item.title}</h5>
+                      <p className="text-[9px] font-medium text-[#7a645b] truncate">{item.date}</p>
+                    </div>
+                  </div>
+                  <span className="material-symbols-outlined text-xs text-[#81756f] group-hover:text-[#6e4336] shrink-0">open_in_new</span>
+                </div>
+              ))}
+
             </div>
           </div>
         </div>
