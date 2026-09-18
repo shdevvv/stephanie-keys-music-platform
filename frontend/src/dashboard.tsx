@@ -505,6 +505,8 @@ function Dashboard({ onNavigate }: DashboardProps) {
               ))}
             </div>
           </div>
+        </div>
+
         {/* Card 4: Level Certificates Status */}
         <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
           <div className="flex justify-between items-center shrink-0">
