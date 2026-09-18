@@ -127,7 +127,7 @@ export const GlobalSearchInput: React.FC<GlobalSearchInputProps> = ({ onNavigate
   };
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-[220px] sm:max-w-[260px] md:max-w-[300px] lg:max-w-[340px] xl:max-w-[380px] 2xl:max-w-[420px]">
+    <div ref={containerRef} className="relative w-full max-w-[240px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[400px] xl:max-w-[460px] 2xl:max-w-[520px]">
       {/* Desktop Search Bar */}
       <div className="hidden md:flex items-center relative">
         <input

@@ -776,8 +776,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
             </div>
 
             {/* Right side: Nav Links + Shopping Cart & Account Dropdown */}
-            <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5 lg:gap-4 xl:gap-4.5 2xl:gap-5">
-              <div className="hidden lg:flex items-center gap-2 lg:gap-2.5 xl:gap-3.5 2xl:gap-4">
+            <div className="flex items-center gap-3 sm:gap-4 md:gap-4.5 lg:gap-5 xl:gap-6 2xl:gap-7 flex-1 justify-end ml-3 lg:ml-5">
+              <div className="hidden lg:flex items-center gap-3.5 lg:gap-4.5 xl:gap-6 2xl:gap-7 mr-auto">
                 {/* 1. HOME */}
                 <button
                   onClick={() => onNavigate("home")}
@@ -1143,7 +1143,15 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       border: "1.5px solid transparent",
                       boxShadow: "none",
                     }}
-                    className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center shadow-none shrink-0"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background =
+                        "linear-gradient(135deg, #F5E6DF 0%, #E8CDA8 25%, #CFA997 60%, #A47869 100%)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background =
+                        "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box";
+                    }}
+                    className="relative h-8.5 sm:h-9.5 px-3.5 sm:px-4 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-sm focus:outline-none flex items-center justify-center shadow-none shrink-0 group"
                   >
                     <span
                       style={{
@@ -1151,7 +1159,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                           "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive",
                         letterSpacing: "0.01em",
                       }}
-                      className="text-sm sm:text-[15px] font-bold text-[#6e4337]"
+                      className="text-sm sm:text-[15px] font-bold text-[#6e4337] group-hover:text-white transition-colors duration-300"
                     >
                       Sign In
                     </span>
