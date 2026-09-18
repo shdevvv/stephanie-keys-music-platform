@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react'
 import { ApiService } from './services/api'
 import { levels } from './courseData'
-import { 
-  ACCOMPLISHMENTS, 
-  initialCompletedSeed, 
-  checkAccomplishmentUnlocked 
-} from './accomplishmentHelper'
-import { BadgeShowcaseWidget } from './components/BadgeShowcaseWidget'
+import { initialCompletedSeed } from './accomplishmentHelper'
+import { BadgeShowcaseWidget, type LevelBadgeItem } from './components/BadgeShowcaseWidget'
 import { BadgeCelebrationModal } from './components/BadgeCelebrationModal'
-import { fetchUserBadges, evaluateBadges, type UserBadgeDto } from './services/badgeApi'
+import { type UserBadgeDto } from './services/badgeApi'
 import { NextRecommendedLessonCard } from './components/NextRecommendedLessonCard'
 import { fetchDashboardSummary, type DashboardSummaryDto } from './services/dashboardApi'
-
+import { downloadLevelCertificate } from './utils/certificateGenerator'
 
 interface TodoItem {
   id: string
@@ -24,7 +20,16 @@ interface DashboardProps {
   onNavigate: (view: 'home' | 'dashboard' | 'library' | 'courses' | 'sessions' | 'forums') => void
 }
 
-
+const LEVEL_BADGES_CONFIG = [
+  { levelNumber: 1, name: 'First Notes', icon: '🥚', subtitle: 'Absolute Fundamentals', requirement: 'Complete Lv.1' },
+  { levelNumber: 2, name: 'Keyboard Explorer', icon: '🐣', subtitle: 'Beginner', requirement: 'Complete Lv.2' },
+  { levelNumber: 3, name: 'Diatonic Navigator', icon: '🐥', subtitle: 'Elementary', requirement: 'Complete Lv.3' },
+  { levelNumber: 4, name: 'Harmony Architect', icon: '🦅', subtitle: 'Pre-Intermediate', requirement: 'Complete Lv.4' },
+  { levelNumber: 5, name: 'Groove Master', icon: '🐉', subtitle: 'Intermediate', requirement: 'Complete Lv.5' },
+  { levelNumber: 6, name: 'Improv Virtuoso', icon: '👑', subtitle: 'Upper Intermediate', requirement: 'Complete Lv.6' },
+  { levelNumber: 7, name: 'Grand Maestro', icon: '🧙‍♂️', subtitle: 'Jazz Foundations', requirement: 'Complete Lv.7' },
+  { levelNumber: 8, name: 'Stephanie\'s Circle', icon: '⚡', subtitle: 'Jazz Advanced', requirement: 'Complete Lv.8' },
+];
 
 function Dashboard({ onNavigate }: DashboardProps) {
   
@@ -58,20 +63,13 @@ function Dashboard({ onNavigate }: DashboardProps) {
   const [title, setTitle] = useState('')
   const [editingId, setEditingId] = useState<string | null>(null)
 
-  // Achievement Badges state
-  const [userBadges, setUserBadges] = useState<UserBadgeDto[]>([])
+  // Celebration state
   const [celebrationBadge, setCelebrationBadge] = useState<UserBadgeDto | null>(null)
 
   // Dashboard summary state
   const [dashboardSummary, setDashboardSummary] = useState<DashboardSummaryDto | null>(null)
 
   useEffect(() => {
-    fetchUserBadges().then(data => setUserBadges(data))
-    evaluateBadges().then(newlyUnlocked => {
-      if (newlyUnlocked.length > 0) {
-        setCelebrationBadge(newlyUnlocked[0])
-      }
-    })
     fetchDashboardSummary().then(summary => setDashboardSummary(summary))
   }, [])
 
@@ -155,31 +153,46 @@ function Dashboard({ onNavigate }: DashboardProps) {
     })
   }
 
-  // Calculate dynamic lessons count and mastery
-  const totalLessons = levels.reduce((acc, lvl) => {
-    return acc + lvl.topics.reduce((acc2, topic) => {
-      return acc2 + topic.lessons.reduce((acc3, lesson) => {
-        if (lesson.subItems && lesson.subItems.length > 0) {
-          return acc3 + lesson.subItems.length
-        }
-        return acc3 + 1
-      }, 0)
-    }, 0)
-  }, 0)
-  const completedCount = completedLessons.length
+  // Calculate level progress & 8 Level Badges
+  const getLevelTotalLessons = (lvlNum: number): number => {
+    const lvl = levels.find(l => l.number === lvlNum);
+    if (!lvl) return 1;
+    return lvl.topics.reduce((sum, t) => sum + t.lessons.length, 0);
+  };
 
-  const lessonXP = completedCount * 10
-  const unlockedXP = ACCOMPLISHMENTS.reduce((acc, ach) => {
-    const isUnlocked = checkAccomplishmentUnlocked(ach.id, completedLessons.map(c => c.title), streak)
-    return acc + (isUnlocked ? ach.xp : 0)
-  }, 0)
-  const totalCurrentXP = lessonXP + unlockedXP
+  const getLevelCompletedLessons = (lvlNum: number): number => {
+    const lvl = levels.find(l => l.number === lvlNum);
+    if (!lvl) return 0;
+    let count = 0;
+    lvl.topics.forEach(t => {
+      t.lessons.forEach(l => {
+        const key = `${lvl.number}-${t.title}-${l.code || l.title}`;
+        if (completedLessons.some(c => c.title === key)) count++;
+      });
+    });
+    return count;
+  };
 
-  // Mastery calculations: 70% Lessons, 30% Badges
-  const maxBadgeXP = ACCOMPLISHMENTS.reduce((acc, ach) => acc + ach.xp, 0)
-  const lessonProgress = totalLessons > 0 ? (completedCount / totalLessons) * 70 : 0
-  const badgeProgress = maxBadgeXP > 0 ? (unlockedXP / maxBadgeXP) * 30 : 0
-  const mastery = Math.min(100, Math.round(lessonProgress + badgeProgress))
+  const levelBadges: LevelBadgeItem[] = LEVEL_BADGES_CONFIG.map(cfg => {
+    const total = getLevelTotalLessons(cfg.levelNumber);
+    const completed = getLevelCompletedLessons(cfg.levelNumber);
+    const pct = total > 0 ? Math.min(100, Math.round((completed / total) * 100)) : 0;
+    return {
+      levelNumber: cfg.levelNumber,
+      name: cfg.name,
+      icon: cfg.icon,
+      subtitle: cfg.subtitle,
+      requirement: cfg.requirement,
+      completedLessons: completed,
+      totalLessons: total,
+      isUnlocked: pct >= 100,
+      progressPercentage: pct,
+    };
+  });
+
+  const overallCompletedLessons = completedLessons.length;
+  const overallTotalLessons = levels.reduce((sum, lvl) => sum + lvl.topics.reduce((sum2, t) => sum2 + t.lessons.length, 0), 0);
+  const mastery = overallTotalLessons > 0 ? Math.min(100, Math.round((overallCompletedLessons / overallTotalLessons) * 100)) : 0;
 
   const handleUnsaveItem = (id: string, e: React.MouseEvent) => {
     e.stopPropagation()
@@ -320,13 +333,13 @@ function Dashboard({ onNavigate }: DashboardProps) {
           <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="text-lg md:text-xl text-[#5a3a2e] font-extrabold tracking-tight">Welcome back, Julian!</h1>
           <span className="px-3 py-1 rounded-lg bg-transparent text-[#7a4b3d] text-xs font-black uppercase tracking-wider border border-[#dfa38f] flex items-center gap-1.5">
             <span className="material-symbols-outlined text-xs font-black text-[#d4af37]">workspace_premium</span>
-            {totalCurrentXP.toLocaleString()} XP
+            Active Student
           </span>
         </div>
       </section>
 
-      {/* Achievement Badges Showcase & Modal */}
-      <BadgeShowcaseWidget badges={userBadges} />
+      {/* 8 Level Achievement Badges Showcase & Modal */}
+      <BadgeShowcaseWidget badges={levelBadges} />
       <BadgeCelebrationModal badge={celebrationBadge} onClose={() => setCelebrationBadge(null)} />
 
       {/* Next Recommended Lesson Card */}
@@ -381,7 +394,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
               {/* Progress Text Details */}
               <div className="flex flex-col min-w-0">
                 <p className="text-[9.5px] font-bold uppercase tracking-widest text-[#81756f]">Julian's Progress</p>
-                <p className="text-xl font-black text-[#3d251c] leading-tight mt-0.5">{completedCount}</p>
+                <p className="text-xl font-black text-[#3d251c] leading-tight mt-0.5">{overallCompletedLessons}</p>
                 <p className="text-xs text-[#6e5a51] font-semibold">Lessons Completed</p>
                 <p className="text-[8.5px] text-[#ab7e66] italic mt-0.5">Keep practicing daily!</p>
               </div>
@@ -389,11 +402,11 @@ function Dashboard({ onNavigate }: DashboardProps) {
 
             {/* Resume Button */}
             <button 
-              onClick={() => alert("Resuming your last video masterclass...")}
+              onClick={() => onNavigate('courses')}
               className="w-full bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] hover:from-[#856758] hover:to-[#ab7e66] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg shadow-xs transition-all duration-300 border border-[#dfa38f] cursor-pointer flex items-center justify-center gap-1.5 active:scale-98 shrink-0 mt-2"
             >
               <span className="material-symbols-outlined text-base">play_circle</span>
-              Resume Lesson
+              Resume Curriculum
             </button>
           </div>
         </div>
@@ -516,10 +529,10 @@ function Dashboard({ onNavigate }: DashboardProps) {
           </div>
         </div>
 
-        {/* Card 4: Accomplishments */}
+        {/* Card 4: Level Certificates Status */}
         <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
           <div className="flex justify-between items-center shrink-0">
-            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Accomplishments</h3>
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Level Certificates</h3>
             <div className="flex items-center gap-1 bg-transparent border border-[#dfa38f]/50 px-2 py-0.5 rounded-lg">
               <button 
                 onClick={() => handleUpdateStreak(-1)} 
@@ -539,29 +552,40 @@ function Dashboard({ onNavigate }: DashboardProps) {
             </div>
           </div>
           <div className="space-y-2 overflow-y-auto flex-grow pr-1 custom-scrollbar min-h-0">
-            {ACCOMPLISHMENTS.map((ach) => {
-              const isUnlocked = checkAccomplishmentUnlocked(ach.id, completedLessons.map(c => c.title), streak)
+            {levelBadges.map((badge) => {
               return (
                 <div 
-                  key={ach.id} 
-                  className={`flex items-start gap-2.5 p-2 md:p-2.5 rounded-lg border border-[#dfa38f]/40 bg-transparent transition-all duration-300 ${isUnlocked ? 'opacity-100' : 'opacity-60'}`}
+                  key={badge.levelNumber} 
+                  className={`flex items-center justify-between gap-2.5 p-2 md:p-2.5 rounded-lg border border-[#dfa38f]/40 bg-transparent transition-all duration-300 ${badge.isUnlocked ? 'opacity-100' : 'opacity-70'}`}
                 >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center border border-[#dfa38f]/50 shrink-0 ${isUnlocked ? 'bg-transparent text-[#6e5a51]' : 'bg-transparent text-[#81756f]'}`}>
-                    <span className="material-symbols-outlined text-base">
-                      {isUnlocked ? ach.icon : 'lock'}
-                    </span>
-                  </div>
-                  <div className="min-w-0 flex-grow">
-                    <div className="flex items-center justify-between gap-1">
-                      <p className="text-xs font-bold text-[#3d251c] truncate">{ach.title}</p>
-                      <span className={`text-[8.5px] font-bold px-1.5 py-0.5 rounded-md shrink-0 border ${isUnlocked ? 'bg-emerald-500/10 text-emerald-800 border-emerald-400/30' : 'bg-gray-500/10 text-gray-600 border-gray-400/30'}`}>
-                        +{ach.xp} XP
-                      </span>
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-xl select-none shrink-0">{badge.icon}</span>
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-[#3d251c] truncate">Level {badge.levelNumber}: {badge.subtitle}</p>
+                      <p className="text-[9.5px] text-[#81756f] truncate">{badge.name} Badge</p>
                     </div>
-                    <p className="text-[9.5px] text-[#4f4540] mt-0.5 leading-snug">
-                      {isUnlocked ? ach.description : ach.requirementText}
-                    </p>
                   </div>
+                  {badge.isUnlocked ? (
+                    <button
+                      type="button"
+                      onClick={() => downloadLevelCertificate({
+                        studentName: 'Julian',
+                        levelNumber: badge.levelNumber,
+                        levelTitle: `Level ${badge.levelNumber}`,
+                        levelSubtitle: badge.subtitle,
+                        badgeName: badge.name,
+                        badgeIcon: badge.icon,
+                      })}
+                      className="px-2.5 py-1 rounded-md bg-[#ab7e66] hover:bg-[#856758] text-white text-[9.5px] font-bold uppercase tracking-wider border border-[#dfa38f] shrink-0 cursor-pointer shadow-xs transition-all flex items-center gap-1"
+                    >
+                      <span className="material-symbols-outlined text-xs">workspace_premium</span>
+                      Certificate
+                    </button>
+                  ) : (
+                    <span className="text-[9px] font-bold text-[#81756f] px-2 py-0.5 rounded-md bg-gray-500/10 border border-gray-400/30 shrink-0">
+                      {badge.progressPercentage}%
+                    </span>
+                  )}
                 </div>
               )
             })}

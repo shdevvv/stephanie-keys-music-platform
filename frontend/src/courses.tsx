@@ -2,9 +2,21 @@ import { useState, useEffect } from "react";
 import { levels as localLevels } from "./courseData";
 import type { Level } from "./courseData";
 import { fetchCourseTree } from "./services/courseApi";
+import { downloadLevelCertificate } from "./utils/certificateGenerator";
 
 const ELEGANT_PIANO_VIDEO = "/dummy-piano-lesson.mp4";
 const ELEGANT_PIANO_POSTER = "/white-grand-piano-hero.jpg";
+
+const LEVEL_BADGES_CONFIG = [
+  { levelNumber: 1, name: 'First Notes', icon: '🥚', subtitle: 'Absolute Fundamentals' },
+  { levelNumber: 2, name: 'Keyboard Explorer', icon: '🐣', subtitle: 'Beginner' },
+  { levelNumber: 3, name: 'Diatonic Navigator', icon: '🐥', subtitle: 'Elementary' },
+  { levelNumber: 4, name: 'Harmony Architect', icon: '🦅', subtitle: 'Pre-Intermediate' },
+  { levelNumber: 5, name: 'Groove Master', icon: '🐉', subtitle: 'Intermediate' },
+  { levelNumber: 6, name: 'Improv Virtuoso', icon: '👑', subtitle: 'Upper Intermediate' },
+  { levelNumber: 7, name: 'Grand Maestro', icon: '🧙‍♂️', subtitle: 'Jazz Foundations' },
+  { levelNumber: 8, name: 'Stephanie\'s Circle', icon: '⚡', subtitle: 'Jazz Advanced' },
+];
 
 
 
@@ -308,6 +320,49 @@ function Courses() {
                         ></div>
                       </div>
                     </div>
+
+                    {/* Download Certificate Button (Visible when level 100% completed) */}
+                    {progressPct >= 100 ? (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const cfg = LEVEL_BADGES_CONFIG.find(b => b.levelNumber === level.number) || LEVEL_BADGES_CONFIG[0];
+                          downloadLevelCertificate({
+                            studentName: 'Julian',
+                            levelNumber: level.number,
+                            levelTitle: `Level ${level.number}`,
+                            levelSubtitle: level.subtitle,
+                            badgeName: cfg.name,
+                            badgeIcon: cfg.icon,
+                          });
+                        }}
+                        className="w-full mt-3 py-1.5 px-3 rounded-md bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] text-white font-bold text-xs uppercase tracking-wider shadow-xs hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-1.5 border border-[#dfa38f] cursor-pointer"
+                      >
+                        <span className="material-symbols-outlined text-sm">workspace_premium</span>
+                        Download Certificate
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const cfg = LEVEL_BADGES_CONFIG.find(b => b.levelNumber === level.number) || LEVEL_BADGES_CONFIG[0];
+                          downloadLevelCertificate({
+                            studentName: 'Julian',
+                            levelNumber: level.number,
+                            levelTitle: `Level ${level.number}`,
+                            levelSubtitle: level.subtitle,
+                            badgeName: cfg.name,
+                            badgeIcon: cfg.icon,
+                          });
+                        }}
+                        className="w-full mt-3 py-1.5 px-3 rounded-md bg-transparent hover:bg-white/40 text-[#6e5a51] font-bold text-[10px] uppercase tracking-wider border border-[#dfa38f]/60 cursor-pointer flex items-center justify-center gap-1 opacity-80 hover:opacity-100 transition-all"
+                      >
+                        <span className="material-symbols-outlined text-xs">workspace_premium</span>
+                        Certificate ({progressPct}%)
+                      </button>
+                    )}
                   </div>
                 </div>
               );
@@ -378,16 +433,24 @@ function Courses() {
                     <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Total Videos:</span>
                     <span className="font-bold text-[#341f18]">{getTotalLessons(activeLevel)}</span>
                   </span>
-                  <span 
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md shadow-2xs"
-                    style={{
-                      background: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) padding-box, linear-gradient(135deg, #e8b4a2 0%, #ffffff 50%, #c89482 100%) border-box',
-                      border: '1px solid transparent'
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      const cfg = LEVEL_BADGES_CONFIG.find(b => b.levelNumber === activeLevel.number) || LEVEL_BADGES_CONFIG[0];
+                      downloadLevelCertificate({
+                        studentName: 'Julian',
+                        levelNumber: activeLevel.number,
+                        levelTitle: `Level ${activeLevel.number}`,
+                        levelSubtitle: activeLevel.subtitle,
+                        badgeName: cfg.name,
+                        badgeIcon: cfg.icon,
+                      });
                     }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md shadow-2xs bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] text-white font-bold cursor-pointer hover:opacity-90 active:scale-95 transition-all border border-[#dfa38f]"
                   >
-                    <span className="text-[10px] text-[#8a6858] font-bold uppercase tracking-wider">Badge Reward:</span>
-                    <span className="font-bold text-[#6e4336]">🏆 {activeLevel.badge.name}</span>
-                  </span>
+                    <span className="material-symbols-outlined text-sm">workspace_premium</span>
+                    <span>Download Level {activeLevel.number} Certificate</span>
+                  </button>
                 </div>
               </div>
 
