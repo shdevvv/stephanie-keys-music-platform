@@ -54,13 +54,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
         } else {
           setCompletedLessons(initialCompletedSeed)
         }
-
-        const savedStreak = localStorage.getItem('practice_streak')
-        if (savedStreak) {
-          setStreak(parseInt(savedStreak, 10))
-        } else {
-          setStreak(14)
-        }
       } catch (err) {
         console.error(err)
       }
@@ -78,25 +71,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
       return initialCompletedSeed
     }
   })
-
-  // Practice streak state (consecutive practice days)
-  const [streak, setStreak] = useState<number>(() => {
-    try {
-      const saved = localStorage.getItem('practice_streak')
-      return saved ? parseInt(saved, 10) : 14
-    } catch {
-      return 14
-    }
-  })
-
-  const handleUpdateStreak = (delta: number) => {
-    setStreak(prev => {
-      const next = Math.max(0, prev + delta)
-      localStorage.setItem('practice_streak', next.toString())
-      window.dispatchEvent(new Event('storage'))
-      return next
-    })
-  }
 
   // Calculate level progress & 8 Level Badges
   const getLevelTotalLessons = (lvlNum: number): number => {
@@ -280,25 +254,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
             <span className="material-symbols-outlined text-xs font-black text-[#d4af37]">workspace_premium</span>
             Active Student
           </span>
-        </div>
-
-        {/* Practice Streak Counter */}
-        <div className="flex items-center gap-1 bg-[#dfa38f]/20 border border-[#dfa38f]/60 px-2.5 py-1 rounded-lg shadow-2xs">
-          <button 
-            onClick={() => handleUpdateStreak(-1)} 
-            className="w-4 h-4 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
-            title="Decrease Streak"
-          >
-            -
-          </button>
-          <span className="text-xs font-bold text-[#5a3a2e] px-1" title="Practice Streak (Days)">🔥 {streak}d Streak</span>
-          <button 
-            onClick={() => handleUpdateStreak(1)} 
-            className="w-4 h-4 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
-            title="Increase Streak"
-          >
-            +
-          </button>
         </div>
       </section>
 
