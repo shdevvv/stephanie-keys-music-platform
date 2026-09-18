@@ -746,10 +746,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
       >
         {/* Top Navigation Bar */}
         <nav
-          className={`sticky top-0 w-full z-50 transition-all duration-300 bg-cover bg-center ${isScrolled
-              ? "bg-white/92 backdrop-blur-md border-b border-[#e2b0a4]/40 shadow-[0_4px_25px_rgba(184,124,109,0.15)]"
-              : "bg-white/60 backdrop-blur-md border-b border-[#e8cdc1]/20"
-            }`}
+          className={`sticky top-0 w-full z-50 transition-all duration-300 ${
+            isScrolled
+              ? "bg-white/65 backdrop-blur-lg border-b border-[#e2b0a4]/40 shadow-[0_4px_25px_rgba(184,124,109,0.12)]"
+              : "bg-white/35 backdrop-blur-md border-b border-[#e8cdc1]/20"
+          }`}
         >
           <div className="flex justify-between items-center h-20 md:h-24 px-3 sm:px-6 md:px-12 w-full">
             {/* Left side: Logo + Search Bar */}
@@ -793,10 +794,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       Home
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "home"
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "home"
                           ? "scale-x-100 opacity-100"
                           : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                        }`}
+                      }`}
                     />
                   </span>
                 </button>
@@ -816,10 +818,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       DASHBOARD
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "dashboard"
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "dashboard"
                           ? "scale-x-100 opacity-100"
                           : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                        }`}
+                      }`}
                     />
                   </span>
                 </button>
@@ -839,10 +842,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       TUTORIALS
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "courses"
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "courses"
                           ? "scale-x-100 opacity-100"
                           : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                        }`}
+                      }`}
                     />
                   </span>
                 </button>
@@ -862,10 +866,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       S.KEYS
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "videos" || view === "library"
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "videos" || view === "library"
                           ? "scale-x-100 opacity-100"
                           : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                        }`}
+                      }`}
                     />
                   </span>
                 </button>
@@ -885,10 +890,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                       SHEETS
                     </span>
                     <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${view === "sheets"
+                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
+                        view === "sheets"
                           ? "scale-x-100 opacity-100"
                           : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                        }`}
+                      }`}
                     />
                   </span>
                 </button>
@@ -1021,10 +1027,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
                   {/* Dropdown Menu */}
                   <div
-                    className={`absolute right-0 top-full pt-2 w-44 flex flex-col z-50 transition-all duration-300 ease-out ${isProfileMenuOpen
+                    className={`absolute right-0 top-full pt-2 w-44 flex flex-col z-50 transition-all duration-300 ease-out ${
+                      isProfileMenuOpen
                         ? "pointer-events-auto opacity-100 translate-y-0 scale-100"
                         : "pointer-events-none opacity-0 -translate-y-1 scale-95"
-                      }`}
+                    }`}
                   >
                     <div
                       style={{
@@ -1283,30 +1290,30 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
           style={
             view === "dashboard"
               ? {
-                backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 248, 244, 0.25) 100%), url('/dashboard-grand-hall-bg.jpg')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center center",
-                backgroundRepeat: "no-repeat",
-                backgroundColor: "#fff8f6",
-              }
+                  backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 248, 244, 0.25) 100%), url('/dashboard-grand-hall-bg.jpg')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundColor: "#fff8f6",
+                }
               : view === "privacy" || view === "terms"
                 ? {
-                  backgroundImage: `url('/white-peach-marble.png')`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                  backgroundColor: "#faf0ed",
-                }
-                : view === "my-library" ||
-                  view === "download-page" ||
-                  view === "invoice"
-                  ? {
-                    backgroundImage: `linear-gradient(rgba(255, 248, 246, 0.50), rgba(255, 248, 246, 0.50)), url('/library-sheet3.png')`,
+                    backgroundImage: `url('/white-peach-marble.png')`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backgroundColor: "#fff8f6",
+                    backgroundColor: "#faf0ed",
                   }
+                : view === "my-library" ||
+                    view === "download-page" ||
+                    view === "invoice"
+                  ? {
+                      backgroundImage: `linear-gradient(rgba(255, 248, 246, 0.50), rgba(255, 248, 246, 0.50)), url('/library-sheet3.png')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                      backgroundColor: "#fff8f6",
+                    }
                   : undefined
           }
         >
@@ -1737,10 +1744,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
             border: "1.5px solid #EAC4B1",
             borderRight: "none",
           }}
-          className={`fixed top-24 right-0 z-[120] rounded-l-2xl rounded-r-none px-5 py-3.5 flex items-center gap-3.5 transition-all duration-500 ease-out transform ${showToast
+          className={`fixed top-24 right-0 z-[120] rounded-l-2xl rounded-r-none px-5 py-3.5 flex items-center gap-3.5 transition-all duration-500 ease-out transform ${
+            showToast
               ? "translate-x-0 opacity-100 shadow-2xl"
               : "translate-x-[115%] opacity-0 pointer-events-none"
-            } ${isToastPulsing ? "scale-105" : "scale-100"}`}
+          } ${isToastPulsing ? "scale-105" : "scale-100"}`}
         >
           {/* Ultra Luxury Sculpted Rose-Gold & Gold Metallic Checkmark Badge */}
           <div

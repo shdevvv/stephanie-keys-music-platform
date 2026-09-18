@@ -13,7 +13,6 @@ import Forums from "./forums";
 import UserProfile from "./userProfile";
 import { type Sheet } from "./sheetsData";
 
-
 const TESTIMONIAL_GLITTERS = [
   { left: "3%", size: 4, delay: "0s", duration: "7s" },
   { left: "8%", size: 6, delay: "2.5s", duration: "9s" },
@@ -30,7 +29,7 @@ const TESTIMONIAL_GLITTERS = [
   { left: "78%", size: 4, delay: "1.5s", duration: "7s" },
   { left: "84%", size: 7, delay: "5.1s", duration: "12s" },
   { left: "91%", size: 3, delay: "2.9s", duration: "8s" },
-  { left: "96%", size: 5, delay: "0.6s", duration: "9.5s" }
+  { left: "96%", size: 5, delay: "0.6s", duration: "9.5s" },
 ];
 
 const PRICING_WHITE_SPARKLES = [
@@ -57,10 +56,16 @@ const PRICING_WHITE_SPARKLES = [
   { left: "90%", size: 12, duration: "8.6s", delay: "5.0s", type: "star" },
   { left: "12%", size: 8, duration: "10.8s", delay: "3.0s", type: "dot" },
   { left: "55%", size: 13, duration: "8.9s", delay: "6.2s", type: "star" },
-  { left: "83%", size: 7, duration: "11.5s", delay: "2.7s", type: "dot" }
+  { left: "83%", size: 7, duration: "11.5s", delay: "2.7s", type: "dot" },
 ];
 
-const WordByWordRevealText = ({ text, speedMs = 35 }: { text: string; speedMs?: number }) => {
+const WordByWordRevealText = ({
+  text,
+  speedMs = 35,
+}: {
+  text: string;
+  speedMs?: number;
+}) => {
   const [wordCount, setWordCount] = useState(0);
   const words = text ? text.split(" ") : [];
 
@@ -99,9 +104,7 @@ function Homepage() {
 
   const handleNavigate = (v: ViewType | string) => setView(v as ViewType);
 
-
   const [activeFaq, setActiveFaq] = useState<number>(0);
-
 
   // Robust double-video looping ref-based system (always mounted)
   const videoARef = useRef<HTMLVideoElement>(null);
@@ -137,7 +140,7 @@ function Homepage() {
       const timer = setTimeout(() => {
         if (videoARef.current) {
           videoARef.current.playbackRate = 0.55;
-          videoARef.current.play().catch(() => { });
+          videoARef.current.play().catch(() => {});
         }
         if (videoBRef.current) {
           videoBRef.current.playbackRate = 0.55;
@@ -146,14 +149,12 @@ function Homepage() {
         }
         // setFaqActive("A");
         if (pricingVideoRef.current) {
-          pricingVideoRef.current.play().catch(() => { });
+          pricingVideoRef.current.play().catch(() => {});
         }
       }, 150);
       return () => clearTimeout(timer);
     }
   }, [view]);
-
-
 
   const renderContent = () => {
     switch (view) {
@@ -213,24 +214,15 @@ function Homepage() {
         );
       case "my-library":
         return (
-          <SheetPurchaseFlow
-            initialStep={8}
-            onNavigate={handleNavigate}
-          />
+          <SheetPurchaseFlow initialStep={8} onNavigate={handleNavigate} />
         );
       case "download-page":
         return (
-          <SheetPurchaseFlow
-            initialStep={9}
-            onNavigate={handleNavigate}
-          />
+          <SheetPurchaseFlow initialStep={9} onNavigate={handleNavigate} />
         );
       case "invoice":
         return (
-          <SheetPurchaseFlow
-            initialStep={10}
-            onNavigate={handleNavigate}
-          />
+          <SheetPurchaseFlow initialStep={10} onNavigate={handleNavigate} />
         );
       case "dashboard":
       case "sessions":
@@ -242,7 +234,9 @@ function Homepage() {
       case "profile":
         return <UserProfile onNavigate={handleNavigate} initialTab="profile" />;
       case "subscription":
-        return <UserProfile onNavigate={handleNavigate} initialTab="subscription" />;
+        return (
+          <UserProfile onNavigate={handleNavigate} initialTab="subscription" />
+        );
       case "privacy":
         return <PrivacyPolicy />;
       case "terms":
@@ -264,7 +258,8 @@ function Homepage() {
                 <div
                   className="absolute inset-0 z-15 pointer-events-none"
                   style={{
-                    background: "linear-gradient(125deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 28%, rgba(255, 255, 255, 0.35) 48%, transparent 68%)"
+                    background:
+                      "linear-gradient(125deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 28%, rgba(255, 255, 255, 0.35) 48%, transparent 68%)",
                   }}
                 />
                 <img
@@ -280,26 +275,28 @@ function Homepage() {
                     <span
                       style={{
                         fontFamily: "'Cormorant Garamond', 'Cinzel', serif",
-                        fontSize: 'clamp(1.15rem, 2.3vw, 1.75rem)',
+                        fontSize: "clamp(1.15rem, 2.3vw, 1.75rem)",
                         fontWeight: 400,
-                        letterSpacing: '0.12em',
-                        textTransform: 'uppercase',
-                        color: '#4e3328',
-                        textShadow: '0 2px 10px rgba(255, 255, 255, 0.9)'
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        color: "#4e3328",
+                        textShadow: "0 2px 10px rgba(255, 255, 255, 0.9)",
                       }}
                     >
                       Transforming Your Music Skills
                     </span>
                     <span
                       style={{
-                        fontFamily: "'Pinyon Script', 'Alex Brush', 'Great Vibes', cursive",
-                        fontSize: 'clamp(2.4rem, 5.2vw, 4.2rem)',
+                        fontFamily:
+                          "'Pinyon Script', 'Alex Brush', 'Great Vibes', cursive",
+                        fontSize: "clamp(2.4rem, 5.2vw, 4.2rem)",
                         fontWeight: 400,
-                        letterSpacing: '0.02em',
-                        background: 'linear-gradient(135deg, #2c1a14 0%, #5e3b2e 35%, #965c49 70%, #4a281e 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        textShadow: '0 2px 14px rgba(255, 255, 255, 0.9)'
+                        letterSpacing: "0.02em",
+                        background:
+                          "linear-gradient(135deg, #2c1a14 0%, #5e3b2e 35%, #965c49 70%, #4a281e 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        textShadow: "0 2px 14px rgba(255, 255, 255, 0.9)",
                       }}
                     >
                       from Zero to Mastery
@@ -307,24 +304,36 @@ function Homepage() {
                   </h1>
                   <p
                     className="text-xs sm:text-sm md:text-base font-bold text-[#7c4d3e] tracking-[0.16em] uppercase max-w-xl flex items-center gap-3 flex-wrap"
-                    style={{ fontFamily: "'Cinzel', 'Cormorant Garamond', serif" }}
+                    style={{
+                      fontFamily: "'Cinzel', 'Cormorant Garamond', serif",
+                    }}
                   >
                     <span>All Genres Piano & Violin</span>
-                    <span className="text-[#b87c6d] font-normal text-sm">•</span>
+                    <span className="text-[#b87c6d] font-normal text-sm">
+                      •
+                    </span>
                     <span>Certified ABRSM Theory</span>
                   </p>
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                     <button
                       onClick={() => setView("dashboard")}
                       className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/45 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/70 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
-                      style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif", fontWeight: 700 }}
+                      style={{
+                        fontFamily:
+                          "'Cormorant Garamond', 'Playfair Display', serif",
+                        fontWeight: 700,
+                      }}
                     >
                       Start Learning
                     </button>
                     <button
                       onClick={() => setView("videos")}
                       className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/45 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/70 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
-                      style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif", fontWeight: 700 }}
+                      style={{
+                        fontFamily:
+                          "'Cormorant Garamond', 'Playfair Display', serif",
+                        fontWeight: 700,
+                      }}
                     >
                       Watch S. Keys Covers
                     </button>
@@ -339,8 +348,9 @@ function Homepage() {
             {/* Standalone God-Given Creativity Quote Section (Pure Clean White Background) */}
             <section className="py-1 md:py-2.5 px-6 bg-white text-center relative overflow-hidden">
               {/* CSS Keyframe Animations for Faster Shiny Rose Gold Sparkles */}
-              <style dangerouslySetInnerHTML={{
-                __html: `
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: `
                 @keyframes roseGoldSparkle1 {
                   0% { transform: translate(0, 10px) scale(0.3) rotate(0deg); opacity: 0; }
                   40% { opacity: 1; filter: drop-shadow(0 0 6px #e2b0a4) drop-shadow(0 0 14px #ffd0ab) drop-shadow(0 0 18px #ffffff); }
@@ -357,17 +367,51 @@ function Homepage() {
                   45% { opacity: 0.95; filter: drop-shadow(0 0 6px #dfa38f) drop-shadow(0 0 12px #f8e3db); }
                   100% { transform: translate(16px, -36px) scale(0.95) rotate(160deg); opacity: 0; }
                 }
-              `}} />
+              `,
+                }}
+              />
 
               {/* Floating Shiny Rose Gold Sparkle Elements */}
               <div className="absolute inset-0 pointer-events-none select-none z-0">
-                <svg className="absolute text-[#e2b0a4] fill-current" style={{ top: '12%', left: '4%', width: '15px', height: '15px', animation: 'roseGoldSparkle1 3.2s infinite ease-in-out' }} viewBox="0 0 24 24">
+                <svg
+                  className="absolute text-[#e2b0a4] fill-current"
+                  style={{
+                    top: "12%",
+                    left: "4%",
+                    width: "15px",
+                    height: "15px",
+                    animation: "roseGoldSparkle1 3.2s infinite ease-in-out",
+                  }}
+                  viewBox="0 0 24 24"
+                >
                   <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                 </svg>
-                <svg className="absolute text-[#f8e3db] fill-current" style={{ top: '18%', left: '93%', width: '13px', height: '13px', animation: 'roseGoldSparkle2 2.8s infinite ease-in-out', animationDelay: '0.6s' }} viewBox="0 0 24 24">
+                <svg
+                  className="absolute text-[#f8e3db] fill-current"
+                  style={{
+                    top: "18%",
+                    left: "93%",
+                    width: "13px",
+                    height: "13px",
+                    animation: "roseGoldSparkle2 2.8s infinite ease-in-out",
+                    animationDelay: "0.6s",
+                  }}
+                  viewBox="0 0 24 24"
+                >
                   <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                 </svg>
-                <svg className="absolute text-[#dfa38f] fill-current" style={{ top: '8%', left: '20%', width: '11px', height: '11px', animation: 'roseGoldSparkle3 3.5s infinite ease-in-out', animationDelay: '0.3s' }} viewBox="0 0 24 24">
+                <svg
+                  className="absolute text-[#dfa38f] fill-current"
+                  style={{
+                    top: "8%",
+                    left: "20%",
+                    width: "11px",
+                    height: "11px",
+                    animation: "roseGoldSparkle3 3.5s infinite ease-in-out",
+                    animationDelay: "0.3s",
+                  }}
+                  viewBox="0 0 24 24"
+                >
                   <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                 </svg>
               </div>
@@ -378,7 +422,8 @@ function Homepage() {
                   className="font-display-lg text-xs sm:text-sm md:text-base lg:text-[16px] italic text-[#8a5d4c] leading-relaxed font-medium tracking-wide"
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
-                  "You’re already in the right place where God-given creativity in music can grow"
+                  "You’re already in the right place where God-given creativity
+                  in music can grow"
                 </p>
               </div>
             </section>
@@ -402,8 +447,9 @@ function Homepage() {
               <div className="absolute inset-x-0 top-0 h-48 md:h-64 bg-gradient-to-b from-white via-white/60 to-transparent z-10 pointer-events-none" />
 
               {/* CSS Keyframes for falling glitters */}
-              <style dangerouslySetInnerHTML={{
-                __html: `
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: `
                 @keyframes glitter-fall {
                   0% {
                     transform: translateY(-20px) rotate(0deg);
@@ -420,12 +466,23 @@ function Homepage() {
                     opacity: 0;
                   }
                 }
-              `}} />
+              `,
+                }}
+              />
 
               {/* Shared SVG Gradient Definition for Luxury Rose Gold Vector Icons */}
-              <svg className="w-0 h-0 absolute overflow-hidden pointer-events-none" aria-hidden="true">
+              <svg
+                className="w-0 h-0 absolute overflow-hidden pointer-events-none"
+                aria-hidden="true"
+              >
                 <defs>
-                  <linearGradient id="roseGoldIconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient
+                    id="roseGoldIconGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
                     <stop offset="0%" stopColor="#f3beae" />
                     <stop offset="50%" stopColor="#dfa38f" />
                     <stop offset="100%" stopColor="#b87463" />
@@ -442,13 +499,13 @@ function Homepage() {
                     className="absolute pointer-events-none rounded-full bg-gradient-to-br from-[#dfa38f] via-[#f5b8c9] to-[#ffd0ab]"
                     style={{
                       left: p.left,
-                      top: '-20px',
+                      top: "-20px",
                       width: `${p.size}px`,
                       height: `${p.size}px`,
                       animation: `glitter-fall ${p.duration} linear infinite`,
                       animationDelay: p.delay,
                       boxShadow: `0 0 10px rgba(245, 184, 201, 0.9), 0 0 4px rgba(223, 163, 143, 0.6)`,
-                      zIndex: 1
+                      zIndex: 1,
                     }}
                   />
                 ))}
@@ -479,18 +536,92 @@ function Homepage() {
                         title: "Reharms & Voicings",
                         desc: "Revoice, reharm, and transpose any standard by ear using rich rootless voicings, altered extensions, and smooth voice leading without needing sheet music.",
                         renderIcon: () => (
-                          <svg className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0" viewBox="0 0 48 48" fill="none">
-                            <circle cx="24" cy="24" r="21" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeDasharray="1 3" />
-                            <path d="M24 2C11.85 2 2 11.85 2 24s9.85 22 22 22 22-9.85 22-22S36.15 2 24 2z" stroke="url(#roseGoldIconGrad)" strokeWidth="1" opacity="0.3" />
-                            <path d="M18 10c2 0 3-3 6-3s4 3 6 3" stroke="url(#roseGoldIconGrad)" strokeWidth="1.4" strokeLinecap="round" />
-                            <rect x="12" y="16" width="24" height="16" rx="2" stroke="url(#roseGoldIconGrad)" strokeWidth="1.6" fill="url(#roseGoldIconGrad)" fillOpacity="0.08" />
-                            <line x1="18" y1="16" x2="18" y2="32" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" />
-                            <line x1="24" y1="16" x2="24" y2="32" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" />
-                            <line x1="30" y1="16" x2="30" y2="32" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" />
-                            <rect x="16" y="16" width="3" height="9" fill="url(#roseGoldIconGrad)" />
-                            <rect x="22" y="16" width="3" height="9" fill="url(#roseGoldIconGrad)" />
-                            <rect x="28" y="16" width="3" height="9" fill="url(#roseGoldIconGrad)" />
-                            <path d="M24 35l1.5 2.5L28 39l-2.5 1.5L24 43l-1.5-2.5L20 39l2.5-1.5z" fill="url(#roseGoldIconGrad)" opacity="0.8" />
+                          <svg
+                            className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0"
+                            viewBox="0 0 48 48"
+                            fill="none"
+                          >
+                            <circle
+                              cx="24"
+                              cy="24"
+                              r="21"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.2"
+                              strokeDasharray="1 3"
+                            />
+                            <path
+                              d="M24 2C11.85 2 2 11.85 2 24s9.85 22 22 22 22-9.85 22-22S36.15 2 24 2z"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1"
+                              opacity="0.3"
+                            />
+                            <path
+                              d="M18 10c2 0 3-3 6-3s4 3 6 3"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.4"
+                              strokeLinecap="round"
+                            />
+                            <rect
+                              x="12"
+                              y="16"
+                              width="24"
+                              height="16"
+                              rx="2"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.6"
+                              fill="url(#roseGoldIconGrad)"
+                              fillOpacity="0.08"
+                            />
+                            <line
+                              x1="18"
+                              y1="16"
+                              x2="18"
+                              y2="32"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.2"
+                            />
+                            <line
+                              x1="24"
+                              y1="16"
+                              x2="24"
+                              y2="32"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.2"
+                            />
+                            <line
+                              x1="30"
+                              y1="16"
+                              x2="30"
+                              y2="32"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.2"
+                            />
+                            <rect
+                              x="16"
+                              y="16"
+                              width="3"
+                              height="9"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <rect
+                              x="22"
+                              y="16"
+                              width="3"
+                              height="9"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <rect
+                              x="28"
+                              y="16"
+                              width="3"
+                              height="9"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <path
+                              d="M24 35l1.5 2.5L28 39l-2.5 1.5L24 43l-1.5-2.5L20 39l2.5-1.5z"
+                              fill="url(#roseGoldIconGrad)"
+                              opacity="0.8"
+                            />
                           </svg>
                         ),
                       },
@@ -499,15 +630,72 @@ function Homepage() {
                         title: "Groove",
                         desc: "Lock down the time pocket, comp responsively with live rhythm sections, and balance independent hands to drive the groove solo or in a full band.",
                         renderIcon: () => (
-                          <svg className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0" viewBox="0 0 48 48" fill="none">
-                            <circle cx="24" cy="24" r="21" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeDasharray="2 2" />
-                            <path d="M16 38l6-26c.5-2 3.5-2 4 0l6 26z" stroke="url(#roseGoldIconGrad)" strokeWidth="1.6" fill="url(#roseGoldIconGrad)" fillOpacity="0.08" />
-                            <line x1="13" y1="38" x2="35" y2="38" stroke="url(#roseGoldIconGrad)" strokeWidth="1.8" strokeLinecap="round" />
-                            <line x1="24" y1="32" x2="33" y2="15" stroke="url(#roseGoldIconGrad)" strokeWidth="1.8" strokeLinecap="round" />
-                            <rect x="29" y="18" width="5" height="5" rx="1" fill="url(#roseGoldIconGrad)" stroke="white" strokeWidth="0.8" />
-                            <path d="M8 24c0-6 3-10 6-10" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeLinecap="round" opacity="0.6" />
-                            <path d="M40 24c0-6-3-10-6-10" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeLinecap="round" opacity="0.6" />
-                            <path d="M24 6l1.5 2L27 9l-2 1L24 12l-1-2-2-1 2-1z" fill="url(#roseGoldIconGrad)" />
+                          <svg
+                            className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0"
+                            viewBox="0 0 48 48"
+                            fill="none"
+                          >
+                            <circle
+                              cx="24"
+                              cy="24"
+                              r="21"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.2"
+                              strokeDasharray="2 2"
+                            />
+                            <path
+                              d="M16 38l6-26c.5-2 3.5-2 4 0l6 26z"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.6"
+                              fill="url(#roseGoldIconGrad)"
+                              fillOpacity="0.08"
+                            />
+                            <line
+                              x1="13"
+                              y1="38"
+                              x2="35"
+                              y2="38"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                            />
+                            <line
+                              x1="24"
+                              y1="32"
+                              x2="33"
+                              y2="15"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                            />
+                            <rect
+                              x="29"
+                              y="18"
+                              width="5"
+                              height="5"
+                              rx="1"
+                              fill="url(#roseGoldIconGrad)"
+                              stroke="white"
+                              strokeWidth="0.8"
+                            />
+                            <path
+                              d="M8 24c0-6 3-10 6-10"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.2"
+                              strokeLinecap="round"
+                              opacity="0.6"
+                            />
+                            <path
+                              d="M40 24c0-6-3-10-6-10"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.2"
+                              strokeLinecap="round"
+                              opacity="0.6"
+                            />
+                            <path
+                              d="M24 6l1.5 2L27 9l-2 1L24 12l-1-2-2-1 2-1z"
+                              fill="url(#roseGoldIconGrad)"
+                            />
                           </svg>
                         ),
                       },
@@ -516,11 +704,36 @@ function Homepage() {
                         title: "Solos",
                         desc: "Improvise fluent, expressive solos through rapid changes using authentic bebop vocabulary, chromatic guide tones, and dynamic touch instead of guessing scales.",
                         renderIcon: () => (
-                          <svg className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0" viewBox="0 0 48 48" fill="none">
-                            <circle cx="24" cy="24" r="21" stroke="url(#roseGoldIconGrad)" strokeWidth="1.2" strokeDasharray="3 3" />
-                            <path d="M26 8v20.5a5.5 5.5 0 1 1-4-5.3V14l12-3v14.5a5.5 5.5 0 1 1-4-5.3V8z" fill="url(#roseGoldIconGrad)" fillOpacity="0.15" stroke="url(#roseGoldIconGrad)" strokeWidth="1.6" strokeLinejoin="round" />
-                            <path d="M12 14l1.5 2.5L16 18l-2.5 1.5L12 22l-1.5-2.5L8 18l2.5-1.5z" fill="url(#roseGoldIconGrad)" />
-                            <path d="M36 30l1 1.8L39 33l-1.8 1L36 36l-1-1.8L33 33l1.8-1z" fill="url(#roseGoldIconGrad)" opacity="0.8" />
+                          <svg
+                            className="w-8 h-8 group-hover:scale-110 transition-transform duration-700 ease-out shrink-0"
+                            viewBox="0 0 48 48"
+                            fill="none"
+                          >
+                            <circle
+                              cx="24"
+                              cy="24"
+                              r="21"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.2"
+                              strokeDasharray="3 3"
+                            />
+                            <path
+                              d="M26 8v20.5a5.5 5.5 0 1 1-4-5.3V14l12-3v14.5a5.5 5.5 0 1 1-4-5.3V8z"
+                              fill="url(#roseGoldIconGrad)"
+                              fillOpacity="0.15"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.6"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M12 14l1.5 2.5L16 18l-2.5 1.5L12 22l-1.5-2.5L8 18l2.5-1.5z"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <path
+                              d="M36 30l1 1.8L39 33l-1.8 1L36 36l-1-1.8L33 33l1.8-1z"
+                              fill="url(#roseGoldIconGrad)"
+                              opacity="0.8"
+                            />
                           </svg>
                         ),
                       },
@@ -543,7 +756,9 @@ function Homepage() {
                           <div className="flex items-center justify-between gap-2.5">
                             {/* Glossy Soft Rose Gold Ribbon Tag */}
                             <span className="font-sans text-[9.5px] font-black uppercase tracking-[0.18em] text-[#885748] bg-gradient-to-r from-white via-[#ffd0ab]/60 to-[#e2b0a4]/40 border border-[#e2b0a4]/60 px-3 py-1 rounded-full shadow-xs backdrop-blur-md flex items-center gap-1.5 transition-colors duration-300">
-                              <span className="text-[#c48b7c] font-bold text-[8.5px]">✦</span>
+                              <span className="text-[#c48b7c] font-bold text-[8.5px]">
+                                ✦
+                              </span>
                               {card.pillar}
                             </span>
 
@@ -570,7 +785,6 @@ function Homepage() {
                 </div>
               </section>
 
-
               {/* Top Delicate Rose Gold Divider Line for About Mentor Section */}
               <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative opacity-90" />
 
@@ -585,8 +799,6 @@ function Homepage() {
 
                     {/* Ultra-Glossy 4-Layered Sparkling Crystal Glass Capsule Frame */}
                     <div className="relative max-w-[360px] sm:max-w-[390px] w-full flex items-center justify-center">
-
-
                       {/* Layer 1: Outer Ultra-Bright Glass Shell with Glowing White-Peach Halo */}
                       <div className="relative p-3 rounded-[240px] bg-white/45 backdrop-blur-xl border-2 border-white/95 shadow-[0_25px_70px_rgba(184,124,109,0.2),0_0_50px_rgba(255,255,255,0.95),0_0_25px_rgba(253,238,232,0.9),inset_0_2px_8px_rgba(255,255,255,1)] w-full">
                         {/* Layer 2: Second Light-Peach Crystal Ring */}
@@ -598,7 +810,8 @@ function Homepage() {
                               <img
                                 className="w-full h-full object-cover object-[center_28%] scale-[1.03] transform-gpu"
                                 style={{
-                                  filter: "contrast(1.02) saturate(1.02) brightness(1.01)",
+                                  filter:
+                                    "contrast(1.02) saturate(1.02) brightness(1.01)",
                                   imageRendering: "crisp-edges",
                                 }}
                                 src="/stephanie-mentor-hd.jpg?v=8"
@@ -624,15 +837,16 @@ function Homepage() {
 
                     <div className="space-y-4 font-sans text-sm md:text-base text-[#6e5a51] leading-relaxed">
                       <p className="font-semibold text-[#5a453d] text-base md:text-lg">
-                        Hello, I’m Stephanie Halim. Welcome to a peaceful space to
-                        learn and grow.
+                        Hello, I’m Stephanie Halim. Welcome to a peaceful space
+                        to learn and grow.
                       </p>
                       <p>
-                        Music has always been my happy place. My own journey began
-                        in the deeply disciplined world of classical music. While
-                        I cherish that beautiful foundation, I found a different
-                        kind of peace and creative freedom when I began exploring
-                        the warm, soulful sounds of jazz and gospel piano.
+                        Music has always been my happy place. My own journey
+                        began in the deeply disciplined world of classical
+                        music. While I cherish that beautiful foundation, I
+                        found a different kind of peace and creative freedom
+                        when I began exploring the warm, soulful sounds of jazz
+                        and gospel piano.
                       </p>
                       <p>
                         You don’t need a formal music college degree or years of
@@ -645,8 +859,8 @@ function Homepage() {
 
                       <div className="pl-4 border-l-2 border-[#ab7e66]/70 pt-1 pb-1 mt-4">
                         <p className="font-display-lg italic text-[#7a645b] font-light text-base md:text-lg leading-relaxed tracking-wide">
-                          "In Stephanie Keys, we will explore rich chords, and help
-                          you find your own voice on the piano at your own
+                          "In Stephanie Keys, we will explore rich chords, and
+                          help you find your own voice on the piano at your own
                           comfortable pace."
                         </p>
                         <span className="block mt-2 text-xs md:text-sm font-sans font-medium uppercase tracking-widest text-[#ab7e66]/90">
@@ -661,41 +875,127 @@ function Homepage() {
               {/* Bottom Delicate Rose Gold Divider Line for About Mentor Section */}
               <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative opacity-90" />
 
-
               {/* Section 3: What You Will Get Section */}
               <section className="py-14 md:py-18 px-6 text-center relative z-10">
                 {/* Floating Sparkle Elements */}
                 <div className="absolute inset-0 z-0 pointer-events-none select-none">
                   {/* Sparkle 1 (Top Left) */}
-                  <svg className="absolute text-[#d49a8b] fill-current" style={{ top: '10%', left: '5%', width: '10px', height: '10px', animation: 'sparkleFloat1 5s infinite ease-in-out' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#d49a8b] fill-current"
+                    style={{
+                      top: "10%",
+                      left: "5%",
+                      width: "10px",
+                      height: "10px",
+                      animation: "sparkleFloat1 5s infinite ease-in-out",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 2 (Top Right) */}
-                  <svg className="absolute text-[#c58b73] fill-current" style={{ top: '15%', left: '92%', width: '8px', height: '8px', animation: 'sparkleFloat2 4s infinite ease-in-out', animationDelay: '1.2s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#c58b73] fill-current"
+                    style={{
+                      top: "15%",
+                      left: "92%",
+                      width: "8px",
+                      height: "8px",
+                      animation: "sparkleFloat2 4s infinite ease-in-out",
+                      animationDelay: "1.2s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 3 (Mid Left) */}
-                  <svg className="absolute text-[#d49a8b] fill-current" style={{ top: '25%', left: '12%', width: '12px', height: '12px', animation: 'sparkleFloat3 6s infinite ease-in-out', animationDelay: '0.5s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#d49a8b] fill-current"
+                    style={{
+                      top: "25%",
+                      left: "12%",
+                      width: "12px",
+                      height: "12px",
+                      animation: "sparkleFloat3 6s infinite ease-in-out",
+                      animationDelay: "0.5s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 4 (Mid Right) */}
-                  <svg className="absolute text-[#c58b73] fill-current" style={{ top: '32%', left: '88%', width: '9px', height: '9px', animation: 'sparkleFloat1 5.5s infinite ease-in-out', animationDelay: '2.0s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#c58b73] fill-current"
+                    style={{
+                      top: "32%",
+                      left: "88%",
+                      width: "9px",
+                      height: "9px",
+                      animation: "sparkleFloat1 5.5s infinite ease-in-out",
+                      animationDelay: "2.0s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 5 (Bottom Left) */}
-                  <svg className="absolute text-[#d49a8b] fill-current" style={{ top: '40%', left: '4%', width: '11px', height: '11px', animation: 'sparkleFloat2 4.8s infinite ease-in-out', animationDelay: '1.0s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#d49a8b] fill-current"
+                    style={{
+                      top: "40%",
+                      left: "4%",
+                      width: "11px",
+                      height: "11px",
+                      animation: "sparkleFloat2 4.8s infinite ease-in-out",
+                      animationDelay: "1.0s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 6 (Bottom Right) */}
-                  <svg className="absolute text-[#c58b73] fill-current" style={{ top: '48%', left: '94%', width: '8px', height: '8px', animation: 'sparkleFloat3 5.2s infinite ease-in-out', animationDelay: '2.5s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#c58b73] fill-current"
+                    style={{
+                      top: "48%",
+                      left: "94%",
+                      width: "8px",
+                      height: "8px",
+                      animation: "sparkleFloat3 5.2s infinite ease-in-out",
+                      animationDelay: "2.5s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 7 (Top Mid-Left) */}
-                  <svg className="absolute text-[#d49a8b] fill-current" style={{ top: '60%', left: '15%', width: '10px', height: '10px', animation: 'sparkleFloat1 6.2s infinite ease-in-out', animationDelay: '0.2s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#d49a8b] fill-current"
+                    style={{
+                      top: "60%",
+                      left: "15%",
+                      width: "10px",
+                      height: "10px",
+                      animation: "sparkleFloat1 6.2s infinite ease-in-out",
+                      animationDelay: "0.2s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 8 (Bottom Mid-Right) */}
-                  <svg className="absolute text-[#c58b73] fill-current" style={{ top: '65%', left: '85%', width: '12px', height: '12px', animation: 'sparkleFloat2 5s infinite ease-in-out', animationDelay: '1.8s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#c58b73] fill-current"
+                    style={{
+                      top: "65%",
+                      left: "85%",
+                      width: "12px",
+                      height: "12px",
+                      animation: "sparkleFloat2 5s infinite ease-in-out",
+                      animationDelay: "1.8s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                 </div>
@@ -718,12 +1018,41 @@ function Homepage() {
                         title: "Structured Learning",
                         desc: "A clear, step-by-step roadmap to guide your daily practice.",
                         renderIcon: () => (
-                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
-                            <path d="M5 24C8 24 10 17 16 17C22 17 24 7 27 7" stroke="url(#roseGoldIconGrad)" strokeWidth="2.4" strokeLinecap="round" />
-                            <circle cx="5" cy="24" r="3.5" fill="url(#roseGoldIconGrad)" />
-                            <circle cx="16" cy="17" r="3" fill="#ffffff" stroke="url(#roseGoldIconGrad)" strokeWidth="2" />
-                            <circle cx="27" cy="7" r="3.5" fill="url(#roseGoldIconGrad)" />
-                            <path d="M23 5L24.5 6.5L27 7L24.5 7.5L23 9L21.5 7.5L19 7L21.5 6.5Z" fill="#e2b0a4" />
+                          <svg
+                            className="w-10 h-10 group-hover:scale-110 transition-transform duration-500"
+                            viewBox="0 0 32 32"
+                            fill="none"
+                          >
+                            <path
+                              d="M5 24C8 24 10 17 16 17C22 17 24 7 27 7"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2.4"
+                              strokeLinecap="round"
+                            />
+                            <circle
+                              cx="5"
+                              cy="24"
+                              r="3.5"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <circle
+                              cx="16"
+                              cy="17"
+                              r="3"
+                              fill="#ffffff"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2"
+                            />
+                            <circle
+                              cx="27"
+                              cy="7"
+                              r="3.5"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <path
+                              d="M23 5L24.5 6.5L27 7L24.5 7.5L23 9L21.5 7.5L19 7L21.5 6.5Z"
+                              fill="#e2b0a4"
+                            />
                           </svg>
                         ),
                       },
@@ -731,10 +1060,32 @@ function Homepage() {
                         title: "Full Access",
                         desc: "Unlimited access to the entire music courses.",
                         renderIcon: () => (
-                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
-                            <circle cx="11" cy="11" r="6.5" stroke="url(#roseGoldIconGrad)" strokeWidth="2.4" fill="url(#roseGoldIconGrad)" fillOpacity="0.15" />
-                            <circle cx="11" cy="11" r="2.5" fill="url(#roseGoldIconGrad)" />
-                            <path d="M15.5 15.5L25.5 25.5M22 22L24.5 24.5M19.5 24.5L21.5 26.5" stroke="url(#roseGoldIconGrad)" strokeWidth="2.4" strokeLinecap="round" />
+                          <svg
+                            className="w-10 h-10 group-hover:scale-110 transition-transform duration-500"
+                            viewBox="0 0 32 32"
+                            fill="none"
+                          >
+                            <circle
+                              cx="11"
+                              cy="11"
+                              r="6.5"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2.4"
+                              fill="url(#roseGoldIconGrad)"
+                              fillOpacity="0.15"
+                            />
+                            <circle
+                              cx="11"
+                              cy="11"
+                              r="2.5"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <path
+                              d="M15.5 15.5L25.5 25.5M22 22L24.5 24.5M19.5 24.5L21.5 26.5"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2.4"
+                              strokeLinecap="round"
+                            />
                           </svg>
                         ),
                       },
@@ -742,11 +1093,47 @@ function Homepage() {
                         title: "Downloadable PDF Notes",
                         desc: "Guidance to your music practice",
                         renderIcon: () => (
-                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
-                            <rect x="7" y="4" width="18" height="24" rx="4" stroke="url(#roseGoldIconGrad)" strokeWidth="2.2" fill="url(#roseGoldIconGrad)" fillOpacity="0.1" />
-                            <line x1="11" y1="9" x2="21" y2="9" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinecap="round" />
-                            <line x1="11" y1="13" x2="17" y2="13" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinecap="round" />
-                            <path d="M16 16V22M16 22L13 19M16 22L19 19" stroke="url(#roseGoldIconGrad)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                          <svg
+                            className="w-10 h-10 group-hover:scale-110 transition-transform duration-500"
+                            viewBox="0 0 32 32"
+                            fill="none"
+                          >
+                            <rect
+                              x="7"
+                              y="4"
+                              width="18"
+                              height="24"
+                              rx="4"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2.2"
+                              fill="url(#roseGoldIconGrad)"
+                              fillOpacity="0.1"
+                            />
+                            <line
+                              x1="11"
+                              y1="9"
+                              x2="21"
+                              y2="9"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                            />
+                            <line
+                              x1="11"
+                              y1="13"
+                              x2="17"
+                              y2="13"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M16 16V22M16 22L13 19M16 22L19 19"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
                           </svg>
                         ),
                       },
@@ -754,14 +1141,62 @@ function Homepage() {
                         title: "Drum Tracks",
                         desc: "Practice your improvisation and timing with jazz drum tracks.",
                         renderIcon: () => (
-                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
-                            <ellipse cx="16" cy="11" rx="9" ry="3.5" stroke="url(#roseGoldIconGrad)" strokeWidth="2" fill="url(#roseGoldIconGrad)" fillOpacity="0.15" />
-                            <path d="M7 11V18C7 20.2 11 22 16 22C21 22 25 20.2 25 18V11" stroke="url(#roseGoldIconGrad)" strokeWidth="2" />
-                            <path d="M8 12L12 21L16 13L20 21L24 12" stroke="url(#roseGoldIconGrad)" strokeWidth="1.6" opacity="0.8" />
-                            <line x1="7" y1="5" x2="25" y2="24" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinecap="round" />
-                            <line x1="25" y1="5" x2="7" y2="24" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinecap="round" />
-                            <circle cx="7" cy="5" r="1.5" fill="url(#roseGoldIconGrad)" />
-                            <circle cx="25" cy="5" r="1.5" fill="url(#roseGoldIconGrad)" />
+                          <svg
+                            className="w-10 h-10 group-hover:scale-110 transition-transform duration-500"
+                            viewBox="0 0 32 32"
+                            fill="none"
+                          >
+                            <ellipse
+                              cx="16"
+                              cy="11"
+                              rx="9"
+                              ry="3.5"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2"
+                              fill="url(#roseGoldIconGrad)"
+                              fillOpacity="0.15"
+                            />
+                            <path
+                              d="M7 11V18C7 20.2 11 22 16 22C21 22 25 20.2 25 18V11"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2"
+                            />
+                            <path
+                              d="M8 12L12 21L16 13L20 21L24 12"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="1.6"
+                              opacity="0.8"
+                            />
+                            <line
+                              x1="7"
+                              y1="5"
+                              x2="25"
+                              y2="24"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                            />
+                            <line
+                              x1="25"
+                              y1="5"
+                              x2="7"
+                              y2="24"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                            />
+                            <circle
+                              cx="7"
+                              cy="5"
+                              r="1.5"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <circle
+                              cx="25"
+                              cy="5"
+                              r="1.5"
+                              fill="url(#roseGoldIconGrad)"
+                            />
                           </svg>
                         ),
                       },
@@ -769,10 +1204,31 @@ function Homepage() {
                         title: "Monthly Coaching",
                         desc: "Interactive online music live sessions with Stephanie",
                         renderIcon: () => (
-                          <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 32 32" fill="none">
-                            <path d="M16 5L18.5 9.5L23.5 10L19.5 13.5L20.8 18.5L16 16L11.2 18.5L12.5 13.5L8.5 10L13.5 9.5Z" fill="url(#roseGoldIconGrad)" fillOpacity="0.25" stroke="url(#roseGoldIconGrad)" strokeWidth="2" strokeLinejoin="round" />
-                            <circle cx="16" cy="11" r="2.5" fill="url(#roseGoldIconGrad)" />
-                            <path d="M9 25C9 21.5 12 19.5 16 19.5C20 19.5 23 21.5 23 25" stroke="url(#roseGoldIconGrad)" strokeWidth="2.2" strokeLinecap="round" />
+                          <svg
+                            className="w-10 h-10 group-hover:scale-110 transition-transform duration-500"
+                            viewBox="0 0 32 32"
+                            fill="none"
+                          >
+                            <path
+                              d="M16 5L18.5 9.5L23.5 10L19.5 13.5L20.8 18.5L16 16L11.2 18.5L12.5 13.5L8.5 10L13.5 9.5Z"
+                              fill="url(#roseGoldIconGrad)"
+                              fillOpacity="0.25"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2"
+                              strokeLinejoin="round"
+                            />
+                            <circle
+                              cx="16"
+                              cy="11"
+                              r="2.5"
+                              fill="url(#roseGoldIconGrad)"
+                            />
+                            <path
+                              d="M9 25C9 21.5 12 19.5 16 19.5C20 19.5 23 21.5 23 25"
+                              stroke="url(#roseGoldIconGrad)"
+                              strokeWidth="2.2"
+                              strokeLinecap="round"
+                            />
                           </svg>
                         ),
                       },
@@ -780,11 +1236,13 @@ function Homepage() {
                       <div
                         key={idx}
                         style={{
-                          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(252, 246, 243, 0.90) 100%) padding-box, linear-gradient(135deg, #ffffff 0%, #f8e3db 20%, #e2b0a4 45%, #c48b7c 75%, #7a4639 100%) border-box",
+                          background:
+                            "linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(252, 246, 243, 0.90) 100%) padding-box, linear-gradient(135deg, #ffffff 0%, #f8e3db 20%, #e2b0a4 45%, #c48b7c 75%, #7a4639 100%) border-box",
                           backdropFilter: "blur(14px)",
                           WebkitBackdropFilter: "blur(14px)",
                           border: "2.5px solid transparent",
-                          boxShadow: "0 10px 30px rgba(160, 110, 95, 0.14), inset 0 1.5px 2px #ffffff",
+                          boxShadow:
+                            "0 10px 30px rgba(160, 110, 95, 0.14), inset 0 1.5px 2px #ffffff",
                         }}
                         className="flex flex-col items-center p-5 md:p-6 rounded-[26px] transition-all duration-500 ease-out hover:scale-[1.04] hover:shadow-[0_18px_40px_rgba(226,176,164,0.35)] cursor-pointer w-full group text-center"
                       >
@@ -834,9 +1292,13 @@ function Homepage() {
               </div>
 
               {/* Section 4: FAQ Section */}
-              <section id="faq-section" className="pt-16 pb-6 px-6 relative z-10">
-                <style dangerouslySetInnerHTML={{
-                  __html: `
+              <section
+                id="faq-section"
+                className="pt-16 pb-6 px-6 relative z-10"
+              >
+                <style
+                  dangerouslySetInnerHTML={{
+                    __html: `
                   @keyframes faqSparkle1 {
                     0% { transform: translate(0, 15px) scale(0.3) rotate(0deg); opacity: 0; }
                     35% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 8px #ffd89b); }
@@ -854,48 +1316,159 @@ function Homepage() {
                     80% { opacity: 1; filter: drop-shadow(0 0 3px #ffd89b) drop-shadow(0 0 7px #ffd89b); }
                     100% { transform: translate(20px, -50px) scale(0.9) rotate(140deg); opacity: 0; }
                   }
-                `}} />
+                `,
+                  }}
+                />
 
                 {/* Floating Sparkle Elements */}
                 <div className="absolute inset-0 z-0 pointer-events-none select-none">
                   {/* Sparkle 1 */}
-                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '8%', left: '4%', width: '10px', height: '10px', animation: 'faqSparkle1 5s infinite ease-in-out' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#ffd89b] fill-current"
+                    style={{
+                      top: "8%",
+                      left: "4%",
+                      width: "10px",
+                      height: "10px",
+                      animation: "faqSparkle1 5s infinite ease-in-out",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 2 */}
-                  <svg className="absolute text-white fill-current" style={{ top: '12%', left: '94%', width: '8px', height: '8px', animation: 'faqSparkle2 4s infinite ease-in-out', animationDelay: '1.2s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-white fill-current"
+                    style={{
+                      top: "12%",
+                      left: "94%",
+                      width: "8px",
+                      height: "8px",
+                      animation: "faqSparkle2 4s infinite ease-in-out",
+                      animationDelay: "1.2s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 3 */}
-                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '22%', left: '10%', width: '12px', height: '12px', animation: 'faqSparkle3 6s infinite ease-in-out', animationDelay: '0.5s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#ffd89b] fill-current"
+                    style={{
+                      top: "22%",
+                      left: "10%",
+                      width: "12px",
+                      height: "12px",
+                      animation: "faqSparkle3 6s infinite ease-in-out",
+                      animationDelay: "0.5s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 4 */}
-                  <svg className="absolute text-white fill-current" style={{ top: '30%', left: '90%', width: '9px', height: '9px', animation: 'faqSparkle1 5.5s infinite ease-in-out', animationDelay: '2s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-white fill-current"
+                    style={{
+                      top: "30%",
+                      left: "90%",
+                      width: "9px",
+                      height: "9px",
+                      animation: "faqSparkle1 5.5s infinite ease-in-out",
+                      animationDelay: "2s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 5 */}
-                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '42%', left: '3%', width: '11px', height: '11px', animation: 'faqSparkle2 4.8s infinite ease-in-out', animationDelay: '1s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#ffd89b] fill-current"
+                    style={{
+                      top: "42%",
+                      left: "3%",
+                      width: "11px",
+                      height: "11px",
+                      animation: "faqSparkle2 4.8s infinite ease-in-out",
+                      animationDelay: "1s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 6 */}
-                  <svg className="absolute text-white fill-current" style={{ top: '50%', left: '95%', width: '8px', height: '8px', animation: 'faqSparkle3 5.2s infinite ease-in-out', animationDelay: '2.5s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-white fill-current"
+                    style={{
+                      top: "50%",
+                      left: "95%",
+                      width: "8px",
+                      height: "8px",
+                      animation: "faqSparkle3 5.2s infinite ease-in-out",
+                      animationDelay: "2.5s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 7 */}
-                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '65%', left: '12%', width: '10px', height: '10px', animation: 'faqSparkle1 6.2s infinite ease-in-out', animationDelay: '0.2s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#ffd89b] fill-current"
+                    style={{
+                      top: "65%",
+                      left: "12%",
+                      width: "10px",
+                      height: "10px",
+                      animation: "faqSparkle1 6.2s infinite ease-in-out",
+                      animationDelay: "0.2s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 8 */}
-                  <svg className="absolute text-white fill-current" style={{ top: '70%', left: '88%', width: '12px', height: '12px', animation: 'faqSparkle2 5s infinite ease-in-out', animationDelay: '1.8s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-white fill-current"
+                    style={{
+                      top: "70%",
+                      left: "88%",
+                      width: "12px",
+                      height: "12px",
+                      animation: "faqSparkle2 5s infinite ease-in-out",
+                      animationDelay: "1.8s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 9 */}
-                  <svg className="absolute text-[#ffd89b] fill-current" style={{ top: '80%', left: '6%', width: '8px', height: '8px', animation: 'faqSparkle3 4.5s infinite ease-in-out', animationDelay: '3s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-[#ffd89b] fill-current"
+                    style={{
+                      top: "80%",
+                      left: "6%",
+                      width: "8px",
+                      height: "8px",
+                      animation: "faqSparkle3 4.5s infinite ease-in-out",
+                      animationDelay: "3s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                   {/* Sparkle 10 */}
-                  <svg className="absolute text-white fill-current" style={{ top: '88%', left: '92%', width: '11px', height: '11px', animation: 'faqSparkle1 5.8s infinite ease-in-out', animationDelay: '0.7s' }} viewBox="0 0 24 24">
+                  <svg
+                    className="absolute text-white fill-current"
+                    style={{
+                      top: "88%",
+                      left: "92%",
+                      width: "11px",
+                      height: "11px",
+                      animation: "faqSparkle1 5.8s infinite ease-in-out",
+                      animationDelay: "0.7s",
+                    }}
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                   </svg>
                 </div>
@@ -909,7 +1482,8 @@ function Homepage() {
                       Frequently Asked Questions
                     </h2>
                     <p className="text-[#8a5a4c] font-sans text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
-                      Click each number to understand everything about the membership
+                      Click each number to understand everything about the
+                      membership
                     </p>
                   </div>
 
@@ -921,62 +1495,81 @@ function Homepage() {
                         {
                           idx: 0,
                           num: "01",
-                          question: "Why choose this membership over free tutorials on YouTube?",
-                          answer: "While YouTube has plenty of quick tutorials, it lacks a structured path. Free videos often leave you guessing what to practice next, leading to bad habits or gaps in your playing. This platform provides a step-by-step, organized curriculum that guarantees steady progress without the confusion.",
+                          question:
+                            "Why choose this membership over free tutorials on YouTube?",
+                          answer:
+                            "While YouTube has plenty of quick tutorials, it lacks a structured path. Free videos often leave you guessing what to practice next, leading to bad habits or gaps in your playing. This platform provides a step-by-step, organized curriculum that guarantees steady progress without the confusion.",
                         },
                         {
                           idx: 1,
                           num: "02",
-                          question: "Is it possible to buy a single course instead of a membership?",
-                          answer: "Our courses are designed to work together as a complete learning ecosystem, which is why we offer them exclusively through our all-access membership. This gives you the freedom to move between foundations, skills, and various styles at your own pace without paying for individual packages.",
+                          question:
+                            "Is it possible to buy a single course instead of a membership?",
+                          answer:
+                            "Our courses are designed to work together as a complete learning ecosystem, which is why we offer them exclusively through our all-access membership. This gives you the freedom to move between foundations, skills, and various styles at your own pace without paying for individual packages.",
                         },
                         {
                           idx: 2,
                           num: "03",
-                          question: "Are the video lessons available for download?",
-                          answer: "No, the video lessons are streaming-only and require an internet connection to watch. This allows us to constantly update our library and ensure you always have access to the highest-quality video playback on any device.",
+                          question:
+                            "Are the video lessons available for download?",
+                          answer:
+                            "No, the video lessons are streaming-only and require an internet connection to watch. This allows us to constantly update our library and ensure you always have access to the highest-quality video playback on any device.",
                         },
                         {
                           idx: 3,
                           num: "04",
-                          question: "What is the core learning approach of Stephanie Keys?",
-                          answer: "Stephanie Keys bridges the gap between structured music theory and creative expression. We guide you through essential keyboard foundations first, immediately showing you how to turn those concepts into practical improvisation, and applying them across a rich variety of gospel and jazz at your own comfortable pace.",
+                          question:
+                            "What is the core learning approach of Stephanie Keys?",
+                          answer:
+                            "Stephanie Keys bridges the gap between structured music theory and creative expression. We guide you through essential keyboard foundations first, immediately showing you how to turn those concepts into practical improvisation, and applying them across a rich variety of gospel and jazz at your own comfortable pace.",
                         },
                         {
                           idx: 4,
                           num: "05",
                           question: "How easy is it to cancel my subscription?",
-                          answer: "Very easy. You have complete control over your subscription and can cancel at any time directly from your account settings with just a few clicks. There are no hidden fees, contracts, or cancellation penalties.",
+                          answer:
+                            "Very easy. You have complete control over your subscription and can cancel at any time directly from your account settings with just a few clicks. There are no hidden fees, contracts, or cancellation penalties.",
                         },
                         {
                           idx: 5,
                           num: "06",
-                          question: "Is this suitable for absolute beginners who cannot read sheet music?",
-                          answer: "Absolutely! The course starts right from the ground up. You don't need any prior experience or sheet music reading ability. Stephanie guides you step-by-step with clear visual key diagrams and simple explanations.",
+                          question:
+                            "Is this suitable for absolute beginners who cannot read sheet music?",
+                          answer:
+                            "Absolutely! The course starts right from the ground up. You don't need any prior experience or sheet music reading ability. Stephanie guides you step-by-step with clear visual key diagrams and simple explanations.",
                         },
                         {
                           idx: 6,
                           num: "07",
-                          question: "Am I allowed to keep the downloaded PDF resources forever?",
-                          answer: "Yes! Any sheet music, chord charts, or practice worksheets you download during your active membership period are yours to keep and use offline forever.",
+                          question:
+                            "Am I allowed to keep the downloaded PDF resources forever?",
+                          answer:
+                            "Yes! Any sheet music, chord charts, or practice worksheets you download during your active membership period are yours to keep and use offline forever.",
                         },
                         {
                           idx: 7,
                           num: "08",
-                          question: "What happens when my free trial period finishes?",
-                          answer: "Once your trial ends, your selected membership plan (monthly or annual) will automatically begin using the payment method you provided. If you choose to cancel before the trial period is up, you will not be charged a single cent.",
+                          question:
+                            "What happens when my free trial period finishes?",
+                          answer:
+                            "Once your trial ends, your selected membership plan (monthly or annual) will automatically begin using the payment method you provided. If you choose to cancel before the trial period is up, you will not be charged a single cent.",
                         },
                         {
                           idx: 8,
                           num: "09",
-                          question: "Are private, 1-on-1 coaching sessions included?",
-                          answer: "If private 1-on-1 lessons are preferred, please reach out to the support team for upgrade options.",
+                          question:
+                            "Are private, 1-on-1 coaching sessions included?",
+                          answer:
+                            "If private 1-on-1 lessons are preferred, please reach out to the support team for upgrade options.",
                         },
                         {
                           idx: 9,
                           num: "10",
-                          question: "Will I lose access to the platform immediately after canceling?",
-                          answer: "No, you will retain full access to all courses, live sessions, and downloadable resources until the final day of your current billing cycle. After that date, your account will simply pause, and you won't be billed again.",
+                          question:
+                            "Will I lose access to the platform immediately after canceling?",
+                          answer:
+                            "No, you will retain full access to all courses, live sessions, and downloadable resources until the final day of your current billing cycle. After that date, your account will simply pause, and you won't be billed again.",
                         },
                       ];
                       const currentItem = faqItems[activeFaq] || faqItems[0];
@@ -998,7 +1591,7 @@ function Homepage() {
                             <div
                               className="absolute top-1/2 left-5 -translate-y-1/2 h-[2.5px] bg-gradient-to-r from-[#bd8174] via-[#e2aba0] to-[#bd8174] rounded-full transition-all duration-500 ease-out hidden sm:block"
                               style={{
-                                width: `calc(${(activeFaq / (faqItems.length - 1)) * 100}% * ((100% - 2.5rem) / 100%))`
+                                width: `calc(${(activeFaq / (faqItems.length - 1)) * 100}% * ((100% - 2.5rem) / 100%))`,
                               }}
                             />
 
@@ -1011,7 +1604,10 @@ function Homepage() {
                                     key={item.idx}
                                     onClick={() => setActiveFaq(idx)}
                                     className="group flex flex-col items-center gap-1 cursor-pointer outline-none focus:outline-none focus:ring-0 active:outline-none border-0 flex-shrink-0 transition-transform duration-200 hover:scale-105 select-none relative py-1 px-0.5"
-                                    style={{ WebkitTapHighlightColor: "transparent", outline: "none" }}
+                                    style={{
+                                      WebkitTapHighlightColor: "transparent",
+                                      outline: "none",
+                                    }}
                                     title={`Question ${item.num}: ${item.question}`}
                                   >
                                     <div className="relative w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
@@ -1021,21 +1617,28 @@ function Homepage() {
                                       )}
                                       <div
                                         style={{
-                                          background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                                          background:
+                                            "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
                                           boxShadow: isActive
                                             ? "0 0 10px rgba(255, 255, 255, 0.9), inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d"
                                             : "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
-                                          border: isActive ? "2px solid #FFFFFF" : "1px solid #D9A998",
+                                          border: isActive
+                                            ? "2px solid #FFFFFF"
+                                            : "1px solid #D9A998",
                                         }}
-                                        className={`relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold text-white transition-all duration-300 group-hover:brightness-125 group-hover:scale-110 ${isActive ? "scale-110" : ""
-                                          }`}
+                                        className={`relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-display-lg text-[11px] font-bold text-white transition-all duration-300 group-hover:brightness-125 group-hover:scale-110 ${
+                                          isActive ? "scale-110" : ""
+                                        }`}
                                       >
                                         {item.num}
                                       </div>
                                     </div>
                                     <span
-                                      className={`text-[8px] md:text-[9px] uppercase font-extrabold tracking-wider transition-colors duration-200 ${isActive ? "text-[#4d281d]" : "text-[#7a493b] group-hover:text-[#4d281d]"
-                                        }`}
+                                      className={`text-[8px] md:text-[9px] uppercase font-extrabold tracking-wider transition-colors duration-200 ${
+                                        isActive
+                                          ? "text-[#4d281d]"
+                                          : "text-[#7a493b] group-hover:text-[#4d281d]"
+                                      }`}
                                     >
                                       Q{item.num}
                                     </span>
@@ -1046,8 +1649,9 @@ function Homepage() {
                           </div>
 
                           {/* Inline CSS Keyframe for Showing Right Reveal Animation Starting from Brown Line */}
-                          <style dangerouslySetInnerHTML={{
-                            __html: `
+                          <style
+                            dangerouslySetInnerHTML={{
+                              __html: `
                               @keyframes showRightFromBrownLine {
                                 0% {
                                   -webkit-clip-path: inset(0 100% 0 0);
@@ -1063,14 +1667,17 @@ function Homepage() {
                                   opacity: 1;
                                 }
                               }
-                            `
-                          }} />
+                            `,
+                            }}
+                          />
 
                           {/* Active Question & Answer Single Card (Translucent Soft Cream to Soft Rose Gold Gradient) */}
                           <div
                             style={{
-                              background: "linear-gradient(135deg, rgba(250, 240, 235, 0.50) 0%, rgba(245, 220, 208, 0.45) 35%, rgba(232, 188, 172, 0.40) 70%, rgba(226, 176, 164, 0.35) 100%)",
-                              boxShadow: "inset 0 1.5px 1px rgba(255, 255, 255, 0.9), inset 0 -1.5px 2px rgba(184, 122, 107, 0.4), 0 0 12px rgba(196, 139, 124, 0.2)",
+                              background:
+                                "linear-gradient(135deg, rgba(250, 240, 235, 0.50) 0%, rgba(245, 220, 208, 0.45) 35%, rgba(232, 188, 172, 0.40) 70%, rgba(226, 176, 164, 0.35) 100%)",
+                              boxShadow:
+                                "inset 0 1.5px 1px rgba(255, 255, 255, 0.9), inset 0 -1.5px 2px rgba(184, 122, 107, 0.4), 0 0 12px rgba(196, 139, 124, 0.2)",
                               border: "2px solid rgba(226, 176, 164, 0.85)",
                             }}
                             className="rounded-xl p-4 md:p-5 backdrop-blur-sm overflow-hidden"
@@ -1085,29 +1692,56 @@ function Homepage() {
                               {/* Left & Right Arrow Navigation Buttons */}
                               <div className="flex items-center gap-2">
                                 <button
-                                  onClick={() => setActiveFaq(Math.max(0, activeFaq - 1))}
+                                  onClick={() =>
+                                    setActiveFaq(Math.max(0, activeFaq - 1))
+                                  }
                                   disabled={activeFaq === 0}
                                   title="Previous Question"
-                                  className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === 0
-                                    ? "opacity-40 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/30"
-                                    : "bg-white/90 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
-                                    }`}
+                                  className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+                                    activeFaq === 0
+                                      ? "opacity-40 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/30"
+                                      : "bg-white/90 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                  }`}
                                 >
-                                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                  <svg
+                                    className="w-3.5 h-3.5"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  >
                                     <polyline points="15 18 9 12 15 6" />
                                   </svg>
                                 </button>
 
                                 <button
-                                  onClick={() => setActiveFaq(Math.min(faqItems.length - 1, activeFaq + 1))}
+                                  onClick={() =>
+                                    setActiveFaq(
+                                      Math.min(
+                                        faqItems.length - 1,
+                                        activeFaq + 1,
+                                      ),
+                                    )
+                                  }
                                   disabled={activeFaq === faqItems.length - 1}
                                   title="Next Question"
-                                  className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${activeFaq === faqItems.length - 1
-                                    ? "opacity-40 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/30"
-                                    : "bg-white/90 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
-                                    }`}
+                                  className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+                                    activeFaq === faqItems.length - 1
+                                      ? "opacity-40 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/30"
+                                      : "bg-white/90 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                  }`}
                                 >
-                                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                  <svg
+                                    className="w-3.5 h-3.5"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  >
                                     <polyline points="9 18 15 12 9 6" />
                                   </svg>
                                 </button>
@@ -1117,7 +1751,9 @@ function Homepage() {
                             {/* Question Title (Soft, Calm Warm Chocolate Typography) */}
                             <h3
                               className="mt-3 text-sm md:text-base text-[#5E3A2E] font-bold leading-relaxed tracking-normal"
-                              style={{ fontFamily: "'Playfair Display', serif" }}
+                              style={{
+                                fontFamily: "'Playfair Display', serif",
+                              }}
                             >
                               {currentItem.question}
                             </h3>
@@ -1133,7 +1769,10 @@ function Homepage() {
                                 className="flex-1 bg-[#fffaf7]/85 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-sm"
                               >
                                 <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-semibold">
-                                  <WordByWordRevealText text={currentItem.answer} speedMs={35} />
+                                  <WordByWordRevealText
+                                    text={currentItem.answer}
+                                    speedMs={35}
+                                  />
                                 </p>
                               </div>
                             </div>
@@ -1148,8 +1787,9 @@ function Homepage() {
               {/* Section 5: Feedbacks / Testimonials Section */}
               <section className="pt-4 pb-16 px-6 relative z-10">
                 {/* CSS Keyframes for falling glitters */}
-                <style dangerouslySetInnerHTML={{
-                  __html: `
+                <style
+                  dangerouslySetInnerHTML={{
+                    __html: `
                   @keyframes glitter-fall {
                     0% {
                       transform: translateY(-20px) rotate(0deg);
@@ -1166,7 +1806,9 @@ function Homepage() {
                       opacity: 0;
                     }
                   }
-                `}} />
+                `,
+                  }}
+                />
 
                 {/* Glitter Particles (Snowfall) */}
                 {TESTIMONIAL_GLITTERS.map((p, idx) => (
@@ -1175,17 +1817,16 @@ function Homepage() {
                     className="absolute pointer-events-none rounded-full bg-gradient-to-br from-[#dfa38f] via-[#f5b8c9] to-[#ffd0ab]"
                     style={{
                       left: p.left,
-                      top: '-20px',
+                      top: "-20px",
                       width: `${p.size}px`,
                       height: `${p.size}px`,
                       animation: `glitter-fall ${p.duration} linear infinite`,
                       animationDelay: p.delay,
                       boxShadow: `0 0 10px rgba(245, 184, 201, 0.9), 0 0 4px rgba(223, 163, 143, 0.6)`,
-                      zIndex: 1
+                      zIndex: 1,
                     }}
                   />
                 ))}
-
 
                 {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
                 <div
@@ -1200,7 +1841,8 @@ function Homepage() {
                     style={{
                       backgroundColor: "rgba(255, 255, 255, 0.08)",
                       border: "2px solid #c48b7c",
-                      boxShadow: "0 4px 16px rgba(196, 139, 124, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.8)",
+                      boxShadow:
+                        "0 4px 16px rgba(196, 139, 124, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.8)",
                     }}
                     className="text-center space-y-2 max-w-xl mx-auto p-4 md:p-5 rounded-xl"
                   >
@@ -1208,7 +1850,8 @@ function Homepage() {
                       Student Feedbacks
                     </h2>
                     <p className="font-sans text-[10.5px] md:text-xs text-[#5e291d] font-normal leading-relaxed uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
-                      DISCOVER HOW PIANISTS OF ALL BACKGROUNDS FOUND THEIR SOLID FOUNDATIONS WITH STEPHANIE KEYS.
+                      DISCOVER HOW PIANISTS OF ALL BACKGROUNDS FOUND THEIR SOLID
+                      FOUNDATIONS WITH STEPHANIE KEYS.
                     </p>
                   </div>
 
@@ -1312,8 +1955,9 @@ function Homepage() {
             {/* Section 6: Dedicated Background Container for Start Your Musical Journey (Focused Piano Keys Background) */}
             <div className="relative overflow-hidden bg-[#faf5f0] flex-grow flex flex-col">
               {/* CSS Keyframes for Rising Shiny White Sparkle Glow Animation */}
-              <style dangerouslySetInnerHTML={{
-                __html: `
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: `
                 @keyframes whiteSparkleRise {
                   0% {
                     transform: translateY(780px) scale(0.15) rotate(0deg);
@@ -1338,7 +1982,9 @@ function Homepage() {
                     filter: drop-shadow(0 0 4px #ffffff);
                   }
                 }
-              `}} />
+              `,
+                }}
+              />
 
               {/* Rising Shiny White Sparkles & Glitters Layer */}
               <div className="absolute inset-0 pointer-events-none select-none z-1 overflow-hidden">
@@ -1348,15 +1994,18 @@ function Homepage() {
                     className="absolute"
                     style={{
                       left: sp.left,
-                      bottom: '-40px',
+                      bottom: "-40px",
                       width: `${sp.size}px`,
                       height: `${sp.size}px`,
                       animation: `whiteSparkleRise ${sp.duration} ease-in-out infinite`,
                       animationDelay: sp.delay,
                     }}
                   >
-                    {sp.type === 'star' ? (
-                      <svg viewBox="0 0 24 24" className="w-full h-full text-white fill-current drop-shadow-[0_0_10px_#ffffff] drop-shadow-[0_0_18px_rgba(255,255,255,0.95)]">
+                    {sp.type === "star" ? (
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="w-full h-full text-white fill-current drop-shadow-[0_0_10px_#ffffff] drop-shadow-[0_0_18px_rgba(255,255,255,0.95)]"
+                      >
                         <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
                       </svg>
                     ) : (
@@ -1402,7 +2051,6 @@ function Homepage() {
 
                   {/* 3-Column Grid: Feature List on Left, Monthly Card in Middle, Annual Card on Right */}
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-stretch w-full">
-
                     {/* Left Column: Included in Every Plan */}
                     <div
                       style={{
@@ -1422,21 +2070,42 @@ function Homepage() {
                             Full Access Pass
                           </h3>
                           <p className="text-[11px] text-[#8d5d4f] font-medium mt-0.5 leading-relaxed">
-                            Get immediate access to everything Stephanie Keys has to offer with no restrictions.
+                            Get immediate access to everything Stephanie Keys
+                            has to offer with no restrictions.
                           </p>
                         </div>
 
                         {/* Feature Items List */}
                         <div className="space-y-2.5 pt-0.5">
                           {[
-                            { title: "All Courses Access", desc: "Complete video library & roadmap" },
-                            { title: "Live Group Coaching", desc: "Interactive monthly Q&A sessions" },
-                            { title: "Sheet Music Library", desc: "Downloadable PDF charts & guides" },
-                            { title: "Community Forum", desc: "Connect with fellow pianists" },
+                            {
+                              title: "All Courses Access",
+                              desc: "Complete video library & roadmap",
+                            },
+                            {
+                              title: "Live Group Coaching",
+                              desc: "Interactive monthly Q&A sessions",
+                            },
+                            {
+                              title: "Sheet Music Library",
+                              desc: "Downloadable PDF charts & guides",
+                            },
+                            {
+                              title: "Community Forum",
+                              desc: "Connect with fellow pianists",
+                            },
                           ].map((item, i) => (
                             <div key={i} className="flex items-start gap-2.5">
                               <div className="w-4.5 h-4.5 rounded-full bg-[#f8e3db] border border-[#e2b0a4]/80 text-[#7a4b3d] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                                <svg className="w-2.5 h-2.5 text-[#7a4b3d]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                                <svg
+                                  className="w-2.5 h-2.5 text-[#7a4b3d]"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2.5"
+                                  viewBox="0 0 24 24"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
                                   <polyline points="20 6 9 17 4 12" />
                                 </svg>
                               </div>
@@ -1482,7 +2151,10 @@ function Homepage() {
 
                         <div className="space-y-0.5">
                           <div className="text-2xl lg:text-3xl font-sans font-bold tracking-tight text-[#7a4b3d]">
-                            $18.99 <span className="text-xs font-medium text-[#8d5d4f]">/ month</span>
+                            $18.99{" "}
+                            <span className="text-xs font-medium text-[#8d5d4f]">
+                              / month
+                            </span>
                           </div>
                         </div>
 
@@ -1503,9 +2175,16 @@ function Homepage() {
                             "Monthly Live Q&A Sessions",
                             "Full 14-Day Trial Guarantee",
                           ].map((perk, i) => (
-                            <div key={i} className="flex items-center gap-2 text-[11px] text-[#7a4b3d]">
-                              <span className="w-3.5 h-3.5 rounded-full bg-[#f8e3db] border border-[#e2b0a4]/60 text-[#7a4b3d] flex items-center justify-center text-[9px] shrink-0 font-bold">✓</span>
-                              <span className="font-semibold text-[#805244]">{perk}</span>
+                            <div
+                              key={i}
+                              className="flex items-center gap-2 text-[11px] text-[#7a4b3d]"
+                            >
+                              <span className="w-3.5 h-3.5 rounded-full bg-[#f8e3db] border border-[#e2b0a4]/60 text-[#7a4b3d] flex items-center justify-center text-[9px] shrink-0 font-bold">
+                                ✓
+                              </span>
+                              <span className="font-semibold text-[#805244]">
+                                {perk}
+                              </span>
                             </div>
                           ))}
                         </div>
@@ -1515,8 +2194,10 @@ function Homepage() {
                         <button
                           onClick={() => setView("dashboard")}
                           style={{
-                            background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 4px 14px rgba(129, 89, 79, 0.22)",
+                            background:
+                              "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                            boxShadow:
+                              "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 4px 14px rgba(129, 89, 79, 0.22)",
                             border: "1px solid #D9A998",
                           }}
                           className="w-full py-2.5 px-3 rounded-[7px] font-sans text-xs font-extrabold text-[#FFFFFF] drop-shadow-2xs hover:brightness-110 transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
@@ -1553,7 +2234,10 @@ function Homepage() {
 
                         <div className="space-y-0.5">
                           <div className="text-2xl lg:text-3xl font-sans font-bold tracking-tight text-[#7a4b3d]">
-                            $14.16 <span className="text-xs font-medium text-[#8d5d4f]">/ month</span>
+                            $14.16{" "}
+                            <span className="text-xs font-medium text-[#8d5d4f]">
+                              / month
+                            </span>
                           </div>
                         </div>
 
@@ -1574,9 +2258,16 @@ function Homepage() {
                             "Unlimited Sheet Music & PDFs",
                             "Priority Community & Live Q&A",
                           ].map((perk, i) => (
-                            <div key={i} className="flex items-center gap-2 text-[11px] text-[#7a4b3d]">
-                              <span className="w-3.5 h-3.5 rounded-full bg-[#e2b0a4] text-[#4d2d22] flex items-center justify-center text-[9px] shrink-0 font-extrabold">✓</span>
-                              <span className="font-bold text-[#7a4b3d]">{perk}</span>
+                            <div
+                              key={i}
+                              className="flex items-center gap-2 text-[11px] text-[#7a4b3d]"
+                            >
+                              <span className="w-3.5 h-3.5 rounded-full bg-[#e2b0a4] text-[#4d2d22] flex items-center justify-center text-[9px] shrink-0 font-extrabold">
+                                ✓
+                              </span>
+                              <span className="font-bold text-[#7a4b3d]">
+                                {perk}
+                              </span>
                             </div>
                           ))}
                         </div>
@@ -1586,8 +2277,10 @@ function Homepage() {
                         <button
                           onClick={() => setView("dashboard")}
                           style={{
-                            background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 4px 14px rgba(129, 89, 79, 0.22)",
+                            background:
+                              "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                            boxShadow:
+                              "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 4px 14px rgba(129, 89, 79, 0.22)",
                             border: "1px solid #D9A998",
                           }}
                           className="w-full py-2.5 px-3 rounded-[7px] font-sans text-xs font-extrabold text-[#FFFFFF] drop-shadow-2xs hover:brightness-110 transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center"
@@ -1596,9 +2289,7 @@ function Homepage() {
                         </button>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
               </section>
             </div>
