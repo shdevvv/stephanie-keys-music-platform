@@ -776,8 +776,8 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
             </div>
 
             {/* Right side: Nav Links + Shopping Cart & Account Dropdown */}
-            <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5 lg:gap-4 xl:gap-4.5 2xl:gap-5">
-              <div className="hidden lg:flex items-center gap-2 lg:gap-2.5 xl:gap-3.5 2xl:gap-4">
+            <div className="flex items-center gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5.5 xl:gap-6.5 2xl:gap-7.5">
+              <div className="hidden lg:flex items-center gap-3.5 lg:gap-4.5 xl:gap-5.5 2xl:gap-6.5">
                 {/* 1. HOME */}
                 <button
                   onClick={() => onNavigate("home")}
