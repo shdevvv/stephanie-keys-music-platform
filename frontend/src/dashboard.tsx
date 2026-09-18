@@ -383,10 +383,10 @@ function Dashboard({ onNavigate }: DashboardProps) {
         </div>
 
 
-        {/* Card 4: Level Certificates Status */}
+        {/* Card 4: 8 Level Badges & Certificates */}
         <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
           <div className="flex justify-between items-center shrink-0">
-            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Level Certificates</h3>
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">8 Level Badges &amp; Certificates</h3>
             <div className="flex items-center gap-1 bg-transparent border border-[#dfa38f]/50 px-2 py-0.5 rounded-lg">
               <button 
                 onClick={() => handleUpdateStreak(-1)} 

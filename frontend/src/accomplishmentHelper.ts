@@ -12,49 +12,9 @@ export interface Accomplishment {
 }
 
 export const initialCompletedSeed = [
-  // Piano Basics
-  { title: "1-Piano Basics-Introduction to the Piano", day: "Mon" },
-  { title: "1-Piano Basics-Keyboard Orientation", day: "Mon" },
-  { title: "1-Piano Basics-White Key Note Names", day: "Tue" },
-  { title: "1-Piano Basics-Black Key Note Names", day: "Tue" },
-  { title: "1-Piano Basics-Finding Notes Quickly", day: "Wed" },
-  { title: "1-Piano Basics-Understanding the Keyboard Pattern", day: "Wed" },
-  // Piano Technique
-  { title: "1-Piano Technique-Proper Sitting Posture", day: "Thu" },
-  { title: "1-Piano Technique-Correct Hand Position", day: "Thu" },
-  { title: "1-Piano Technique-Finger Numbers", day: "Fri" },
-  { title: "1-Piano Technique-Wrist & Arm Relaxation", day: "Fri" },
-  { title: "1-Piano Technique-Basic Touch Control", day: "Sat" },
-  { title: "1-Piano Technique-Developing Good Playing Habits", day: "Sat" },
-  // Finger Development
-  { title: "1-Finger Development-Finger Independence Exercises", day: "Sun" },
-  { title: "1-Finger Development-Finger Stretching Warm-Ups", day: "Sun" },
-  { title: "1-Finger Development-Playing in C Position", day: "Mon" },
-  { title: "1-Finger Development-Basic Fingering Principles", day: "Mon" },
-  { title: "1-Finger Development-Smooth Finger Transitions", day: "Tue" },
-  { title: "1-Finger Development-Finger Strength Exercises", day: "Tue" },
-  // Reading & Rhythm Fundamentals
-  { title: "1-Reading & Rhythm Fundamentals-Note Values", day: "Wed" },
-  { title: "1-Reading & Rhythm Fundamentals-Whole Notes", day: "Wed" },
-  { title: "1-Reading & Rhythm Fundamentals-Half Notes", day: "Thu" },
-  { title: "1-Reading & Rhythm Fundamentals-Quarter Notes", day: "Thu" },
-  { title: "1-Reading & Rhythm Fundamentals-Eighth Notes", day: "Fri" },
-  { title: "1-Reading & Rhythm Fundamentals-Counting Rhythm", day: "Fri" },
-  { title: "1-Reading & Rhythm Fundamentals-Playing with a Steady Pulse", day: "Sat" },
-  { title: "1-Reading & Rhythm Fundamentals-Reading Simple Rhythms", day: "Sat" },
-  // Beginner Songs
-  { title: "1-Beginner Songs-Ode to Joy (Jazz Style)", day: "Sun" },
-  { title: "1-Beginner Songs-Mary Had a Little Lamb (Latin Style)", day: "Sun" },
-  { title: "1-Beginner Songs-William Jonathan (Jazz Ballad)", day: "Mon" },
-  { title: "1-Beginner Songs-I'll Be There (Pop Style)", day: "Mon" },
-  { title: "1-Beginner Songs-Twinkle Twinkle (Blues Style)", day: "Tue" },
-  { title: "1-Beginner Songs-Playing with Expression", day: "Tue" },
-  { title: "1-Beginner Songs-Performance with Backing Track", day: "Wed" },
-  // Practice Fundamentals
-  { title: "1-Practice Fundamentals-How to Practice Effectively", day: "Thu" },
-  { title: "1-Practice Fundamentals-Daily Practice Routine", day: "Thu" },
-  { title: "1-Practice Fundamentals-Practicing Without Mistakes", day: "Fri" },
-  { title: "1-Practice Fundamentals-Using a Metronome", day: "Fri" }
+  { title: "1-Module 1.1 — Orientation-V1.1.1", day: "Mon" },
+  { title: "1-Module 1.1 — Orientation-V1.1.2", day: "Mon" },
+  { title: "1-Module 1.1 — Orientation-V1.1.3", day: "Tue" }
 ]
 
 export const ACCOMPLISHMENTS: Accomplishment[] = [

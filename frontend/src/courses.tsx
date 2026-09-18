@@ -89,9 +89,9 @@ function Courses() {
     try {
       const saved = localStorage.getItem('completed_lessons');
       return saved ? JSON.parse(saved) : [
-        { title: "V0.1.1", day: "Mon" },
-        { title: "V0.1.2", day: "Mon" },
-        { title: "V0.1.3", day: "Tue" }
+        { title: "1-Module 1.1 — Orientation-V1.1.1", day: "Mon" },
+        { title: "1-Module 1.1 — Orientation-V1.1.2", day: "Mon" },
+        { title: "1-Module 1.1 — Orientation-V1.1.3", day: "Tue" }
       ];
     } catch {
       return [];
