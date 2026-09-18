@@ -61,32 +61,28 @@ function Courses() {
     }).catch(err => console.error("Error loading DB courses:", err));
   }, []);
 
-  // Saved for Later state
-  const [savedItems, setSavedItems] = useState<{ id: string; type: 'pdf' | 'video'; title: string; meta: string }[]>(() => {
-    try {
-      const saved = localStorage.getItem('saved_later_items');
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  useEffect(() => {
-    localStorage.setItem('saved_later_items', JSON.stringify(savedItems));
-    window.dispatchEvent(new Event('storage'));
-  }, [savedItems]);
-
-  const toggleSaveLater = (type: 'pdf' | 'video', item: { id: string; title: string; meta: string }, e: React.MouseEvent) => {
-    e.stopPropagation();
-    const exists = savedItems.some(s => s.id === item.id);
-    if (exists) {
-      setSavedItems(savedItems.filter(s => s.id !== item.id));
-    } else {
-      setSavedItems([...savedItems, { ...item, type }]);
-    }
+  // Sequential Lesson Unlock System
+  const getAllLessonsInOrder = () => {
+    const list: { key: string; levelNumber: number }[] = [];
+    dbLevels.forEach(lvl => {
+      lvl.topics.forEach(topic => {
+        topic.lessons.forEach(lesson => {
+          const key = `${lvl.number}-${topic.title}-${lesson.code || lesson.title}`;
+          list.push({ key, levelNumber: lvl.number });
+        });
+      });
+    });
+    return list;
   };
 
-  const isSavedLater = (id: string) => savedItems.some(s => s.id === id);
+  const isLessonUnlocked = (lessonKey: string): boolean => {
+    const all = getAllLessonsInOrder();
+    const idx = all.findIndex(item => item.key === lessonKey);
+    if (idx <= 0) return true; // 1st lesson ever is always unlocked
+    // Unlocked ONLY IF preceding lesson is completed!
+    const prevLessonKey = all[idx - 1].key;
+    return completedLessons.some(c => c.title === prevLessonKey);
+  };
 
   // Completed Lessons State
   const [completedLessons, setCompletedLessons] = useState<{ title: string; day: string }[]>(() => {
@@ -570,53 +566,73 @@ function Courses() {
                                   {topic.lessons.map((lesson, lessonIdx) => {
                                     const lessonKey = `${activeLevel.number}-${topic.title}-${lesson.code || lesson.title}`;
                                     const isCompleted = isLessonCompleted(lessonKey);
-                                    const isSelected = activeLessonIdx === lessonIdx;
+                                    const isUnlocked = isLessonUnlocked(lessonKey);
+                                    const isSelected = activeLessonIdx === lessonIdx && isUnlocked;
 
                                     return (
                                       <div
                                         key={lessonIdx}
                                         onClick={() => {
+                                          if (!isUnlocked) {
+                                            alert("🔒 Modul Terkunci: Anda wajib menyelesaikan video pelajaran sebelumnya terlebih dahulu untuk membuka modul ini.");
+                                            return;
+                                          }
                                           setSelectedLessonMap(prev => ({ ...prev, [topicKey]: lessonIdx }));
                                         }}
-                                        className={`p-3.5 rounded-md border transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${
-                                          isSelected
-                                            ? "bg-[#fdeee8]/90 border-[#c89482] shadow-[0_0_20px_rgba(253,238,232,0.95),0_4px_16px_rgba(184,124,109,0.2)] ring-1 ring-[#c89482]/60"
-                                            : "bg-white/60 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)]"
+                                        className={`p-3.5 rounded-md border transition-all duration-300 flex items-center justify-between gap-3 ${
+                                          !isUnlocked
+                                            ? "bg-gray-100/40 border-gray-300/60 opacity-60 cursor-not-allowed"
+                                            : isSelected
+                                              ? "bg-[#fdeee8]/90 border-[#c89482] shadow-[0_0_20px_rgba(253,238,232,0.95),0_4px_16px_rgba(184,124,109,0.2)] ring-1 ring-[#c89482]/60 cursor-pointer"
+                                              : "bg-white/60 border-[#e8cdc1]/80 hover:bg-[#fdeee8]/60 hover:border-[#c89482] hover:shadow-[0_0_18px_rgba(255,255,255,0.95)] cursor-pointer"
                                         }`}
                                       >
                                         <div className="flex items-center gap-3 min-w-0">
-                                          {/* Completion Status Checkmark on the Left */}
-                                          <button
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              toggleLessonCompleted(lessonKey);
-                                            }}
-                                            className="w-5 h-5 rounded-full border border-[#8a6858]/40 hover:border-[#8a6858] flex items-center justify-center transition-colors cursor-pointer bg-transparent shrink-0"
-                                            title="Toggle Complete"
-                                          >
-                                            {isCompleted ? (
-                                              <div className="w-4 h-4 rounded-full bg-[#8a6858] text-white flex items-center justify-center">
-                                                <span className="material-symbols-outlined text-[10px] font-bold">check</span>
-                                              </div>
-                                            ) : (
-                                              <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/25" />
-                                            )}
-                                          </button>
+                                          {/* Lock / Completion Status Checkmark on the Left */}
+                                          {!isUnlocked ? (
+                                            <div className="w-5 h-5 rounded-full bg-gray-200 text-gray-500 border border-gray-300 flex items-center justify-center shrink-0" title="Locked">
+                                              <span className="material-symbols-outlined text-[11px] font-bold">lock</span>
+                                            </div>
+                                          ) : (
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleLessonCompleted(lessonKey);
+                                              }}
+                                              className="w-5 h-5 rounded-full border border-[#8a6858]/40 hover:border-[#8a6858] flex items-center justify-center transition-colors cursor-pointer bg-transparent shrink-0"
+                                              title="Toggle Complete"
+                                            >
+                                              {isCompleted ? (
+                                                <div className="w-4 h-4 rounded-full bg-[#8a6858] text-white flex items-center justify-center">
+                                                  <span className="material-symbols-outlined text-[10px] font-bold">check</span>
+                                                </div>
+                                              ) : (
+                                                <div className="w-3.5 h-3.5 rounded-full border border-[#ab7e66]/40 bg-white/25" />
+                                              )}
+                                            </button>
+                                          )}
 
                                           {/* Lesson Code & Title */}
                                           <div className="min-w-0">
                                             <div className="flex items-center gap-1.5 mb-0.5">
                                               {lesson.code && (
                                                 <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md border ${
-                                                  isSelected 
-                                                    ? "bg-[#8a6858] text-white border-[#8a6858]" 
-                                                    : "bg-[#f8e3db] text-[#6e4336] border-[#e8cdc1]"
+                                                  !isUnlocked
+                                                    ? "bg-gray-200 text-gray-500 border-gray-300"
+                                                    : isSelected 
+                                                      ? "bg-[#8a6858] text-white border-[#8a6858]" 
+                                                      : "bg-[#f8e3db] text-[#6e4336] border-[#e8cdc1]"
                                                 }`}>
                                                   {lesson.code}
                                                 </span>
                                               )}
+                                              {!isUnlocked && (
+                                                <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider bg-gray-200/80 px-1.5 py-0.2 rounded border border-gray-300">
+                                                  Locked
+                                                </span>
+                                              )}
                                             </div>
-                                            <h4 className={`text-xs font-bold truncate ${isSelected ? "text-[#5e382b]" : "text-[#341f18]"}`}>
+                                            <h4 className={`text-xs font-bold truncate ${!isUnlocked ? "text-gray-500" : isSelected ? "text-[#5e382b]" : "text-[#341f18]"}`}>
                                               {lesson.title}
                                             </h4>
                                           </div>
@@ -626,21 +642,33 @@ function Courses() {
                                         <button
                                           onClick={(e) => {
                                             e.stopPropagation();
+                                            if (!isUnlocked) {
+                                              alert("🔒 Modul Terkunci: Selesaikan video pelajaran sebelumnya terlebih dahulu.");
+                                              return;
+                                            }
                                             alert(`Downloading PDF: ${lesson.pdf || lesson.title + ' Sheet Music'}`);
                                           }}
-                                          className="px-3 py-1.5 text-[11px] font-bold text-[#5e382b] hover:text-[#3e2219] rounded-md flex items-center gap-1.5 transition-all duration-300 shrink-0 cursor-pointer shadow-xs hover:shadow-[0_4px_16px_rgba(184,124,109,0.35)] hover:scale-[1.05] group/pdf relative overflow-hidden"
-                                          style={{
+                                          disabled={!isUnlocked}
+                                          className={`px-3 py-1.5 text-[11px] font-bold rounded-md flex items-center gap-1.5 transition-all duration-300 shrink-0 relative overflow-hidden ${
+                                            !isUnlocked
+                                              ? "opacity-40 cursor-not-allowed bg-gray-200 text-gray-400 border border-gray-300"
+                                              : "text-[#5e382b] hover:text-[#3e2219] cursor-pointer shadow-xs hover:shadow-[0_4px_16px_rgba(184,124,109,0.35)] hover:scale-[1.05] group/pdf"
+                                          }`}
+                                          style={isUnlocked ? {
                                             background: 'linear-gradient(135deg, #ffffff 0%, #fdeee8 50%, #f9dad0 100%) padding-box, linear-gradient(135deg, #b87c6d 0%, #f7d6cb 30%, #ffffff 50%, #e8b4a2 75%, #8e5849 100%) border-box',
                                             border: '1.5px solid transparent',
                                             boxShadow: '0 3px 12px rgba(184, 124, 109, 0.22), 0 0 10px rgba(255, 255, 255, 0.9), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)'
-                                          }}
-                                          title={`Download PDF: ${lesson.pdf || lesson.title}`}
+                                          } : {}}
+                                          title={isUnlocked ? `Download PDF: ${lesson.pdf || lesson.title}` : "Locked"}
                                         >
-                                          {/* Glossy Sheen Overlay */}
-                                          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover/pdf:translate-x-full transition-transform duration-700 z-0" />
+                                          {isUnlocked && (
+                                            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover/pdf:translate-x-full transition-transform duration-700 z-0" />
+                                          )}
                                           
-                                          <span className="material-symbols-outlined text-[15px] text-[#a05240] group-hover/pdf:scale-110 transition-transform relative z-10">workspace_premium</span>
-                                          <span className="tracking-widest uppercase text-[10px] font-black text-[#5e382b] relative z-10" style={{ fontFamily: "'Cinzel', serif" }}>
+                                          <span className={`material-symbols-outlined text-[15px] ${!isUnlocked ? "text-gray-400" : "text-[#a05240] group-hover/pdf:scale-110"} transition-transform relative z-10`}>
+                                            {!isUnlocked ? "lock" : "workspace_premium"}
+                                          </span>
+                                          <span className="tracking-widest uppercase text-[10px] font-black relative z-10" style={{ fontFamily: "'Cinzel', serif" }}>
                                             PDF
                                           </span>
                                         </button>

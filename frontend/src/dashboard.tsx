@@ -31,16 +31,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
   const [showSettings, setShowSettings] = useState(false)
   const [connectionTest, setConnectionTest] = useState<{ status: 'idle' | 'testing' | 'success' | 'failed', message?: string }>({ status: 'idle' })
 
-  // Saved for Later state
-  const [savedItems, setSavedItems] = useState<{ id: string; type: 'pdf' | 'video'; title: string; meta: string }[]>(() => {
-    try {
-      const saved = localStorage.getItem('saved_later_items')
-      return saved ? JSON.parse(saved) : []
-    } catch {
-      return []
-    }
-  })
-
   // Celebration state
   const [celebrationBadge, setCelebrationBadge] = useState<UserBadgeDto | null>(null)
 
@@ -55,16 +45,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
   useEffect(() => {
     const handleSync = () => {
       try {
-        const savedLater = localStorage.getItem('saved_later_items')
-        if (savedLater) {
-          setSavedItems(prev => {
-            if (JSON.stringify(prev) === savedLater) return prev
-            return JSON.parse(savedLater)
-          })
-        } else {
-          setSavedItems([])
-        }
-
         const savedCompleted = localStorage.getItem('completed_lessons')
         if (savedCompleted) {
           setCompletedLessons(prev => {
@@ -489,52 +469,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
             >
               Join Waiting Room
             </button>
-          </div>
-        </div>
-
-        {/* Card 6: Saved for Later */}
-        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
-          <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Saved for Later</h3>
-          <div className="space-y-2 overflow-y-auto flex-grow pr-1 custom-scrollbar min-h-0">
-            {savedItems.filter(item => item.type === 'pdf' || item.type === 'video').length === 0 ? (
-              <p className="text-xs text-[#81756f] italic py-1">No saved items. Bookmark lessons or PDFs from the Courses page to save them here.</p>
-            ) : (
-              savedItems
-                .filter(item => item.type === 'pdf' || item.type === 'video')
-                .map((item, i) => (
-                  <div 
-                    key={i} 
-                    className="flex items-center gap-2.5 p-2.5 bg-transparent hover:bg-white/10 border border-[#dfa38f]/40 rounded-lg cursor-pointer transition-all animate-in fade-in duration-200" 
-                    onClick={() => {
-                      if (item.type === 'pdf') {
-                        localStorage.setItem('redirect_course_pdf', item.title);
-                      } else {
-                        localStorage.setItem('redirect_lesson', item.title);
-                      }
-                      onNavigate('courses');
-                    }}
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-transparent overflow-hidden shrink-0 border border-[#dfa38f]/50 flex items-center justify-center text-[#6e5a51]">
-                      <span className="material-symbols-outlined text-base">
-                        {item.type === 'pdf' ? 'picture_as_pdf' : 'play_circle'}
-                      </span>
-                    </div>
-                    <div className="flex-grow min-w-0">
-                      <p className="text-xs font-bold text-[#1d1b1a] truncate">{item.title}</p>
-                      <p className="text-[9.5px] text-[#4f4540] truncate">{item.meta}</p>
-                    </div>
-                    <div className="flex items-center shrink-0" onClick={(e) => e.stopPropagation()}>
-                      <button
-                        onClick={(e) => handleUnsaveItem(item.id, e)}
-                        className="text-[8.5px] font-bold uppercase tracking-widest text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer transition-all pr-0.5"
-                        title="Unsave"
-                      >
-                        Unsave
-                      </button>
-                    </div>
-                  </div>
-                ))
-            )}
           </div>
         </div>
 
