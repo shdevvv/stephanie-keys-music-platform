@@ -127,20 +127,25 @@ export const GlobalSearchInput: React.FC<GlobalSearchInputProps> = ({ onNavigate
   };
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-[240px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[400px] xl:max-w-[460px] 2xl:max-w-[520px]">
+    <div ref={containerRef} className="relative w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[460px] xl:max-w-[540px] 2xl:max-w-[620px]">
       {/* Desktop Search Bar */}
       <div className="hidden md:flex items-center relative">
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setIsOpen(true);
+            const val = e.target.value;
+            setSearchTerm(val);
+            setIsOpen(val.trim().length > 0);
           }}
-          onFocus={() => setIsOpen(true)}
+          onFocus={() => {
+            if (searchTerm.trim().length > 0) {
+              setIsOpen(true);
+            }
+          }}
           onKeyDown={handleKeyDown}
           placeholder="Search lessons, sheets, and more..."
-          className="w-full bg-[#fffcfb]/90 border-[1.5px] border-[#dfa38f] hover:border-[#b76e79] focus:border-[#b76e79] rounded-[10px] py-2.5 pl-9 pr-8 text-[11.5px] text-[#5c3a2e] placeholder-[#a17a6e]/70 focus:outline-none transition-colors duration-200 shadow-none font-sans font-medium"
+          className="w-full bg-[#fffcfb]/90 border-[1.5px] border-[#dfa38f] hover:border-[#b76e79] focus:border-[#b76e79] rounded-[6px] py-1.5 pl-9 pr-8 text-[11.5px] text-[#5c3a2e] placeholder-[#a17a6e]/70 focus:outline-none transition-colors duration-200 shadow-none font-sans font-medium"
         />
         {/* Luxury Ornate Carved Metallic Rose-Gold Magnifying Glass Icon */}
         <svg className="absolute left-3.5 w-4.5 h-4.5 shrink-0 pointer-events-none drop-shadow-2xs" viewBox="0 0 24 24" fill="none">
@@ -185,7 +190,7 @@ export const GlobalSearchInput: React.FC<GlobalSearchInputProps> = ({ onNavigate
       </div>
 
       {/* Desktop Dropdown */}
-      {isOpen && (
+      {isOpen && searchTerm.trim().length > 0 && (
         <div className="hidden md:block">
           <SearchDropdownOverlay
             query={searchTerm}
