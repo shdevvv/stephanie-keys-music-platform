@@ -261,124 +261,135 @@ function Dashboard({ onNavigate }: DashboardProps) {
       <BadgeShowcaseWidget badges={levelBadges} />
       <BadgeCelebrationModal badge={celebrationBadge} onClose={() => setCelebrationBadge(null)} />
 
-      {/* Next Recommended Lesson Card */}
-      {dashboardSummary?.nextRecommendedLesson && (
-        <NextRecommendedLessonCard
-          recommendedLesson={dashboardSummary.nextRecommendedLesson}
-          onNavigate={onNavigate}
-        />
-      )}
-
-      {/* Main Grid Layout (3 Core Cards) */}
+      {/* Main Grid Layout: Left (Col 1 & 2), Right (Col 3) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6 min-h-0">
         
-        {/* Card 1: Overall Progress */}
-        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between min-h-[235px] shrink-0 gap-3 shadow-md">
-          <div className="flex justify-between items-center shrink-0">
-            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Overall Progress</h3>
-          </div>
-          <div className="flex flex-col flex-grow justify-between py-1">
-            <div className="flex items-center justify-around gap-4 my-auto">
-              {/* Circular Meter */}
-              <div className="relative w-20 h-20 shrink-0">
-                <svg className="w-full h-full transform -rotate-90">
-                  <defs>
-                    <linearGradient id="masteryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ab7e66" />
-                      <stop offset="100%" stopColor="#dfa38f" />
-                    </linearGradient>
-                  </defs>
-                  <circle cx="40" cy="40" fill="transparent" r="32" stroke="#f2dfd7" strokeWidth="5"></circle>
-                  <circle 
-                    className="progress-circle text-[#6e5a51]" 
-                    cx="40" 
-                    cy="40" 
-                    fill="transparent" 
-                    r="32" 
-                    stroke="url(#masteryGrad)" 
-                    strokeLinecap="round" 
-                    strokeWidth="5.5"
-                    style={{
-                      strokeDasharray: '201',
-                      strokeDashoffset: `calc(201 - (201 * ${mastery}) / 100)`
-                    }}
-                  ></circle>
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                  <span className="font-display-lg text-sm text-[#3d251c] font-black">{mastery}%</span>
-                  <span className="text-[7.5px] font-bold text-[#81756f] uppercase tracking-widest leading-none mt-0.5">Mastery</span>
-                </div>
+        {/* Left Column Span (Col 1 & 2) */}
+        <div className="lg:col-span-2 flex flex-col gap-5 md:gap-6">
+          
+          {/* Next Recommended Lesson Card (Spans from Overall Progress to Weekly Intensity) */}
+          {dashboardSummary?.nextRecommendedLesson && (
+            <NextRecommendedLessonCard
+              recommendedLesson={dashboardSummary.nextRecommendedLesson}
+              onNavigate={onNavigate}
+            />
+          )}
+
+          {/* Cards 1 & 2: Overall Progress + Weekly Practice Intensity */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 flex-grow">
+            
+            {/* Card 1: Overall Progress */}
+            <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between min-h-[235px] shrink-0 gap-3 shadow-md">
+              <div className="flex justify-between items-center shrink-0">
+                <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Overall Progress</h3>
               </div>
-
-              {/* Progress Text Details */}
-              <div className="flex flex-col min-w-0">
-                <p className="text-[9.5px] font-bold uppercase tracking-widest text-[#81756f]">Julian's Progress</p>
-                <p className="text-xl font-black text-[#3d251c] leading-tight mt-0.5">{overallCompletedLessons}</p>
-                <p className="text-xs text-[#6e5a51] font-semibold">Lessons Completed</p>
-                <p className="text-[8.5px] text-[#ab7e66] italic mt-0.5">Keep practicing daily!</p>
-              </div>
-            </div>
-
-            {/* Resume Button */}
-            <button 
-              onClick={() => onNavigate('courses')}
-              className="w-full bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] hover:from-[#856758] hover:to-[#ab7e66] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg shadow-xs transition-all duration-300 border border-[#dfa38f] cursor-pointer flex items-center justify-center gap-1.5 active:scale-98 shrink-0 mt-2"
-            >
-              <span className="material-symbols-outlined text-base">play_circle</span>
-              Resume Curriculum
-            </button>
-          </div>
-        </div>
-
-        {/* Card 2: Weekly Practice Intensity */}
-        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between min-h-[235px] shrink-0 gap-3 shadow-md">
-          <div className="flex justify-between items-center shrink-0">
-            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Weekly Practice Intensity</h3>
-          </div>
-          <div className="flex items-end justify-between gap-2.5 px-1 h-[125px] mt-2 shrink-0">
-            {(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as const).map((day) => {
-              const dayCompletedCount = completedLessons.filter(c => c.day === day).length
-              const barHeight = `${Math.min(95, 10 + dayCompletedCount * 18)}px`
-
-              return (
-                <div key={day} className="flex flex-col items-center gap-1.5 w-full justify-end animate-in fade-in duration-300">
-                  <div className="w-full flex flex-col justify-end h-[95px]">
-                    <div 
-                      className="bg-gradient-to-t from-[#ab7e66] to-[#dfa38f] hover:to-[#eec0b2] rounded-md w-full transition-all duration-300 border border-[#dfa38f]/40" 
-                      style={{ height: barHeight }} 
-                      title={`${dayCompletedCount} Lessons Completed`}
-                    ></div>
+              <div className="flex flex-col flex-grow justify-between py-1">
+                <div className="flex items-center justify-around gap-4 my-auto">
+                  {/* Circular Meter */}
+                  <div className="relative w-20 h-20 shrink-0">
+                    <svg className="w-full h-full transform -rotate-90">
+                      <defs>
+                        <linearGradient id="masteryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#ab7e66" />
+                          <stop offset="100%" stopColor="#dfa38f" />
+                        </linearGradient>
+                      </defs>
+                      <circle cx="40" cy="40" fill="transparent" r="32" stroke="#f2dfd7" strokeWidth="5"></circle>
+                      <circle 
+                        className="progress-circle text-[#6e5a51]" 
+                        cx="40" 
+                        cy="40" 
+                        fill="transparent" 
+                        r="32" 
+                        stroke="url(#masteryGrad)" 
+                        strokeLinecap="round" 
+                        strokeWidth="5.5"
+                        style={{
+                          strokeDasharray: '201',
+                          strokeDashoffset: `calc(201 - (201 * ${mastery}) / 100)`
+                        }}
+                      ></circle>
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                      <span className="font-display-lg text-sm text-[#3d251c] font-black">{mastery}%</span>
+                      <span className="text-[7.5px] font-bold text-[#81756f] uppercase tracking-widest leading-none mt-0.5">Mastery</span>
+                    </div>
                   </div>
-                  <span className="text-xs font-bold text-[#4f4540]">{day}</span>
+
+                  {/* Progress Text Details */}
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-[9.5px] font-bold uppercase tracking-widest text-[#81756f]">Julian's Progress</p>
+                    <p className="text-xl font-black text-[#3d251c] leading-tight mt-0.5">{overallCompletedLessons}</p>
+                    <p className="text-xs text-[#6e5a51] font-semibold">Lessons Completed</p>
+                    <p className="text-[8.5px] text-[#ab7e66] italic mt-0.5">Keep practicing daily!</p>
+                  </div>
                 </div>
-              );
-            })}
+
+                {/* Resume Button */}
+                <button 
+                  onClick={() => onNavigate('courses')}
+                  className="w-full bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] hover:from-[#856758] hover:to-[#ab7e66] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg shadow-xs transition-all duration-300 border border-[#dfa38f] cursor-pointer flex items-center justify-center gap-1.5 active:scale-98 shrink-0 mt-2"
+                >
+                  <span className="material-symbols-outlined text-base">play_circle</span>
+                  Resume Curriculum
+                </button>
+              </div>
+            </div>
+
+            {/* Card 2: Weekly Practice Intensity */}
+            <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between min-h-[235px] shrink-0 gap-3 shadow-md">
+              <div className="flex justify-between items-center shrink-0">
+                <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Weekly Practice Intensity</h3>
+              </div>
+              <div className="flex items-end justify-between gap-2.5 px-1 h-[125px] mt-2 shrink-0">
+                {(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as const).map((day) => {
+                  const dayCompletedCount = completedLessons.filter(c => c.day === day).length
+                  const barHeight = `${Math.min(95, 10 + dayCompletedCount * 18)}px`
+
+                  return (
+                    <div key={day} className="flex flex-col items-center gap-1.5 w-full justify-end animate-in fade-in duration-300">
+                      <div className="w-full flex flex-col justify-end h-[95px]">
+                        <div 
+                          className="bg-gradient-to-t from-[#ab7e66] to-[#dfa38f] hover:to-[#eec0b2] rounded-md w-full transition-all duration-300 border border-[#dfa38f]/40" 
+                          style={{ height: barHeight }} 
+                          title={`${dayCompletedCount} Lessons Completed`}
+                        ></div>
+                      </div>
+                      <span className="text-xs font-bold text-[#4f4540]">{day}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* Card 3: Live Studio */}
-        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between min-h-[235px] shrink-0 gap-3 shadow-md">
-          <div className="flex justify-between items-center shrink-0">
-            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Live Studio</h3>
-            <a className="text-[#6e5a51] text-xs font-bold hover:underline cursor-pointer" onClick={() => onNavigate('sessions')}>View All</a>
-          </div>
-          <div className="flex-grow flex flex-col justify-between min-h-0 py-1 gap-2">
-            <div className="p-3 rounded-lg bg-transparent hover:bg-white/10 transition-colors border border-[#dfa38f]/40 cursor-pointer w-full space-y-1" onClick={() => onNavigate('sessions')}>
-              <div className="flex justify-between items-start gap-1">
-                <span className="bg-transparent border border-[#dfa38f] text-[#524037] px-2 py-0.5 rounded-md text-[8.5px] font-bold uppercase tracking-wider">Oct 26 • 2:00 PM</span>
-              </div>
-              <h4 className="font-bold text-xs md:text-sm text-[#1d1b1a] truncate">Advanced Jazz Voicings &amp; Transitional Runs</h4>
-              <p className="text-[9.5px] text-[#4f4540]">with Stephanie Halim</p>
+        {/* Right Column Span (Col 3): Live Studio */}
+        <div className="lg:col-span-1">
+          <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between h-full min-h-[235px] shrink-0 gap-3 shadow-md">
+            <div className="flex justify-between items-center shrink-0">
+              <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Live Studio</h3>
+              <a className="text-[#6e5a51] text-xs font-bold hover:underline cursor-pointer" onClick={() => onNavigate('sessions')}>View All</a>
             </div>
-            <button 
-              onClick={() => {
-                alert("Redirecting to Live Studio Zoom Session...\nMeeting Link: https://zoom.us/j/8889991111\n\n(Dummy Zoom link generated for simulation)");
-                window.open("https://zoom.us/j/8889991111", "_blank");
-              }}
-              className="w-full bg-transparent hover:bg-white/20 text-[#6e5a51] font-bold text-xs py-2 rounded-lg transition-all border border-[#dfa38f] cursor-pointer shrink-0"
-            >
-              Join Waiting Room
-            </button>
+            <div className="flex-grow flex flex-col justify-between min-h-0 py-1 gap-2">
+              <div className="p-3 rounded-lg bg-transparent hover:bg-white/10 transition-colors border border-[#dfa38f]/40 cursor-pointer w-full space-y-1" onClick={() => onNavigate('sessions')}>
+                <div className="flex justify-between items-start gap-1">
+                  <span className="bg-transparent border border-[#dfa38f] text-[#524037] px-2 py-0.5 rounded-md text-[8.5px] font-bold uppercase tracking-wider">Oct 26 • 2:00 PM</span>
+                </div>
+                <h4 className="font-bold text-xs md:text-sm text-[#1d1b1a] truncate">Advanced Jazz Voicings &amp; Transitional Runs</h4>
+                <p className="text-[9.5px] text-[#4f4540]">with Stephanie Halim</p>
+              </div>
+              <button 
+                onClick={() => {
+                  alert("Redirecting to Live Studio Zoom Session...\nMeeting Link: https://zoom.us/j/8889991111\n\n(Dummy Zoom link generated for simulation)");
+                  window.open("https://zoom.us/j/8889991111", "_blank");
+                }}
+                className="w-full bg-transparent hover:bg-white/20 text-[#6e5a51] font-bold text-xs py-2 rounded-lg transition-all border border-[#dfa38f] cursor-pointer shrink-0"
+              >
+                Join Waiting Room
+              </button>
+            </div>
           </div>
         </div>
 
