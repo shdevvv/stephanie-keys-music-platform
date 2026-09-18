@@ -934,51 +934,36 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   </div>
                 </div>
               ) : (
-                /* Not Logged In: Clear Liquid Glass Controls */
+                /* Not Logged In: Rose Gold Metallic Border Pill Controls matching Logged In Username design */
                 <div className="flex items-center gap-2 sm:gap-2.5">
                   <button
                     onClick={() => onNavigate("signin")}
                     style={{
-                      background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 100%)",
-                      backdropFilter: "blur(16px) saturate(180%)",
-                      WebkitBackdropFilter: "blur(16px) saturate(180%)",
-                      border: "1.5px solid rgba(255, 255, 255, 0.85)",
-                      boxShadow: "inset 0 1.5px 1px 0 #FFFFFF, inset 0 -1px 2px 0 rgba(0, 0, 0, 0.04)",
-                      fontFamily: "'Playfair Display', Georgia, serif",
+                      background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
+                      border: "1.5px solid transparent",
+                      boxShadow: "none",
                     }}
-                    className="h-9.5 sm:h-10.5 px-3.5 sm:px-4.5 rounded-[10px] text-xs sm:text-[13.5px] font-bold text-[#3d2319] hover:text-[#800A1D] hover:scale-[1.02] transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center shrink-0"
+                    className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center shadow-none shrink-0"
                   >
-                    Sign In
+                    <span
+                      style={{ fontFamily: "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive", letterSpacing: "0.01em" }}
+                      className="text-sm sm:text-[15px] font-bold text-[#6e4337]"
+                    >
+                      Sign In
+                    </span>
                   </button>
                   <button
                     onClick={() => onNavigate("signup")}
                     style={{
-                      background: "linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.16) 100%)",
-                      backdropFilter: "blur(18px) saturate(190%)",
-                      WebkitBackdropFilter: "blur(18px) saturate(190%)",
-                      border: "1.5px solid rgba(255, 255, 255, 0.9)",
-                      boxShadow: "0 6px 18px -2px rgba(0, 0, 0, 0.06), inset 0 1.5px 1px 0 #FFFFFF, inset 0 -1px 2px 0 rgba(0, 0, 0, 0.05)",
+                      background: "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
+                      border: "1.5px solid transparent",
+                      boxShadow: "none",
                     }}
-                    className="relative h-9.5 sm:h-10.5 px-3.5 sm:px-4.5 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-120 hover:scale-[1.02] active:scale-97 focus:outline-none flex items-center justify-center gap-1.5 text-[#3d2319] shadow-none shrink-0"
+                    className="relative h-8.5 sm:h-9.5 px-3 sm:px-3.5 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center shadow-none shrink-0"
                   >
-                    <svg className="w-4 h-4.5 shrink-0 drop-shadow-2xs block" viewBox="0 0 100 130">
-                      <defs>
-                        <linearGradient id="note-glossy-gold-su" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#FFFFFF" />
-                          <stop offset="25%" stopColor="#FFF0EB" />
-                          <stop offset="55%" stopColor="#E2B0A4" />
-                          <stop offset="85%" stopColor="#C48B7C" />
-                          <stop offset="100%" stopColor="#8C5446" />
-                        </linearGradient>
-                      </defs>
-                      <ellipse cx="28" cy="98" rx="18" ry="12" transform="rotate(-25 28 98)" fill="url(#note-glossy-gold-su)" />
-                      <rect x="42" y="10" width="9" height="88" rx="2" fill="url(#note-glossy-gold-su)" />
-                      <path d="M 50 10 C 68 22, 82 42, 75 66 C 72 72, 68 76, 65 80 C 72 65, 75 48, 50 32 Z" fill="url(#note-glossy-gold-su)" />
-                      <path d="M 50 35 C 68 47, 82 67, 75 91 C 72 96, 68 100, 65 104 C 72 90, 75 73, 50 57 Z" fill="url(#note-glossy-gold-su)" />
-                    </svg>
                     <span
-                      style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                      className="text-xs sm:text-[13.5px] font-bold text-[#4A2B20] tracking-wider"
+                      style={{ fontFamily: "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive", letterSpacing: "0.01em" }}
+                      className="text-sm sm:text-[15px] font-bold text-[#6e4337]"
                     >
                       Sign Up
                     </span>
