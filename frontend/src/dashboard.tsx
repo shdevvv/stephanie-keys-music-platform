@@ -9,13 +9,6 @@ import { NextRecommendedLessonCard } from './components/NextRecommendedLessonCar
 import { fetchDashboardSummary, type DashboardSummaryDto } from './services/dashboardApi'
 import { downloadLevelCertificate } from './utils/certificateGenerator'
 
-interface TodoItem {
-  id: string
-  title: string
-  description?: string
-  isCompleted: boolean
-}
-
 interface DashboardProps {
   onNavigate: (view: 'home' | 'dashboard' | 'library' | 'courses' | 'sessions' | 'forums') => void
 }
@@ -48,21 +41,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
     }
   })
 
-  // Student To Do List states
-  const [todos, setTodos] = useState<TodoItem[]>(() => {
-    try {
-      const saved = localStorage.getItem('student_todos')
-      return saved ? JSON.parse(saved) : [
-        { id: '1', title: 'Practice C Major scale 2 octaves', isCompleted: false },
-        { id: '2', title: 'Review jazz voicings for Misty', isCompleted: true }
-      ]
-    } catch {
-      return []
-    }
-  })
-  const [title, setTitle] = useState('')
-  const [editingId, setEditingId] = useState<string | null>(null)
-
   // Celebration state
   const [celebrationBadge, setCelebrationBadge] = useState<UserBadgeDto | null>(null)
 
@@ -72,11 +50,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
   useEffect(() => {
     fetchDashboardSummary().then(summary => setDashboardSummary(summary))
   }, [])
-
-  useEffect(() => {
-    localStorage.setItem('student_todos', JSON.stringify(todos))
-    window.dispatchEvent(new Event('storage'))
-  }, [todos])
 
   // Sync state from local storage mutations
   useEffect(() => {
@@ -107,14 +80,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
           setStreak(parseInt(savedStreak, 10))
         } else {
           setStreak(14)
-        }
-
-        const savedTodos = localStorage.getItem('student_todos')
-        if (savedTodos) {
-          setTodos(prev => {
-            if (JSON.stringify(prev) === savedTodos) return prev
-            return JSON.parse(savedTodos)
-          })
         }
       } catch (err) {
         console.error(err)
@@ -437,75 +402,6 @@ function Dashboard({ onNavigate }: DashboardProps) {
           </div>
         </div>
 
-        {/* Card 3: Today's Guided Practice Plan */}
-        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
-          <div className="flex justify-between items-center shrink-0">
-            <div>
-              <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Today's Practice Plan</h3>
-              <p className="text-[9.5px] text-[#81756f] font-medium">Guided daily goals recommended for your level</p>
-            </div>
-            <span className="px-2 py-0.5 rounded-md bg-[#dfa38f]/20 text-[#6e4336] text-[9px] font-bold border border-[#dfa38f]/50">
-              {todos.filter(t => t.isCompleted).length} / {todos.length} Done
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-2 flex-grow min-h-0">
-            {/* Quick Add Custom Goal */}
-            <form onSubmit={handleAddOrUpdateTodo} className="flex gap-2 shrink-0">
-              <input
-                type="text"
-                required
-                placeholder="Add custom practice goal..."
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="flex-grow bg-transparent border border-[#dfa38f]/60 rounded-lg px-3 py-1.5 text-[#5a3a2e] placeholder:text-[#ab7e66]/60 focus:outline-none focus:border-[#dfa38f] text-xs font-medium"
-              />
-              <button
-                type="submit"
-                className="bg-[#ab7e66] hover:bg-[#856758] text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-all cursor-pointer flex items-center justify-center shrink-0 border border-[#dfa38f]"
-              >
-                + Goal
-              </button>
-            </form>
-
-            {/* Guided Tasks List */}
-            <div className="flex-grow min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-1.5 mt-1">
-              {todos.map((todo) => (
-                <div 
-                  key={todo.id} 
-                  onClick={() => handleToggleTodo(todo.id)}
-                  className={`p-2.5 bg-transparent border rounded-lg flex items-center justify-between gap-2.5 cursor-pointer transition-all duration-200 ${
-                    todo.isCompleted 
-                      ? 'border-[#dfa38f]/30 opacity-70 bg-white/5' 
-                      : 'border-[#dfa38f]/50 hover:bg-white/10 shadow-2xs'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5 min-w-0 flex-grow">
-                    <div className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-colors ${
-                      todo.isCompleted ? 'bg-[#b76e79] text-white' : 'border-1.5 border-[#dfa38f]/70 bg-transparent'
-                    }`}>
-                      {todo.isCompleted && <span className="material-symbols-outlined text-xs font-black">check</span>}
-                    </div>
-                    <p className={`text-xs font-semibold truncate ${todo.isCompleted ? 'line-through text-[#81756f]' : 'text-[#4e3328]'}`}>
-                      {todo.title}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteTodo(todo.id);
-                    }}
-                    className="text-[#81756f]/60 hover:text-red-500 bg-transparent border-none cursor-pointer transition-colors p-0.5 shrink-0"
-                    title="Remove Goal"
-                  >
-                    <span className="material-symbols-outlined text-sm">close</span>
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* Card 4: Level Certificates Status */}
         <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
