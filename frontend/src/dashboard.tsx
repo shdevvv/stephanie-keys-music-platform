@@ -437,98 +437,74 @@ function Dashboard({ onNavigate }: DashboardProps) {
           </div>
         </div>
 
-        {/* Card 3: Student To Do List */}
+        {/* Card 3: Today's Guided Practice Plan */}
         <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
-          <div className="flex justify-between items-start shrink-0">
-            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Student To Do List</h3>
+          <div className="flex justify-between items-center shrink-0">
+            <div>
+              <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Today's Practice Plan</h3>
+              <p className="text-[9.5px] text-[#81756f] font-medium">Guided daily goals recommended for your level</p>
+            </div>
+            <span className="px-2 py-0.5 rounded-md bg-[#dfa38f]/20 text-[#6e4336] text-[9px] font-bold border border-[#dfa38f]/50">
+              {todos.filter(t => t.isCompleted).length} / {todos.length} Done
+            </span>
           </div>
 
-          <div className="flex flex-col gap-2.5 flex-grow min-h-0">
-            {/* Form */}
-            <div className="flex flex-col gap-1 shrink-0">
-              <div className="flex justify-between items-center mb-0.5">
-                <h4 className="font-bold text-[9.5px] uppercase tracking-wider text-[#81756f]">
-                  {editingId ? 'Edit Task' : 'Add Task'}
-                </h4>
-                {editingId && (
-                  <button 
-                    onClick={handleCancelEdit} 
-                    className="text-[9.5px] font-bold text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer"
-                  >
-                    Cancel
-                  </button>
-                )}
-              </div>
-              <form onSubmit={handleAddOrUpdateTodo} className="flex gap-2">
-                <input
-                  type="text"
-                  required
-                  placeholder="E.g., Practice Misty chord runs"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  className="flex-grow bg-transparent border border-[#dfa38f]/60 rounded-lg px-3 py-1.5 text-[#5a3a2e] placeholder:text-[#ab7e66]/60 focus:outline-none focus:border-[#dfa38f] text-xs font-medium"
-                />
-                <button
-                  type="submit"
-                  className="bg-transparent border border-[#dfa38f] text-[#6e5a51] font-bold px-3 py-1.5 rounded-lg text-xs hover:bg-white/20 active:scale-98 transition-all cursor-pointer flex items-center justify-center shrink-0"
+          <div className="flex flex-col gap-2 flex-grow min-h-0">
+            {/* Quick Add Custom Goal */}
+            <form onSubmit={handleAddOrUpdateTodo} className="flex gap-2 shrink-0">
+              <input
+                type="text"
+                required
+                placeholder="Add custom practice goal..."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="flex-grow bg-transparent border border-[#dfa38f]/60 rounded-lg px-3 py-1.5 text-[#5a3a2e] placeholder:text-[#ab7e66]/60 focus:outline-none focus:border-[#dfa38f] text-xs font-medium"
+              />
+              <button
+                type="submit"
+                className="bg-[#ab7e66] hover:bg-[#856758] text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-all cursor-pointer flex items-center justify-center shrink-0 border border-[#dfa38f]"
+              >
+                + Goal
+              </button>
+            </form>
+
+            {/* Guided Tasks List */}
+            <div className="flex-grow min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-1.5 mt-1">
+              {todos.map((todo) => (
+                <div 
+                  key={todo.id} 
+                  onClick={() => handleToggleTodo(todo.id)}
+                  className={`p-2.5 bg-transparent border rounded-lg flex items-center justify-between gap-2.5 cursor-pointer transition-all duration-200 ${
+                    todo.isCompleted 
+                      ? 'border-[#dfa38f]/30 opacity-70 bg-white/5' 
+                      : 'border-[#dfa38f]/50 hover:bg-white/10 shadow-2xs'
+                  }`}
                 >
-                  {editingId ? 'Save' : 'Add'}
-                </button>
-              </form>
-            </div>
-
-            {/* Items List */}
-            <div className="flex flex-col min-h-0 flex-grow gap-1.5">
-              <h4 className="font-bold text-[9.5px] uppercase tracking-wider text-[#81756f] shrink-0">My Tasks ({todos.length})</h4>
-              <div className="flex-grow min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-1.5">
-                {todos.length === 0 ? (
-                  <p className="text-xs text-[#4f4540] italic py-1">No tasks added. Add tasks above to track your practice!</p>
-                ) : (
-                  todos.map((todo) => (
-                    <div key={todo.id} className="p-2 md:p-2.5 bg-transparent border border-[#dfa38f]/40 rounded-lg flex items-center justify-between gap-2 group animate-in fade-in duration-200 hover:bg-white/10">
-                      <button 
-                        type="button"
-                        onClick={() => handleToggleTodo(todo.id)}
-                        className="shrink-0 bg-transparent border-none cursor-pointer focus:outline-none flex items-center justify-center p-0"
-                      >
-                        {todo.isCompleted ? (
-                          <div className="w-4.5 h-4.5 rounded-md bg-transparent border-1.5 border-[#b76e79] flex items-center justify-center">
-                            <span className="material-symbols-outlined text-[#b76e79] text-xs font-black">check</span>
-                          </div>
-                        ) : (
-                          <div className="w-4.5 h-4.5 rounded-md bg-transparent border-1.5 border-[#dfa38f]/60 flex items-center justify-center transition-all duration-200"></div>
-                        )}
-                      </button>
-                      <div className="flex-grow min-w-0">
-                        <p className={`text-xs font-semibold truncate ${todo.isCompleted ? 'line-through text-[#81756f]' : 'text-[#5a3a2e]'}`}>{todo.title}</p>
-                      </div>
-                      <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all shrink-0 self-center">
-                        <button 
-                          type="button"
-                          onClick={() => handleEditTodo(todo)}
-                          className="text-[9px] font-bold uppercase text-[#81756f] hover:text-[#3d251c] bg-transparent border-none cursor-pointer"
-                          title="Edit"
-                        >
-                          Edit
-                        </button>
-                        <span className="text-[#81756f]/40 text-[8px] select-none">•</span>
-                        <button 
-                          type="button"
-                          onClick={() => handleDeleteTodo(todo.id)}
-                          className="text-[9px] font-bold uppercase text-[#81756f] hover:text-red-500 bg-transparent border-none cursor-pointer"
-                          title="Delete"
-                        >
-                          Delete
-                        </button>
-                      </div>
+                  <div className="flex items-center gap-2.5 min-w-0 flex-grow">
+                    <div className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-colors ${
+                      todo.isCompleted ? 'bg-[#b76e79] text-white' : 'border-1.5 border-[#dfa38f]/70 bg-transparent'
+                    }`}>
+                      {todo.isCompleted && <span className="material-symbols-outlined text-xs font-black">check</span>}
                     </div>
-                  ))
-                )}
-              </div>
+                    <p className={`text-xs font-semibold truncate ${todo.isCompleted ? 'line-through text-[#81756f]' : 'text-[#4e3328]'}`}>
+                      {todo.title}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteTodo(todo.id);
+                    }}
+                    className="text-[#81756f]/60 hover:text-red-500 bg-transparent border-none cursor-pointer transition-colors p-0.5 shrink-0"
+                    title="Remove Goal"
+                  >
+                    <span className="material-symbols-outlined text-sm">close</span>
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-
         {/* Card 4: Level Certificates Status */}
         <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
           <div className="flex justify-between items-center shrink-0">
