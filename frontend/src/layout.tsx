@@ -742,14 +742,14 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
       `}</style>
       <CustomCursor />
       <div
-        className={`max-w-[1440px] mx-auto w-full ${view === "dashboard" ? "h-auto bg-transparent" : view === "my-library" || view === "download-page" || view === "invoice" ? "h-auto bg-transparent" : "h-auto bg-[#fff8f6]"} flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative`}
+        className="max-w-[1440px] mx-auto w-full h-auto bg-transparent flex flex-col shadow-[0_0_80px_rgba(45,41,38,0.08)] relative"
       >
         {/* Top Navigation Bar */}
         <nav
           className={`sticky top-0 w-full z-50 transition-all duration-300 ${
             isScrolled
-              ? "bg-[#fff8f6]/45 backdrop-blur-lg border-b border-[#e2b0a4]/30 shadow-[0_4px_25px_rgba(184,124,109,0.08)]"
-              : "bg-[#fff8f6]/15 backdrop-blur-md border-b border-[#e8cdc1]/15"
+              ? "bg-[#fff8f6]/75 backdrop-blur-lg border-b border-[#e2b0a4]/40 shadow-[0_4px_25px_rgba(184,124,109,0.12)]"
+              : "bg-[#fff8f6]/35 backdrop-blur-md border-b border-[#e8cdc1]/20"
           }`}
         >
           <div className="flex justify-between items-center h-20 md:h-24 px-3 sm:px-6 md:px-12 w-full">
