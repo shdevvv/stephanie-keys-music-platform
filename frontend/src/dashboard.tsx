@@ -181,7 +181,15 @@ function Dashboard({ onNavigate }: DashboardProps) {
   }
 
   return (
-    <main className="py-6 md:py-8 px-4 sm:px-6 md:px-8 max-w-[1400px] mx-auto w-full flex flex-col gap-6 md:gap-7 min-h-0">
+    <main 
+      className="py-6 md:py-8 px-4 sm:px-6 md:px-8 max-w-[1400px] mx-auto w-full flex flex-col gap-6 md:gap-7 min-h-screen text-[#3d251c] relative"
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(255, 252, 250, 0.45) 0%, rgba(255, 245, 240, 0.35) 100%), url('/dashboard-silk-bg.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       
       {/* Connection Settings panel (overlay modal) */}
       {showSettings && (

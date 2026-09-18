@@ -688,7 +688,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     <span
                       className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
                     >
-                      STUDENTS
+                      DASHBOARD
                     </span>
                     <span
                       className={`absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full bg-gradient-to-r from-[#b57262] via-[#ffe2d8] to-[#b57262] shadow-[0_0_8px_rgba(232,180,162,0.6)] transition-all duration-300 ease-out origin-center ${
@@ -1024,7 +1024,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     <span className="w-7 h-7 rounded-[6px] bg-white border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0">
                       <NavProgressIcon className="w-4 h-4 shrink-0" />
                     </span>
-                    <span>STUDENTS</span>
+                    <span>DASHBOARD</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </button>
