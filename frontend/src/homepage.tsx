@@ -12,6 +12,7 @@ import ForgotPassword from "./forgotPassword";
 import SheetPurchaseFlow from "./sheetPurchaseFlow";
 import Forums from "./forums";
 import UserProfile from "./userProfile";
+import LiveStudio from "./liveStudio";
 import { type Sheet } from "./sheetsData";
 
 
@@ -235,6 +236,8 @@ function Homepage() {
         );
       case "dashboard":
         return <Dashboard onNavigate={handleNavigate} />;
+      case "sessions":
+        return <LiveStudio onNavigate={handleNavigate} />;
       case "courses":
         return <Courses />;
       case "forums":
