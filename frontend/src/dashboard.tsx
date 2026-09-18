@@ -281,9 +281,28 @@ function Dashboard({ onNavigate }: DashboardProps) {
             Active Student
           </span>
         </div>
+
+        {/* Practice Streak Counter */}
+        <div className="flex items-center gap-1 bg-[#dfa38f]/20 border border-[#dfa38f]/60 px-2.5 py-1 rounded-lg shadow-2xs">
+          <button 
+            onClick={() => handleUpdateStreak(-1)} 
+            className="w-4 h-4 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
+            title="Decrease Streak"
+          >
+            -
+          </button>
+          <span className="text-xs font-bold text-[#5a3a2e] px-1" title="Practice Streak (Days)">🔥 {streak}d Streak</span>
+          <button 
+            onClick={() => handleUpdateStreak(1)} 
+            className="w-4 h-4 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
+            title="Increase Streak"
+          >
+            +
+          </button>
+        </div>
       </section>
 
-      {/* 8 Level Achievement Badges Showcase & Modal */}
+      {/* 8 Level Achievement Badges Showcase & Modal (1x Only) */}
       <BadgeShowcaseWidget badges={levelBadges} />
       <BadgeCelebrationModal badge={celebrationBadge} onClose={() => setCelebrationBadge(null)} />
 
@@ -295,7 +314,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
         />
       )}
 
-      {/* Main Grid Layout (3 on top, 3 at the bottom) */}
+      {/* Main Grid Layout (3 Core Cards) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6 min-h-0">
         
         {/* Card 1: Overall Progress */}
@@ -382,71 +401,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
           </div>
         </div>
 
-
-        {/* Card 4: 8 Level Badges & Certificates */}
-        <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col min-h-[235px] shrink-0 gap-3 shadow-md">
-          <div className="flex justify-between items-center shrink-0">
-            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">8 Level Badges &amp; Certificates</h3>
-            <div className="flex items-center gap-1 bg-transparent border border-[#dfa38f]/50 px-2 py-0.5 rounded-lg">
-              <button 
-                onClick={() => handleUpdateStreak(-1)} 
-                className="w-4 h-4 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
-                title="Decrease Streak"
-              >
-                -
-              </button>
-              <span className="text-xs font-bold text-[#6e5a51]" title="Practice Streak (Days)">{streak}d Streak</span>
-              <button 
-                onClick={() => handleUpdateStreak(1)} 
-                className="w-4 h-4 bg-transparent border-none text-[#6e5a51] hover:text-[#3d251c] flex items-center justify-center font-bold cursor-pointer text-xs focus:outline-none"
-                title="Increase Streak"
-              >
-                +
-              </button>
-            </div>
-          </div>
-          <div className="space-y-2 overflow-y-auto flex-grow pr-1 custom-scrollbar min-h-0">
-            {levelBadges.map((badge) => {
-              return (
-                <div 
-                  key={badge.levelNumber} 
-                  className={`flex items-center justify-between gap-2.5 p-2 md:p-2.5 rounded-lg border border-[#dfa38f]/40 bg-transparent transition-all duration-300 ${badge.isUnlocked ? 'opacity-100' : 'opacity-70'}`}
-                >
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className="text-xl select-none shrink-0">{badge.icon}</span>
-                    <div className="min-w-0">
-                      <p className="text-xs font-bold text-[#3d251c] truncate">Level {badge.levelNumber}: {badge.subtitle}</p>
-                      <p className="text-[9.5px] text-[#81756f] truncate">{badge.name} Badge</p>
-                    </div>
-                  </div>
-                  {badge.isUnlocked ? (
-                    <button
-                      type="button"
-                      onClick={() => downloadLevelCertificate({
-                        studentName: 'Julian',
-                        levelNumber: badge.levelNumber,
-                        levelTitle: `Level ${badge.levelNumber}`,
-                        levelSubtitle: badge.subtitle,
-                        badgeName: badge.name,
-                        badgeIcon: badge.icon,
-                      })}
-                      className="px-2.5 py-1 rounded-md bg-[#ab7e66] hover:bg-[#856758] text-white text-[9.5px] font-bold uppercase tracking-wider border border-[#dfa38f] shrink-0 cursor-pointer shadow-xs transition-all flex items-center gap-1"
-                    >
-                      <span className="material-symbols-outlined text-xs">workspace_premium</span>
-                      Certificate
-                    </button>
-                  ) : (
-                    <span className="text-[9px] font-bold text-[#81756f] px-2 py-0.5 rounded-md bg-gray-500/10 border border-gray-400/30 shrink-0">
-                      {badge.progressPercentage}%
-                    </span>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Card 5: Live Studio */}
+        {/* Card 3: Live Studio */}
         <div className="bg-transparent backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 md:p-6 flex flex-col justify-between min-h-[235px] shrink-0 gap-3 shadow-md">
           <div className="flex justify-between items-center shrink-0">
             <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif" }} className="font-bold text-xs md:text-sm uppercase tracking-wider text-[#6e5a51]">Live Studio</h3>
