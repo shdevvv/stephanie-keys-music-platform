@@ -184,7 +184,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
     <main 
       className="py-6 md:py-8 px-4 sm:px-6 md:px-8 max-w-[1400px] mx-auto w-full flex flex-col gap-6 md:gap-7 min-h-screen text-[#3d251c] relative"
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(255, 252, 250, 0.45) 0%, rgba(255, 245, 240, 0.35) 100%), url('/dashboard-silk-bg.jpg')`,
+        backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 248, 244, 0.15) 100%), url('/dashboard-grand-hall-bg.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
         backgroundAttachment: 'fixed'

@@ -1059,11 +1059,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
           className="flex flex-col h-auto flex-grow-0"
           style={
             view === "dashboard" ? {
-              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('/sonata.png')`,
+              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), url('/dashboard-grand-hall-bg.jpg')`,
               backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
-              backgroundColor: '#ffffff'
+              backgroundColor: '#fff8f6'
             } : (view === "privacy" || view === "terms" ? {
               backgroundImage: `url('/white-peach-marble.png')`,
               backgroundSize: 'cover',
