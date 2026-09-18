@@ -643,13 +643,13 @@ function Homepage() {
                         voice.
                       </p>
 
-                      <div className="pl-4 border-l-2 border-[#ab7e66] pt-1 pb-1 mt-4">
-                        <p className="font-display-lg italic text-[#5a453d] font-semibold text-base md:text-lg leading-relaxed">
+                      <div className="pl-4 border-l-2 border-[#ab7e66]/70 pt-1 pb-1 mt-4">
+                        <p className="font-display-lg italic text-[#7a645b] font-light text-base md:text-lg leading-relaxed tracking-wide">
                           "In Stephanie Keys, we will explore rich chords, and help
                           you find your own voice on the piano at your own
                           comfortable pace."
                         </p>
-                        <span className="block mt-2 text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-[#ab7e66]">
+                        <span className="block mt-2 text-xs md:text-sm font-sans font-medium uppercase tracking-widest text-[#ab7e66]/90">
                           — Stephanie Halim, 2026
                         </span>
                       </div>
