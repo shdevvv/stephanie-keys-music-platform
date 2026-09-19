@@ -57,33 +57,33 @@ export default function SignUp({ onNavigate }: SignUpProps) {
 
   if (isSuccess) {
     return (
-      <main className="w-full flex-grow relative overflow-hidden bg-gradient-to-br from-[#ffe5db] to-[#cbb2a6] py-24 px-6 flex items-center justify-center min-h-[70vh]">
+      <main className="w-full h-full flex-grow relative overflow-hidden bg-transparent py-2 px-4 flex items-center justify-center select-none">
         {/* Symmetrical Ambient Warm Rose Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-36 bg-[#dfa38f]/10 rounded-full blur-[80px] pointer-events-none z-0" />
         
-        {/* Clean Success Card */}
-        <div className="relative z-10 w-full max-w-md bg-white/95 backdrop-blur-xl rounded-3xl border border-[#e8cdc1]/40 shadow-[0_12px_40px_rgba(45,41,38,0.08)] p-8 md:p-10 text-center space-y-6 flex flex-col items-center animate-in zoom-in-95 duration-300">
-          <div className="w-14 h-14 bg-[#e8cdc1]/30 text-[#805c51] rounded-full flex items-center justify-center">
-            <span className="material-symbols-outlined text-3xl font-light">
+        {/* Clean Success Card - Matches Dashboard Page Vibes */}
+        <div className="relative z-10 w-full max-w-md bg-white/55 backdrop-blur-sm rounded-lg border-2 border-[#dfa38f] shadow-md p-6 sm:p-7 text-center space-y-4 flex flex-col items-center animate-in zoom-in-95 duration-300">
+          <div className="w-12 h-12 bg-[#dfa38f]/20 text-[#805c51] rounded-full flex items-center justify-center">
+            <span className="material-symbols-outlined text-2xl font-light">
               check_circle
             </span>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <h2 
-              className="text-2xl md:text-3xl text-[#3d2f28] font-bold tracking-tight leading-snug"
+              className="text-2xl text-[#3d2f28] font-bold tracking-tight leading-snug"
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             >
               Welcome to Stephanie Keys!
             </h2>
             <p className="text-xs text-[#81756f] leading-relaxed max-w-xs mx-auto">
-              Your account for <span className="font-bold text-[#3d2f28]">{formData.email}</span> has been successfully created. Get ready to elevate your piano playing.
+              Your account for <span className="font-bold text-[#3d2f28]">{formData.email}</span> has been successfully created.
             </p>
           </div>
 
-          <div className="h-px bg-[#e8cdc1]/30 w-full" />
+          <div className="h-px bg-[#dfa38f]/30 w-full" />
 
-          <div className="flex flex-col gap-3 w-full pt-1">
+          <div className="flex flex-col gap-2.5 w-full pt-1">
             <button
               onClick={() => {
                 localStorage.setItem("isLoggedIn", "true");
@@ -93,14 +93,19 @@ export default function SignUp({ onNavigate }: SignUpProps) {
                 window.dispatchEvent(new Event("storage"));
                 onNavigate("dashboard");
               }}
-              className="w-full bg-[#6e5a51] hover:bg-[#58473f] text-white text-xs font-bold uppercase tracking-[0.12em] py-3.5 px-6 rounded-xl border-none cursor-pointer active:scale-[0.98] transition-all shadow-sm"
+              style={{
+                background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                border: "1px solid #D9A998",
+              }}
+              className="w-full h-10 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.01] active:scale-95 text-white text-xs font-bold uppercase tracking-[0.12em] flex items-center justify-center shadow-none"
             >
               Go to Student Dashboard
             </button>
             
             <button
               onClick={() => onNavigate("home")}
-              className="w-full bg-transparent hover:bg-[#f3ecea] text-[#5c3a2e] text-xs font-bold uppercase tracking-widest py-3 rounded-xl border border-[#e8cdc1]/60 cursor-pointer active:scale-[0.98] transition-all"
+              className="w-full bg-white/70 hover:bg-white text-[#5c3a2e] text-xs font-bold uppercase tracking-widest h-9 rounded-lg border border-[#dfa38f]/60 cursor-pointer active:scale-[0.98] transition-all"
             >
               Return to Homepage
             </button>
@@ -111,50 +116,31 @@ export default function SignUp({ onNavigate }: SignUpProps) {
   }
 
   return (
-    <main className="w-full flex-grow relative overflow-hidden bg-[#fffaf7] py-20 px-6 flex items-center justify-center min-h-[85vh]">
-      {/* Background Silk Texture */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none opacity-40"
-        style={{
-          backgroundImage: "linear-gradient(135deg, rgba(255,250,247,0.92) 0%, rgba(252,238,233,0.85) 100%), url('/floral.png')",
-        }}
-      />
-
-      {/* Clean Create Account Card */}
-      <div className="relative z-10 w-full max-w-lg bg-white/95 backdrop-blur-xl rounded-3xl border border-[#e8cdc1]/40 shadow-[0_12px_40px_rgba(45,41,38,0.08)] p-8 md:p-10 flex flex-col gap-6">
-        {/* Header */}
-        <div className="text-center space-y-2">
-          <div className="flex justify-center items-center gap-2">
-            <div className="h-px w-8 bg-[#e8cdc1]" />
-            <span 
-              className="text-xl text-[#805c51] font-serif select-none"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-            >
-              𝄞
-            </span>
-            <div className="h-px w-8 bg-[#e8cdc1]" />
-          </div>
-
+    <main className="w-full h-full flex-grow relative overflow-hidden bg-transparent py-2 px-4 flex items-center justify-center select-none">
+      {/* Clean Create Account Card - Matches Dashboard Page Vibes */}
+      <div className="relative z-10 w-full max-w-md bg-white/55 backdrop-blur-sm rounded-lg border-2 border-[#dfa38f] shadow-md p-5 sm:p-6 flex flex-col gap-3 animate-auth-fade">
+        {/* Header (Musical icon removed) */}
+        <div className="text-center space-y-1">
           <h1 
-            className="text-2xl md:text-3xl text-[#3d2f28] font-bold tracking-tight leading-snug"
+            className="text-2xl text-[#3d2f28] font-bold tracking-tight leading-snug"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Create Account
           </h1>
-          <p className="text-[#81756f] text-xs max-w-xs mx-auto font-medium leading-relaxed">
+          <p className="text-[#81756f] text-[11px] max-w-xs mx-auto font-medium leading-relaxed">
             Start your journey into advanced Gospel & Jazz piano playing.
           </p>
         </div>
 
         {error && (
-          <div className="bg-[#fff0ed] border border-[#f5b4a4] text-[#a83b2a] rounded-xl px-4 py-3 text-xs font-bold flex items-center gap-2 animate-shake">
-            <span className="material-symbols-outlined text-base select-none">error</span>
+          <div className="bg-[#fff0ed] border border-[#f5b4a4] text-[#a83b2a] rounded-lg px-3 py-1.5 text-xs font-bold flex items-center gap-2 animate-shake">
+            <span className="material-symbols-outlined text-sm select-none">error</span>
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1">
+        <form onSubmit={handleSubmit} className="space-y-2.5">
+          <div className="space-y-0.5">
             <label 
               className="block text-[10px] font-bold uppercase tracking-[0.12em] text-[#7a5446] ml-1"
             >
@@ -166,11 +152,11 @@ export default function SignUp({ onNavigate }: SignUpProps) {
               value={formData.name}
               onChange={handleChange}
               placeholder="e.g. Stephanie Halim"
-              className="w-full bg-[#fffcfa] border border-[#e8cdc1] focus:border-[#ab7e66] rounded-xl px-4 py-3 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
+              className="w-full bg-[#fffcfa]/90 border border-[#dfa38f] focus:border-[#ab7e66] rounded-lg px-3 py-2 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
             />
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-0.5">
             <label 
               className="block text-[10px] font-bold uppercase tracking-[0.12em] text-[#7a5446] ml-1"
             >
@@ -182,12 +168,12 @@ export default function SignUp({ onNavigate }: SignUpProps) {
               value={formData.email}
               onChange={handleChange}
               placeholder="yourname@example.com"
-              className="w-full bg-[#fffcfa] border border-[#e8cdc1] focus:border-[#ab7e66] rounded-xl px-4 py-3 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
+              className="w-full bg-[#fffcfa]/90 border border-[#dfa38f] focus:border-[#ab7e66] rounded-lg px-3 py-2 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="space-y-0.5">
               <label 
                 className="block text-[10px] font-bold uppercase tracking-[0.12em] text-[#7a5446] ml-1"
               >
@@ -199,11 +185,11 @@ export default function SignUp({ onNavigate }: SignUpProps) {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Min 6 characters"
-                className="w-full bg-[#fffcfa] border border-[#e8cdc1] focus:border-[#ab7e66] rounded-xl px-4 py-3 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
+                className="w-full bg-[#fffcfa]/90 border border-[#dfa38f] focus:border-[#ab7e66] rounded-lg px-3 py-2 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
               />
             </div>
 
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               <label 
                 className="block text-[10px] font-bold uppercase tracking-[0.12em] text-[#7a5446] ml-1"
               >
@@ -215,7 +201,7 @@ export default function SignUp({ onNavigate }: SignUpProps) {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Repeat password"
-                className="w-full bg-[#fffcfa] border border-[#e8cdc1] focus:border-[#ab7e66] rounded-xl px-4 py-3 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
+                className="w-full bg-[#fffcfa]/90 border border-[#dfa38f] focus:border-[#ab7e66] rounded-lg px-3 py-2 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
               />
             </div>
           </div>
@@ -228,31 +214,36 @@ export default function SignUp({ onNavigate }: SignUpProps) {
             }}
           />
 
-          <div className="flex items-start gap-2.5 pt-2 ml-1">
+          <div className="flex items-start gap-2 pt-0.5 ml-1">
             <input
               type="checkbox"
               name="agree"
               id="agree-checkbox"
               checked={formData.agree}
               onChange={handleChange}
-              className="mt-0.5 rounded border-[#e8cdc1] text-[#805c51] focus:ring-[#805c51] cursor-pointer"
+              className="mt-0.5 rounded border-[#dfa38f] text-[#805c51] focus:ring-[#805c51] cursor-pointer"
             />
             <label htmlFor="agree-checkbox" className="text-[10px] text-[#81756f] leading-tight select-none cursor-pointer">
               I agree to the <button type="button" onClick={() => onNavigate("terms")} className="text-[#805c51] font-bold hover:underline bg-transparent border-none cursor-pointer p-0">Terms of Service</button> and <button type="button" onClick={() => onNavigate("privacy")} className="text-[#805c51] font-bold hover:underline bg-transparent border-none cursor-pointer p-0">Privacy Policy</button>.
             </label>
           </div>
 
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               type="submit"
-              className="w-full bg-[#6e5a51] hover:bg-[#58473f] text-white text-xs font-bold uppercase tracking-[0.12em] py-3.5 px-6 rounded-xl border-none cursor-pointer active:scale-[0.98] transition-all shadow-sm"
+              style={{
+                background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                border: "1px solid #D9A998",
+              }}
+              className="w-full h-9.5 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.01] active:scale-95 text-white text-xs font-bold uppercase tracking-[0.12em] flex items-center justify-center shadow-none"
             >
               Create Account
             </button>
           </div>
         </form>
 
-        <div className="text-center pt-2 border-t border-[#e8cdc1]/30">
+        <div className="text-center pt-1.5 border-t border-[#dfa38f]/30">
           <p className="text-[11px] text-[#81756f]">
             Already have an account?{' '}
             <button

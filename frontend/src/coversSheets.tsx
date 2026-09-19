@@ -227,6 +227,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
   // Multiselect Filters State for Covers
   const [selectedCoverCategories] = useState<string[]>(['All'])
+  const [isWatchMoreHovered, setIsWatchMoreHovered] = useState(false)
   // const [currentPage] = useState(1)
 
 
@@ -474,68 +475,45 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
   }, []);
 
   return (
-    <main className="bg-[#fffcf9] flex flex-col h-auto">
+    <main className="bg-transparent flex flex-col h-auto">
 
       {/* SECTION 1: COVERS SHOWCASE */}
       {(activeTab === "all" || activeTab === "videos") && (
-        <section className="pt-10 pb-6 relative overflow-hidden flex flex-col h-auto">
-          {/* Background image layer - Studio Keyboard setup */}
-          <div
-            className="absolute inset-0 z-0 pointer-events-none"
-            style={{
-              backgroundImage: "url('/skeys-studio-hero-new.png')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-          {/* Enhanced white overlay opacity layer */}
-          <div
-            className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-white/60 via-white/65 to-white/70"
-          />
+        <section className="-mt-20 md:-mt-24 pt-24 md:pt-28 pb-6 relative overflow-hidden flex flex-col h-auto">
           {/* Ambient background decoration */}
           <div className="absolute top-12 left-1/4 w-72 h-72 bg-[#ffd89b]/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
           <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/8 rounded-full blur-[90px] pointer-events-none z-0"></div>
 
           <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 space-y-6">
-            {/* Left-Aligned S.Keys Performance & Covers Badge with Attached Triple Solid Lines */}
-            <div className="flex items-center gap-0 w-full mb-9">
-              {/* Button Badge */}
-              <div 
-                className="inline-flex items-center gap-2.5 px-4 py-2 rounded-[4px] bg-white/95 border-[1.5px] border-[#c89482] shadow-xs shrink-0 relative z-10"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#a06e5e] animate-pulse"></span>
-                <span 
-                  className="text-[12.5px] font-bold tracking-[0.2em] uppercase text-[#5e382b]"
-                  style={{ fontFamily: "'Cinzel', serif" }}
+            {/* Centered S.Keys Performance & Covers Badge Joined with WATCH MORE Button */}
+            <div className="flex justify-center items-center w-full mb-7">
+              <div className="inline-flex items-stretch rounded-[6px] shadow-sm overflow-hidden border border-[#c89482]">
+                {/* Badge */}
+                <div 
+                  className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/95 border-r border-[#c89482] shrink-0"
                 >
-                  S.Keys Performance &amp; Covers
-                </span>
-              </div>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#a06e5e] animate-pulse"></span>
+                  <span 
+                    className="text-[12px] md:text-[12.5px] font-bold tracking-[0.18em] uppercase text-[#5e382b]"
+                    style={{ fontFamily: "'Cinzel', serif" }}
+                  >
+                    S.Keys Performance &amp; Covers
+                  </span>
+                </div>
 
-              {/* Ultra-Fine Sleek Triple Metallic Rose Gold Hairlines attached to button */}
-              <div className="flex-1 flex flex-col justify-center gap-[2.5px] -ml-[1px] relative z-0">
-                {/* Line 1: Lead Rose Gold Line (1.25px) */}
-                <div 
-                  className="w-full h-[1.25px] rounded-r-full"
+                {/* WATCH MORE Button - already colored from start like after hover */}
+                <a
+                  href="https://www.youtube.com/@stephaniekeyss"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
-                    background: 'linear-gradient(90deg, #b86d5c 0%, #e8b4a2 40%, #c88879 80%, #9e5a4b 100%)',
-                    boxShadow: '0 0.5px 1px rgba(184, 109, 92, 0.2)'
+                    background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                    boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 2px 6px rgba(129, 89, 79, 0.2)",
                   }}
-                />
-                {/* Line 2: Delicate Hairline Accent (0.75px) */}
-                <div 
-                  className="w-full h-[0.75px] rounded-r-full"
-                  style={{
-                    background: 'linear-gradient(90deg, #d9a998 0%, #f7e4dc 50%, #e2b0a4 100%)'
-                  }}
-                />
-                {/* Line 3: Soft Support Hairline (1px) */}
-                <div 
-                  className="w-full h-[1px] rounded-r-full"
-                  style={{
-                    background: 'linear-gradient(90deg, #8a5345 0%, #b57262 50%, #6e3e32 100%)'
-                  }}
-                />
+                  className="inline-flex items-center justify-center px-4 py-2 font-sans text-xs font-bold tracking-widest uppercase text-white transition-all duration-300 hover:brightness-115 active:scale-95 no-underline cursor-pointer outline-none focus:outline-none ring-0 focus:ring-0 shrink-0 select-none"
+                >
+                  WATCH MORE
+                </a>
               </div>
             </div>
 
@@ -545,7 +523,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
                 <div
                   key={index}
                   onClick={() => setActiveVideo(cover)}
-                  className="group relative flex flex-col bg-white/35 hover:bg-white/50 border-2 border-[#e2b0a4] hover:border-[#c88879] rounded-[8px] shadow-[0_8px_24px_rgba(189,129,116,0.12)] hover:shadow-[0_12px_32px_rgba(189,129,116,0.22)] hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer"
+                  className="group relative flex flex-col bg-white/55 hover:bg-white/75 backdrop-blur-sm border-2 border-[#e2b0a4] hover:border-[#c88879] rounded-[8px] shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer"
                 >
                   {/* Thumbnail Layer */}
                   <div className="relative aspect-[16/9] overflow-hidden bg-[#5c4337] rounded-t-[6px]">
@@ -584,18 +562,6 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
               ))}
             </div>
 
-            {/* WATCH MORE Button -> YouTube Channel (No blur, no black hover outline) */}
-            <div className="flex justify-center items-center pt-2">
-              <a
-                href="https://www.youtube.com/@stephaniekeyss"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-2.5 rounded-[6px] bg-white/40 hover:bg-white/60 border-2 border-[#dca698] hover:border-[#c88879] shadow-[0_4px_16px_rgba(220,166,152,0.2)] hover:shadow-[0_6px_22px_rgba(220,166,152,0.35)] text-[#73574b] hover:text-[#52352b] font-sans text-xs font-bold tracking-widest uppercase transition-all duration-300 active:scale-95 no-underline cursor-pointer outline-none focus:outline-none ring-0 focus:ring-0"
-              >
-                WATCH MORE
-              </a>
-            </div>
-
             {filteredCovers.length === 0 && (
               <div className="text-center py-16 bg-white/40 rounded-[6px] border border-solid border-[#e8cdc1]/30">
                 <span className="material-symbols-outlined text-4xl text-[#ab7e66]/40 select-none">video_library</span>
@@ -608,18 +574,7 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
       {/* SECTION 2: SHEET MUSIC SHOP */}
       {(activeTab === "all" || activeTab === "sheets") && (
-        <section className="pt-8 md:pt-10 pb-6 md:pb-8 relative overflow-hidden flex flex-col h-auto">
-          {/* Zoomed Background Image Layer (Cropping plants/leaves on left & right) */}
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-            <img
-              src="/stephanie-music-shop.png"
-              alt="Sheet Music Shop Background"
-              className="w-full h-full object-cover object-center scale-135 sm:scale-140 md:scale-145 lg:scale-150 transition-transform duration-500"
-            />
-            {/* Bright white overlay covering background image */}
-            <div className="absolute inset-0 bg-white/75" />
-          </div>
-
+        <section className={`relative overflow-hidden flex flex-col h-auto pb-6 md:pb-8 ${activeTab === "sheets" ? "-mt-20 md:-mt-24 pt-24 md:pt-28" : "pt-8 md:pt-10"}`}>
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-6 md:space-y-8 relative z-10">
             {/* 1-LINE HORIZONTAL BAR - COMPLETELY TRANSPARENT (NO COLOR) */}
             <div 
@@ -627,13 +582,6 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
             >
               {/* Single Horizontal Flex Row */}
               <div className="flex flex-wrap lg:flex-nowrap items-center gap-4 lg:gap-6 relative z-10">
-                {/* 1. Refined, Elegant & Compact Calligraphy Title */}
-                <h2 
-                  style={{ fontFamily: "'Dancing Script', 'Cormorant Garamond', 'Playfair Display', cursive, serif" }}
-                  className="text-2xl md:text-3xl lg:text-[32px] text-[#5e2b1e] font-bold tracking-wide whitespace-nowrap shrink-0 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]"
-                >
-                  Sheet Music Shop
-                </h2>
 
                 {/* 2. Light Soft Translucent Search Bar (Rose Gold Border From Start) */}
                 <div className="relative flex-grow min-w-[200px] max-w-sm lg:max-w-md">

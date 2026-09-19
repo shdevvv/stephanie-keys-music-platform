@@ -25,7 +25,7 @@ export const BadgeShowcaseWidget: React.FC<BadgeShowcaseWidgetProps> = ({
   const unlockedCount = badges.filter((b) => b.isUnlocked).length;
 
   return (
-    <div className="bg-white/35 border-2 border-[#dfa38f] rounded-lg p-4 md:p-5 shadow-md space-y-4">
+    <div className="bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] rounded-lg p-4 md:p-5 shadow-md space-y-4">
       <div className="flex items-center justify-between border-b border-[#dfa38f]/40 pb-3 flex-wrap gap-2">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#dfa38f] to-[#ab7e66] text-white flex items-center justify-center shadow-xs shrink-0">
@@ -58,7 +58,7 @@ export const BadgeShowcaseWidget: React.FC<BadgeShowcaseWidgetProps> = ({
             key={badge.levelNumber}
             style={{
               background:
-                "rgba(255, 255, 255, 0.45) padding-box, linear-gradient(135deg, #fffaf7 0%, #f0c0ae 25%, #b96f5d 56%, #f6cbbb 78%, #874a3d 100%) border-box",
+                "rgba(255, 255, 255, 0.65) padding-box, linear-gradient(135deg, #fffaf7 0%, #f0c0ae 25%, #b96f5d 56%, #f6cbbb 78%, #874a3d 100%) border-box",
               border: "4px solid transparent",
             }}
             className={`relative p-3 md:p-3.5 rounded-lg border-4 border-transparent ring-1 ring-[#d9a998]/75 transition-all duration-300 flex flex-col justify-between ${

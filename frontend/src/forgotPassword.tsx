@@ -23,34 +23,33 @@ export default function ForgotPassword({ onNavigate }: ForgotPasswordProps) {
 
   if (isSuccess) {
     return (
-      <main className="w-full flex-grow relative overflow-hidden bg-gradient-to-br from-[#ffe5db] to-[#cbb2a6] py-24 px-6 flex items-center justify-center min-h-[70vh]">
-        {/* Symmetrical Ambient Warm Rose Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-36 bg-[#dfa38f]/10 rounded-full blur-[80px] pointer-events-none z-0" />
-        
-        {/* Frosted Success Card */}
-        <div className="relative z-10 w-full max-w-md bg-white/70 backdrop-blur-md border border-[#dfa38f]/30 rounded-lg p-8 md:p-10 text-center space-y-6 shadow-xl animate-in zoom-in-95 duration-300">
-          <div className="w-16 h-16 bg-gradient-to-br from-[#e8cdc1] to-[#dfa38f] text-white rounded-full mx-auto flex items-center justify-center shadow-md">
-            <span className="material-symbols-outlined text-3xl font-light">
-              mail
+      <main className="w-full h-full flex-grow relative overflow-hidden bg-transparent py-2 px-4 flex items-center justify-center select-none">
+        {/* Clean Success Card - Matches Dashboard & Auth Vibes */}
+        <div className="relative z-10 w-full max-w-md bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] rounded-lg p-6 sm:p-7 text-center space-y-4 shadow-md flex flex-col items-center animate-auth-fade">
+          <div className="w-12 h-12 bg-[#dfa38f]/20 text-[#805c51] rounded-full flex items-center justify-center shadow-xs">
+            <span className="material-symbols-outlined text-2xl font-light">
+              check_circle
             </span>
           </div>
-          <div className="space-y-2">
-            <h2 className="font-display-lg text-2xl font-bold text-[#4a372e]" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <div className="space-y-1.5">
+            <h2 className="text-2xl text-[#3d2f28] font-bold tracking-tight leading-snug" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
               Reset Link Sent!
             </h2>
-            <p className="text-xs text-[#8b7368] leading-relaxed">
-              We have sent a password reset link to <span className="font-bold text-[#4a372e]">{email}</span>. Please check your email inbox and spam folder.
+            <p className="text-xs text-[#81756f] leading-relaxed max-w-xs mx-auto">
+              We have sent a password reset link to <span className="font-bold text-[#3d2f28]">{email}</span>. Please check your email inbox and spam folder.
             </p>
           </div>
 
-          <div className="h-px bg-[#dfa38f]/20 w-full" />
+          <div className="h-px bg-[#dfa38f]/30 w-full" />
 
           <button
             onClick={() => onNavigate("signin")}
             style={{
-              backgroundImage: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #f5b8c9 100%)",
+              background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+              boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+              border: "1px solid #D9A998",
             }}
-            className="w-full text-white text-xs font-bold uppercase tracking-widest py-3.5 px-6 rounded-xl border border-white/20 cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_4px_12px_rgba(223,163,143,0.3)]"
+            className="w-full h-10 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.01] active:scale-95 text-white text-xs font-bold uppercase tracking-[0.12em] flex items-center justify-center shadow-none"
           >
             Back to Sign In
           </button>
@@ -60,41 +59,27 @@ export default function ForgotPassword({ onNavigate }: ForgotPasswordProps) {
   }
 
   return (
-    <main className="w-full flex-grow relative overflow-hidden bg-gradient-to-br from-[#ffe5db] to-[#cbb2a6] py-16 px-6 flex items-center justify-center min-h-[80vh] animate-in fade-in duration-300">
-      {/* Symmetrical Ambient Warm Rose Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-36 bg-[#dfa38f]/10 rounded-full blur-[80px] pointer-events-none z-0" />
-
-      {/* Background Piano Grand Image Layer */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none select-none opacity-5"
-        style={{
-          backgroundImage: "url('/pianogrand.jpg')",
-        }}
-      />
-
-      <div className="relative z-10 w-full max-w-md bg-white/70 backdrop-blur-md border border-[#dfa38f]/30 rounded-lg p-8 md:p-10 shadow-2xl flex flex-col gap-6">
-        <div className="text-center space-y-2">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#dfa38f]/15 text-[#8a6858] text-[9px] font-bold uppercase tracking-widest border border-[#dfa38f]/20">
-            Forgot Password
-          </span>
-          <h1 className="font-display-lg text-2xl md:text-3xl text-[#4a372e] font-bold leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Reset Your Password
+    <main className="w-full h-full flex-grow relative overflow-hidden bg-transparent py-2 px-4 flex items-center justify-center select-none">
+      <div className="relative z-10 w-full max-w-md bg-white/55 backdrop-blur-sm rounded-lg border-2 border-[#dfa38f] shadow-md p-6 sm:p-7 flex flex-col gap-4 animate-auth-fade">
+        <div className="text-center space-y-1.5">
+          <h1 className="text-2xl sm:text-[26px] text-[#3d2f28] font-bold tracking-tight leading-snug" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+            Reset Password
           </h1>
-          <p className="text-[#8b7368] text-xs max-w-xs mx-auto leading-relaxed">
+          <p className="text-[#81756f] text-xs max-w-xs mx-auto font-medium leading-relaxed">
             Enter your account's email address and we will send you a link to reset your password.
           </p>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200/50 text-red-600 rounded-xl px-4 py-3 text-xs font-bold flex items-center gap-2 animate-shake">
-            <span className="material-symbols-outlined text-sm">error</span>
+          <div className="bg-[#fff0ed] border border-[#f5b4a4] text-[#a83b2a] rounded-lg px-3 py-2 text-xs font-bold flex items-center gap-2 animate-shake">
+            <span className="material-symbols-outlined text-sm select-none">error</span>
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3.5">
           <div className="space-y-1">
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-[#8b7368] ml-1">Email Address</label>
+            <label className="block text-[10px] font-bold uppercase tracking-[0.12em] text-[#7a5446] ml-1">Email Address</label>
             <input
               type="email"
               value={email}
@@ -103,29 +88,36 @@ export default function ForgotPassword({ onNavigate }: ForgotPasswordProps) {
                 setError('');
               }}
               placeholder="yourname@example.com"
-              className="w-full bg-white/80 border border-[#dfa38f]/30 rounded-xl px-4 py-3 text-xs text-[#5a4740] placeholder-[#ab7e66]/40 focus:outline-none focus:ring-1 focus:ring-[#dfa38f] focus:border-[#dfa38f] transition-all shadow-[inset_0_1px_3px_rgba(223,163,143,0.03)]"
+              className="w-full bg-[#fffcfa]/90 border border-[#dfa38f] focus:border-[#ab7e66] rounded-lg px-3.5 py-2.5 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
             />
           </div>
 
-          <button
-            type="submit"
-            style={{
-              backgroundImage: "linear-gradient(135deg, #dfa38f 0%, #ab7e66 50%, #f5b8c9 100%)",
-            }}
-            className="w-full text-white text-xs font-bold uppercase tracking-widest py-4 px-6 rounded-xl border border-white/20 cursor-pointer hover:scale-[1.01] active:scale-[0.99] transition-all shadow-[0_4px_12px_rgba(223,163,143,0.3)] mt-4"
-          >
-            Send Reset Link
-          </button>
+          <div className="pt-1">
+            <button
+              type="submit"
+              style={{
+                background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                border: "1px solid #D9A998",
+              }}
+              className="w-full h-10 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.01] active:scale-95 text-white text-xs font-bold uppercase tracking-[0.12em] flex items-center justify-center shadow-none"
+            >
+              Send Reset Link
+            </button>
+          </div>
         </form>
 
-        <div className="text-center pt-2">
-          <button
-            type="button"
-            onClick={() => onNavigate("signin")}
-            className="text-[#6a564d] font-bold text-xs hover:underline bg-transparent border-none cursor-pointer p-0"
-          >
-            Back to Sign In
-          </button>
+        <div className="text-center pt-2 border-t border-[#dfa38f]/30">
+          <p className="text-[11px] text-[#81756f]">
+            Remember your password?{' '}
+            <button
+              type="button"
+              onClick={() => onNavigate("signin")}
+              className="text-[#805c51] font-bold hover:underline bg-transparent border-none cursor-pointer p-0 ml-1"
+            >
+              Sign In
+            </button>
+          </p>
         </div>
       </div>
     </main>

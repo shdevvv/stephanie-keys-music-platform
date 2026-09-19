@@ -627,13 +627,7 @@ export default function SheetPurchaseFlow({
 
   return (
     <div
-      className="w-full flex-grow-0 relative overflow-hidden py-8 md:py-10 px-4 md:px-8 min-h-0"
-      style={{
-        backgroundImage: "linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.18)), url('/checkout-castle-bg.jpg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+      className="w-full flex-grow-0 relative overflow-hidden py-8 md:py-10 px-4 md:px-8 min-h-0 bg-transparent"
     >
       <div className="max-w-5xl mx-auto relative z-10">
 
@@ -833,125 +827,136 @@ export default function SheetPurchaseFlow({
                       </button>
                     </div>
                 ) : (
-                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5 items-stretch">
-                    {/* Left Column: Product List + Find More Sheet Music Box */}
-                    <div className="space-y-4 flex flex-col justify-between h-full">
-                      <div className="space-y-3">
-                        <div className="border-b-2 border-[#e6cdc3] pb-3">
-                          <h3 className="font-serif text-lg font-extrabold text-[#3d231b]">
+                  <div className="space-y-6">
+                    <div>
+                      <h1 className="font-display-lg text-xl md:text-2xl text-[#3d231b] font-black tracking-tight mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                        1. Shopping Cart Selection
+                      </h1>
+                      <p className="text-[#5a372c] text-xs font-bold">Review your selected arrangements before proceeding to checkout.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5 items-stretch">
+                      {/* Left Column: Product List + Find More Sheet Music Box */}
+                      <div className="space-y-4 flex flex-col justify-between h-full">
+                        <div className="bg-white/25 backdrop-blur-md border border-[#dfa38f] rounded-lg p-5 space-y-3.5">
+                          <h3 className="text-xs font-black text-[#3d231b] uppercase tracking-wider border-b-2 border-[#b85b40]/50 pb-2.5 flex items-center gap-1.5">
+                            <span className="material-symbols-outlined text-sm text-[#d68c78]">shopping_bag</span>
                             Cart Selection ({cart.length})
                           </h3>
-                        </div>
 
-                        {cart.map((item, idx) => {
-                          const isRemoving = removingTitles.includes(item.sheet.title);
-                          return (
-                            <div
-                              key={item.sheet.title || idx}
-                              className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white/80 backdrop-blur-md border-2 border-[#dfa38f] hover:border-[#c58270] rounded-xl shadow-xs transition-all duration-350 ease-in-out group ${isRemoving
-                                ? 'opacity-0 scale-95 -translate-x-6 max-h-0 py-0 overflow-hidden border-transparent'
-                                : 'opacity-100 scale-100 translate-x-0'
-                                }`}
-                            >
-                              <div className="flex items-center gap-3.5">
-                                <div className="p-0.5 bg-gradient-to-br from-[#e5b3a3] to-[#c97b63] rounded-xl shadow-xs shrink-0">
-                                  <img
-                                    src={item.sheet.image}
-                                    alt={item.sheet.title}
-                                    className="w-16 h-16 object-cover rounded-[10px] border border-white bg-[#faf6f4] flex-shrink-0"
-                                  />
-                                </div>
-                                <div>
-                                  <h3 style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }} className="text-sm font-black text-[#3d231b] tracking-tight">
-                                    {item.sheet.title}
-                                  </h3>
-                                  <p className="text-xs text-[#5a372c] mt-0.5 font-bold line-clamp-1">{item.sheet.description}</p>
-                                  <div className="flex flex-wrap gap-1.5 mt-2">
-                                    {item.sheet.genres.map((g, i) => (
-                                      <span key={i} className="bg-white/50 backdrop-blur-xs text-[#8c3b26] px-2 py-0.5 rounded-md text-[10px] font-black border border-[#dfa38f]/60">
-                                        {g}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="flex items-center justify-between sm:justify-end gap-5 w-full sm:w-auto border-t sm:border-t-0 border-solid border-[#dfa38f]/60 pt-3 sm:pt-0">
-                                <div className="flex items-center gap-3">
-                                  <div className="text-right">
-                                    <div className="text-sm font-serif font-black text-[#8c3b26]">
-                                      {formatPrice(parsePrice(item.sheet.price))}
+                          <div className="space-y-3">
+                            {cart.map((item, idx) => {
+                              const isRemoving = removingTitles.includes(item.sheet.title);
+                              return (
+                                <div
+                                  key={item.sheet.title || idx}
+                                  className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-3.5 bg-white/40 backdrop-blur-xs border border-[#dfa38f] hover:border-[#b85b40] rounded-md shadow-2xs transition-all duration-350 ease-in-out group ${isRemoving
+                                    ? 'opacity-0 scale-95 -translate-x-6 max-h-0 py-0 overflow-hidden border-transparent'
+                                    : 'opacity-100 scale-100 translate-x-0'
+                                    }`}
+                                >
+                                  <div className="flex items-center gap-3.5">
+                                    <div className="p-0.5 bg-gradient-to-br from-[#e5b3a3] to-[#c97b63] rounded-md shadow-xs shrink-0">
+                                      <img
+                                        src={item.sheet.image}
+                                        alt={item.sheet.title}
+                                        className="w-14 h-14 object-cover rounded-[5px] border border-white bg-[#faf6f4] flex-shrink-0"
+                                      />
+                                    </div>
+                                    <div>
+                                      <h3 style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }} className="text-sm font-black text-[#3d231b] tracking-tight">
+                                        {item.sheet.title}
+                                      </h3>
+                                      <p className="text-xs text-[#5a372c] mt-0.5 font-bold line-clamp-1">{item.sheet.description}</p>
+                                      <div className="flex flex-wrap gap-1.5 mt-2">
+                                        {item.sheet.genres.map((g, i) => (
+                                          <span key={i} className="bg-white/50 backdrop-blur-xs text-[#8c3b26] px-2 py-0.5 rounded-md text-[10px] font-black border border-[#dfa38f]/60">
+                                            {g}
+                                          </span>
+                                        ))}
+                                      </div>
                                     </div>
                                   </div>
 
-                                  <button
-                                    onClick={() => handleAnimateRemoveFromCart(item.sheet.title)}
-                                    className="px-2.5 py-1.5 rounded-md bg-white/60 hover:bg-[#fceee8] text-[#8c3b26] border border-[#dfa38f] hover:border-[#c58270] text-[10px] font-black tracking-widest uppercase transition-all duration-200 cursor-pointer shadow-2xs hover:scale-105 active:scale-95 flex items-center justify-center shrink-0"
-                                    title="Remove item"
-                                  >
-                                    REMOVE
-                                  </button>
+                                  <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto border-t sm:border-t-0 border-solid border-[#dfa38f]/60 pt-3 sm:pt-0">
+                                    <div className="flex items-center gap-3">
+                                      <div className="text-right">
+                                        <div className="text-sm font-serif font-black text-[#8c3b26]">
+                                          {formatPrice(parsePrice(item.sheet.price))}
+                                        </div>
+                                      </div>
+
+                                      <button
+                                        onClick={() => handleAnimateRemoveFromCart(item.sheet.title)}
+                                        className="px-2.5 py-1.5 rounded-md bg-white/60 hover:bg-[#fceee8] text-[#8c3b26] border border-[#dfa38f] hover:border-[#c58270] text-[10px] font-black tracking-widest uppercase transition-all duration-200 cursor-pointer shadow-2xs hover:scale-105 active:scale-95 flex items-center justify-center shrink-0"
+                                        title="Remove item"
+                                      >
+                                        REMOVE
+                                      </button>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* Find More Sheet Music Box inside Left Column */}
-                      <button
-                        onClick={() => onNavigate('sheets')}
-                        className="w-full py-3.5 px-4 bg-white/80 hover:bg-[#81594F] hover:text-white backdrop-blur-md text-[#3d231b] border-2 border-[#dfa38f] hover:border-[#81594F] font-black text-xs uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer shadow-xs text-center mt-2"
-                      >
-                        Find More Sheet Music
-                      </button>
-                    </div>
-
-                    {/* Right Column: Order Summary Sideboard (Matches left height) */}
-                    <div className="bg-white/80 backdrop-blur-md border-2 border-[#dfa38f] rounded-xl p-5 shadow-xs flex flex-col justify-between space-y-4 h-full">
-                      <div className="space-y-4">
-                        <h4 className="text-xs font-black text-[#3d231b] uppercase tracking-widest border-b-2 border-[#dfa38f]/50 pb-3">
-                          Order Summary
-                        </h4>
-
-                        <div className="space-y-2.5 text-xs text-[#5a372c]">
-                          <div className="flex justify-between font-extrabold">
-                            <span>Subtotal</span>
-                            <span className="font-black text-[#3d231b]">{formatPrice(getSubtotal())}</span>
-                          </div>
-                          <div className="flex justify-between font-extrabold">
-                            <span>Instant Digital Delivery</span>
-                            <span className="font-black text-[#23783e]">FREE</span>
-                          </div>
-                          <div className="h-px bg-[#dfa38f]/40 my-2" />
-                          <div className="flex justify-between items-baseline text-sm font-black text-[#3d231b]">
-                            <span>Total</span>
-                            <span className="text-[#8c3b26] text-lg font-serif font-black">
-                              {formatPrice(getTotal())}
-                            </span>
+                              );
+                            })}
                           </div>
                         </div>
+
+                        {/* Find More Sheet Music Box inside Left Column */}
+                        <button
+                          onClick={() => onNavigate('sheets')}
+                          className="w-full py-3 px-4 bg-white/35 hover:bg-[#81594F] hover:text-white backdrop-blur-md border border-[#b85b40] text-[#3d231b] font-black text-xs uppercase tracking-wider rounded-lg transition-all duration-200 cursor-pointer shadow-2xs text-center"
+                        >
+                          Find More Sheet Music
+                        </button>
                       </div>
 
-                      <button
-                        onClick={() => {
-                          const loggedIn = localStorage.getItem("isLoggedIn") !== "false";
-                          if (loggedIn) {
-                            setStep(4);
-                          } else {
-                            setStep(3);
-                          }
-                        }}
-                        style={{
-                          background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
-                          boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
-                          border: "1px solid #D9A998",
-                        }}
-                        className="w-full text-white text-xs font-extrabold uppercase tracking-widest py-3.5 px-5 rounded-xl cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-2 group mt-4 shadow-none"
-                      >
-                        <span>Proceed to Checkout</span>
-                        <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
-                      </button>
+                      {/* Right Column: Order Summary Sideboard (Matches timeline 2 style) */}
+                      <div className="bg-white/25 backdrop-blur-md border border-[#dfa38f] rounded-lg p-5 space-y-4 flex flex-col justify-between h-full">
+                        <div className="space-y-3.5">
+                          <h3 className="text-xs font-black text-[#3d231b] uppercase tracking-wider border-b-2 border-[#b85b40]/50 pb-2.5 flex items-center gap-1.5">
+                            <span className="material-symbols-outlined text-sm text-[#d68c78]">receipt_long</span>
+                            Order Summary
+                          </h3>
+
+                          <div className="space-y-2.5 text-xs text-[#5a372c]">
+                            <div className="flex justify-between font-extrabold">
+                              <span>Subtotal</span>
+                              <span className="font-black text-[#3d231b]">{formatPrice(getSubtotal())}</span>
+                            </div>
+                            <div className="flex justify-between font-extrabold">
+                              <span>Instant Digital Delivery</span>
+                              <span className="font-black text-[#23783e]">FREE</span>
+                            </div>
+                            <div className="h-px bg-[#dfa38f]/40 my-2" />
+                            <div className="flex justify-between items-baseline text-sm font-black text-[#3d231b]">
+                              <span>Total</span>
+                              <span className="text-[#8c3b26] text-lg font-serif font-black">
+                                {formatPrice(getTotal())}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => {
+                            const loggedIn = localStorage.getItem("isLoggedIn") !== "false";
+                            if (loggedIn) {
+                              setStep(4);
+                            } else {
+                              setStep(3);
+                            }
+                          }}
+                          style={{
+                            background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                            boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                            border: "1px solid #D9A998",
+                          }}
+                          className="w-full text-white text-xs font-extrabold uppercase tracking-widest py-3.5 px-5 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-2 group mt-4 shadow-none"
+                        >
+                          <span>Proceed to Checkout</span>
+                          <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}

@@ -556,8 +556,16 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
       "StephanieHalim06"
     );
   });
+  const [userAvatar, setUserAvatar] = useState<string>(() => {
+    return (
+      localStorage.getItem("user_avatar") ||
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+    );
+  });
   const [cartCount, setCartCount] = useState(0);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isProfileHovered, setIsProfileHovered] = useState(false);
+  const [isSignInHovered, setIsSignInHovered] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -676,6 +684,10 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
         localStorage.getItem("user_name") ||
         "Student";
       setUserName(currentName);
+      const currentAvatar =
+        localStorage.getItem("user_avatar") ||
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80";
+      setUserAvatar(currentAvatar);
     };
     syncLoginState();
     window.addEventListener("storage", syncLoginState);
@@ -698,6 +710,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     localStorage.removeItem("guest_name");
     localStorage.removeItem("guest_email");
     localStorage.removeItem("guest_country");
+    localStorage.removeItem("user_avatar");
     window.dispatchEvent(new Event("storage")); // Trigger sync in current window
   };
 
@@ -746,15 +759,11 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
       >
         {/* Top Navigation Bar */}
         <nav
-          className={`sticky top-0 w-full z-50 transition-all duration-300 ${
-            isScrolled
-              ? "bg-[#fff8f6]/35 backdrop-blur-lg border-b border-[#e2b0a4]/30 shadow-[0_4px_25px_rgba(184,124,109,0.08)]"
-              : "bg-[#fff8f6]/10 backdrop-blur-sm border-b border-[#e8cdc1]/15"
-          }`}
+          className="sticky top-0 -mb-20 md:-mb-24 w-full z-50 transition-all duration-300 bg-white/35 backdrop-blur-md border-b border-[#e2b0a4]/25 shadow-[0_4px_20px_rgba(45,41,38,0.04)]"
         >
           <div className="flex justify-between items-center h-20 md:h-24 px-3 sm:px-6 md:px-12 w-full">
             {/* Left side: Logo + Search Bar */}
-            <div className="flex items-center gap-2 sm:gap-3 md:gap-4 shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-5 flex-1 max-w-xl xl:max-w-2xl mr-4 md:mr-6 lg:mr-8 xl:mr-10">
               <button
                 onClick={() => {
                   onNavigate("home");
@@ -777,16 +786,14 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
             </div>
 
             {/* Right side: Nav Links + Shopping Cart & Account Dropdown */}
-            <div className="flex items-center gap-3.5 sm:gap-4 md:gap-4.5 lg:gap-5.5 xl:gap-6.5 2xl:gap-7.5">
-              <div className="hidden lg:flex items-center gap-3.5 lg:gap-4.5 xl:gap-5.5 2xl:gap-6.5">
+            <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5 lg:gap-4.5 xl:gap-5.5 2xl:gap-6.5">
+              <div className="hidden lg:flex items-center gap-2.5 lg:gap-3.5 xl:gap-4.5 ml-2 lg:ml-4">
                 {/* 1. HOME */}
                 <button
                   onClick={() => onNavigate("home")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1"
                 >
-                  <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
-                    <NavHomeIcon className="w-3 h-3 shrink-0" />
-                  </span>
+                  <NavHomeIcon className={`w-3.5 h-3.5 shrink-0 ${view === "home" ? "text-[#8a5d4c]" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`} />
                   <span className="relative py-0.5">
                     <span
                       className={`${view === "home" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
@@ -806,11 +813,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 2. STUDENTS */}
                 <button
                   onClick={() => onNavigate("dashboard")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1"
                 >
-                  <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
-                    <NavProgressIcon className="w-3 h-3 shrink-0" />
-                  </span>
+                  <NavProgressIcon className={`w-3.5 h-3.5 shrink-0 ${view === "dashboard" ? "text-[#8a5d4c]" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`} />
                   <span className="relative py-0.5">
                     <span
                       className={`${view === "dashboard" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
@@ -830,11 +835,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 3. TUTORIALS */}
                 <button
                   onClick={() => onNavigate("courses")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1"
                 >
-                  <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
-                    <NavLearnIcon className="w-3 h-3 shrink-0" />
-                  </span>
+                  <NavLearnIcon className={`w-3.5 h-3.5 shrink-0 ${view === "courses" ? "text-[#8a5d4c]" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`} />
                   <span className="relative py-0.5">
                     <span
                       className={`${view === "courses" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
@@ -854,11 +857,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 4. SKEYS */}
                 <button
                   onClick={() => onNavigate("videos")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1"
                 >
-                  <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
-                    <NavVideosIcon className="w-3 h-3 shrink-0" />
-                  </span>
+                  <NavVideosIcon className={`w-3.5 h-3.5 shrink-0 ${view === "videos" || view === "library" ? "text-[#8a5d4c]" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`} />
                   <span className="relative py-0.5">
                     <span
                       className={`${view === "videos" || view === "library" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
@@ -878,11 +879,9 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 {/* 5. SHEETS */}
                 <button
                   onClick={() => onNavigate("sheets")}
-                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1.25"
+                  className="relative font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold px-1.5 py-1.5 transition-all duration-300 ease-out cursor-pointer bg-transparent focus:outline-none group flex items-center gap-1"
                 >
-                  <span className="w-5 h-5 rounded-[4px] bg-white/95 border border-[#dfa38f]/40 shadow-none flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-[#dfa38f]/80 transition-colors duration-300">
-                    <NavSheetsIcon className="w-3 h-3 shrink-0" />
-                  </span>
+                  <NavSheetsIcon className={`w-3.5 h-3.5 shrink-0 ${view === "sheets" ? "text-[#8a5d4c]" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300`} />
                   <span className="relative py-0.5">
                     <span
                       className={`${view === "sheets" ? "text-[#8a5d4c] font-bold" : "text-[#9c6a58] group-hover:text-[#8a5d4c]"} transition-colors duration-300 block`}
@@ -946,77 +945,58 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                 <div className="relative" ref={profileMenuRef}>
                   <button
                     onClick={() => setIsProfileMenuOpen((prev) => !prev)}
+                    onMouseEnter={() => setIsProfileHovered(true)}
+                    onMouseLeave={() => setIsProfileHovered(false)}
                     style={{
-                      background:
-                        "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
-                      border: "1.5px solid transparent",
-                      boxShadow: "none",
+                      background: isProfileHovered
+                        ? "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)"
+                        : "#FFFFFF",
+                      filter: isProfileHovered ? "brightness(1.15)" : "none",
+                      border: "1px solid #D9A998",
+                      boxShadow: isProfileHovered
+                        ? "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 3px 10px rgba(129, 89, 79, 0.22)"
+                        : "0 1px 4px rgba(217, 169, 152, 0.18)",
                     }}
-                    className="relative h-8.5 sm:h-9.5 px-2.5 sm:px-3 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:brightness-105 hover:scale-[1.02] focus:outline-none flex items-center justify-center gap-1 sm:gap-1.5 shadow-none"
+                    className="relative h-8.5 sm:h-9.5 pl-1.5 pr-2.5 sm:pl-2 sm:pr-3 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:scale-[1.02] focus:outline-none flex items-center justify-center gap-1.5 sm:gap-2"
                   >
-                    {/* Glossy Specular Rose-Gold Semiquaver Icon */}
-                    <svg
-                      className="w-3.5 h-4 shrink-0 block"
-                      viewBox="0 0 100 130"
+                    {/* Luxurious Rose Gold Circular Frame for Profile Photo */}
+                    <div
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #FFF0EB 0%, #F5D5C8 25%, #E8B9A7 55%, #D49987 80%, #8E5445 100%)",
+                        boxShadow:
+                          "0 1.5px 4px rgba(181, 114, 98, 0.4), inset 0 1px 1px #FFFFFF",
+                        border: "1.5px solid #FFFFFF",
+                      }}
+                      className="w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full flex items-center justify-center overflow-hidden shrink-0 shadow-xs"
                     >
-                      <defs>
-                        <linearGradient
-                          id="note-glossy-gold-user"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="100%"
-                        >
-                          <stop offset="0%" stopColor="#FFFFFF" />
-                          <stop offset="25%" stopColor="#FFF0EB" />
-                          <stop offset="55%" stopColor="#E2B0A4" />
-                          <stop offset="85%" stopColor="#C48B7C" />
-                          <stop offset="100%" stopColor="#8C5446" />
-                        </linearGradient>
-                      </defs>
-                      <ellipse
-                        cx="28"
-                        cy="98"
-                        rx="18"
-                        ry="12"
-                        transform="rotate(-25 28 98)"
-                        fill="url(#note-glossy-gold-user)"
+                      <img
+                        src={userAvatar}
+                        alt={userName}
+                        className="w-full h-full object-cover rounded-full"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80";
+                        }}
                       />
-                      <rect
-                        x="42"
-                        y="10"
-                        width="9"
-                        height="88"
-                        rx="2"
-                        fill="url(#note-glossy-gold-user)"
-                      />
-                      <path
-                        d="M 50 10 C 68 22, 82 42, 75 66 C 72 72, 68 76, 65 80 C 72 65, 75 48, 50 32 Z"
-                        fill="url(#note-glossy-gold-user)"
-                      />
-                      <path
-                        d="M 50 35 C 68 47, 82 67, 75 91 C 72 96, 68 100, 65 104 C 72 90, 75 73, 50 57 Z"
-                        fill="url(#note-glossy-gold-user)"
-                      />
-                    </svg>
+                    </div>
 
                     <span
-                      style={{
-                        fontFamily:
-                          "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive",
-                        letterSpacing: "0.01em",
-                      }}
-                      className="text-sm sm:text-[15px] font-bold text-[#6e4337] truncate max-w-[125px] sm:max-w-[155px] xl:max-w-[175px]"
+                      className={`font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold truncate max-w-[125px] sm:max-w-[155px] xl:max-w-[175px] transition-colors duration-300 ${
+                        isProfileHovered ? "text-white" : "text-[#8a5d4c]"
+                      }`}
                     >
                       {userName}
                     </span>
 
                     {/* Royal Ruby Red Dropdown Arrow with Smooth Click Rotation */}
                     <svg
-                      className={`w-3.5 h-3.5 shrink-0 ml-0.5 transition-transform duration-300 ease-out ${isProfileMenuOpen ? "rotate-180" : ""}`}
+                      className={`w-3.5 h-3.5 shrink-0 ml-0.5 transition-all duration-300 ease-out ${
+                        isProfileMenuOpen ? "rotate-180" : ""
+                      }`}
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="#800A1D"
+                      stroke={isProfileHovered ? "#FFFFFF" : "#800A1D"}
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -1140,33 +1120,29 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   </div>
                 </div>
               ) : (
-                /* Not Logged In: Rose Gold Metallic Border Pill Controls matching Logged In Username design */
+                /* Not Logged In: Sign In Button matching StephanieHalim06 design and font */
                 <div className="flex items-center gap-2 sm:gap-2.5">
                   <button
                     onClick={() => onNavigate("signin")}
+                    onMouseEnter={() => setIsSignInHovered(true)}
+                    onMouseLeave={() => setIsSignInHovered(false)}
                     style={{
-                      background:
-                        "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
-                      border: "1.5px solid transparent",
-                      boxShadow: "none",
+                      background: isSignInHovered
+                        ? "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)"
+                        : "#FFFFFF",
+                      filter: isSignInHovered ? "brightness(1.15)" : "none",
+                      border: "1px solid #D9A998",
+                      boxShadow: isSignInHovered
+                        ? "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d, 0 3px 10px rgba(129, 89, 79, 0.22)"
+                        : "0 1px 4px rgba(217, 169, 152, 0.18)",
                     }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background =
-                        "linear-gradient(135deg, #F5E6DF 0%, #E8CDA8 25%, #CFA997 60%, #A47869 100%)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background =
-                        "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box";
-                    }}
-                    className="relative h-8.5 sm:h-9.5 px-3.5 sm:px-4 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-sm focus:outline-none flex items-center justify-center shadow-none shrink-0 group"
+                    className="relative h-8.5 sm:h-9.5 px-3.5 sm:px-4 rounded-[10px] cursor-pointer transition-all duration-300 ease-out hover:scale-[1.02] focus:outline-none flex items-center justify-center shrink-0"
+                    aria-label="Sign In"
                   >
                     <span
-                      style={{
-                        fontFamily:
-                          "'Dancing Script', 'Alex Brush', 'Great Vibes', cursive",
-                        letterSpacing: "0.01em",
-                      }}
-                      className="text-sm sm:text-[15px] font-bold text-[#6e4337] group-hover:text-white transition-colors duration-300"
+                      className={`font-sans text-[11px] xl:text-[11.5px] uppercase tracking-[0.05em] font-semibold transition-colors duration-300 ${
+                        isSignInHovered ? "text-white" : "text-[#8a5d4c]"
+                      }`}
                     >
                       Sign In
                     </span>
@@ -1286,35 +1262,61 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
         {/* Main Content Area */}
         <div
-          className="flex flex-col h-auto flex-grow-0"
+          className={`flex flex-col flex-grow-0 pt-20 md:pt-24 ${
+            view === "signin" || view === "signup" || view === "forgotpassword"
+              ? "auth-page-container"
+              : "h-auto"
+          }`}
           style={
-            view === "dashboard"
+            view === "dashboard" ||
+            view === "sessions" ||
+            view === "courses" ||
+            view === "videos" ||
+            view === "library" ||
+            view === "sheets" ||
+            view === "cart" ||
+            view === "checkout" ||
+            view === "signin" ||
+            view === "signup" ||
+            view === "forgotpassword" ||
+            view === "profile" ||
+            view === "subscription"
               ? {
-                  backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 248, 244, 0.25) 100%), url('/dashboard-grand-hall-bg.jpg')`,
+                  backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.60) 0%, rgba(255, 248, 244, 0.45) 100%), url('/dashboard-grand-hall-bg.jpg')`,
                   backgroundSize: "cover",
                   backgroundPosition: "center center",
                   backgroundRepeat: "no-repeat",
+                  backgroundAttachment: "fixed",
                   backgroundColor: "#fff8f6",
                 }
               : view === "privacy" || view === "terms"
                 ? {
-                    backgroundImage: `url('/white-peach-marble.png')`,
+                    backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(250, 245, 240, 0.20) 100%), url('/legal-bg.jpg')`,
                     backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    backgroundPosition: "center center",
                     backgroundRepeat: "no-repeat",
+                    backgroundAttachment: "fixed",
                     backgroundColor: "#faf0ed",
                   }
                 : view === "my-library" ||
                     view === "download-page" ||
                     view === "invoice"
                   ? {
-                      backgroundImage: `linear-gradient(rgba(255, 248, 246, 0.50), rgba(255, 248, 246, 0.50)), url('/library-sheet3.png')`,
+                      backgroundImage: `linear-gradient(rgba(255, 248, 246, 0.45), rgba(255, 248, 246, 0.35)), url('/library-sheet3.png')`,
                       backgroundSize: "cover",
-                      backgroundPosition: "center",
+                      backgroundPosition: "center center",
                       backgroundRepeat: "no-repeat",
+                      backgroundAttachment: "fixed",
                       backgroundColor: "#fff8f6",
                     }
-                  : undefined
+                  : {
+                            backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 248, 244, 0.20) 100%), url('/hero-new-luxury.jpg')`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center center",
+                            backgroundRepeat: "no-repeat",
+                            backgroundAttachment: "fixed",
+                            backgroundColor: "#fff8f6",
+                          }
           }
         >
           {children}
@@ -1560,7 +1562,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                   className="text-[11.5px] md:text-xs text-left bg-transparent border-none cursor-pointer p-0 font-bold text-[#7a594e] hover:text-[#5a3a2e] hover:underline underline-offset-4 decoration-[#dfa38f]/50 transition-colors tracking-wide"
                 >
-                  FAQ
+                  Frequently Asked Questions
                 </button>
                 <div
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}

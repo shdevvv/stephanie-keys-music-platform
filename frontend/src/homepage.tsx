@@ -252,20 +252,20 @@ function Homepage() {
         return (
           <>
             {/* Hero Section (Image Background Exclusive to Hero Section) */}
-            <section className="relative h-[calc(100vh-96px)] min-h-[440px] max-h-[640px] md:max-h-[750px] flex items-center overflow-hidden py-10 md:py-0">
+            <section className="relative -mt-20 md:-mt-24 pt-20 md:pt-24 min-h-[500px] md:min-h-[620px] flex items-center overflow-hidden py-10 md:py-0">
               <div className="absolute inset-0 z-0">
                 {/* Truly Diagonal White Gradient Fading Overlay Across Entire Hero Image */}
                 <div
                   className="absolute inset-0 z-15 pointer-events-none"
                   style={{
                     background:
-                      "linear-gradient(125deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 28%, rgba(255, 255, 255, 0.35) 48%, transparent 68%)",
+                      "linear-gradient(125deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.84) 30%, rgba(255, 255, 255, 0.58) 55%, rgba(255, 255, 255, 0.25) 75%, transparent 100%)",
                   }}
                 />
                 <img
-                  className="w-full h-full object-cover object-[85%_25%] transform transition-all duration-500"
+                  className="w-full h-full object-cover object-[80%_30%] transform transition-all duration-500"
                   alt="Luxury grand piano in palace music hall"
-                  src="/sheet-hero-new.png?v=hd"
+                  src="/hero-palace-grand.jpg"
                 />
               </div>
 
@@ -317,7 +317,7 @@ function Homepage() {
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                     <button
                       onClick={() => setView("dashboard")}
-                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/45 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/70 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
+                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/75 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/95 hover:border-[#c48b7c] hover:brightness-105 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
                       style={{
                         fontFamily:
                           "'Cormorant Garamond', 'Playfair Display', serif",
@@ -328,7 +328,7 @@ function Homepage() {
                     </button>
                     <button
                       onClick={() => setView("videos")}
-                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/45 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/70 hover:border-[#c48b7c] hover:brightness-110 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
+                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/75 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/95 hover:border-[#c48b7c] hover:brightness-105 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
                       style={{
                         fontFamily:
                           "'Cormorant Garamond', 'Playfair Display', serif",
@@ -491,7 +491,13 @@ function Homepage() {
               </svg>
 
               {/* Section 1: Welcome to Stephanie Keys */}
-              <section className="py-24 px-6 border-b border-[#ebd3cb]/15 relative z-10">
+              <section className="py-24 px-6 border-b border-[#ebd3cb]/15 relative z-10 overflow-hidden">
+                {/* Background Overlay - Light Soft Warm Chocolate */}
+                <div
+                  className="absolute inset-0 pointer-events-none z-0"
+                  style={{ backgroundColor: "rgba(206, 168, 154, 0.25)" }}
+                />
+
                 {/* Glitter Particles (Snowfall) */}
                 {TESTIMONIAL_GLITTERS.map((p, idx) => (
                   <div
@@ -515,15 +521,18 @@ function Homepage() {
                 <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-[#dfa38f]/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
                 <div className="max-w-[1100px] mx-auto space-y-10 relative z-10">
-                  {/* Header */}
+                  {/* Header (Lighter Warm Chocolate) */}
                   <div className="text-center space-y-3 max-w-2xl mx-auto">
                     <h2
-                      className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#885748] font-bold leading-tight tracking-tight drop-shadow-xs"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      className="font-display-lg text-2xl md:text-3xl lg:text-4xl text-[#7a4b3d] font-bold leading-tight tracking-tight drop-shadow-none"
+                      style={{ fontFamily: "'Playfair Display', serif", textShadow: "none" }}
                     >
                       Welcome to Stephanie Keys.
                     </h2>
-                    <p className="font-sans text-[11px] md:text-xs text-[#a06d5e] font-bold uppercase tracking-[0.16em]">
+                    <p 
+                      className="font-sans text-[11px] md:text-xs text-[#915e4f] font-bold uppercase tracking-[0.16em] drop-shadow-none"
+                      style={{ textShadow: "none" }}
+                    >
                       If you join Stephanie Keys, you will be able to:
                     </p>
                   </div>
@@ -741,12 +750,11 @@ function Homepage() {
                       <div
                         key={idx}
                         style={{
-                          background:
-                            "linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(253, 245, 238, 0.78) 50%, rgba(255, 250, 246, 0.88) 100%)",
+                          background: "#ffffff",
                           boxShadow:
-                            "0 14px 40px rgba(226, 176, 164, 0.18), 0 0 20px rgba(255, 255, 255, 0.8), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
+                            "0 14px 40px rgba(226, 176, 164, 0.16), 0 0 20px rgba(255, 255, 255, 0.9), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
                         }}
-                        className="relative overflow-hidden p-6 md:p-7 rounded-[28px] md:rounded-tl-[38px] md:rounded-br-[38px] md:rounded-tr-[18px] md:rounded-bl-[18px] border-2 border-[#e2b0a4]/80 backdrop-blur-2xl transition-all duration-700 ease-out hover:border-[#f3beae] hover:bg-white/95 hover:shadow-[0_20px_50px_rgba(226,176,164,0.30)] flex flex-col justify-between group cursor-pointer"
+                        className="relative overflow-hidden p-6 md:p-7 rounded-[28px] md:rounded-tl-[38px] md:rounded-br-[38px] md:rounded-tr-[18px] md:rounded-bl-[18px] border-2 border-[#e2b0a4]/80 backdrop-blur-2xl transition-all duration-700 ease-out hover:border-[#f3beae] hover:bg-white hover:shadow-[0_20px_50px_rgba(226,176,164,0.30)] flex flex-col justify-between group cursor-pointer"
                       >
                         {/* Subtle Glass Reflection */}
                         <div className="absolute -top-24 -left-24 w-48 h-48 bg-gradient-to-br from-white/50 via-white/10 to-transparent rounded-full blur-xl pointer-events-none group-hover:scale-125 transition-transform duration-700" />
@@ -788,8 +796,8 @@ function Homepage() {
               {/* Top Delicate Rose Gold Divider Line for About Mentor Section */}
               <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative opacity-90" />
 
-              {/* Section 2: About Mentor Section with 60% White Opacity */}
-              <section className="py-16 md:py-20 px-6 relative z-10 overflow-hidden bg-white/60">
+              {/* Section 2: About Mentor Section with 75% White Opacity */}
+              <section className="py-16 md:py-20 px-6 relative z-10 overflow-hidden bg-white/75">
                 <div className="max-w-[1250px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
                   {/* Left Column: Rectangular Mentor Photo with Heavy Glossy Rose Gold Luxury Frame */}
                   <div className="lg:col-span-5 flex items-center justify-center relative">
@@ -876,7 +884,13 @@ function Homepage() {
               <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#c48b7c] via-[#e2b0a4] via-[#ffffff] via-[#e2b0a4] via-[#c48b7c] to-transparent z-20 relative opacity-90" />
 
               {/* Section 3: What You Will Get Section */}
-              <section className="py-14 md:py-18 px-6 text-center relative z-10">
+              <section className="py-14 md:py-18 px-6 text-center relative z-10 overflow-hidden">
+                {/* Background Overlay - Medium Coklat Susu Opasitas 50% */}
+                <div
+                  className="absolute inset-0 pointer-events-none z-0"
+                  style={{ backgroundColor: "rgba(146, 102, 86, 0.50)" }}
+                />
+
                 {/* Floating Sparkle Elements */}
                 <div className="absolute inset-0 z-0 pointer-events-none select-none">
                   {/* Sparkle 1 (Top Left) */}
@@ -1001,12 +1015,18 @@ function Homepage() {
                 </div>
 
                 <div className="relative z-10 max-w-[1200px] mx-auto space-y-10">
-                  {/* Header */}
-                  <div className="space-y-1">
-                    <h2 className="font-display-lg text-xl md:text-2xl lg:text-[28px] text-[#784d40] font-medium leading-tight tracking-wide">
+                  {/* Header (White text, no shadow) */}
+                  <div className="space-y-1.5">
+                    <h2
+                      style={{ fontFamily: "'Cinzel', 'Playfair Display', serif", textShadow: "none" }}
+                      className="text-xl md:text-2xl lg:text-[28px] text-white font-bold leading-tight tracking-[0.12em] uppercase drop-shadow-none"
+                    >
                       What You Will Get
                     </h2>
-                    <p className="font-curvy-vibes text-2xl md:text-3xl lg:text-4xl text-[#a06d5e] block leading-snug">
+                    <p
+                      style={{ fontFamily: "'Cormorant Garamond', 'Playfair Display', serif", textShadow: "none" }}
+                      className="text-lg md:text-xl lg:text-[22px] text-white italic font-medium block leading-snug tracking-wider drop-shadow-none"
+                    >
                       from Stephanie Keys Course
                     </p>
                   </div>
@@ -1272,23 +1292,15 @@ function Homepage() {
 
             {/* Master Seamless Grand White Marble Hall Container for FAQ, Students Feedbacks, and Pricing */}
             <div className="relative overflow-hidden bg-[#faf5f0]">
-              {/* Smooth Medium White Top Gradient above FAQ */}
-              <div className="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-white/90 via-white/50 to-transparent z-10 pointer-events-none" />
-
               {/* Luxury Pink Bookshelf Shared Background Image Layer */}
               <div className="absolute inset-0 z-0 pointer-events-none select-none">
                 <img
-                  className="w-full h-full object-cover object-[50%_30%] transform-gpu"
+                  className="w-full h-full object-cover object-[50%_30%] transform-gpu opacity-40"
                   alt="Pink Bookshelf Background"
                   src="/faq-bookshelf-bg.jpg"
                 />
-                {/* 
-                  Vertical & Soft White Overlay across FAQ & Students Feedbacks Section:
-                  Provides soft pure white translucent glow for pristine text contrast
-                */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/45 via-white/30 via-white/35 to-white/55" />
-                {/* Subtle Low-Opacity White Overlay */}
-                <div className="absolute inset-0 bg-white/25 z-0 pointer-events-none backdrop-blur-[2px]" />
+                {/* Subtle White Overlay */}
+                <div className="absolute inset-0 bg-white/40 z-0 pointer-events-none backdrop-blur-[2px]" />
               </div>
 
               {/* Section 4: FAQ Section */}
@@ -1576,12 +1588,12 @@ function Homepage() {
 
                       return (
                         <>
-                          {/* Soft Lightened Peach-Chocolate Horizontal Timeline Track (Clean Rose Gold Border) */}
+                          {/* Soft Pure White Horizontal Timeline Track (Clean Rose Gold Border) */}
                           <div
                             style={{
-                              backgroundColor: "rgba(255, 246, 242, 0.55)",
+                              backgroundColor: "#ffffff",
                               border: "2px solid #c48b7c",
-                              boxShadow: "0 0 10px rgba(196, 139, 124, 0.25)",
+                              boxShadow: "0 0 14px rgba(196, 139, 124, 0.2)",
                             }}
                             className="relative py-3 px-3 md:px-5 rounded-xl backdrop-blur-sm"
                           >
@@ -1671,20 +1683,19 @@ function Homepage() {
                             }}
                           />
 
-                          {/* Active Question & Answer Single Card (Translucent Soft Cream to Soft Rose Gold Gradient) */}
+                          {/* Active Question & Answer Single Card (Pure White) */}
                           <div
                             style={{
-                              background:
-                                "linear-gradient(135deg, rgba(250, 240, 235, 0.50) 0%, rgba(245, 220, 208, 0.45) 35%, rgba(232, 188, 172, 0.40) 70%, rgba(226, 176, 164, 0.35) 100%)",
+                              background: "#ffffff",
                               boxShadow:
-                                "inset 0 1.5px 1px rgba(255, 255, 255, 0.9), inset 0 -1.5px 2px rgba(184, 122, 107, 0.4), 0 0 12px rgba(196, 139, 124, 0.2)",
-                              border: "2px solid rgba(226, 176, 164, 0.85)",
+                                "0 8px 28px rgba(196, 139, 124, 0.18), inset 0 1.5px 1px #ffffff",
+                              border: "2px solid #c48b7c",
                             }}
                             className="rounded-xl p-4 md:p-5 backdrop-blur-sm overflow-hidden"
                           >
                             {/* Header Badge + Left (◄) & Right (►) Arrow Navigation */}
                             <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-[#b58474]/25">
-                              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/90 border border-white/80 text-[#5E3A2E] text-[10px] font-bold tracking-wider uppercase shadow-2xs">
+                              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#f8e3db]/80 border border-[#c48b7c]/40 text-[#5E3A2E] text-[10px] font-bold tracking-wider uppercase shadow-2xs">
                                 <span className="w-1.5 h-1.5 rounded-full bg-[#B58474] animate-pulse" />
                                 Question {currentItem.num} of 10
                               </div>
@@ -1699,8 +1710,8 @@ function Homepage() {
                                   title="Previous Question"
                                   className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
                                     activeFaq === 0
-                                      ? "opacity-40 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/30"
-                                      : "bg-white/90 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                      ? "opacity-40 cursor-not-allowed bg-gray-100 text-[#8f6456] border border-[#b58474]/30"
+                                      : "bg-[#f8e3db]/60 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-[#c48b7c]/50 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                                   }`}
                                 >
                                   <svg
@@ -1729,8 +1740,8 @@ function Homepage() {
                                   title="Next Question"
                                   className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
                                     activeFaq === faqItems.length - 1
-                                      ? "opacity-40 cursor-not-allowed bg-white/40 text-[#8f6456] border border-[#b58474]/30"
-                                      : "bg-white/90 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-white/80 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                                      ? "opacity-40 cursor-not-allowed bg-gray-100 text-[#8f6456] border border-[#b58474]/30"
+                                      : "bg-[#f8e3db]/60 hover:bg-[#b58474] text-[#5E3A2E] hover:text-white border border-[#c48b7c]/50 shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                                   }`}
                                 >
                                   <svg
@@ -1758,15 +1769,15 @@ function Homepage() {
                               {currentItem.question}
                             </h3>
 
-                            {/* Answer Section with Static Vertical Brown Line + White Background Box */}
+                            {/* Answer Section with Static Vertical Brown Line + Pure White Background Box */}
                             <div className="mt-3 flex items-stretch">
                               {/* Static Vertical Brown Line (Anchor point always visible on left) */}
                               <div className="w-[3.5px] bg-[#5E3A2E] rounded-full shrink-0 z-10" />
 
-                              {/* White Background Box (Contains progressive word-by-word reveal text, higher white opacity) */}
+                              {/* Pure White Background Box (Contains progressive word-by-word reveal text) */}
                               <div
                                 key={activeFaq}
-                                className="flex-1 bg-[#fffaf7]/85 backdrop-blur-sm py-2.5 px-3.5 rounded-r-lg shadow-sm"
+                                className="flex-1 bg-white border border-[#e8cdc1]/70 py-2.5 px-3.5 rounded-r-lg shadow-2xs"
                               >
                                 <p className="font-sans text-[11.5px] md:text-xs text-[#523328] leading-relaxed font-semibold">
                                   <WordByWordRevealText
@@ -1828,43 +1839,28 @@ function Homepage() {
                   />
                 ))}
 
-                {/* 1 Master Outer Rose Gold Outline Border Wrapping ALL of Students Feedbacks */}
-                <div
-                  style={{
-                    border: "2.5px solid #c48b7c",
-                    boxShadow: "0 0 16px rgba(196, 139, 124, 0.3)",
-                  }}
-                  className="max-w-[980px] mx-auto p-5 md:p-7 rounded-2xl space-y-6 relative z-10"
-                >
-                  {/* Header wrapped in a small transparent inner card ("bolong" cutout showing bg image clearly) */}
-                  <div
-                    style={{
-                      backgroundColor: "rgba(255, 255, 255, 0.08)",
-                      border: "2px solid #c48b7c",
-                      boxShadow:
-                        "0 4px 16px rgba(196, 139, 124, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.8)",
-                    }}
-                    className="text-center space-y-2 max-w-xl mx-auto p-4 md:p-5 rounded-xl"
-                  >
+                {/* Student Feedbacks Container (Without outer outline) */}
+                <div className="max-w-[980px] mx-auto space-y-6 relative z-10">
+                  {/* Standalone Header Text (Card container removed) */}
+                  <div className="text-center space-y-2 max-w-xl mx-auto pt-2 pb-1">
                     <h2 className="font-display-lg text-xl md:text-2xl lg:text-3xl text-[#4a1f16] font-bold leading-tight tracking-tight drop-shadow-[0_1.5px_2px_rgba(255,255,255,0.95)]">
                       Student Feedbacks
                     </h2>
-                    <p className="font-sans text-[10.5px] md:text-xs text-[#5e291d] font-normal leading-relaxed uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
-                      DISCOVER HOW PIANISTS OF ALL BACKGROUNDS FOUND THEIR SOLID
-                      FOUNDATIONS WITH STEPHANIE KEYS.
+                    <p className="text-[#8a5a4c] font-sans text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)] leading-relaxed">
+                      DISCOVER HOW PIANISTS OF ALL BACKGROUNDS FOUND THEIR SOLID FOUNDATIONS WITH STEPHANIE KEYS.
                     </p>
                   </div>
 
-                  {/* Main Large Warm Brown Outer Card wrapping the testimonial grid (22% glass opacity so bg image shows clearly) */}
+                  {/* Main Large Translucent White Outer Card wrapping the testimonial grid */}
                   <div
                     style={{
-                      backgroundColor: "rgba(196, 139, 124, 0.22)",
+                      backgroundColor: "rgba(255, 248, 245, 0.50)",
                       border: "1.5px solid #c48b7c",
                       boxShadow: "0 4px 16px rgba(196, 139, 124, 0.18)",
                     }}
-                    className="p-4 md:p-5 rounded-xl backdrop-blur-[2px]"
+                    className="p-4 md:p-5 rounded-xl backdrop-blur-md"
                   >
-                    {/* Testimonial Cards Grid (3 Small Inner Cards: Medium Translucent Flat White Background) */}
+                    {/* Testimonial Cards Grid (3 Small Inner Cards: High White Opacity Background) */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
                       {[
                         {
@@ -1901,11 +1897,11 @@ function Homepage() {
                         <div
                           key={idx}
                           style={{
-                            backgroundColor: "rgba(255, 255, 255, 0.62)",
+                            backgroundColor: "rgba(255, 255, 255, 0.88)",
                             border: "1.5px solid #c48b7c",
-                            boxShadow: "0 0 8px rgba(196, 139, 124, 0.2)",
+                            boxShadow: "0 0 12px rgba(196, 139, 124, 0.2)",
                           }}
-                          className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 flex flex-col justify-between gap-4 group cursor-pointer"
+                          className="relative overflow-hidden p-4.5 rounded-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/95 flex flex-col justify-between gap-4 group cursor-pointer"
                         >
                           <div className="space-y-2.5 relative z-10">
                             {/* Comment */}
@@ -1939,8 +1935,6 @@ function Homepage() {
                     </div>
                   </div>
                 </div>
-                {/* Bottom White Soft Fade Gradient Overlay (fading upwards) */}
-                <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#faf5f0] via-[#faf5f0]/75 to-transparent z-0 pointer-events-none" />
               </section>
             </div>
 
@@ -2054,10 +2048,9 @@ function Homepage() {
                     {/* Left Column: Included in Every Plan */}
                     <div
                       style={{
-                        background:
-                          "linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(253, 245, 238, 0.88) 50%, rgba(255, 250, 246, 0.95) 100%)",
+                        background: "#ffffff",
                         boxShadow:
-                          "0 12px 32px rgba(116, 66, 50, 0.16), 0 2px 10px rgba(226, 176, 164, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.9)",
+                          "0 12px 32px rgba(116, 66, 50, 0.12), 0 2px 10px rgba(226, 176, 164, 0.15), inset 0 1.5px 2px rgba(255, 255, 255, 0.9)",
                       }}
                       className="lg:col-span-4 backdrop-blur-2xl rounded-[20px] p-4.5 lg:p-5 border-2 border-[#e2b0a4]/80 shadow-md flex flex-col justify-between text-left"
                     >
@@ -2132,12 +2125,11 @@ function Homepage() {
                     {/* Middle Column: Monthly Plan Card */}
                     <div
                       style={{
-                        background:
-                          "linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(253, 245, 238, 0.88) 50%, rgba(255, 250, 246, 0.95) 100%)",
+                        background: "#ffffff",
                         boxShadow:
-                          "0 12px 32px rgba(116, 66, 50, 0.16), 0 2px 10px rgba(226, 176, 164, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.9)",
+                          "0 12px 32px rgba(116, 66, 50, 0.12), 0 2px 10px rgba(226, 176, 164, 0.15), inset 0 1.5px 2px rgba(255, 255, 255, 0.9)",
                       }}
-                      className="lg:col-span-4 backdrop-blur-2xl rounded-[20px] p-4.5 lg:p-5 border-2 border-[#e2b0a4]/80 transition-all duration-300 hover:border-[#ffd0ab] hover:bg-white/95 flex flex-col justify-between text-left"
+                      className="lg:col-span-4 backdrop-blur-2xl rounded-[20px] p-4.5 lg:p-5 border-2 border-[#e2b0a4]/80 transition-all duration-300 hover:border-[#ffd0ab] hover:bg-white flex flex-col justify-between text-left"
                     >
                       <div className="space-y-4">
                         <div className="space-y-0.5">
@@ -2210,10 +2202,9 @@ function Homepage() {
                     {/* Right Column: Annual Plan Card (Featured Best Value) */}
                     <div
                       style={{
-                        background:
-                          "linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 245, 238, 0.92) 50%, rgba(255, 250, 246, 0.97) 100%)",
+                        background: "#ffffff",
                         boxShadow:
-                          "0 14px 38px rgba(116, 66, 50, 0.22), 0 2px 12px rgba(226, 176, 164, 0.24), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
+                          "0 14px 38px rgba(116, 66, 50, 0.16), 0 2px 12px rgba(226, 176, 164, 0.20), inset 0 1.5px 2px rgba(255, 255, 255, 0.95)",
                       }}
                       className="lg:col-span-4 backdrop-blur-2xl rounded-[20px] p-4.5 lg:p-5 border-2 border-[#d48b78] transition-all duration-300 flex flex-col justify-between text-left relative"
                     >

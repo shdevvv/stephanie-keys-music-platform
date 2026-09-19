@@ -12,7 +12,7 @@ export const NextRecommendedLessonCard: React.FC<
   NextRecommendedLessonCardProps
 > = ({ recommendedLesson, onNavigate }) => {
   return (
-    <div className="bg-white/35 border-2 border-[#dfa38f] rounded-lg p-4 md:p-5 shadow-md space-y-3 sm:space-y-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] rounded-lg p-4 md:p-5 shadow-md space-y-3 sm:space-y-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div className="space-y-1.5">
         <div className="flex items-center gap-2.5">
           <span className="px-3 py-1 rounded-lg bg-[#dfa38f]/20 text-[#854d38] text-[10px] font-extrabold uppercase tracking-wider border border-[#dfa38f]/50">

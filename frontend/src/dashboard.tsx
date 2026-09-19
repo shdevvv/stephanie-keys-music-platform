@@ -330,7 +330,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
       )}
 
       {/* 1. Header Welcome Banner */}
-      <section className="bg-white/35 border-2 border-[#dfa38f] rounded-lg px-5 py-4 flex items-center justify-between gap-4 shrink-0 shadow-md">
+      <section className="bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] rounded-lg px-5 py-4 flex items-center justify-between gap-4 shrink-0 shadow-md">
         <div className="flex items-center gap-3 animate-in fade-in duration-300">
           <h1
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
@@ -369,7 +369,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
           {/* Cards 1 & 2: Overall Progress + Weekly Practice Intensity */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 flex-grow">
             {/* Card 1: Overall Progress */}
-            <div className="bg-white/35 border-2 border-[#dfa38f] rounded-lg p-5 md:p-6 flex flex-col justify-between min-h-[235px] shrink-0 gap-3 shadow-md">
+            <div className="bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] rounded-lg p-5 md:p-6 flex flex-col justify-between min-h-[235px] shrink-0 gap-3 shadow-md">
               <div className="flex justify-between items-center shrink-0">
                 <h3
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
@@ -543,7 +543,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
             </div>
 
             {/* Card 2: Weekly Practice Intensity */}
-            <div className="bg-white/35 border-2 border-[#dfa38f] rounded-lg p-5 md:p-6 flex flex-col justify-between min-h-[320px] shrink-0 gap-3 shadow-md">
+            <div className="bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] rounded-lg p-5 md:p-6 flex flex-col justify-between min-h-[320px] shrink-0 gap-3 shadow-md">
               <div className="flex items-start justify-between gap-4 shrink-0">
                 <div>
                   <h3
@@ -639,7 +639,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
 
         {/* Right Column Span (Col 3): Live Studio (Scrollable Upcoming + Google Drive Past Replays) */}
         <div className="lg:col-span-1">
-          <div className="bg-white/35 border-2 border-[#dfa38f] rounded-lg p-5 md:p-6 flex flex-col justify-start h-full min-h-[320px] shrink-0 gap-3 shadow-md">
+          <div className="bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] rounded-lg p-5 md:p-6 flex flex-col justify-start h-full min-h-[320px] shrink-0 gap-3 shadow-md">
             <div className="flex justify-between items-center shrink-0 border-b border-[#dfa38f]/30 pb-2.5">
               <div>
                 <h3
@@ -660,7 +660,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
             {/* Scrollable Container for Upcoming & Past Sessions */}
             <div className="min-h-0 overflow-y-auto pr-1 custom-scrollbar space-y-2.5 max-h-[390px]">
               {/* 1. UPCOMING LIVE SESSION */}
-              <div className="p-3 rounded-md bg-white/35 border border-[#dfa38f] space-y-2">
+              <div className="p-3 rounded-md bg-white/50 border border-[#dfa38f] space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="bg-[#dfa38f]/30 border border-[#dfa38f] text-[#524037] px-2 py-0.5 rounded-md text-[8.5px] font-extrabold uppercase tracking-wider">
                     🔴 Oct 26 • 2:00 PM
@@ -747,7 +747,7 @@ function Dashboard({ onNavigate }: DashboardProps) {
                     );
                     window.open(item.gdriveUrl, "_blank");
                   }}
-                  className="p-2.5 rounded-lg bg-white/20 hover:bg-white/45 border border-[#dfa38f]/50 hover:border-[#dfa38f] cursor-pointer transition-all duration-200 flex items-center justify-between gap-2.5 group"
+                  className="p-2.5 rounded-lg bg-white/35 hover:bg-white/60 border border-[#dfa38f]/50 hover:border-[#dfa38f] cursor-pointer transition-all duration-200 flex items-center justify-between gap-2.5 group"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-7 h-7 rounded-md bg-[#dfa38f]/20 text-[#6e4336] group-hover:bg-[#ab7e66] group-hover:text-white transition-colors flex items-center justify-center shrink-0 border border-[#dfa38f]/40">

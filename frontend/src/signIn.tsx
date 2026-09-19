@@ -33,32 +33,13 @@ export default function SignIn({ onNavigate }: SignInProps) {
   };
 
   return (
-    <main className="w-full flex-grow relative overflow-hidden bg-[#fffaf7] py-20 px-6 flex items-center justify-center min-h-[85vh]">
-      {/* Background Silk Texture */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none opacity-40"
-        style={{
-          backgroundImage: "linear-gradient(135deg, rgba(255,250,247,0.92) 0%, rgba(252,238,233,0.85) 100%), url('/floral.png')",
-        }}
-      />
-
-      {/* Clean Sign In Card */}
-      <div className="relative z-10 w-full max-w-md bg-white/95 backdrop-blur-xl rounded-3xl border border-[#e8cdc1]/40 shadow-[0_12px_40px_rgba(45,41,38,0.08)] p-8 md:p-10 flex flex-col gap-6">
-        {/* Header */}
-        <div className="text-center space-y-2">
-          <div className="flex justify-center items-center gap-2">
-            <div className="h-px w-8 bg-[#e8cdc1]" />
-            <span 
-              className="text-xl text-[#805c51] font-serif select-none"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-            >
-              𝄞
-            </span>
-            <div className="h-px w-8 bg-[#e8cdc1]" />
-          </div>
-          
+    <main className="w-full h-full flex-grow relative overflow-hidden bg-transparent py-2 px-4 flex items-center justify-center select-none">
+      {/* Clean Sign In Card - Matches Dashboard Page Vibes */}
+      <div className="relative z-10 w-full max-w-md bg-white/55 backdrop-blur-sm rounded-lg border-2 border-[#dfa38f] shadow-md p-6 sm:p-7 flex flex-col gap-4 animate-auth-fade">
+        {/* Header (Musical icon removed) */}
+        <div className="text-center space-y-1.5">
           <h1 
-            className="text-2xl md:text-3xl text-[#3d2f28] font-bold tracking-tight leading-snug"
+            className="text-2xl sm:text-[26px] text-[#3d2f28] font-bold tracking-tight leading-snug"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Sign In
@@ -69,14 +50,14 @@ export default function SignIn({ onNavigate }: SignInProps) {
         </div>
 
         {error && (
-          <div className="bg-[#fff0ed] border border-[#f5b4a4] text-[#a83b2a] rounded-xl px-4 py-3 text-xs font-bold flex items-center gap-2 animate-shake">
-            <span className="material-symbols-outlined text-base select-none">error</span>
+          <div className="bg-[#fff0ed] border border-[#f5b4a4] text-[#a83b2a] rounded-lg px-3 py-2 text-xs font-bold flex items-center gap-2 animate-shake">
+            <span className="material-symbols-outlined text-sm select-none">error</span>
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1.5">
+        <form onSubmit={handleSubmit} className="space-y-3.5">
+          <div className="space-y-1">
             <label 
               className="block text-[10px] font-bold uppercase tracking-[0.12em] text-[#7a5446] ml-1"
             >
@@ -91,12 +72,12 @@ export default function SignIn({ onNavigate }: SignInProps) {
                   setError('');
                 }}
                 placeholder="yourname@example.com"
-                className="w-full bg-[#fffcfa] border border-[#e8cdc1] focus:border-[#ab7e66] rounded-xl px-4 py-3 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
+                className="w-full bg-[#fffcfa]/90 border border-[#dfa38f] focus:border-[#ab7e66] rounded-lg px-3.5 py-2.5 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
               />
             </div>
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <div className="flex justify-between items-center ml-1">
               <label 
                 className="block text-[10px] font-bold uppercase tracking-[0.12em] text-[#7a5446]"
@@ -119,21 +100,26 @@ export default function SignIn({ onNavigate }: SignInProps) {
                 setError('');
               }}
               placeholder="••••••••"
-              className="w-full bg-[#fffcfa] border border-[#e8cdc1] focus:border-[#ab7e66] rounded-xl px-4 py-3 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
+              className="w-full bg-[#fffcfa]/90 border border-[#dfa38f] focus:border-[#ab7e66] rounded-lg px-3.5 py-2.5 text-xs text-[#4a2e25] placeholder-[#b88e7e]/50 transition-all outline-none"
             />
           </div>
 
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               type="submit"
-              className="w-full bg-[#6e5a51] hover:bg-[#58473f] text-white text-xs font-bold uppercase tracking-[0.12em] py-3.5 px-6 rounded-xl border-none cursor-pointer active:scale-[0.98] transition-all shadow-sm"
+              style={{
+                background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                border: "1px solid #D9A998",
+              }}
+              className="w-full h-10 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:brightness-115 hover:scale-[1.01] active:scale-95 text-white text-xs font-bold uppercase tracking-[0.12em] flex items-center justify-center shadow-none"
             >
               Sign In
             </button>
           </div>
         </form>
 
-        <div className="text-center pt-2 border-t border-[#e8cdc1]/30">
+        <div className="text-center pt-2 border-t border-[#dfa38f]/30">
           <p className="text-[11px] text-[#81756f]">
             Don't have an account?{' '}
             <button

@@ -171,70 +171,10 @@ function Courses() {
   };
 
   return (
-    <main
-      className="pt-6 pb-8 flex-grow flex flex-col text-[#3d251c] relative"
-      style={{
-        backgroundImage: `linear-gradient(180deg, rgba(255, 252, 250, 0.45) 0%, rgba(255, 245, 240, 0.35) 100%), url('/skeys-building.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top',
-        backgroundAttachment: 'fixed'
-      }}
-    >
+    <main className="pt-6 pb-8 flex-grow flex flex-col text-[#3d251c] relative bg-transparent">
       {/* ── Level Grid ── */}
       {!selectedLevel && (
-        <section className="px-6 max-w-[1240px] mx-auto w-full mb-8 pt-4 animate-in fade-in duration-300">
-          <div className="relative w-full pt-4 pb-10 text-center max-w-4xl mx-auto flex flex-col items-center justify-center">
-            {/* Elegant Header Pill */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full mb-4 bg-white border border-[#e8cdc1]/60 shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#a06e5e] animate-pulse"></span>
-              <span 
-                className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#7c5a4d]"
-                style={{ fontFamily: "'Cinzel', serif" }}
-              >
-                Curriculum Roadmap
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#a06e5e] animate-pulse"></span>
-            </div>
-
-            {/* Main Luxurious Heading split in two lines */}
-            <h1 className="text-center drop-shadow-xs py-1 flex flex-col items-center justify-center gap-1">
-              <span
-                style={{
-                  fontFamily: "'Cormorant Garamond', 'Cinzel', serif",
-                  fontSize: 'clamp(1.15rem, 2.3vw, 1.75rem)',
-                  fontWeight: 400,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: '#4e3328',
-                  textShadow: '0 2px 10px rgba(255, 255, 255, 0.9)'
-                }}
-              >
-                Your Complete Roadmap from Absolute
-              </span>
-              <span
-                style={{
-                  fontFamily: "'Pinyon Script', 'Alex Brush', 'Great Vibes', cursive",
-                  fontSize: 'clamp(2.4rem, 5.2vw, 3.8rem)',
-                  fontWeight: 400,
-                  letterSpacing: '0.02em',
-                  background: 'linear-gradient(135deg, #2c1a14 0%, #5e3b2e 35%, #965c49 70%, #4a281e 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  textShadow: '0 2px 14px rgba(255, 255, 255, 0.9)'
-                }}
-              >
-                Zero to Mastery
-              </span>
-            </h1>
-
-            {/* Luxurious Ornamental Divider */}
-            <div className="flex items-center justify-center gap-3 mt-4 w-full max-w-xs">
-              <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#c89482]/70 to-transparent"></div>
-              <span className="text-[#a06e5e] text-xs">❖</span>
-              <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#c89482]/70 to-transparent"></div>
-            </div>
-          </div>
-
+        <section className="px-6 max-w-[1240px] mx-auto w-full mb-8 pt-6 animate-in fade-in duration-300">
           {/* Grid of 8 Levels */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {dbLevels.map((level) => {
@@ -246,10 +186,7 @@ function Courses() {
                 <div
                   key={level.number}
                   onClick={() => handleSelectLevel(level.number)}
-                  className="group relative flex flex-col justify-between p-6 rounded-lg cursor-pointer bg-white/55 border-[1.5px] border-[#e8cdc1] transition-all duration-700 ease-out hover:scale-[1.028] hover:-translate-y-1 hover:bg-white/70 hover:shadow-[0_0_35px_rgba(255,255,255,0.95),0_20px_45px_-6px_rgba(184,124,109,0.35)] overflow-hidden"
-                  style={{
-                    boxShadow: '0 15px 38px -6px rgba(184, 124, 109, 0.22), 0 0 18px rgba(255, 255, 255, 0.8)'
-                  }}
+                  className="group relative flex flex-col justify-between p-5 md:p-6 rounded-lg cursor-pointer bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] shadow-md transition-all duration-300 ease-out hover:scale-[1.025] hover:-translate-y-1 hover:bg-white/75 hover:border-[#cb9e8a] hover:shadow-xl overflow-hidden"
                 >
                   {/* Glossy Sheen Overlay */}
                   <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/35 to-transparent z-0" />
@@ -258,9 +195,12 @@ function Courses() {
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
                       <span 
-                        className="px-3.5 py-1 rounded-md text-[10px] font-bold tracking-[0.18em] uppercase text-[#6e4336] flex items-center bg-white/75 border border-[#e8cdc1] shadow-xs"
+                        className="px-4 py-1.5 rounded-full text-[11px] font-bold tracking-[0.14em] uppercase text-white flex items-center shadow-xs transition-all duration-300 group-hover:brightness-115 group-hover:scale-105"
                         style={{
-                          fontFamily: "'Cinzel', serif"
+                          fontFamily: "'Cinzel', serif",
+                          background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                          boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                          border: "1px solid #D9A998",
                         }}
                       >
                         Level {level.number}
@@ -315,49 +255,6 @@ function Courses() {
                         ></div>
                       </div>
                     </div>
-
-                    {/* Download Certificate Button (Visible when level 100% completed) */}
-                    {progressPct >= 100 ? (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          const cfg = LEVEL_BADGES_CONFIG.find(b => b.levelNumber === level.number) || LEVEL_BADGES_CONFIG[0];
-                          downloadLevelCertificate({
-                            studentName: 'Julian',
-                            levelNumber: level.number,
-                            levelTitle: `Level ${level.number}`,
-                            levelSubtitle: level.subtitle,
-                            badgeName: cfg.name,
-                            badgeIcon: cfg.icon,
-                          });
-                        }}
-                        className="w-full mt-3 py-1.5 px-3 rounded-md bg-gradient-to-r from-[#ab7e66] to-[#dfa38f] text-white font-bold text-xs uppercase tracking-wider shadow-xs hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-1.5 border border-[#dfa38f] cursor-pointer"
-                      >
-                        <span className="material-symbols-outlined text-sm">workspace_premium</span>
-                        Download Certificate
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          const cfg = LEVEL_BADGES_CONFIG.find(b => b.levelNumber === level.number) || LEVEL_BADGES_CONFIG[0];
-                          downloadLevelCertificate({
-                            studentName: 'Julian',
-                            levelNumber: level.number,
-                            levelTitle: `Level ${level.number}`,
-                            levelSubtitle: level.subtitle,
-                            badgeName: cfg.name,
-                            badgeIcon: cfg.icon,
-                          });
-                        }}
-                        className="w-full mt-3 py-1.5 px-3 rounded-md bg-transparent hover:bg-white/40 text-[#6e5a51] font-bold text-[10px] uppercase tracking-wider border border-[#dfa38f]/60 cursor-pointer flex items-center justify-center gap-1 opacity-80 hover:opacity-100 transition-all"
-                      >
-                        <span className="material-symbols-outlined text-xs">workspace_premium</span>
-                        Certificate ({progressPct}%)
-                      </button>
-                    )}
                   </div>
                 </div>
               );
@@ -371,10 +268,7 @@ function Courses() {
         <section className="px-6 max-w-[1240px] mx-auto w-full mb-6 animate-in fade-in duration-300">
           {/* Level Header Banner & Back Button */}
           <div 
-            className="bg-white/55 border-[1.5px] border-[#e8cdc1] rounded-md p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300"
-            style={{
-              boxShadow: "0 20px 50px rgba(184, 124, 109, 0.18), 0 0 30px rgba(255, 255, 255, 0.95), inset 0 2px 4px rgba(255, 255, 255, 0.95)"
-            }}
+            className="bg-white/55 backdrop-blur-sm border-2 border-[#dfa38f] rounded-lg p-6 md:p-7 mb-8 relative overflow-hidden transition-all duration-300 shadow-md"
           >
             {/* Top Gloss Sheen Overlay */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/40 to-transparent z-0" />
@@ -384,11 +278,12 @@ function Courses() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span 
-                      className="px-3 py-0.5 rounded-md text-xs font-bold text-[#6e4336] shadow-xs"
+                      className="px-4 py-1 rounded-full text-xs font-bold text-white shadow-xs"
                       style={{
                         fontFamily: "'Cinzel', serif",
-                        background: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) padding-box, linear-gradient(135deg, #d4a395 0%, #ffffff 50%, #b87c6d 100%) border-box',
-                        border: '1px solid transparent'
+                        background: "linear-gradient(135deg, #F8E8DF 0%, #EAC4B1 20%, #D9A998 42%, #CB9E8A 62%, #B58474 82%, #81594F 100%)",
+                        boxShadow: "inset 0 1.5px 1px #FFFFFF, inset 0 -1.5px 2px #905c4d",
+                        border: "1px solid #D9A998",
                       }}
                     >
                       Level {activeLevel.number}
@@ -463,7 +358,7 @@ function Courses() {
 
           {/* Topics Accordion List (Unified Attached Container) */}
           <div 
-            className="bg-white/55 border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
+            className="bg-white/75 backdrop-blur-sm border-[1.5px] border-[#e8cdc1] rounded-md overflow-hidden transition-all duration-300 divide-y divide-[#e8cdc1]/60 w-full"
             style={{
               boxShadow: "0 15px 40px rgba(184, 124, 109, 0.15), 0 0 25px rgba(255, 255, 255, 0.9), inset 0 1.5px 3px rgba(255, 255, 255, 0.95)"
             }}
