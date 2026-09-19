@@ -698,9 +698,9 @@ export default function SheetPurchaseFlow({
                         <span
                           style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
                           className={`mt-2 text-[10px] md:text-xs tracking-wider uppercase transition-all ${s.isCurrent
-                            ? 'text-[#4a241b] font-black'
+                            ? 'text-[#7a493b] font-black'
                             : s.active
-                              ? 'text-[#7a493b] font-extrabold'
+                              ? 'text-[#8c5647] font-extrabold'
                               : 'text-[#a37f72] font-semibold'
                             }`}
                         >
@@ -742,9 +742,9 @@ export default function SheetPurchaseFlow({
                         <span
                           style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
                           className={`mt-2 text-[10px] md:text-xs tracking-wider uppercase transition-all ${s.isCurrent
-                            ? 'text-[#4a241b] font-black'
+                            ? 'text-[#7a493b] font-black'
                             : s.active
-                              ? 'text-[#7a493b] font-extrabold'
+                              ? 'text-[#8c5647] font-extrabold'
                               : 'text-[#a37f72] font-semibold'
                             }`}
                         >
@@ -829,7 +829,7 @@ export default function SheetPurchaseFlow({
                 ) : (
                   <div className="space-y-6">
                     <div>
-                      <h1 className="font-display-lg text-xl md:text-2xl text-[#3d231b] font-black tracking-tight mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      <h1 className="font-display-lg text-xl md:text-2xl text-[#7a493b] font-black tracking-tight mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
                         1. Shopping Cart Selection
                       </h1>
                       <p className="text-[#5a372c] text-xs font-bold">Review your selected arrangements before proceeding to checkout.</p>
@@ -1115,7 +1115,7 @@ export default function SheetPurchaseFlow({
             {step === 4 && (
               <div className="animate-in fade-in duration-300 space-y-6">
                 <div>
-                  <h1 className="font-display-lg text-xl md:text-2xl text-[#3d231b] font-black tracking-tight mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h1 className="font-display-lg text-xl md:text-2xl text-[#7a493b] font-black tracking-tight mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
                     {!isDirectBuy ? '2. Checkout Details' : '1. Checkout Details'}
                   </h1>
                   <p className="text-[#5a372c] text-xs font-bold">Enter your delivery email and select payment parameters.</p>
@@ -1150,31 +1150,31 @@ export default function SheetPurchaseFlow({
                   <form onSubmit={handleCheckoutSubmit} className="space-y-4 flex flex-col justify-between">
                     <div className="space-y-4">
                       <div className="bg-white/25 backdrop-blur-md border border-[#dfa38f] rounded-xl p-5 space-y-3.5">
-                        <h3 className="text-xs font-black text-[#3d231b] uppercase tracking-wider border-b-2 border-[#b85b40]/50 pb-2.5 flex items-center gap-1.5">
+                        <h3 className="text-xs font-black text-[#7a493b] uppercase tracking-wider border-b-2 border-[#b85b40]/50 pb-2.5 flex items-center gap-1.5">
                           <span className="material-symbols-outlined text-sm text-[#d68c78]">badge</span>
                           Customer Information
                         </h3>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                           <div className="space-y-1">
-                            <label className="block text-xs font-extrabold uppercase tracking-wider text-[#3d231b] ml-1">Full Name</label>
+                            <label className="block text-xs font-extrabold uppercase tracking-wider text-[#7a493b] ml-1">Full Name</label>
                             <input
                               type="text"
                               placeholder="John Doe"
                               value={customerInfo.fullName}
                               onChange={(e) => setCustomerInfo({ ...customerInfo, fullName: e.target.value })}
-                              className="w-full bg-white/40 backdrop-blur-xs border border-[#dfa38f] rounded-xl px-3.5 py-2.5 text-xs text-[#3d231b] font-bold placeholder-[#8c5243] focus:bg-white/70 focus:outline-none focus:ring-2 focus:ring-[#d68c78]"
+                              className="w-full bg-white/40 backdrop-blur-xs border border-[#dfa38f] rounded-xl px-3.5 py-2.5 text-xs text-[#5a372c] font-semibold placeholder:text-[#c4a69c] placeholder:font-normal placeholder:text-[11px] focus:bg-white/70 focus:outline-none focus:ring-2 focus:ring-[#d68c78]"
                               required
                             />
                           </div>
                           <div className="space-y-1">
-                            <label className="block text-xs font-extrabold uppercase tracking-wider text-[#3d231b] ml-1">Email Address (For PDF Delivery)</label>
+                            <label className="block text-xs font-extrabold uppercase tracking-wider text-[#7a493b] ml-1">Email Address (For PDF Delivery)</label>
                             <input
                               type="email"
                               placeholder="john.doe@example.com"
                               value={customerInfo.email}
                               onChange={(e) => setCustomerInfo({ ...customerInfo, email: e.target.value })}
-                              className="w-full bg-white/40 backdrop-blur-xs border border-[#dfa38f] rounded-xl px-3.5 py-2.5 text-xs text-[#3d231b] font-bold placeholder-[#8c5243] focus:bg-white/70 focus:outline-none focus:ring-2 focus:ring-[#d68c78]"
+                              className="w-full bg-white/40 backdrop-blur-xs border border-[#dfa38f] rounded-xl px-3.5 py-2.5 text-xs text-[#5a372c] font-semibold placeholder:text-[#c4a69c] placeholder:font-normal placeholder:text-[11px] focus:bg-white/70 focus:outline-none focus:ring-2 focus:ring-[#d68c78]"
                               required
                             />
                           </div>
@@ -1285,7 +1285,7 @@ export default function SheetPurchaseFlow({
                 )}
 
                 <div className="text-left space-y-0.5">
-                  <h2 className="font-display-lg text-base md:text-lg text-[#3d231b] font-black" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h2 className="font-display-lg text-base md:text-lg text-[#7a493b] font-black" style={{ fontFamily: "'Playfair Display', serif" }}>
                     {!isDirectBuy ? '3. Select Payment Method' : '2. Select Payment Method'}
                   </h2>
                   <p className="text-[#5a372c] text-[11px] font-bold">
@@ -1442,7 +1442,7 @@ export default function SheetPurchaseFlow({
                   <span className="inline-block px-3 py-0.5 rounded-full bg-white/70 text-[#8c3b26] text-[10px] font-extrabold uppercase tracking-widest border border-[#dfa38f]">
                     Awaiting Payment
                   </span>
-                  <h2 className="font-display-lg text-lg sm:text-xl text-[#3d231b] font-black text-center pt-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h2 className="font-display-lg text-lg sm:text-xl text-[#7a493b] font-black text-center pt-1" style={{ fontFamily: "'Playfair Display', serif" }}>
                     {!isDirectBuy ? '3. Complete Your Payment' : '2. Complete Your Payment'}
                   </h2>
                   <p className="text-[#6e5448] text-xs font-medium">Please follow the instructions below to complete your transaction.</p>
@@ -1594,7 +1594,7 @@ export default function SheetPurchaseFlow({
                   <span className="text-xs font-black tracking-widest text-[#8c3b26] uppercase">
                     {!isDirectBuy ? '✓ 4. PURCHASE COMPLETE' : '✓ 3. PURCHASE COMPLETE'}
                   </span>
-                  <h2 className="font-display-lg text-xl text-[#3d231b] font-black" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h2 className="font-display-lg text-xl text-[#7a493b] font-black" style={{ fontFamily: "'Playfair Display', serif" }}>
                     Thank you for your purchase!
                   </h2>
                   <p className="text-[#5a372c] text-xs font-bold">Your sheet music is ready to download.</p>

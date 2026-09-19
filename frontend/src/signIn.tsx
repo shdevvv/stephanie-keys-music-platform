@@ -22,10 +22,16 @@ export default function SignIn({ onNavigate }: SignInProps) {
     }
 
     // Simulate successful login
+    const existingFullName = localStorage.getItem("full_name");
     const existingName = localStorage.getItem("guest_name");
-    if (!existingName) {
+    if (!existingFullName && !existingName) {
       const derivedName = email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      localStorage.setItem("full_name", derivedName);
       localStorage.setItem("guest_name", derivedName);
+    } else if (existingFullName && !existingName) {
+      localStorage.setItem("guest_name", existingFullName);
+    } else if (existingName && !existingFullName) {
+      localStorage.setItem("full_name", existingName);
     }
     localStorage.setItem("isLoggedIn", "true");
     window.dispatchEvent(new Event("storage"));

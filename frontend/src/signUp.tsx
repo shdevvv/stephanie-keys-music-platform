@@ -88,6 +88,7 @@ export default function SignUp({ onNavigate }: SignUpProps) {
               onClick={() => {
                 localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem("guest_name", formData.name);
+                localStorage.setItem("full_name", formData.name);
                 localStorage.setItem("guest_email", formData.email);
                 localStorage.setItem("guest_country", formData.country);
                 window.dispatchEvent(new Event("storage"));

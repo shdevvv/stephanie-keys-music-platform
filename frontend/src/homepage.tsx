@@ -59,6 +59,43 @@ const PRICING_WHITE_SPARKLES = [
   { left: "83%", size: 7, duration: "11.5s", delay: "2.7s", type: "dot" },
 ];
 
+const HERO_WHITE_SPARKLES = [
+  { left: "2%", bottom: "-20px", size: 14, duration: "6.8s", delay: "0s", type: "star" },
+  { left: "5%", bottom: "25%", size: 8, duration: "8.5s", delay: "1.2s", type: "dot" },
+  { left: "8%", bottom: "50%", size: 16, duration: "7.2s", delay: "2.5s", type: "star" },
+  { left: "12%", bottom: "10%", size: 9, duration: "9.6s", delay: "0.5s", type: "dot" },
+  { left: "15%", bottom: "-30px", size: 18, duration: "6.5s", delay: "3.2s", type: "star" },
+  { left: "19%", bottom: "60%", size: 7, duration: "8.0s", delay: "1.8s", type: "dot" },
+  { left: "22%", bottom: "35%", size: 13, duration: "7.8s", delay: "0.2s", type: "star" },
+  { left: "26%", bottom: "-15px", size: 10, duration: "9.2s", delay: "4.1s", type: "dot" },
+  { left: "29%", bottom: "70%", size: 15, duration: "6.9s", delay: "2.1s", type: "star" },
+  { left: "33%", bottom: "20%", size: 8, duration: "8.8s", delay: "0.8s", type: "dot" },
+  { left: "37%", bottom: "-25px", size: 20, duration: "7.0s", delay: "3.5s", type: "star" },
+  { left: "41%", bottom: "45%", size: 9, duration: "9.5s", delay: "1.6s", type: "dot" },
+  { left: "45%", bottom: "15%", size: 17, duration: "6.4s", delay: "2.8s", type: "star" },
+  { left: "49%", bottom: "65%", size: 7, duration: "8.6s", delay: "0.4s", type: "dot" },
+  { left: "53%", bottom: "-20px", size: 14, duration: "7.5s", delay: "4.5s", type: "star" },
+  { left: "57%", bottom: "30%", size: 10, duration: "9.0s", delay: "1.9s", type: "dot" },
+  { left: "61%", bottom: "75%", size: 16, duration: "6.7s", delay: "3.8s", type: "star" },
+  { left: "65%", bottom: "10%", size: 8, duration: "8.3s", delay: "0.7s", type: "dot" },
+  { left: "69%", bottom: "-30px", size: 19, duration: "7.3s", delay: "2.2s", type: "star" },
+  { left: "73%", bottom: "55%", size: 9, duration: "9.8s", delay: "1.1s", type: "dot" },
+  { left: "77%", bottom: "25%", size: 15, duration: "6.6s", delay: "4.8s", type: "star" },
+  { left: "81%", bottom: "70%", size: 8, duration: "8.1s", delay: "2.6s", type: "dot" },
+  { left: "85%", bottom: "-15px", size: 18, duration: "7.1s", delay: "0.9s", type: "star" },
+  { left: "88%", bottom: "40%", size: 7, duration: "9.3s", delay: "3.6s", type: "dot" },
+  { left: "92%", bottom: "15%", size: 14, duration: "6.9s", delay: "1.4s", type: "star" },
+  { left: "95%", bottom: "60%", size: 9, duration: "8.7s", delay: "4.3s", type: "dot" },
+  { left: "98%", bottom: "-25px", size: 16, duration: "7.4s", delay: "2.0s", type: "star" },
+  { left: "10%", bottom: "40%", size: 12, duration: "8.2s", delay: "5.1s", type: "star" },
+  { left: "24%", bottom: "80%", size: 7, duration: "10.0s", delay: "3.9s", type: "dot" },
+  { left: "39%", bottom: "5%", size: 15, duration: "7.6s", delay: "5.5s", type: "star" },
+  { left: "51%", bottom: "85%", size: 8, duration: "9.4s", delay: "4.9s", type: "dot" },
+  { left: "67%", bottom: "35%", size: 13, duration: "8.0s", delay: "5.3s", type: "star" },
+  { left: "82%", bottom: "10%", size: 10, duration: "7.7s", delay: "5.7s", type: "dot" },
+  { left: "96%", bottom: "80%", size: 12, duration: "8.4s", delay: "3.3s", type: "star" },
+];
+
 const WordByWordRevealText = ({
   text,
   speedMs = 35,
@@ -253,6 +290,33 @@ function Homepage() {
           <>
             {/* Hero Section (Image Background Exclusive to Hero Section) */}
             <section className="relative -mt-20 md:-mt-24 pt-20 md:pt-24 min-h-[500px] md:min-h-[620px] flex items-center overflow-hidden py-10 md:py-0">
+              {/* CSS Keyframes for Hero Sparkles Animation */}
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: `
+                @keyframes heroSparkleRise {
+                  0% {
+                    transform: translateY(0px) scale(0.3) rotate(0deg);
+                    opacity: 0;
+                  }
+                  20% {
+                    opacity: 0.95;
+                    filter: drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 16px #ffffff);
+                  }
+                  60% {
+                    opacity: 0.85;
+                    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #ffffff);
+                  }
+                  100% {
+                    transform: translateY(-130px) scale(1.18) rotate(230deg);
+                    opacity: 0;
+                    filter: drop-shadow(0 0 4px #ffffff);
+                  }
+                }
+              `,
+                }}
+              />
+
               <div className="absolute inset-0 z-0">
                 {/* Truly Diagonal White Gradient Fading Overlay Across Entire Hero Image */}
                 <div
@@ -269,13 +333,58 @@ function Homepage() {
                 />
               </div>
 
+              {/* Rising Shiny White Sparkles & Glitters Layer (Hero Section) */}
+              <div className="absolute inset-0 pointer-events-none select-none z-18 overflow-hidden">
+                {HERO_WHITE_SPARKLES.map((sp, idx) => (
+                  <div
+                    key={idx}
+                    className="absolute"
+                    style={{
+                      left: sp.left,
+                      bottom: sp.bottom || "-30px",
+                      width: `${sp.size}px`,
+                      height: `${sp.size}px`,
+                      animation: `heroSparkleRise ${sp.duration} ease-in-out infinite`,
+                      animationDelay: sp.delay,
+                    }}
+                  >
+                    {sp.type === "star" ? (
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="w-full h-full text-white fill-current drop-shadow-[0_0_8px_#ffffff] drop-shadow-[0_0_16px_rgba(255,255,255,0.95)]"
+                      >
+                        <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z" />
+                      </svg>
+                    ) : (
+                      <div className="w-full h-full rounded-full bg-white shadow-[0_0_10px_#ffffff,0_0_18px_#ffffff,0_0_26px_#fceee8]" />
+                    )}
+                  </div>
+                ))}
+              </div>
+
               <div className="relative z-20 px-6 max-w-[1200px] mx-auto w-full">
-                <div className="max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl space-y-5">
-                  <h1 className="drop-shadow-xs py-1 flex flex-col items-start gap-1">
+                <div className="max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl space-y-5">
+                  <h1 className="drop-shadow-xs py-1 flex flex-col items-start gap-1 overflow-visible">
+                    {/* 1. Transforming - Distinct Font, Distinct Rose Gold Terracotta Color, Slightly Bolder */}
                     <span
                       style={{
-                        fontFamily: "'Cormorant Garamond', 'Cinzel', serif",
-                        fontSize: "clamp(1.15rem, 2.3vw, 1.75rem)",
+                        fontFamily: "'Cinzel', serif",
+                        fontSize: "clamp(1.05rem, 2.1vw, 1.55rem)",
+                        fontWeight: 600,
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase",
+                        color: "#a85845",
+                        textShadow: "0 2px 10px rgba(255, 255, 255, 0.9)",
+                      }}
+                    >
+                      Transforming
+                    </span>
+
+                    {/* 2. Your Music Skills */}
+                    <span
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "clamp(1.2rem, 2.4vw, 1.85rem)",
                         fontWeight: 400,
                         letterSpacing: "0.12em",
                         textTransform: "uppercase",
@@ -283,56 +392,66 @@ function Homepage() {
                         textShadow: "0 2px 10px rgba(255, 255, 255, 0.9)",
                       }}
                     >
-                      Transforming Your Music Skills
+                      Your Music Skills
                     </span>
+
+                    {/* 3. From Zero to Mastery - Capitalized 'From', unclipped full calligraphy */}
                     <span
                       style={{
                         fontFamily:
-                          "'Pinyon Script', 'Alex Brush', 'Great Vibes', cursive",
-                        fontSize: "clamp(2.4rem, 5.2vw, 4.2rem)",
+                          "'Parisienne', 'Great Vibes', 'Alex Brush', cursive",
+                        fontSize: "clamp(2.1rem, 4.3vw, 3.4rem)",
                         fontWeight: 400,
-                        letterSpacing: "0.02em",
+                        letterSpacing: "0.01em",
+                        lineHeight: 1.35,
+                        display: "inline-block",
+                        whiteSpace: "nowrap",
+                        padding: "0.15em 0.6em 0.25em 0.15em",
+                        overflow: "visible",
                         background:
-                          "linear-gradient(135deg, #2c1a14 0%, #5e3b2e 35%, #965c49 70%, #4a281e 100%)",
+                          "linear-gradient(135deg, #4e291d 0%, #764131 40%, #9e5a47 70%, #582b1e 100%)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
-                        textShadow: "0 2px 14px rgba(255, 255, 255, 0.9)",
+                        filter:
+                          "drop-shadow(0 2px 8px rgba(255, 255, 255, 0.95))",
                       }}
                     >
-                      from Zero to Mastery
+                      From Zero to Mastery
                     </span>
                   </h1>
                   <p
-                    className="text-xs sm:text-sm md:text-base font-bold text-[#7c4d3e] tracking-[0.16em] uppercase max-w-xl flex items-center gap-3 flex-wrap"
+                    className="text-xs sm:text-sm md:text-[15px] font-semibold text-[#805244] uppercase max-w-xl flex items-center gap-3 flex-wrap"
                     style={{
-                      fontFamily: "'Cinzel', 'Cormorant Garamond', serif",
+                      fontFamily:
+                        "'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif",
+                      letterSpacing: "0.12em",
                     }}
                   >
                     <span>All Genres Piano & Violin</span>
-                    <span className="text-[#b87c6d] font-normal text-sm">
+                    <span className="text-[#be7f6e] font-normal text-sm">
                       •
                     </span>
                     <span>Certified ABRSM Theory</span>
                   </p>
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                     <button
                       onClick={() => setView("dashboard")}
-                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/75 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/95 hover:border-[#c48b7c] hover:brightness-105 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
+                      className="px-7 py-3.5 md:px-8 md:py-4 rounded-[11px] text-base md:text-[17px] text-[#754434] hover:text-[#522b1e] bg-white/85 backdrop-blur-md border-[2.5px] border-[#dfa38f] shadow-[0_5px_18px_rgba(196,139,124,0.22)] cursor-pointer transition-all duration-300 ease-out hover:bg-white hover:border-[#c48b7c] hover:brightness-105 hover:shadow-[0_0_24px_rgba(226,176,164,0.7),0_0_14px_rgba(255,255,255,0.9),inset_0_0_15px_rgba(255,255,255,0.6)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
                       style={{
-                        fontFamily:
-                          "'Cormorant Garamond', 'Playfair Display', serif",
+                        fontFamily: "'Playfair Display', Georgia, serif",
                         fontWeight: 700,
+                        letterSpacing: "0.03em",
                       }}
                     >
                       Start Learning
                     </button>
                     <button
                       onClick={() => setView("videos")}
-                      className="px-6 py-3 md:px-7 md:py-3.5 rounded-[9px] text-sm md:text-base text-[#4a2a20] bg-white/75 backdrop-blur-md border-[2.5px] border-[#e2b0a4] shadow-[0_4px_15px_rgba(196,139,124,0.18)] cursor-pointer transition-all duration-300 ease-out hover:bg-white/95 hover:border-[#c48b7c] hover:brightness-105 hover:shadow-[0_0_22px_rgba(226,176,164,0.65),0_0_12px_rgba(255,255,255,0.8),inset_0_0_15px_rgba(255,255,255,0.5)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
+                      className="px-7 py-3.5 md:px-8 md:py-4 rounded-[11px] text-base md:text-[17px] text-[#754434] hover:text-[#522b1e] bg-white/85 backdrop-blur-md border-[2.5px] border-[#dfa38f] shadow-[0_5px_18px_rgba(196,139,124,0.22)] cursor-pointer transition-all duration-300 ease-out hover:bg-white hover:border-[#c48b7c] hover:brightness-105 hover:shadow-[0_0_24px_rgba(226,176,164,0.7),0_0_14px_rgba(255,255,255,0.9),inset_0_0_15px_rgba(255,255,255,0.6)] active:scale-95 flex items-center justify-center gap-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none"
                       style={{
-                        fontFamily:
-                          "'Cormorant Garamond', 'Playfair Display', serif",
+                        fontFamily: "'Playfair Display', Georgia, serif",
                         fontWeight: 700,
+                        letterSpacing: "0.03em",
                       }}
                     >
                       Watch S. Keys Covers

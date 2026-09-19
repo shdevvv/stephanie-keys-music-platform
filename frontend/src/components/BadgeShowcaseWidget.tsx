@@ -58,11 +58,11 @@ export const BadgeShowcaseWidget: React.FC<BadgeShowcaseWidgetProps> = ({
             key={badge.levelNumber}
             style={{
               background:
-                "rgba(255, 255, 255, 0.65) padding-box, linear-gradient(135deg, #fffaf7 0%, #f0c0ae 25%, #b96f5d 56%, #f6cbbb 78%, #874a3d 100%) border-box",
+                "rgba(255, 255, 255, 0.70) padding-box, linear-gradient(135deg, #fffaf7 0%, #f0c0ae 25%, #b96f5d 56%, #f6cbbb 78%, #874a3d 100%) border-box",
               border: "4px solid transparent",
             }}
-            className={`relative p-3 md:p-3.5 rounded-lg border-4 border-transparent ring-1 ring-[#d9a998]/75 transition-all duration-300 flex flex-col justify-between ${
-              badge.isUnlocked ? "shadow-xs" : "opacity-95"
+            className={`relative p-3 md:p-3.5 rounded-lg border-4 border-transparent ring-[1.5px] ring-[#b96f5d] shadow-[0_2px_6px_rgba(185,111,93,0.15)] transition-all duration-300 flex flex-col justify-between ${
+              badge.isUnlocked ? "shadow-sm" : "opacity-95"
             }`}
           >
             <div className="space-y-2">
@@ -70,7 +70,7 @@ export const BadgeShowcaseWidget: React.FC<BadgeShowcaseWidgetProps> = ({
                 <div className="flex items-center gap-2">
                   {badge.imageSrc && badge.imagePosition ? (
                     <span
-                      className="relative w-14 h-[4.7rem] overflow-hidden shrink-0"
+                      className="relative w-14 h-[4.7rem] overflow-hidden shrink-0 rounded-[4px] border border-[#dfa38f]/60 shadow-xs"
                       aria-hidden="true"
                     >
                       <img

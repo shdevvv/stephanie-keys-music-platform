@@ -550,17 +550,28 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     () => localStorage.getItem("isLoggedIn") !== "false",
   );
   const [userName, setUserName] = useState<string>(() => {
-    return (
+    const raw =
+      localStorage.getItem("full_name") ||
       localStorage.getItem("guest_name") ||
       localStorage.getItem("user_name") ||
-      "StephanieHalim06"
+      "Stephanie Halim";
+    return raw.trim().split(/\s+/)[0] || "Stephanie";
+  });
+  const [userFullName, setUserFullName] = useState<string>(() => {
+    return (
+      localStorage.getItem("full_name") ||
+      localStorage.getItem("guest_name") ||
+      localStorage.getItem("user_name") ||
+      "Stephanie Halim"
     );
   });
   const [userAvatar, setUserAvatar] = useState<string>(() => {
-    return (
-      localStorage.getItem("user_avatar") ||
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-    );
+    const saved = localStorage.getItem("user_avatar");
+    if (!saved || saved.includes("unsplash.com")) {
+      localStorage.setItem("user_avatar", "/profile-photo.jpg");
+      return "/profile-photo.jpg";
+    }
+    return saved;
   });
   const [cartCount, setCartCount] = useState(0);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -679,14 +690,19 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   useEffect(() => {
     const syncLoginState = () => {
       setIsLoggedIn(localStorage.getItem("isLoggedIn") !== "false");
-      const currentName =
+      const raw =
+        localStorage.getItem("full_name") ||
         localStorage.getItem("guest_name") ||
         localStorage.getItem("user_name") ||
-        "Student";
-      setUserName(currentName);
+        "Stephanie Halim";
+      const firstName = raw.trim().split(/\s+/)[0] || "Stephanie";
+      setUserName(firstName);
+      setUserFullName(raw);
+      const rawAvatar = localStorage.getItem("user_avatar");
       const currentAvatar =
-        localStorage.getItem("user_avatar") ||
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80";
+        rawAvatar && !rawAvatar.includes("unsplash.com")
+          ? rawAvatar
+          : "/profile-photo.jpg";
       setUserAvatar(currentAvatar);
     };
     syncLoginState();
@@ -708,6 +724,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
     setIsLoggedIn(false);
     localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("guest_name");
+    localStorage.removeItem("full_name");
     localStorage.removeItem("guest_email");
     localStorage.removeItem("guest_country");
     localStorage.removeItem("user_avatar");
@@ -976,7 +993,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                         className="w-full h-full object-cover rounded-full"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80";
+                          target.src = "/profile-photo.jpg";
                         }}
                       />
                     </div>
@@ -1007,7 +1024,7 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
 
                   {/* Dropdown Menu */}
                   <div
-                    className={`absolute right-0 top-full pt-2 w-44 flex flex-col z-50 transition-all duration-300 ease-out ${
+                    className={`absolute right-0 top-full pt-2 w-60 flex flex-col z-50 transition-all duration-150 ease-out ${
                       isProfileMenuOpen
                         ? "pointer-events-auto opacity-100 translate-y-0 scale-100"
                         : "pointer-events-none opacity-0 -translate-y-1 scale-95"
@@ -1016,105 +1033,148 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
                     <div
                       style={{
                         background:
-                          "linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #F8E3DB 0%, #E2B0A4 40%, #C48B7C 75%, #8C5446 100%) border-box",
-                        backdropFilter: "blur(16px)",
-                        WebkitBackdropFilter: "blur(16px)",
-                        border: "1.5px solid transparent",
-                        boxShadow: "0 8px 24px rgba(140, 85, 70, 0.18)",
+                          "linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 250, 248, 0.96) 100%)",
+                        backdropFilter: "blur(20px)",
+                        WebkitBackdropFilter: "blur(20px)",
+                        border: "1.5px solid #dfa38f",
+                        boxShadow:
+                          "0 10px 30px rgba(140, 85, 70, 0.22), 0 0 1px rgba(255, 255, 255, 0.9)",
                       }}
-                      className="p-1.5 rounded-[12px] flex flex-col gap-1 overflow-hidden"
+                      className="p-2 rounded-[14px] flex flex-col gap-1.5 overflow-hidden"
                     >
-                      {/* Profile Button */}
+                      {/* User Greeting & Status Card */}
+                      <div className="px-3 py-2 rounded-[10px] bg-gradient-to-r from-[#faf2ed] to-[#f7ece5] border border-[#ebd2c7] flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full border border-[#d9a998] overflow-hidden shrink-0 shadow-2xs">
+                          <img
+                            src={userAvatar}
+                            alt=""
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "/profile-photo.jpg";
+                            }}
+                          />
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span
+                            className="text-[12px] font-bold text-[#45271d] truncate"
+                            style={{
+                              fontFamily: "'Playfair Display', Georgia, serif",
+                            }}
+                          >
+                            {userFullName}
+                          </span>
+                          <span className="text-[9.5px] uppercase tracking-wider text-[#9a6454] font-bold flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block shrink-0 shadow-[0_0_4px_#10b981]" />
+                            Active Member
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Profile Button - Instant Direct Navigation */}
                       <button
+                        type="button"
                         onClick={() => {
+                          setIsProfileMenuOpen(false);
+                          window.scrollTo({
+                            top: 0,
+                            behavior: "instant" as ScrollBehavior,
+                          });
                           onNavigate("profile");
-                          setIsProfileMenuOpen(false);
                         }}
-                        className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#F8E3DB]/60 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#3d2319] hover:text-[#800A1D]"
+                        className="group relative px-2.5 py-2 w-full rounded-[9px] cursor-pointer transition-all duration-150 ease-out hover:bg-gradient-to-r hover:from-[#fff7f4] hover:to-[#fdf1eb] border border-transparent hover:border-[#dfa38f]/50 hover:shadow-xs focus:outline-none flex items-center justify-between gap-2.5 shrink-0 text-left"
                       >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="w-7.5 h-7.5 rounded-[8px] bg-gradient-to-br from-[#f8e8df] to-[#dfa38f] text-[#633326] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              viewBox="0 0 24 24"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                              <circle cx="12" cy="7" r="4" />
+                            </svg>
+                          </div>
+                          <div className="flex flex-col min-w-0">
+                            <span
+                              style={{
+                                fontFamily: "'Playfair Display', Georgia, serif",
+                              }}
+                              className="text-[12.5px] font-bold tracking-wide text-[#45271d] group-hover:text-[#78281a] transition-colors"
+                            >
+                              Profile &amp; Settings
+                            </span>
+                            <span className="text-[10px] text-[#936657] font-medium leading-tight">
+                              Personal details &amp; goals
+                            </span>
+                          </div>
+                        </div>
                         <svg
-                          className="w-3.5 h-3.5 shrink-0 text-[#8C5446]"
+                          className="w-3.5 h-3.5 text-[#c49283] group-hover:text-[#800A1D] group-hover:translate-x-0.5 transition-all shrink-0"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth="2"
+                          strokeWidth="2.5"
                           viewBox="0 0 24 24"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
                         >
-                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                          <circle cx="12" cy="7" r="4" />
+                          <polyline points="9 18 15 12 9 6" />
                         </svg>
-                        <span
-                          style={{
-                            fontFamily: "'Playfair Display', Georgia, serif",
-                          }}
-                          className="text-xs font-bold tracking-wider"
-                        >
-                          Profile
-                        </span>
                       </button>
 
-                      {/* Subscription Button */}
-                      <button
-                        onClick={() => {
-                          onNavigate("subscription");
-                          setIsProfileMenuOpen(false);
-                        }}
-                        className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#F8E3DB]/60 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#3d2319] hover:text-[#800A1D]"
-                      >
-                        <svg
-                          className="w-3.5 h-3.5 shrink-0 text-[#8C5446]"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <rect x="2" y="5" width="20" height="14" rx="2" />
-                          <line x1="2" y1="10" x2="22" y2="10" />
-                        </svg>
-                        <span
-                          style={{
-                            fontFamily: "'Playfair Display', Georgia, serif",
-                          }}
-                          className="text-xs font-bold tracking-wider"
-                        >
-                          Subscription
-                        </span>
-                      </button>
-
-                      <div className="h-[1px] bg-[#E2B0A4]/40 my-0.5 mx-1" />
+                      {/* Elegant Rose Gold Hairline Divider */}
+                      <div className="h-[1px] bg-gradient-to-r from-transparent via-[#dfa38f]/50 to-transparent my-0.5 mx-1" />
 
                       {/* Log Out Button */}
                       <button
+                        type="button"
                         onClick={() => {
-                          handleLogout();
                           setIsProfileMenuOpen(false);
+                          handleLogout();
                         }}
-                        className="relative h-9 px-3 w-full rounded-[8px] cursor-pointer transition-all duration-200 ease-out hover:bg-[#800A1D]/10 active:scale-98 focus:outline-none flex items-center justify-start gap-2.5 shrink-0 text-[#800A1D]"
+                        className="group relative px-2.5 py-2 w-full rounded-[9px] cursor-pointer transition-all duration-150 ease-out hover:bg-rose-50/80 border border-transparent hover:border-rose-200/80 hover:shadow-xs focus:outline-none flex items-center justify-between gap-2.5 shrink-0 text-left"
                       >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="w-7.5 h-7.5 rounded-[8px] bg-rose-100/70 text-[#8b3528] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              viewBox="0 0 24 24"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                              <polyline points="16 17 21 12 16 7" />
+                              <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                          </div>
+                          <div className="flex flex-col min-w-0">
+                            <span
+                              style={{
+                                fontFamily: "'Playfair Display', Georgia, serif",
+                              }}
+                              className="text-[12.5px] font-bold tracking-wide text-[#8b3528] group-hover:text-[#6e2216] transition-colors"
+                            >
+                              Sign Out
+                            </span>
+                            <span className="text-[10px] text-[#a9665a] font-medium leading-tight">
+                              End current session
+                            </span>
+                          </div>
+                        </div>
                         <svg
-                          className="w-3.5 h-3.5 shrink-0 text-[#800A1D]"
+                          className="w-3.5 h-3.5 text-[#d08f84] group-hover:text-[#8b3528] group-hover:translate-x-0.5 transition-all shrink-0"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth="2"
+                          strokeWidth="2.5"
                           viewBox="0 0 24 24"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
                         >
-                          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                          <polyline points="16 17 21 12 16 7" />
-                          <line x1="21" y1="12" x2="9" y2="12" />
+                          <polyline points="9 18 15 12 9 6" />
                         </svg>
-                        <span
-                          style={{
-                            fontFamily: "'Playfair Display', Georgia, serif",
-                          }}
-                          className="text-xs font-bold tracking-wider"
-                        >
-                          Log Out
-                        </span>
                       </button>
                     </div>
                   </div>
