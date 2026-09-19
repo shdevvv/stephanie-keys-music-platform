@@ -5,15 +5,15 @@ interface UserProfileProps {
   initialTab?: string;
 }
 
-export default function UserProfile({ onNavigate }: UserProfileProps) {
+export default function UserProfile({ onNavigate: _onNavigate }: UserProfileProps) {
   // Personal details states
-  const [displayName, setDisplayName] = useState<string>(() => {
+  const [displayName] = useState<string>(() => {
     return localStorage.getItem('guest_name') || localStorage.getItem('user_name') || 'Stephanie Keys';
   });
-  const [fullName, setFullName] = useState<string>(() => {
+  const [fullName] = useState<string>(() => {
     return localStorage.getItem('full_name') || 'Stephanie Halim';
   });
-  const [email, setEmail] = useState<string>(() => {
+  const [email] = useState<string>(() => {
     return localStorage.getItem('guest_email') || 'stephanie@gmail.com';
   });
   const [avatarUrl, setAvatarUrl] = useState<string>(() => {

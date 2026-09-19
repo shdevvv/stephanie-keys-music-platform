@@ -545,7 +545,6 @@ const NavSheetsIcon = ({
 );
 
 function Layout({ children, view, onNavigate }: LayoutProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => localStorage.getItem("isLoggedIn") !== "false",
   );
@@ -579,14 +578,6 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   const [isSignInHovered, setIsSignInHovered] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -678,13 +669,6 @@ function Layout({ children, view, onNavigate }: LayoutProps) {
   const [isNewsletterSent, setIsNewsletterSent] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState("");
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Listen to storage events to sync login state across tabs/actions
   useEffect(() => {

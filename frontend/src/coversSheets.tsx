@@ -227,8 +227,6 @@ function CoversSheets({ onNavigate, onSetBuyNowSheet, initialTab = "all" }: Cove
 
   // Multiselect Filters State for Covers
   const [selectedCoverCategories] = useState<string[]>(['All'])
-  const [isWatchMoreHovered, setIsWatchMoreHovered] = useState(false)
-  // const [currentPage] = useState(1)
 
 
 
